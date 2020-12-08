@@ -1,0 +1,50 @@
+{
+  "name": "rarecamp-ui",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@material-ui/core": "^4.9.7",
+    "@material-ui/icons": "^4.9.1",
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.5.0",
+    "@testing-library/user-event": "^7.2.1",
+    "aws-amplify": "^3.0.8",
+    "aws-amplify-react": "^4.1.7",
+    "axios": "^0.19.2",
+    "clsx": "^1.1.0",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-scripts": "3.4.1",
+    "serverless": "^1.72.0",
+    "typeface-roboto": "0.0.75"
+  },
+  "scripts": {
+    "start-cloud-api": "react-scripts start",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "package": "serverless package && zip -r ui.zip build .serverless serverless.yaml package.json package-lock.json",
+    "deploy": "sls deploy",
+    "deploy-package": "serverless deploy --package .serverless"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@wizeline/serverless-amplify-plugin": "^1.2.1",
+    "serverless-dotenv-plugin": "^2.3.2"
+  }
+}

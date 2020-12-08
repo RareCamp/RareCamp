@@ -1,0 +1,39 @@
+name: On release published
+
+on:
+  release:
+    types:
+    - published
+
+jobs:
+  deploy_prod:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Download release
+      uses: Legion2/download-release-action@v2.1.0
+      with:
+        repository: ${{ github.repository }}
+        token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
+        tag: latest
+        file: release.zip
+
+    - name: Unzip release
+      run: unzip release.zip
+
+    - name: Setup AWS Credentials
+      run: |
+        mkdir ~/.aws
+        echo "[myapp_prod]
+        aws_access_key_id = ${{ secrets.AWS_ACCESS_KEY_ID_PROD }}
+        aws_secret_access_key = ${{ secrets.AWS_SECRET_ACCESS_KEY_PROD }}" > ~/.aws/credentials
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v1
+      with:
+        node-version: 12.x
+
+    - name: Install
+      run: npm ci
+    
+    - name: Deploy
+      run: npm run deploy-prepack:prod

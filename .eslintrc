@@ -1,0 +1,54 @@
+{
+  "extends": [
+    "airbnb",
+  ],
+  "env": {
+    "node": true,
+    "jest": true
+  },
+  "rules": {
+    "default-case": "off",
+    "semi": [
+      "error",
+      "never"
+    ],
+    "comma-dangle": [
+      "error",
+      "always-multiline"
+    ],
+    "max-len": [
+      "error",
+      {
+        "code": 200
+      }
+    ],
+    "no-use-before-define": "off",
+    "import/prefer-default-export": "off",
+    "no-param-reassign": "off",
+    "radix": "off",
+    "no-console": [
+      "error",
+      {
+        "allow": [
+          "log",
+          "info",
+          "warn",
+          "error"
+        ]
+      }
+    ],
+    "no-plusplus": [
+      "error",
+      {
+        "allowForLoopAfterthoughts": true
+      }
+    ],
+    "quotes": [
+      "error",
+      "single"
+    ],
+    "import/no-extraneous-dependencies": "off",
+    "global-require": "off",
+    "import/no-dynamic-require": "off",
+  }
+}

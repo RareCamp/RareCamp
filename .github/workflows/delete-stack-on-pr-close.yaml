@@ -1,0 +1,31 @@
+name: Delete preview stack on PR close
+
+on:
+  pull_request:
+    types: [closed]
+
+jobs:
+  delete-stack:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v1
+      with:
+        node-version: 12.x
+    
+    - name: Install root
+      run: npm ci
+
+    - name: Setup AWS Credentials
+      run: |
+        mkdir ~/.aws
+        echo "[myapp_dev]
+        aws_access_key_id = ${{ secrets.AWS_ACCESS_KEY_ID_DEV }}
+        aws_secret_access_key = ${{ secrets.AWS_SECRET_ACCESS_KEY_DEV }}" > ~/.aws/credentials
+
+    - name: Delete PR preview stack
+      run: SERVERLESS_SERVICE_SUFFIX=-${{ github.head_ref }} npm run remove-stack:dev
+    
