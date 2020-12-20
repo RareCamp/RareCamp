@@ -5,6 +5,10 @@ on:
     types:
     - published
 
+env:
+  AWS_REGION: us-west-2
+  AWS_DEFAULT_REGION: us-west-2
+  
 jobs:
   deploy_prod:
     runs-on: ubuntu-latest

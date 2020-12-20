@@ -43,17 +43,8 @@ plugins:
 
 custom:
   stages:
-    personal:
-      # Uses default AWS Config profile in your environment
-      profile: ${{env:AWS_PROFILE}}
-      logRetentionInDays: 1
-      amplify:
-      api:
-        domainEnabled: false
-      alarms:
-        notificationEmail: ${{env:ALARMS_NOTIFICATION_EMAIL}}
     development:
-      profile: rarecamp_dev
+      profile: ${{env:AWS_PROFILE}}
       logRetentionInDays: 1
       amplify:
       api:

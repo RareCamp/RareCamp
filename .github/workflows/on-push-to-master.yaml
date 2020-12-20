@@ -4,6 +4,10 @@ on:
   push:
     branches: [ master ]
 
+env:
+  AWS_REGION: us-west-2
+  AWS_DEFAULT_REGION: us-west-2
+
 jobs:
   test-deploy-to-staging-and-package:
     runs-on: ubuntu-latest

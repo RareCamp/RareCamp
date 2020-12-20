@@ -10,10 +10,6 @@
     "start:ui:offline": "REACT_APP_ApiEndpoint=http://localhost:4911 npm run start:ui",
     "start:api": "sls offline cloudside",
 
-    "package:personal": "sls package --stage personal",
-    "deploy-prepack:personal": "sls deploy --package .serverless --stage personal",
-    "deploy:personal": "sls deploy --stage personal",
-
     "package:dev": "sls package --stage development",
     "deploy-prepack:dev": "sls deploy --package .serverless --stage development",
     "deploy:dev": "sls deploy --stage development",
