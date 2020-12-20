@@ -9,15 +9,23 @@
     "start:ui": "cd packages/ui && npm start",
     "start:ui:offline": "REACT_APP_ApiEndpoint=http://localhost:4911 npm run start:ui",
     "start:api": "sls offline cloudside",
+
+    "package:personal": "sls package --stage personal",
+    "deploy-prepack:personal": "sls deploy --package .serverless --stage personal",
+    "deploy:personal": "sls deploy --stage personal",
+
     "package:dev": "sls package --stage development",
     "deploy-prepack:dev": "sls deploy --package .serverless --stage development",
     "deploy:dev": "sls deploy --stage development",
+
     "package:staging": "NODE_ENV=production sls package --stage staging",
     "deploy-prepack:staging": "NODE_ENV=production sls deploy --package .serverless --stage staging",
     "deploy:staging": "NODE_ENV=production sls deploy --stage staging",
+
     "package:prod": "NODE_ENV=production sls package --stage production",
     "deploy-prepack:prod": "NODE_ENV=production sls deploy --package .serverless --stage production",
     "deploy:prod": "NODE_ENV=production sls deploy --stage production",
+
     "remove-stack:dev": "sls remove --stage development",
     "zip-release": "zip -r release.zip .serverless serverless.yaml package.json package-lock.json",
     "setup": "node scripts/setup/setup.js",
@@ -59,6 +67,12 @@
     "webpack": "^4.44.2"
   },
   "dependencies": {
+    "@vendia/serverless-express": "^3.4.0",
+    "archiver": "^5.1.0",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "dynamodb-toolbox": "^0.3.0",
+    "express": "^4.17.1",
     "replace-in-file": "^6.0.0"
   }
 }
