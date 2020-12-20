@@ -6,7 +6,7 @@ on:
 
 env:
   AWS_REGION: us-west-2
-  WS_DEFAULT_REGION: us-west-2
+  AWS_DEFAULT_REGION: us-west-2
 
 jobs:
   auto-approve-dependabot:
@@ -38,6 +38,8 @@ jobs:
     - name: Deploy to sandboxed stack
       id: deploy_to_sandboxed_stack
       run: |
+        echo $AWS_REGION
+        echo $AWS_DEFAULT_REGION
         mkdir ~/.aws
         echo "[rarecamp_dev]
         aws_access_key_id=${{ secrets.AWS_ACCESS_KEY_ID_DEV }}
