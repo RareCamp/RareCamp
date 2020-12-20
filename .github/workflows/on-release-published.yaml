@@ -23,7 +23,7 @@ jobs:
     - name: Setup AWS Credentials
       run: |
         mkdir ~/.aws
-        echo "[myapp_prod]
+        echo "[rarecamp_prod]
         aws_access_key_id = ${{ secrets.AWS_ACCESS_KEY_ID_PROD }}
         aws_secret_access_key = ${{ secrets.AWS_SECRET_ACCESS_KEY_PROD }}" > ~/.aws/credentials
     

@@ -35,7 +35,7 @@ jobs:
       id: deploy_to_sandboxed_stack
       run: |
         mkdir ~/.aws
-        echo "[myapp_dev]
+        echo "[rarecamp_dev]
         aws_access_key_id = ${{ secrets.AWS_ACCESS_KEY_ID_DEV }}
         aws_secret_access_key = ${{ secrets.AWS_SECRET_ACCESS_KEY_DEV }}" > ~/.aws/credentials
         # TODO: How to also get the PR origin repo if it's coming from an external contributor
