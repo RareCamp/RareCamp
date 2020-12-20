@@ -5,6 +5,10 @@ on:
     types:
     - published
 
+env:
+  AWS_REGION: us-west-2
+  AWS_DEFAULT_REGION: us-west-2
+  
 jobs:
   deploy_prod:
     runs-on: ubuntu-latest
@@ -23,7 +27,7 @@ jobs:
     - name: Setup AWS Credentials
       run: |
         mkdir ~/.aws
-        echo "[myapp_prod]
+        echo "[rarecamp_prod]
         aws_access_key_id = ${{ secrets.AWS_ACCESS_KEY_ID_PROD }}
         aws_secret_access_key = ${{ secrets.AWS_SECRET_ACCESS_KEY_PROD }}" > ~/.aws/credentials
     

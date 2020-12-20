@@ -44,7 +44,7 @@ plugins:
 custom:
   stages:
     development:
-      profile: rarecamp_dev
+      profile: ${{env:AWS_PROFILE}}
       logRetentionInDays: 1
       amplify:
       api:
@@ -92,7 +92,7 @@ custom:
     isManual: true
     domainName: ${{self:custom.stageConfig.amplify.domainName, ''}}
     buildSpecValues:
-      artifactBaseDirectory: packages/ui/build
+      artifactBaseDirectory: packages/ui/.next
       preBuildWorkingDirectory: packages/ui
     buildCommandEnvVars:
       prefix: 'REACT_APP_'

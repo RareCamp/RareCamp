@@ -16,3 +16,6 @@ coverage
 stack-outputs.json
 
 wizeline-academy/
+.idea
+.vscode
+.env

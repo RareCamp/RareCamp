@@ -4,6 +4,10 @@ on:
   push:
     branches: [ master ]
 
+env:
+  AWS_REGION: us-west-2
+  AWS_DEFAULT_REGION: us-west-2
+
 jobs:
   test-deploy-to-staging-and-package:
     runs-on: ubuntu-latest
@@ -25,7 +29,7 @@ jobs:
     - name: Deploy to staging
       run: |
         mkdir ~/.aws
-        echo "[myapp_staging]
+        echo "[rarecamp_staging]
         aws_access_key_id = ${{ secrets.AWS_ACCESS_KEY_ID_STAGING }}
         aws_secret_access_key = ${{ secrets.AWS_SECRET_ACCESS_KEY_STAGING }}" > ~/.aws/credentials
         NODE_ENV=production npm run deploy:staging
@@ -40,7 +44,7 @@ jobs:
       run: |
         echo "
         
-        [myapp_prod]
+        [rarecamp_prod]
         aws_access_key_id = ${{ secrets.AWS_ACCESS_KEY_ID_PROD }}
         aws_secret_access_key = ${{ secrets.AWS_SECRET_ACCESS_KEY_PROD }}" > ~/.aws/credentials
         npm run package:prod

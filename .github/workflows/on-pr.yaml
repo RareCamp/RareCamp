@@ -4,6 +4,10 @@ on:
   pull_request:
     types: [synchronize, opened, reopened]
 
+env:
+  AWS_REGION: us-west-2
+  AWS_DEFAULT_REGION: us-west-2
+
 jobs:
   auto-approve-dependabot:
     if: github.actor == 'dependabot[bot]' || github.actor == 'dependabot-preview[bot]'
@@ -35,12 +39,15 @@ jobs:
       id: deploy_to_sandboxed_stack
       run: |
         mkdir ~/.aws
-        echo "[myapp_dev]
-        aws_access_key_id = ${{ secrets.AWS_ACCESS_KEY_ID_DEV }}
-        aws_secret_access_key = ${{ secrets.AWS_SECRET_ACCESS_KEY_DEV }}" > ~/.aws/credentials
+        echo "[rarecamp_dev]
+        aws_access_key_id=${{ secrets.AWS_ACCESS_KEY_ID_DEV }}
+        aws_secret_access_key=${{ secrets.AWS_SECRET_ACCESS_KEY_DEV }}" > ~/.aws/credentials
         # TODO: How to also get the PR origin repo if it's coming from an external contributor
         # See: env.GITHUB_REF, env.GITHUB_HEAD_REF, GITHUB_BASE_REF https://help.github.com/en/actions/configuring-and-managing-workflows/using-environment-variables
-        NODE_ENV=production ALARMS_NOTIFICATION_EMAIL=alert@example.com SERVERLESS_SERVICE_SUFFIX=-${{ github.head_ref }} npm run deploy:dev
+
+        # Just testing the AWS Creds 
+        aws --debug --profile rarecamp_dev cloudformation list-stacks
+        AWS_PROFILE=rarecamp_dev NODE_ENV=production ALARMS_NOTIFICATION_EMAIL=alert@example.com SERVERLESS_SERVICE_SUFFIX=-${{ github.head_ref }} npm run deploy:dev
         WEBSITE_URL=https://$(grep -o 'DefaultDomain": "[^"]*' ./stack-outputs.json | grep -o '[^"]*$')
         echo "::set-output name=websiteUrl::$WEBSITE_URL"
     
