@@ -38,8 +38,6 @@ jobs:
     - name: Deploy to sandboxed stack
       id: deploy_to_sandboxed_stack
       run: |
-        echo $AWS_REGION
-        echo $AWS_DEFAULT_REGION
         mkdir ~/.aws
         echo "[rarecamp_dev]
         aws_access_key_id=${{ secrets.AWS_ACCESS_KEY_ID_DEV }}
@@ -48,7 +46,7 @@ jobs:
         # See: env.GITHUB_REF, env.GITHUB_HEAD_REF, GITHUB_BASE_REF https://help.github.com/en/actions/configuring-and-managing-workflows/using-environment-variables
 
         # Just testing the AWS Creds 
-        aws --profile rarecamp_dev cloudformation list-stacks
+        aws --debug --profile rarecamp_dev cloudformation list-stacks
         AWS_PROFILE=rarecamp_dev NODE_ENV=production ALARMS_NOTIFICATION_EMAIL=alert@example.com SERVERLESS_SERVICE_SUFFIX=-${{ github.head_ref }} npm run deploy:dev
         WEBSITE_URL=https://$(grep -o 'DefaultDomain": "[^"]*' ./stack-outputs.json | grep -o '[^"]*$')
         echo "::set-output name=websiteUrl::$WEBSITE_URL"
