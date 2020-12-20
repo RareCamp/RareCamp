@@ -41,7 +41,7 @@
     "eslint-plugin-react": "^7.14.3",
     "eslint-plugin-react-hooks": "^1.7.0",
     "nodemon": "^2.0.3",
-    "semantic-release": "^17.0.4",
+    "semantic-release": "^17.3.0",
     "serverless": "^1.70.0",
     "serverless-apigateway-service-proxy": "^1.7.0",
     "serverless-cloudside-plugin": "^1.0.3",
@@ -56,7 +56,7 @@
     "serverless-stack-output": "^0.2.3",
     "serverless-stack-termination-protection": "^1.0.4",
     "serverless-webpack": "^5.3.2",
-    "webpack": "^4.43.0"
+    "webpack": "^4.44.2"
   },
   "dependencies": {
     "replace-in-file": "^6.0.0"
