@@ -1,42 +1,44 @@
-import { Table } from 'antd';
-import { PlusOutlined } from '@ant-design/icons';
-import { AddButton, MainSection } from 'components/index-page';
 import {
-  dashboardColumns,
-  dashboardData,
-  diseaseColumns,
-  diseaseData,
-} from 'fixtures/dashboard';
-import { ADD_SECTION } from 'constants/labels';
+  MainSection,
+  SectionHeader,
+  TableItem,
+} from 'components/Pages/Program';
+import { Button } from 'components/Button';
 
-const dashboardCol: any = dashboardColumns;
-const diseaseCol: any = diseaseColumns;
+import records from 'fixtures/dashboard.json';
+import { HOME_TABLE_HEADINGS } from 'constants/lists';
+import { ADD_TASK } from 'constants/labels';
+
+import styles from 'styles/program.module.css';
 
 const Home = () => {
   return (
     <MainSection>
-      <Table
-        className="table-striped-rows"
-        columns={dashboardCol}
-        dataSource={dashboardData}
-        bordered
-        pagination={false}
-      />
-      <AddButton />
-      <Table
-        className="table-striped-rows"
-        columns={diseaseCol}
-        dataSource={diseaseData}
-        bordered
-        pagination={false}
-      />
-      <AddButton />
-      <div>
-        <button type="button" className="btnClass">
-          <PlusOutlined />
-          {ADD_SECTION}
-        </button>
-      </div>
+      <table>
+        <thead>
+          <tr className={styles['table-header']}>
+            {HOME_TABLE_HEADINGS.map((heading) => (
+              <th key={heading}>{heading}</th>
+            ))}
+          </tr>
+        </thead>
+        {records.map((record) => (
+          <tbody key={record.id}>
+            <SectionHeader
+              title={record.title}
+              description={record.description}
+            />
+            {record.items.map((item) => (
+              <TableItem item={item} key={item.name} />
+            ))}
+            <Button
+              onClick={() => {}}
+              icon={<span className="mr-2">+</span>}
+              label={ADD_TASK}
+            />
+          </tbody>
+        ))}
+      </table>
     </MainSection>
   );
 };

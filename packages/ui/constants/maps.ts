@@ -1,7 +1,7 @@
-/* Any key value pairs including :
-eg:
-1. string mappings
-const TITLES = {SIGNIN: "Sign in", SIGNUP: "Sign up"}
-2. other key value pairs
-const URLS = {firstprice: "youtube.com/ll", second: "youtube.com/.."}
-*/
+/* Any key value pairs. Prefer using typescript enum */
+
+export const enum STATUS {
+  COMPLETED = 'completed',
+  IN_PROGRESS = 'in-progress',
+  NOT_STARTED = 'not-started',
+}

@@ -9,19 +9,19 @@ describe('AppLayout#Navbar', () => {
   });
 });
 
-describe('AppLayout#Sidebar', () => {
-  test('shows the links', () => {
-    render(<AppLayout> </AppLayout>);
-    const dashboard = screen.getByRole('menuitem', {
-      name: /dashboard/i,
-    });
-    const diseaseProfile = screen.getByRole('menuitem', {
-      name: /disease profile/i,
-    });
-    expect(dashboard).toBeInTheDocument();
-    expect(diseaseProfile).toBeInTheDocument();
-  });
-});
+// describe('AppLayout#Sidebar', () => {
+//   test('shows the links', () => {
+//     render(<AppLayout> </AppLayout>);
+//     const dashboard = screen.getByRole('menuitem', {
+//       name: /dashboard/i,
+//     });
+//     const diseaseProfile = screen.getByRole('menuitem', {
+//       name: /disease profile/i,
+//     });
+//     expect(dashboard).toBeInTheDocument();
+//     expect(diseaseProfile).toBeInTheDocument();
+//   });
+// });
 
 describe('AppLayout', () => {
   test('displays the children passed', () => {

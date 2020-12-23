@@ -1,0 +1,92 @@
+[
+  {
+    "id": "123",
+    "title": "Planning",
+    "description": "Foundational Steps to execute a gene therap program",
+    "items": [
+      {
+        "name": "Expert consultation to identify gaps and create a plan",
+        "status": "completed",
+        "owner": "Ramya",
+        "budget": "$10,000",
+        "duration": "1 week",
+        "startDate": "12/05/2020",
+        "endDate": "12/05/2020"
+      },
+
+      {
+        "name": "Create a budget & fundraising plan",
+        "status": "in-progress",
+        "owner": "Ramya",
+        "budget": "$10,000",
+        "duration": "1 week",
+        "startDate": "12/05/2020",
+        "endDate": "12/05/2020"
+      },
+      {
+        "name": "Create a approximate clinical trial plan",
+        "status": "not-started",
+        "owner": "",
+
+        "budget": "$10,000",
+        "duration": "1 week",
+        "startDate": "",
+        "endDate": ""
+      },
+      {
+        "name": "Identify disease models best used for gene therapy",
+        "status": "not-started",
+        "owner": "",
+        "budget": "$10,000",
+        "duration": "1 week",
+        "startDate": "",
+        "endDate": ""
+      },
+      {
+        "name": "Identify the target organs/cell types",
+        "status": "not-started",
+        "owner": "",
+        "budget": "$10,000",
+        "duration": "1 week",
+        "startDate": "",
+        "endDate": ""
+      }
+    ]
+  },
+  {
+    "id": "124",
+    "title": "Disease Models",
+    "description": "Understand what models are relevant to your disease",
+    "items": [
+      {
+        "name": "Identify Models Available",
+        "status": "not-started",
+        "owner": "",
+        "budget": "$10,000",
+        "duration": "4 weeks",
+        "startDate": "12/05/2020",
+        "endDate": "12/05/2020"
+      },
+
+      {
+        "name": "Construct knock-in-mice",
+        "status": "not-started",
+        "owner": "",
+        "budget": "$10,000",
+        "duration": "10 week",
+        "startDate": "12/05/2020",
+        "endDate": "12/05/2020"
+      },
+      {
+        "key": "4",
+        "name": "Characterization of knock-in mice",
+        "status": "not-started",
+        "owner": "",
+        "budget": "$10,000",
+        "duration": "1 week",
+        "startDate": "",
+        "endDate": ""
+      }
+    ]
+  }
+]

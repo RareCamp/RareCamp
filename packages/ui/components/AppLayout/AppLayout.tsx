@@ -1,21 +1,17 @@
-import { Layout } from 'antd';
 import { ChildrenProps } from 'types';
 import Navbar from './Navbar';
 import SideBar from './Sidebar';
 
-const { Footer } = Layout;
-
 const USER_NAME = 'Ramya';
 const AppLayout = ({ children }: ChildrenProps) => {
   return (
-    <Layout style={{ maxHeight: '100vh', overflow: 'hidden' }}>
+    <div className="flex">
       <SideBar />
-      <Layout className="site-layout">
+      <div className="w-full min-h-screen">
         <Navbar username={USER_NAME} />
-        {children}
-        <Footer />
-      </Layout>
-    </Layout>
+        <div className="w-full overflow-y-auto">{children}</div>
+      </div>
+    </div>
   );
 };
 
