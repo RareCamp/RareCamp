@@ -1,0 +1,43 @@
+name: rarecamp-${file(serverless.yml):provider.stage}
+authenticationType: AMAZON_COGNITO_USER_POOLS
+schema:
+  - graphql/schema/schema.graphql
+  - graphql/schema/organization.graphql
+  - graphql/schema/user.graphql
+  - graphql/schema/disease.graphql
+
+userPoolConfig:
+  defaultAction: DENY
+  userPoolId:
+    Ref: CognitoUserPool
+
+mappingTemplates:
+  # Queries
+  - type: Query
+    field: listOrganizations
+    dataSource: organizations
+  
+  
+  # Mutations
+  - type: Mutation
+    field: createOrganization
+    dataSource: organizations
+  - type: Mutation
+    field: updateOrganization
+    dataSource: organizations
+  - type: Mutation
+    field: deleteOrganization
+    dataSource: organizations
+
+dataSources:
+  - type: AMAZON_DYNAMODB
+    name: organizations
+    config:
+      tableName:
+        Ref: OrganizationsTable
+  
+  - type: AMAZON_DYNAMODB
+    name: diseases
+    config:
+      tableName:
+        Ref: DiseasesTable

@@ -1,0 +1,141 @@
+Conditions:
+    IsApiCustomDomainEnabled:
+      !Equals
+        - ${{self:custom.customDomain.enabled}}
+        - true
+  
+Resources:
+  AcmCertificate:
+    Type: AWS::CertificateManager::Certificate
+    Condition: IsApiCustomDomainEnabled
+    Properties:
+      DomainName: ${{self:custom.customDomain.domainName}}
+      DomainValidationOptions:
+        - DomainName: ${{self:custom.customDomain.domainName}}
+          ValidationDomain: ${{self:custom.stageConfig.api.validationDomain, ''}}
+
+  CognitoUserPool:
+    Type: AWS::Cognito::UserPool
+    Properties:
+      Policies:
+        PasswordPolicy:
+          MinimumLength: 6
+      Schema:
+        - AttributeDataType: String
+          Name: email
+          Required: true
+      AutoVerifiedAttributes:
+        - email
+      # EmailConfiguration:
+      #   EmailSendingAccount: DEVELOPER
+      #   ReplyToEmailAddress: no-reply@halfstack.software
+      #   SourceArn: arn:aws:ses:us-west-2:xxxx:identity/no-reply@halfstack.software
+      LambdaConfig:
+        PreSignUp: !GetAtt AutoConfirmUserLambdaFunction.Arn
+        PostAuthentication: !GetAtt PostAuthNLambdaFunction.Arn
+
+  CognitoUserPoolClient:
+    Type: AWS::Cognito::UserPoolClient
+    Properties:
+      UserPoolId: !Ref CognitoUserPool
+      ClientName: CognitoIdentityPool
+      GenerateSecret: false
+      RefreshTokenValidity: 30
+
+  CognitoIdentityPool:
+    Type: AWS::Cognito::IdentityPool
+    Properties:
+      AllowUnauthenticatedIdentities: false
+      # SupportedLoginProviders:
+      #   graph.facebook.com: 'xxxxx'
+      #   accounts.google.com: 'xxxxx-v02jjpd5r9ig0pdacbhpill2asuqtvnf.apps.googleusercontent.com'
+      #   api.twitter.com:
+      CognitoIdentityProviders:
+        - ClientId: !Ref CognitoUserPoolClient
+          ProviderName: !GetAtt CognitoUserPool.ProviderName
+
+  # Allow Cognito to invoke the cognitoAutoConfirm and cognitoPostAuthN functions
+  AutoConfirmUserLambdaCognitoPermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName: !GetAtt AutoConfirmUserLambdaFunction.Arn
+      Principal: cognito-idp.amazonaws.com
+      SourceArn: !GetAtt CognitoUserPool.Arn
+
+  PostAuthNLambdaCognitoPermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName: !GetAtt PostAuthNLambdaFunction.Arn
+      Principal: cognito-idp.amazonaws.com
+      SourceArn: !GetAtt CognitoUserPool.Arn
+
+  CognitoUserRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          # Allow authenticated users to assume this role
+          - Effect: Allow
+            Principal:
+              Federated: cognito-identity.amazonaws.com
+            Action: sts:AssumeRoleWithWebIdentity
+            Condition:
+              StringEquals:
+                'cognito-identity.amazonaws.com:aud': !Ref CognitoIdentityPool
+              'ForAnyValue:StringLike':
+                'cognito-identity.amazonaws.com:amr': authenticated
+      # Authenticated users are allowed to invoke the API
+      Policies:
+        - PolicyName: InvokeApi
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action:
+                  - execute-api:Invoke
+                Resource: !Sub 'arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${ApiGatewayRestApi}/${{self:provider.stage}}/*/*'
+      Path: '/'
+
+  CognitoIdentityPoolRoles:
+    Type: AWS::Cognito::IdentityPoolRoleAttachment
+    Properties:
+      IdentityPoolId: !Ref CognitoIdentityPool
+      Roles:
+        authenticated: !GetAtt CognitoUserRole.Arn
+  
+  # Due to a Serverless Framework bug, we need to create our own Authorizer, instead of
+  # simply specifying `authorizer.arn: !GetAtt CognitoUserPool.Arn` in the function.
+  # https://github.com/serverless/serverless/issues/3212#issuecomment-450574093
+  ApiGatewayAuthorizer:
+    DependsOn:
+      - ApiGatewayRestApi
+    Type: AWS::ApiGateway::Authorizer
+    Properties:
+      Name: CognitoAuthorizer
+      IdentitySource: method.request.header.Authorization
+      RestApiId:
+        Ref: ApiGatewayRestApi
+      Type: COGNITO_USER_POOLS
+      ProviderARNs:
+        - !GetAtt CognitoUserPool.Arn
+Outputs:
+  CognitoUserPoolId:
+    Description: ID of the Cognito User Pool
+    Value: !Ref CognitoUserPool
+
+  CognitoUserPoolClientId:
+    Description: 'Client ID of the Cognito User Pool App: Identity Pool'
+    Value: !Ref CognitoUserPoolClient
+
+  CognitoIdentityPoolId:
+    Description: ID of the Cognito Identity Pool
+    Value: !Ref CognitoIdentityPool
+
+  UserTableName:
+    Value: !Ref UserTable
+
+  ApiEndpoint:
+    Value: !Sub https://${ApiGatewayRestApi}.execute-api.${AWS::Region}.amazonaws.com/${{self:provider.stage}}

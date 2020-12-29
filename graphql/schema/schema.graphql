@@ -1,0 +1,4 @@
+schema {
+  mutation: Mutation
+  query: Query
+}
