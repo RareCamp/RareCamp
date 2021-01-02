@@ -1,5 +1,5 @@
 .status-center {
-  @apply p-1 text-center;
+  @apply w-full p-1 text-center outline-none;
 }
 .status-completed {
   @apply status-center bg-green-400 text-white;
@@ -18,10 +18,10 @@
   @apply border-r border border-gray-100 text-sm text-gray-500 font-semibold;
 }
 .table-header > th:not(:first-child) {
-  @apply w-1/4;
+  @apply w-1/6;
 }
 .table-header > th:first-child {
-  @apply w-1/2;
+  @apply w-3/6;
 }
 
 .border-1-gray-100 {
@@ -31,5 +31,8 @@
   @apply text-sm border-1-gray-100;
 }
 .table-item > td {
-  @apply border-1-gray-100 p-2;
+  @apply border-1-gray-100 py-2 px-1;
+}
+.table-item > td > input {
+  @apply outline-none w-full;
 }

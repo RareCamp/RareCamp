@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-// import IndexPage from 'pages/index';
+import IndexPage from 'pages/index';
 import { MainSection } from './index';
 
 describe('IndexPage#MainSection', () => {
@@ -16,16 +16,16 @@ describe('IndexPage#MainSection', () => {
   });
 });
 
-/*  TODO: write integration test for the index page. Right now the ant design 
-    components has lot of listener that needs to be mocked
-*/
-/* describe('IndexPage', () => {
-  fit('shows the disease table', () => {
+describe('IndexPage', () => {
+  test('shows the invite header and table', () => {
     render(<IndexPage />);
-    const text = screen.getByRole('row', {
-      name: /foundation/i,
+    const invite = screen.getByRole('button', {
+      name: /invite/i,
     });
-    expect(text).toBeInTheDocument();
+    expect(invite).toBeInTheDocument();
+    const tableRec = screen.getByRole('heading', {
+      name: /planning/i,
+    });
+    expect(tableRec).toBeInTheDocument();
   });
 });
- */

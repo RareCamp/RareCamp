@@ -1,14 +1,19 @@
+import { useEffect } from 'react';
+import { useRouter } from 'next/router';
 import { ChildrenProps } from 'types';
-import Navbar from './Navbar';
 import SideBar from './Sidebar';
 
-const USER_NAME = 'Ramya';
 const AppLayout = ({ children }: ChildrenProps) => {
+  const router = useRouter();
+  useEffect(() => {
+    const isAuthenticated = true;
+    // if unauthenicated redirect to signin page
+    if (!isAuthenticated) router.push('/signin');
+  }, []);
   return (
     <div className="flex">
       <SideBar />
       <div className="w-full min-h-screen">
-        <Navbar username={USER_NAME} />
         <div className="w-full overflow-y-auto">{children}</div>
       </div>
     </div>

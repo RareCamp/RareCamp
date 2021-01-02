@@ -6,6 +6,7 @@ const components = {
   list: Icons.List,
   dashboard: Icons.Dashboard,
   bell: Icons.Bell,
+  dot: Icons.DotImage,
 };
 
 export type IconNameType = keyof typeof components;

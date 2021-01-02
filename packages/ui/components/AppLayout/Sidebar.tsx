@@ -1,15 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
+import Link from 'next/link';
 import { APP_NAME } from 'constants/application';
 import { SIDEBAR_LINKS } from 'constants/lists';
 import { Icon } from 'components/Icon';
 import styles from 'styles/layout.module.css';
+import { DropDown } from 'components/DropDown';
 
 const SideBar = () => {
   const [toggleSideBar] = React.useState(true);
+  const [open, setOpen] = useState(false);
   return (
     <aside
       className={`min-h-screen relative bg-secondary ${
-        toggleSideBar ? 'w-2/12' : 'w-40'
+        toggleSideBar ? 'w-1/5' : 'w-40'
       }`}
     >
       <ul>
@@ -25,7 +28,7 @@ const SideBar = () => {
           {SIDEBAR_LINKS.map((item) => {
             return (
               <button
-                key={item.name}
+                key={item.link}
                 type="button"
                 className={styles['sidebar-item']}
               >
@@ -35,12 +38,39 @@ const SideBar = () => {
                     toggleSideBar ? 6 : 10
                   } text--white`}
                 />
-                {toggleSideBar && <a href="/">{item.name}</a>}
+                {toggleSideBar && (
+                  <Link href={`/${item.link}`}>{item.name}</Link>
+                )}
               </button>
             );
           })}
+          <div className={styles['sidebar-item']}>
+            {toggleSideBar && <Link href="/">SSMD Gene Therapy</Link>}
+            <span role="presentation" onClick={() => setOpen(!open)}>
+              <Icon name="dot" className="mr-4 w-6" />
+            </span>
+          </div>
         </li>
-
+        {open && (
+          <DropDown
+            className="top-38 right-0 w-48 text-sm"
+            data={[
+              'Edit Program Details',
+              'Duplicate Program',
+              'Delete Program',
+            ]}
+            render={(item) => {
+              return (
+                <li
+                  key={item}
+                  className="text-black py-2 px-2 block hover:bg-gray-300"
+                >
+                  {item}
+                </li>
+              );
+            }}
+          />
+        )}
         {/* <li>
           <Icon
             name="chevron-right"

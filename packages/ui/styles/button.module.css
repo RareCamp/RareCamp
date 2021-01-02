@@ -1,0 +1,24 @@
+.button {
+  @apply h-9 border rounded  shadow-md text-center focus:shadow outline-none;
+}
+.btn-sm {
+  @apply button w-sm;
+}
+.btn-md {
+  @apply button w-md;
+}
+.btn-lg {
+  @apply button w-full;
+}
+.btn-xs {
+  @apply button w-8;
+}
+.btn-primary {
+  @apply bg-btn-primary;
+}
+.btn-secondary {
+  @apply bg-btn-secondary;
+}
+.btn-tertiary {
+  @apply bg-btn-tertiary;
+}

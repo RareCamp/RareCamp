@@ -1,5 +1,6 @@
 import MainSection from './MainSection';
 import SectionHeader from './SectionHeader';
-import TableItem from './TableItem';
+import TableRow from './TableRow';
+import TaskSection from './TaskSection';
 
-export { MainSection, SectionHeader, TableItem };
+export { MainSection, SectionHeader, TableRow, TaskSection };

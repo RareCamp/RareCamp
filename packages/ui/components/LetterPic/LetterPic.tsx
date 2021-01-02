@@ -1,6 +1,38 @@
-const LetterPic = ({ letter }: { letter: string }) => (
-  <li className="flex flex-col justify-between mr-2 w-6 h-6 rounded-full bg-blue-200 px-1">
-    <span className="m-auto text-xs text-blue-600">{letter}</span>
-  </li>
-);
+import React from 'react';
+import styles from 'styles/letterpic.module.css';
+
+// three different buttons, default is `primary`
+type Color = 'primary' | 'secondary' | 'tertiary' | 'custom';
+// three different sizes, default is `md`
+type Size = 'sm' | 'md' | 'lg' | 'xs' | 'custom';
+type TextColor = 'purple' | 'blue';
+type LetterPicProps = {
+  letter: string;
+  className?: string | null;
+  color?: Color;
+  size: Size;
+  textColor?: TextColor;
+};
+
+const LetterPic = ({
+  letter,
+  className,
+  color = 'primary',
+  size = 'md',
+  textColor = 'purple',
+}: LetterPicProps) => {
+  const btnClassses = `lp ${className} ${
+    color === 'custom' ? null : styles[`letterpic-${color}`]
+  } ${size === 'custom' ? null : styles[`letterpic-${size}`]}`;
+
+  return (
+    <li className={btnClassses}>
+      <span
+        className={`m-auto ${styles[`lettercolor-${textColor}`]}`}
+      >
+        {letter}
+      </span>
+    </li>
+  );
+};
 export default LetterPic;
