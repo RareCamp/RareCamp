@@ -68,6 +68,6 @@
     "dynamodb-toolbox": "^0.3.0",
     "express": "^4.17.1",
     "replace-in-file": "^6.0.0",
-    "serverless-appsync-plugin": "^1.5.0"
+    "serverless-appsync-plugin": "^1.6.0"
   }
 }
