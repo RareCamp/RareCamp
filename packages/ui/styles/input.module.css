@@ -1,0 +1,12 @@
+.input-field {
+  @apply w-full;
+}
+.input-has-error {
+  @apply w-full border border-red-700 mt-2 mb-2  py-1 px-1 rounded focus:outline-none;
+}
+.input-text {
+  @apply w-full pl-4 border mt-2 mb-2 border-gray-200 h-9 rounded focus:outline-none;
+}
+.input-error {
+  @apply text-red-700;
+}
