@@ -32,8 +32,7 @@ jobs:
     - name: Install package
       run: |
         (npm ci && npm audit --audit-level high && npm test) & \
-        (cd packages/ui && npm ci && npm audit --audit-level high && npm test) & \
-        (cd packages/api && npm ci && npm audit --audit-level high && npm test)
+        (cd packages/ui && npm ci && npm audit --audit-level high && npm test)
 
     - name: Deploy to sandboxed stack
       id: deploy_to_sandboxed_stack
