@@ -9,19 +9,15 @@
     "start:ui": "cd packages/ui && npm start",
     "start:ui:offline": "REACT_APP_ApiEndpoint=http://localhost:4911 npm run start:ui",
     "start:api": "sls offline cloudside",
-
     "package:dev": "sls package --stage development",
     "deploy-prepack:dev": "sls deploy --package .serverless --stage development",
     "deploy:dev": "sls deploy --stage development",
-
     "package:staging": "NODE_ENV=production sls package --stage staging",
     "deploy-prepack:staging": "NODE_ENV=production sls deploy --package .serverless --stage staging",
     "deploy:staging": "NODE_ENV=production sls deploy --stage staging",
-
     "package:prod": "NODE_ENV=production sls package --stage production",
     "deploy-prepack:prod": "NODE_ENV=production sls deploy --package .serverless --stage production",
     "deploy:prod": "NODE_ENV=production sls deploy --stage production",
-
     "remove-stack:dev": "sls remove --stage development",
     "zip-release": "zip -r release.zip .serverless serverless.yaml package.json package-lock.json",
     "setup": "node scripts/setup/setup.js",
@@ -46,7 +42,7 @@
     "eslint-plugin-react-hooks": "^1.7.0",
     "nodemon": "^2.0.3",
     "semantic-release": "^17.3.0",
-    "serverless": "^1.70.0",
+    "serverless": "^2.18.0",
     "serverless-apigateway-service-proxy": "^1.7.0",
     "serverless-cloudside-plugin": "^1.0.3",
     "serverless-domain-manager": "^3.3.2",
