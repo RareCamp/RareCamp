@@ -1,0 +1,40 @@
+.lp {
+    @apply bg-red-300 flex flex-col rounded-full;
+}
+
+.letterpic-sm {
+    @apply lp w-8 h-8;
+}
+
+.letterpic-md {
+    @apply lp w-12 h-12;
+}
+
+.letterpic-lg {
+    @apply lp w-20 h-20;
+}
+
+.letterpic-xs {
+    @apply lp w-8 h-8;
+}
+
+.letterpic-primary {
+    @apply bg-letterpic-primary;
+}
+
+.letterpic-secondary {
+    @apply bg-letterpic-secondary;
+}
+
+.letterpic-tertiary {
+    @apply bg-letterpic-tertiary;
+}
+
+.lettercolor-purple {
+    @apply text-lettercolor-purple;
+}
+
+.lettercolor-blue {
+    @apply text-lettercolor-blue;
+}
+

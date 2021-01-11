@@ -8,7 +8,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start:ui": "cd packages/ui && npm start",
     "start:ui:offline": "REACT_APP_ApiEndpoint=http://localhost:4911 npm run start:ui",
-    "start:api": "sls offline start",
+    "start:api": "sls offline cloudside",
     "package:dev": "sls package --stage development",
     "deploy-prepack:dev": "sls deploy --package .serverless --stage development",
     "deploy:dev": "sls deploy --stage development",
@@ -42,13 +42,11 @@
     "eslint-plugin-react-hooks": "^1.7.0",
     "nodemon": "^2.0.3",
     "semantic-release": "^17.3.0",
-    "serverless": "^1.70.0",
+    "serverless": "^2.18.0",
     "serverless-apigateway-service-proxy": "^1.7.0",
-    "serverless-appsync-simulator": "^0.11.0",
     "serverless-cloudside-plugin": "^1.0.3",
     "serverless-domain-manager": "^3.3.2",
     "serverless-dotenv-plugin": "^2.4.2",
-    "serverless-dynamodb-local": "^0.2.39",
     "serverless-iam-roles-per-function": "^2.0.2",
     "serverless-offline": "^6.1.5",
     "serverless-plugin-aws-alerts": "^1.4.0",
@@ -61,7 +59,12 @@
     "webpack": "^4.44.2"
   },
   "dependencies": {
-    "archiver": "^5.2.0",
-    "serverless-appsync-plugin": "^1.6.0"
+    "@vendia/serverless-express": "^3.4.0",
+    "archiver": "^5.1.0",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "dynamodb-toolbox": "^0.3.0",
+    "express": "^4.17.1",
+    "replace-in-file": "^6.0.0"
   }
 }

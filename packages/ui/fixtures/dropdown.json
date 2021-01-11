@@ -1,0 +1,23 @@
+[
+  {
+    "ownerName": "Fernando Bernal",
+    "ownerEmail": "Fernando@gmail.com",
+    "letterColor": "purple",
+    "bgColor": "primary",
+    "letter": "F"
+  },
+  {
+    "ownerName": "John Doe",
+    "ownerEmail": "johndoe@gmail.com",
+    "letterColor": "blue",
+    "bgColor": "secondary",
+    "letter": "J"
+  },
+  {
+    "ownerName": "Phillip Delmas",
+    "ownerEmail": "philipdelmas@gmail.com",
+    "letterColor": "purple",
+    "bgColor": "primary",
+    "letter": "P"
+  }
+]

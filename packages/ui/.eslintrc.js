@@ -12,8 +12,10 @@ module.exports = {
     project: './tsconfig.json',
   },
   rules: {
-    'prettier/prettier': ['error'],
+    'prettier/prettier': ['error', { endOfLine: 'auto' }],
     'react/react-in-jsx-scope': 'off',
     'import/prefer-default-export': 'off',
+    'react/prop-types': 'off',
+    'react/require-default-props': 'off',
   },
 };
