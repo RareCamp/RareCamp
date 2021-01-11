@@ -8,7 +8,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start:ui": "cd packages/ui && npm start",
     "start:ui:offline": "REACT_APP_ApiEndpoint=http://localhost:4911 npm run start:ui",
-    "start:api": "sls offline cloudside",
+    "start:api": "sls offline start",
     "package:dev": "sls package --stage development",
     "deploy-prepack:dev": "sls deploy --package .serverless --stage development",
     "deploy:dev": "sls deploy --stage development",
@@ -61,13 +61,7 @@
     "webpack": "^4.44.2"
   },
   "dependencies": {
-    "@vendia/serverless-express": "^3.4.0",
-    "archiver": "^5.1.0",
-    "body-parser": "^1.19.0",
-    "cors": "^2.8.5",
-    "dynamodb-toolbox": "^0.3.0",
-    "express": "^4.17.1",
-    "replace-in-file": "^6.0.0",
+    "archiver": "^5.2.0",
     "serverless-appsync-plugin": "^1.6.0"
   }
 }
