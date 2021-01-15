@@ -13,7 +13,7 @@ const AppLayout = ({ children }: ChildrenProps) => {
   return (
     <div className="flex">
       <SideBar />
-      <div className="w-full min-h-screen">
+      <div data-testid="121" className="w-full min-h-screen">
         <div className="w-full overflow-y-auto">{children}</div>
       </div>
     </div>

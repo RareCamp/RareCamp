@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { Button } from 'components/Button';
 import { InputField } from 'components/InputField';
 import { AS_REQUIRED, AS_EMAIL } from 'constants/validations';
-import { APP_NAME } from 'constants/application';
+import { Logo } from 'components/Logo';
 
 const SignUp = () => {
   const { register, handleSubmit, errors } = useForm();
@@ -14,17 +14,12 @@ const SignUp = () => {
     <section className="px-4">
       <div className="bg-secondary h-screen flex justify-between px-52 py-16">
         <div className="w-1/2 bg-white rounded-l-lg py-16 px-10">
-          <span className="px-5 text-3xl mt-4 text-red-600 uppercase my-auto">
-            {APP_NAME.slice(0, 4)}
-            <span className="inline text-4xl text-blue-900">
-              {APP_NAME.slice(4, 6)}
-            </span>
-          </span>
+          <Logo />
           <h1 className="text-3xl mt-8">Sign Up</h1>
           <span>
             or
             <Link href="/signin">
-              <span className="text-btn-primary ml-2 cursor-pointer">
+              <span className="text-btn-primary ml-2 cursor-pointer hover:text-blue-500">
                 log in to your account
               </span>
             </Link>
@@ -49,9 +44,9 @@ const SignUp = () => {
               size="lg"
               color="primary"
               label="Sign Up"
-              className="mt-4 text-white"
+              className="mt-4 text-white text-sm"
             />
-            <div className="flex items-center justify-evenly mt-4">
+            {/* <div className="flex items-center justify-evenly mt-4">
               <p className="border-b-2  border-gray-300 w-2/5" />
               Or
               <p className="border-b-2 border-gray-300 w-2/5" />
@@ -70,23 +65,32 @@ const SignUp = () => {
               onClick={() => {}}
               label="Sign up with Google"
               className="text-sm text-gray-500 mt-4  border-gray-300"
-            />
-            <p className="text-sm mt-4 ">
-              <span className="text-gray-400">
+            /> */}
+            <p className="text-xs mt-4 flex flex-col justify-between h-9">
+              <span className="text-gray-400 text-extralight">
                 By signing up, you acknowledge you have read and
+              </span>
+              <span className="text-gray-400 text-extralight">
                 understood OpenGT
-              </span>
-              <span className="text-btn-primary ml-1">
-                Privacy policy
-              </span>
-              &
-              <span className="text-btn-primary ml-1">
-                Terms of service
+                <span className="text-btn-primary ml-1 mr-1 cursor-pointer hover:text-blue-500">
+                  Privacy policy
+                </span>
+                &
+                <span className="text-btn-primary ml-1 cursor-pointer hover:text-blue-500">
+                  Terms of service
+                </span>
               </span>
             </p>
           </form>
         </div>
         <div className="w-1/2 bg-white rounded-r-lg object-contain">
+          <div
+            style={{ color: '#3e3465' }}
+            className="absolute top-44 right-80 flex flex-col text-3xl"
+          >
+            <span>Own the roadmap </span>
+            <span>to our future</span>
+          </div>
           <img
             src="/login-signup.png"
             alt="signup"

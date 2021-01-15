@@ -7,6 +7,10 @@ const components = {
   dashboard: Icons.Dashboard,
   bell: Icons.Bell,
   dot: Icons.DotImage,
+  users: Icons.Users,
+  close: Icons.Close,
+  arrowleft: Icons.ArrowLeft,
+  'add-circled': Icons.AddCircle,
 };
 
 export type IconNameType = keyof typeof components;
@@ -19,7 +23,7 @@ type Props = {
 const Icon = ({ name, className }: Props) => {
   const IconComponent = components[name];
   return (
-    <div>
+    <div data-testid="Icon">
       <IconComponent className={className} />
     </div>
   );

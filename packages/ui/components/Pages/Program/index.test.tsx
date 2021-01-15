@@ -1,20 +1,5 @@
 import { render, screen } from '@testing-library/react';
 import IndexPage from 'pages/index';
-import { MainSection } from './index';
-
-describe('IndexPage#MainSection', () => {
-  test('shows the children passed', () => {
-    render(
-      <MainSection>
-        <h3>hello</h3>
-      </MainSection>,
-    );
-    const text = screen.getByRole('heading', {
-      name: /hello/i,
-    });
-    expect(text).toBeInTheDocument();
-  });
-});
 
 describe('IndexPage', () => {
   test('shows the invite header and table', () => {

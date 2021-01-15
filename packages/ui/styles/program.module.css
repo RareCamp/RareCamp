@@ -1,37 +1,34 @@
-.status-center {
-  @apply w-full p-1 text-center outline-none;
-}
 .status-completed {
-  @apply status-center bg-green-400 text-white;
+  @apply focus:outline-none p-2 ml-2 bg-green-400 text-white;
 }
 .status-in-progress {
-  @apply status-center bg-yellow-500 text-white;
+  @apply focus:outline-none p-2 ml-2 bg-yellow-500 text-white;
 }
 .status-not-started {
-  @apply status-center text-gray-400 bg-gray-100;
+  @apply focus:outline-none p-2 ml-2 text-gray-400 bg-gray-100;
 }
 .status-default {
-  @apply status-center text-gray-400 bg-gray-100;
+  @apply focus:outline-none text-gray-400 bg-gray-100;
 }
 
 .table-header > th {
-  @apply border-r border border-gray-100 text-sm text-gray-500 font-semibold;
+  @apply border border-gray-300 hover:border-blue-400 text-sm text-gray-500 font-semibold;
 }
 .table-header > th:not(:first-child) {
-  @apply w-1/6;
+  @apply w-36;
 }
 .table-header > th:first-child {
-  @apply w-3/6;
+  @apply w-2/6;
 }
 
 .border-1-gray-100 {
-  @apply border-r border border-gray-100;
+  @apply border-r border border-gray-300;
 }
 .table-item {
-  @apply text-sm border-1-gray-100;
+  @apply text-sm;
 }
 .table-item > td {
-  @apply border-1-gray-100 py-2 px-1;
+  @apply border border-gray-300 hover:border-blue-400 py-2 px-1 cursor-pointer text-gray-500 font-extralight;
 }
 .table-item > td > input {
   @apply outline-none w-full;

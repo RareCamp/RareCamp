@@ -2,6 +2,7 @@ import { render, screen } from '@testing-library/react';
 import Button from './Button';
 
 describe('Button', () => {
+  // TODO: Separate out the tests that are written together
   test('shows the text and icon with custom class and predefined color/size style', () => {
     render(
       <Button
