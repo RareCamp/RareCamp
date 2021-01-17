@@ -1,0 +1,17 @@
+type Disease {
+    omim: ID!
+    name: String!
+}
+
+input CreateDiseaseInput {
+    name: String!
+}
+
+type Query {
+    listDiseases(limit: Int, nextToken: String): [Disease]
+    getDisease(omim: ID!): Disease!
+}
+
+type Mutation {
+    createDisease(disease: CreateDiseaseInput): Disease
+}

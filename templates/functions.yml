@@ -1,0 +1,3 @@
+getDisease:
+  name: ${{self:provider.stage}}-getDisease
+  handler: packages/graphql/resolvers/getDisease.handler

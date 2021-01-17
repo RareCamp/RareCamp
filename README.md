@@ -1,15 +1,3 @@
-# Serverless FullStack starter
-
-<p align="center">
-  <img src="https://raw.githubusercontent.com/wizeline/serverless-fullstack/master/wizeline-amplify-serverless-banner.png" alt="wizeline, serverless, and amplify banner">
-</p>
-
-<p align="center">
-  <img src="https://raw.githubusercontent.com/wizeline/serverless-fullstack/master/docs/diagrams/cloud-architecture/software-architecture-diagram.png" alt="serverless software architecture diagram">
-</p>
-
-Get started developing applications quickly with best practices using Serverless on AWS.
-
 ## Pre-requisites
 
 * [AWS CLI](https://docs.aws.amazon.com/polly/latest/dg/setup-aws-cli.html)
@@ -21,8 +9,8 @@ Get started developing applications quickly with best practices using Serverless
 To get started, run the following commands:
 
 ```
-git clone https://github.com/wizeline/serverless-fullstack
-cd serverless-fullstack
+git clone git@github.com:RareCamp/RareCamp.git
+cd RareCamp
 npm run setup-file
 ```
 
@@ -71,11 +59,9 @@ User authentication is provided by AWS Cognito.
 
 Social sign-in coming soon.
 
-### REST API
+### GraphQl (AppSync) API
 
-<img src="https://raw.githubusercontent.com/wizeline/serverless-fullstack/master/docs/diagrams/cloud-architecture/rest-api.png" alt="API">
-
-A Node.js Express API running on Lambda and API Gateway allows for a familiar developer experience while leveraging the benefits of Serverless.
+A fully-managed and serverless GraphQl API.
 
 ### Database
 
