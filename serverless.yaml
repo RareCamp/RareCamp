@@ -36,8 +36,7 @@ plugins:
   - serverless-stack-output
   - serverless-cloudside-plugin
   - serverless-plugin-aws-alerts
-  # - '../serverless-amplify-plugin'
-  - '@wizeline/serverless-amplify-plugin'
+  - '@brettstack/serverless-amplify-plugin'
   - serverless-dynamodb-local
   - serverless-offline
   - serverless-appsync-simulator

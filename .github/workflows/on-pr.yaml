@@ -9,13 +9,13 @@ env:
   AWS_DEFAULT_REGION: us-west-2
 
 jobs:
-  # auto-approve-dependabot:
-  #   if: github.actor == 'dependabot[bot]' || github.actor == 'dependabot-preview[bot]'
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #   - uses: hmarr/auto-approve-action@v2.0.0
-  #     with:
-  #       github-token: "${{ secrets.GITHUB_TOKEN }}"
+  auto-approve-dependabot:
+    if: github.actor == 'dependabot[bot]' || github.actor == 'dependabot-preview[bot]'
+    runs-on: ubuntu-latest
+    steps:
+    - uses: hmarr/auto-approve-action@v2.0.0
+      with:
+        github-token: "${{ secrets.GITHUB_TOKEN }}"
 
   test-and-deploy-to-sandbox:
     if: github.actor != 'dependabot[bot]' && github.actor != 'dependabot-preview[bot]'
@@ -28,6 +28,7 @@ jobs:
       run: |
         pr_id_cut=$(echo ${{github.event.pull_request._links.self}} | cut -d '/' -f 8)
         pr_id=${{github.event.number}}
+        echo ${{github.event.pull_request._links.self}}
         echo $pr_id_cut
         echo $pr_id
 
