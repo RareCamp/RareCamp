@@ -31,16 +31,25 @@ const TaskSection = ({ record }: RecordProps) => {
         setShowTable={setShowTable}
         showTable={showTable}
       />
-      {showTable &&
-        rows.map((item) => <TableRow key={item.name} item={item} />)}
-      <Button
-        onClick={() => addRow()}
-        icon={<span className="mr-2">+</span>}
-        label={ADD_TASK}
-        color="tertiary"
-        size="custom"
-        className="w-32 py-4 focus:outline-none text-gray-300 hover:text-gray-400"
-      />
+      {showTable && (
+        <>
+          {rows.map((item) => (
+            <TableRow key={item.name} item={item} />
+          ))}
+          <tr>
+            <td colSpan={6}>
+              <Button
+                onClick={() => addRow()}
+                icon={<span>+</span>}
+                label={ADD_TASK}
+                color="tertiary"
+                size="custom"
+                className="py-4 px-4 flex flex-start w-full focus:outline-none text-gray-300 hover:text-gray-400 border border-gray-300 hover:border-blue-400"
+              />
+            </td>
+          </tr>
+        </>
+      )}
     </tbody>
   );
 };

@@ -1,5 +1,5 @@
 .lp {
-    @apply bg-red-300 flex flex-col rounded-full;
+    @apply  flex flex-col rounded-full;
 }
 
 .letterpic-sm {
@@ -37,4 +37,10 @@
 .lettercolor-blue {
     @apply text-lettercolor-blue;
 }
+.avatar {
+    @apply flex -space-x-1 overflow-hidden;
 
+}
+.avatar > li {
+    @apply inline-block h-6 w-6 rounded-full ring-2 ring-white;
+}

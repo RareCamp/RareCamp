@@ -4,6 +4,7 @@ import { STATUS_TYPES } from 'constants/lists';
 import styles from 'styles/program.module.css';
 import { DropDown } from 'components/DropDown';
 import type { Task } from 'types';
+import { Icon } from 'components/Icon';
 
 type TableRowProps = {
   item: Task;
@@ -12,43 +13,76 @@ type TableRowProps = {
 const TableRow = ({ item }: TableRowProps) => {
   const [task, setTask] = useState(item.name);
   const [budget, setBudget] = useState(item.budget);
-  const [duration, setDuration] = useState(item.duration);
+  const [showDropdown, setshowDropdown] = useState(false);
   const [selectedStatus, setStatus] = useState(item.status);
   const [isOwnerDetailsVisible, setOwnerDetailsVisible] = useState(
     false,
   );
   const [startDate, setStartDate] = useState(item.startDate);
   const [endDate, setEndDate] = useState(item.endDate);
+  const [hover, setHover] = useState(false);
+
+  let statusClass = 'not-started';
+  if (selectedStatus === 'completed') {
+    statusClass = 'completed';
+  }
+
+  if (selectedStatus === 'in-progress') {
+    statusClass = 'in-progress';
+  }
+  if (selectedStatus === 'not-started') {
+    statusClass = 'not-started';
+  }
+  const tooltipStyle = hover ? 'block' : 'hidden';
 
   return (
     <tr key={item.name} className={styles['table-item']}>
-      <td>
+      <td
+        className="flex items-center h-14 w-full"
+        onMouseOver={() => setHover(true)}
+        onFocus={() => setHover(true)}
+        onMouseOut={() => setHover(false)}
+        onBlur={() => setHover(false)}
+      >
+        <Icon
+          name="dot"
+          className={`w-4 text-gray-300 hover:text-gray-400 cursor-pointer ${tooltipStyle}`}
+        />
         <input
-          // autoFocus={task ? false : true}
+          className="text-sm"
           type="text"
           value={task}
           onChange={(e) => setTask(e.target.value)}
         />
       </td>
-      <td>
-        <select
-          onChange={(e) => setStatus(e.target.value)}
-          className={styles[`status-${selectedStatus}`]}
-        >
-          {STATUS_TYPES.map((status) => {
-            return (
-              <option
-                key={status.id}
-                className={styles[`status-${status.id}`]}
-                value={status.id}
-                selected={item.status === status.id}
-              >
-                {status.label}
-              </option>
-            );
-          })}
-        </select>
+      <td
+        role="presentation"
+        onClick={() => setshowDropdown(!showDropdown)}
+      >
+        <span className={styles[statusClass]}>{selectedStatus}</span>
+        {showDropdown && (
+          <DropDown
+            className="text-sm w-36"
+            data={STATUS_TYPES}
+            render={(status) => {
+              return (
+                <li
+                  className="border border-gray-300 hover:border-blue-400"
+                  key={status.id}
+                  role="presentation"
+                  onClick={() => {
+                    setStatus(status.id);
+                    setshowDropdown(false);
+                  }}
+                >
+                  {status.label}
+                </li>
+              );
+            }}
+          />
+        )}
       </td>
+
       {item.owner !== '' ? (
         <td
           onClick={() => {
@@ -78,7 +112,7 @@ const TableRow = ({ item }: TableRowProps) => {
           ]}
           render={(i) => {
             return (
-              <div className="flex items-center px-2 py-2">
+              <div className="flex items-center px-2 py-2 hover:bg-gray-200 cursor-pointer">
                 <LetterPic
                   letter="R"
                   color="primary"
@@ -107,13 +141,6 @@ const TableRow = ({ item }: TableRowProps) => {
         />
       </td>
 
-      <td>
-        <input
-          type="text"
-          value={duration}
-          onChange={(e) => setDuration(e.target.value)}
-        />
-      </td>
       <td>
         <input
           type="date"

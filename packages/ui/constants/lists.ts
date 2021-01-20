@@ -17,7 +17,6 @@ export const HOME_TABLE_HEADINGS = [
   'Status',
   'Owner',
   'Budget',
-  'Duration',
   'Start Date',
   'End Date',
 ];

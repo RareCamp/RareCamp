@@ -13,6 +13,7 @@ type InputFieldProps = {
   onBlur?: () => void;
   onFocus?: () => void;
   reference: any;
+  value?: string;
 };
 
 const InputField = ({
@@ -27,6 +28,7 @@ const InputField = ({
   error,
   maxLength,
   reference,
+  value,
 }: InputFieldProps) => {
   const containerClassNames = `${className} ${styles['input-field']}`;
   const inputClassNames = `${
@@ -44,6 +46,7 @@ const InputField = ({
         placeholder={placeholder}
         type={type}
         id={name}
+        value={value}
         name={name}
         maxLength={maxLength}
       />
