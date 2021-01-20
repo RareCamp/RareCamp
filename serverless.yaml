@@ -33,7 +33,6 @@ plugins:
   - serverless-webpack
   - serverless-appsync-plugin
   # - serverless-apigateway-service-proxy
-  # - serverless-plugin-split-stacks
   - serverless-stack-output
   - serverless-cloudside-plugin
   - serverless-plugin-aws-alerts
@@ -100,7 +99,7 @@ custom:
     buildCommandEnvVars:
       prefix: 'REACT_APP_'
       allow:
-        - ApiEndpoint
+        - GraphQlApiUrl
         - CognitoIdentityPoolId,
         - CognitoUserPoolId,
         - CognitoUserPoolClientId,
@@ -108,10 +107,6 @@ custom:
     webpackConfig: ./functions.webpack.config.js
   output:
     file: ./stack-outputs.json
-  # TODO: Add custom splitting with ./split-stack-splitter.js
-  # splitStacks:
-  #   perFunction: true
-  #   custom: ./split-stack-splitter.js
   alerts:
     dashboards: true
     nameTemplate: $[functionName]-$[metricName]-Alarm

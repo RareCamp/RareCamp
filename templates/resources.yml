@@ -87,16 +87,17 @@ Resources:
                 'cognito-identity.amazonaws.com:aud': !Ref CognitoIdentityPool
               'ForAnyValue:StringLike':
                 'cognito-identity.amazonaws.com:amr': authenticated
+      # TODO: Allow invoking AppSync API
       # Authenticated users are allowed to invoke the API
-      Policies:
-        - PolicyName: InvokeApi
-          PolicyDocument:
-            Version: '2012-10-17'
-            Statement:
-              - Effect: Allow
-                Action:
-                  - execute-api:Invoke
-                Resource: !Sub 'arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${ApiGatewayRestApi}/${{self:provider.stage}}/*/*'
+      # Policies:
+      #   - PolicyName: InvokeApi
+      #     PolicyDocument:
+      #       Version: '2012-10-17'
+      #       Statement:
+      #         - Effect: Allow
+      #           Action:
+      #             - execute-api:Invoke
+      #           Resource: !Sub 'arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${ApiGatewayRestApi}/${{self:provider.stage}}/*/*'
       Path: '/'
 
   CognitoIdentityPoolRoles:
@@ -109,18 +110,19 @@ Resources:
   # Due to a Serverless Framework bug, we need to create our own Authorizer, instead of
   # simply specifying `authorizer.arn: !GetAtt CognitoUserPool.Arn` in the function.
   # https://github.com/serverless/serverless/issues/3212#issuecomment-450574093
-  ApiGatewayAuthorizer:
-    DependsOn:
-      - ApiGatewayRestApi
-    Type: AWS::ApiGateway::Authorizer
-    Properties:
-      Name: CognitoAuthorizer
-      IdentitySource: method.request.header.Authorization
-      RestApiId:
-        Ref: ApiGatewayRestApi
-      Type: COGNITO_USER_POOLS
-      ProviderARNs:
-        - !GetAtt CognitoUserPool.Arn
+  # TODO: AppSync cognito authorizer
+  # ApiGatewayAuthorizer:
+  #   DependsOn:
+  #     - ApiGatewayRestApi
+  #   Type: AWS::ApiGateway::Authorizer
+  #   Properties:
+  #     Name: CognitoAuthorizer
+  #     IdentitySource: method.request.header.Authorization
+  #     RestApiId:
+  #       Ref: ApiGatewayRestApi
+  #     Type: COGNITO_USER_POOLS
+  #     ProviderARNs:
+  #       - !GetAtt CognitoUserPool.Arn
 Outputs:
   CognitoUserPoolId:
     Description: ID of the Cognito User Pool
@@ -136,6 +138,3 @@ Outputs:
 
   UserTableName:
     Value: !Ref UserTable
-
-  ApiEndpoint:
-    Value: !Sub https://${ApiGatewayRestApi}.execute-api.${AWS::Region}.amazonaws.com/${{self:provider.stage}}
