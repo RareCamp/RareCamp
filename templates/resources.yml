@@ -87,18 +87,15 @@ Resources:
                 'cognito-identity.amazonaws.com:aud': !Ref CognitoIdentityPool
               'ForAnyValue:StringLike':
                 'cognito-identity.amazonaws.com:amr': authenticated
-      # TODO: Allow invoking AppSync API
-      # Authenticated users are allowed to invoke the API
-      # Policies:
-      #   - PolicyName: InvokeApi
-      #     PolicyDocument:
-      #       Version: '2012-10-17'
-      #       Statement:
-      #         - Effect: Allow
-      #           Action:
-      #             - execute-api:Invoke
-      #           Resource: !Sub 'arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${ApiGatewayRestApi}/${{self:provider.stage}}/*/*'
-      Path: '/'
+      Policies:
+        - PolicyName: UserPoolAppSyncPolicy
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Effect: "Allow"
+                Action:
+                  - "appsync:GraphQL"
+                Resource: "*"
 
   CognitoIdentityPoolRoles:
     Type: AWS::Cognito::IdentityPoolRoleAttachment
