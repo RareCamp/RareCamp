@@ -24,14 +24,6 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
 
-    - name: Debug
-      run: |
-        pr_id_cut=$(echo ${{github.event.pull_request._links.self}} | cut -d '/' -f 8)
-        pr_id=${{github.event.number}}
-        echo ${{github.event.pull_request._links.self}}
-        echo $pr_id_cut
-        echo $pr_id
-
     - name: Setup Node.js
       uses: actions/setup-node@v1
       with:
