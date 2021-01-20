@@ -15,11 +15,11 @@ describe('AppLayout', () => {
   test('displays the children passed', () => {
     render(
       <AppLayout>
-        <h3>Hello</h3>
+        <h3>Layout</h3>
       </AppLayout>,
     );
     const text = screen.getByRole('heading', {
-      name: /hello/i,
+      name: /Layout/i,
     });
     expect(text).toBeInTheDocument();
   });

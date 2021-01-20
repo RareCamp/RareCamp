@@ -1,0 +1,32 @@
+[
+  {
+    "title": "SSMD Gene Therapy",
+    "description": "This program captures essential steps in the SSMD gene therapy roadmap",
+    "className": "",
+    "icons": [
+      {
+        "src": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.25&w=256&h=256&q=80",
+        "color": "secondary"
+      },
+      {
+        "src": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+        "color": "primary"
+      }
+    ]
+  },
+  {
+    "title": "SSMD Drug Repurposing",
+    "description": "The drug repurposing program outlines all ongoing research projects to conduct a study",
+    "className": "",
+    "icons": [
+      {
+        "src": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.25&w=256&h=256&q=80",
+        "color": "secondary"
+      },
+      {
+        "src": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+        "color": "primary"
+      }
+    ]
+  }
+]

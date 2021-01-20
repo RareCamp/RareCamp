@@ -5,9 +5,9 @@ import styles from 'styles/letterpic.module.css';
 type Color = 'primary' | 'secondary' | 'tertiary' | 'custom';
 // three different sizes, default is `md`
 type Size = 'sm' | 'md' | 'lg' | 'xs' | 'custom';
-type TextColor = 'purple' | 'blue';
+type TextColor = 'purple' | 'blue' | null;
 type LetterPicProps = {
-  letter: string;
+  letter: any;
   className?: string | null;
   color?: Color;
   size: Size;

@@ -11,6 +11,7 @@ const SideBar = () => {
   const [open, setOpen] = useState(false);
   return (
     <aside
+      style={{ minHeight: '100vh' }}
       className={`min-h-screen relative bg-secondary ${
         toggleSideBar ? 'w-1/5' : 'w-40'
       }`}
@@ -50,27 +51,29 @@ const SideBar = () => {
               <Icon name="dot" className="mr-4 w-6" />
             </span>
           </div>
+          {open && (
+            <DropDown
+              className="w-48 text-sm right-0 px-2 py-1"
+              data={['Edit Program Details', 'Delete Program']}
+              render={(item) => {
+                return (
+                  <li
+                    key={item}
+                    className="text-black py-2 px-2 block border border-gray-100 hover:border-blue-400"
+                  >
+                    {item}
+                  </li>
+                );
+              }}
+            />
+          )}
+          <div className={styles['sidebar-item']}>
+            {toggleSideBar && (
+              <Link href="/">SSMD Drug Repurposing</Link>
+            )}
+          </div>
         </li>
-        {open && (
-          <DropDown
-            className="top-38 right-0 w-48 text-sm"
-            data={[
-              'Edit Program Details',
-              'Duplicate Program',
-              'Delete Program',
-            ]}
-            render={(item) => {
-              return (
-                <li
-                  key={item}
-                  className="text-black py-2 px-2 block hover:bg-gray-300"
-                >
-                  {item}
-                </li>
-              );
-            }}
-          />
-        )}
+
         {/* <li>
           <Icon
             name="chevron-right"

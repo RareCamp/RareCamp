@@ -7,7 +7,7 @@ import {
   AS_EMAIL,
   AS_PASSWORD,
 } from 'constants/validations';
-import { APP_NAME } from 'constants/application';
+import { Logo } from 'components/Logo';
 
 const SignIn = () => {
   const { register, handleSubmit, errors } = useForm();
@@ -18,47 +18,22 @@ const SignIn = () => {
     <section className="px-4">
       <div className="bg-secondary h-screen flex justify-between px-52 py-16 ">
         <div className="w-1/2 bg-white rounded-l-lg py-16 px-10">
-          <span className="px-5 text-3xl mt-4 text-red-600 uppercase my-auto">
-            {APP_NAME.slice(0, 4)}
-            <span className="inline text-4xl text-blue-900">
-              {APP_NAME.slice(4, 6)}
-            </span>
-          </span>
+          <Logo />
           <h1 className="text-3xl mt-8 text-black text-bold">
             Log in
           </h1>
           <span>
             or
             <Link href="/signup">
-              <span className="text-btn-primary ml-2 cursor-pointer">
+              <span className="text-btn-primary ml-2 cursor-pointer hover:text-blue-500">
                 Dont have a login? Sign Up
               </span>
             </Link>
           </span>
           <form
-            className="flex flex-col mt-5 h-full "
+            className="flex flex-col mt-5 h-full"
             onSubmit={handleSubmit(onSubmit)}
           >
-            <Button
-              icon={
-                <img
-                  src="/google-20.png"
-                  alt="Google auth"
-                  height={20}
-                  width={20}
-                />
-              }
-              size="lg"
-              color="tertiary"
-              onClick={() => {}}
-              label="Sign in with Google"
-              className="mt-4 text-gray-600 border-gray-300"
-            />
-            <div className="flex items-center justify-evenly mt-4">
-              <p className="border-b-2  border-gray-300 w-2/5" />
-              Or
-              <p className="border-b-2 border-gray-300 w-2/5" />
-            </div>
             <InputField
               reference={register({
                 ...AS_REQUIRED,
@@ -77,12 +52,12 @@ const SignIn = () => {
               error={errors.PASSWORD && errors.PASSWORD.message}
             />
             <p className="text-sm mt-4 ">
-              <span className="text-btn-primary ml-1">
+              <span className="text-btn-primary ml-1 cursor-pointer hover:text-blue-500">
                 Forgot your password?
               </span>
             </p>
             <div className="flex justify-between items-center mt-2">
-              <div className="items-center">
+              <div className="items-center ml-1">
                 <input type="checkbox" />
                 <span className="text-sm text-gray-600 ml-1">
                   Remember
@@ -99,13 +74,19 @@ const SignIn = () => {
             </div>
           </form>
         </div>
-        <div className="w-1/2 bg-white rounded-r-lg object-contain">
+        <div className="flex w-1/2 bg-white rounded-r-lg object-contain">
+          <div
+            style={{ color: '#3e3465' }}
+            className="absolute top-44 right-80 flex flex-col text-3xl"
+          >
+            <span>Own the roadmap </span>
+            <span>to our future</span>
+          </div>
           <img
             src="/login-signup.png"
             alt="login"
             className="self-center h-full w-full"
           />
-          {/* <Icon name="form" className="object-contain  w-full..." /> */}
         </div>
       </div>
     </section>

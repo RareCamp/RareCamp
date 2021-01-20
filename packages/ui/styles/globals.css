@@ -11,4 +11,3 @@
 .owner--dropdown > li {
     @apply text-black py-2 px-2 block hover:bg-gray-300;
 }
-

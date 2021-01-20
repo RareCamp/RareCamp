@@ -1,0 +1,3 @@
+.info-form > input {
+    @apply mt-6 placeholder-gray-800 font-extralight;
+}
