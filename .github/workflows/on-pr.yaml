@@ -9,13 +9,13 @@ env:
   AWS_DEFAULT_REGION: us-west-2
 
 jobs:
-  auto-approve-dependabot:
-    if: github.actor == 'dependabot[bot]' || github.actor == 'dependabot-preview[bot]'
-    runs-on: ubuntu-latest
-    steps:
-    - uses: hmarr/auto-approve-action@v2.0.0
-      with:
-        github-token: "${{ secrets.GITHUB_TOKEN }}"
+  # auto-approve-dependabot:
+  #   if: github.actor == 'dependabot[bot]' || github.actor == 'dependabot-preview[bot]'
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #   - uses: hmarr/auto-approve-action@v2.0.0
+  #     with:
+  #       github-token: "${{ secrets.GITHUB_TOKEN }}"
 
   test-and-deploy-to-sandbox:
     if: github.actor != 'dependabot[bot]' && github.actor != 'dependabot-preview[bot]'
@@ -24,6 +24,13 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
 
+    - name: Debug
+      run: |
+        pr_id_cut=$(echo ${{github.event.pull_request._links.self}} | cut -d '/' -f 8)
+        pr_id=${{github.event.number}}
+        echo $pr_id_cut
+        echo $pr_id
+
     - name: Setup Node.js
       uses: actions/setup-node@v1
       with:
@@ -31,8 +38,8 @@ jobs:
 
     - name: Install package
       run: |
-        (npm ci && npm audit --audit-level high && npm test) & \
-        (cd packages/ui && npm ci && npm audit --audit-level high && npm test)
+        (npm ci && npm audit --audit-level critical && npm test) & \
+        (cd packages/ui && npm ci && npm audit --audit-level critical && npm test)
 
     - name: Deploy to sandboxed stack
       id: deploy_to_sandboxed_stack
@@ -46,7 +53,7 @@ jobs:
 
         # Just testing the AWS Creds 
         aws --debug --profile rarecamp_dev cloudformation list-stacks
-        AWS_PROFILE=rarecamp_dev NODE_ENV=production ALARMS_NOTIFICATION_EMAIL=alert@example.com SERVERLESS_SERVICE_SUFFIX=-${{ github.head_ref }} npm run deploy:dev
+        AWS_PROFILE=rarecamp_dev NODE_ENV=production ALARMS_NOTIFICATION_EMAIL=alert@example.com SERVERLESS_SERVICE_SUFFIX=-${{ github.event.number }} npm run deploy:dev
         WEBSITE_URL=https://$(grep -o 'DefaultDomain": "[^"]*' ./stack-outputs.json | grep -o '[^"]*$')
         echo "::set-output name=websiteUrl::$WEBSITE_URL"
     
