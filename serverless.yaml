@@ -93,7 +93,7 @@ custom:
     isManual: true
     domainName: ${{self:custom.stageConfig.amplify.domainName, ''}}
     buildSpecValues:
-      artifactBaseDirectory: packages/ui/.next
+      artifactBaseDirectory: packages/ui/out
       preBuildWorkingDirectory: packages/ui
     buildCommandEnvVars:
       prefix: 'REACT_APP_'
