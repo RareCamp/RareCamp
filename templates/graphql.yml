@@ -53,4 +53,4 @@ dataSources:
   - type: AWS_LAMBDA
     name: getDisease
     config:
-      lambdaFunctionArn: { Fn::GetAtt: [GetDiseaseLambdaFunction, Arn] }
+      functionName: getDisease
