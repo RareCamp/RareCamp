@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build-only": "next build",
+    "build": "next build && next export",
     "start": "next start",
     "export": "next build && next export",
     "format": "prettier-eslint --write $PWD/'**/*.[jt]s?(x)' --ignore '**/.next/**' && eslint --fix .",

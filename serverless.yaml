@@ -33,12 +33,10 @@ plugins:
   - serverless-webpack
   - serverless-appsync-plugin
   # - serverless-apigateway-service-proxy
-  # - serverless-plugin-split-stacks
   - serverless-stack-output
   - serverless-cloudside-plugin
   - serverless-plugin-aws-alerts
-  # - '../serverless-amplify-plugin'
-  - '@wizeline/serverless-amplify-plugin'
+  - '@brettstack/serverless-amplify-plugin'
   - serverless-dynamodb-local
   - serverless-offline
   - serverless-appsync-simulator
@@ -95,12 +93,12 @@ custom:
     isManual: true
     domainName: ${{self:custom.stageConfig.amplify.domainName, ''}}
     buildSpecValues:
-      artifactBaseDirectory: packages/ui/.next
+      artifactBaseDirectory: packages/ui/out
       preBuildWorkingDirectory: packages/ui
     buildCommandEnvVars:
       prefix: 'REACT_APP_'
       allow:
-        - ApiEndpoint
+        - GraphQlApiUrl
         - CognitoIdentityPoolId,
         - CognitoUserPoolId,
         - CognitoUserPoolClientId,
@@ -108,10 +106,6 @@ custom:
     webpackConfig: ./functions.webpack.config.js
   output:
     file: ./stack-outputs.json
-  # TODO: Add custom splitting with ./split-stack-splitter.js
-  # splitStacks:
-  #   perFunction: true
-  #   custom: ./split-stack-splitter.js
   alerts:
     dashboards: true
     nameTemplate: $[functionName]-$[metricName]-Alarm

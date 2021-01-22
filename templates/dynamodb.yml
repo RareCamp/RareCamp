@@ -2,7 +2,6 @@ Resources:
   UserTable:
     Type: AWS::DynamoDB::Table
     Properties:
-      TableName: ${{self:provider.stage}}-users
       BillingMode: PAY_PER_REQUEST
       PointInTimeRecoverySpecification:
         PointInTimeRecoveryEnabled: false
@@ -16,7 +15,6 @@ Resources:
   OrganizationsTable:
     Type: AWS::DynamoDB::Table
     Properties:
-      TableName: ${{self:provider.stage}}-organizations
       BillingMode: PAY_PER_REQUEST
       PointInTimeRecoverySpecification:
         PointInTimeRecoveryEnabled: false
@@ -30,7 +28,6 @@ Resources:
   DiseasesTable:
     Type: AWS::DynamoDB::Table
     Properties:
-      TableName: ${{self:provider.stage}}-diseases
       BillingMode: PAY_PER_REQUEST
       PointInTimeRecoverySpecification:
         PointInTimeRecoveryEnabled: false

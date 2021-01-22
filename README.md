@@ -11,19 +11,7 @@ To get started, run the following commands:
 ```
 git clone git@github.com:RareCamp/RareCamp.git
 cd RareCamp
-npm run setup-file
-```
-
-The last command will create a setup.config.json file, adjust it to set your application name and your aws credentials.
-
-Application name is required, if it's not provided, the setup will throw an error.
-The AWS DEV profile is required, if prod and stage are not provided, the dev will be used instead.
-
-Once you're done with the configuration file, run the following commands:
-
-```
-npm i
-npm run setup
+npm run init
 ```
 
 Add your AWS credentials as secrets to your GitHub Repository with the following keys:
@@ -39,39 +27,27 @@ It's advised that development, staging, and production environments exist in sep
 
 Create a GitHub Personal Access Token and add it as a repository secret called `GH_PERSONAL_ACCESS_TOKEN`. This is used to create GitHub releases.
 
-Coming soon: setup script to automate this.
+## High-level architecture
 
-## Features
+### UI - Next.js on Amplify
 
-### UI
+The UI uses Next.js and is deployed on Amplify Console.
 
-<img src="https://raw.githubusercontent.com/wizeline/serverless-fullstack/master/docs/diagrams/cloud-architecture/static-website-hosting.png" alt="User Interface">
-
-The UI was bootstrapped with Create React App and modified to include an Auth flow using AWS Amplify and Cognito.
-
-Static website hosting is provided by AWS Ampify, backed by S3 and CloudFront.
-
-### Auth
-
-<img src="https://raw.githubusercontent.com/wizeline/serverless-fullstack/master/docs/diagrams/cloud-architecture/users-auth.png" alt="Auth">
+### Auth - Cognito
 
 User authentication is provided by AWS Cognito.
 
-Social sign-in coming soon.
-
-### GraphQl (AppSync) API
+### API - AppSync (GraphQL)
 
 A fully-managed and serverless GraphQl API.
 
-### Database
+### Database - DynamoDB
 
-<img src="https://raw.githubusercontent.com/wizeline/serverless-fullstack/master/docs/diagrams/cloud-architecture/data.png" alt="Data">
-
-DynamoDB is capable of scaling to meet any requirements you may have.
+...
 
 ### Continuous Deployment (CI/CD)
 
-<img src="https://raw.githubusercontent.com/wizeline/serverless-fullstack/master/docs/diagrams/ci-cd/diagram.png" alt="Continuous Deployment">
+<img src="https://raw.githubusercontent.com/RareCamp/RareCamp/master/docs/diagrams/ci-cd/diagram.png" alt="Continuous Deployment">
 
 GitHub Actions is used to create a Continuous Deployment Pipeline from developer preview, to staging, to production. Each environment is deployed to an isolated AWS Account (optionally, these can be deployed to the same account for simplicity).
 
@@ -83,7 +59,7 @@ Each PR gets its own stack deployed so that reviewers can see the results for th
 
 ### Infrastructure as Code
 
-Serverless Framework is used to describe our infrastruture
+Serverless Framework is used to provision our infrastruture
 
 ### And more...
 
@@ -120,25 +96,3 @@ To deploy to staging and production manually, you can run `npm run deploy:stagin
 After deploying to your developer AWS account, run `npm run start:ui` to run your UI locally against your AWS resources in the cloud.
 
 If you want to run your API locally also, you can run `npm run start:api` and `npm run start:ui:offline` separately.
-
-## Customization
-
-### Remove auto-verification
-
-By default, Cognito forces users to verify their email address, but this kit comes with auto-verification of new users to reduce onboarding friction. If you want to remove this and require users to verify their accounts, perform the following:
-
-1. Inside of `serverless.yaml`, remove the `cognitoAutoConfirmUser` function, the `CognitoAutoConfirmUserLambdaCognitoPermission` resource, and the `PreSignUp: !GetAtt CognitoAutoConfirmUserLambdaFunction.Arn` line.
-2. Remove the `ConfirmSignUpRedirectToSignIn`function from `packages/ui/src/AuthenticatedApp.js`, and replace `<ConfirmSignUpRedirectToSignIn override="ConfirmSignUp" />,` with `<ConfirmSignup />`.
-3. Delete `packages/api/functions/auto-confirm-user.js`
-
-## TODO:
-- [ ] Improve setup experience (primarily, replace myapp with custom name)
-- [ ] Custom domains
-- [ ] CloudFormation rollback triggers
-- [ ] Enable stack termination protection on prod and staging
-- [ ] Add [lumigo-cli](https://www.npmjs.com/package/lumigo-cli), especially for tuning
-- [ ] Split stacks to mitigate chance of hitting CloudFormation 200 resource limit
-- [ ] Additional unit/integration tests
-- [ ] End-to-end tests (with Cypress?)
-
-- [ ] Make it easy to disable PR Previews for open-source projects where you don't want to allow people to create resources in your AWS account. 🔒

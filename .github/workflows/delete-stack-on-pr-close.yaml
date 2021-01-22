@@ -27,5 +27,5 @@ jobs:
         aws_secret_access_key = ${{ secrets.AWS_SECRET_ACCESS_KEY_DEV }}" > ~/.aws/credentials
 
     - name: Delete PR preview stack
-      run: SERVERLESS_SERVICE_SUFFIX=-${{ github.head_ref }} npm run remove-stack:dev
+      run: SERVERLESS_SERVICE_SUFFIX=-${{ github.event.number }} npm run remove-stack:dev
     
