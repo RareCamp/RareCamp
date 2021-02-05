@@ -13,7 +13,7 @@ const MainSection = ({
   isAccountSettingModalOpen,
   setAccountSettingModalOpen,
 }: {
-  children: ChildrenProps;
+  children: ChildrenProps | any;
   isEditProgramModalOpen: boolean;
   setEditProgramModalOpen: Function;
   isAccountSettingModalOpen: boolean;

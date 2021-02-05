@@ -1,5 +1,5 @@
 import { APP_NAME } from 'constants/application';
-import Image from 'next/image';
+// import Image from 'next/image';
 import Link from 'next/link';
 
 const EmailConfirmation = () => {
@@ -9,7 +9,7 @@ const EmailConfirmation = () => {
         <div className="w-full bg-white flex justify-center rounded-l-lg h-full py-16 px-10">
           <div className="flex flex-col items-center">
             <div>
-              <Image src="/subscribe.svg" width={240} height={240} />
+              <img src="/subscribe.svg" width={240} height={240} />
             </div>
             <h1 className="text-3xl font-semibold">Almost There!</h1>
             <p className="mt-4 text-xl text-gray-800">

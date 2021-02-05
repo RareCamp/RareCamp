@@ -12,7 +12,7 @@ export type Record = {
   items: Task[];
 };
 type RecordProps = {
-  record: Record;
+  record: Record | any;
 };
 
 const TaskSection = ({ record }: RecordProps) => {

@@ -7,6 +7,7 @@ import { HOME_TABLE_HEADINGS } from 'constants/lists';
 import styles from 'styles/program.module.css';
 import { Button } from 'components/Button';
 
+console.log('process.env', process.env)
 const USER_NAME = 'Ramya';
 const Home = () => {
   const [isEditProgramModalOpen, setEditProgramModalOpen] = useState(
