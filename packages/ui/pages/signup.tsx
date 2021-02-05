@@ -1,15 +1,35 @@
 import Link from 'next/link';
 import { useForm } from 'react-hook-form';
+import { Auth } from 'aws-amplify';
 import { Button } from 'components/Button';
 import { InputField } from 'components/InputField';
 import { AS_REQUIRED, AS_EMAIL } from 'constants/validations';
 import { Logo } from 'components/Logo';
+
+// https://docs.amplify.aws/lib/auth/emailpassword/q/platform/js
 
 const SignUp = () => {
   const { register, handleSubmit, errors } = useForm();
   const onSubmit = () => {
     // console.log(data);
   };
+
+  async function signup () {
+      try {
+          const { user } = await Auth.signUp({
+              username,
+              password,
+              attributes: {
+                  email,          // optional
+                  phone_number,   // optional - E.164 number convention
+                  // other custom attributes 
+              }
+          });
+          console.log(user);
+      } catch (error) {
+          console.log('error signing up:', error);
+      }
+  }
   return (
     <section className="px-4">
       <div className="bg-secondary h-screen flex justify-between px-52 py-16">
@@ -40,7 +60,7 @@ const SignUp = () => {
             />
             <Button
               type="submit"
-              onClick={() => {}}
+              onClick={signup}
               size="lg"
               color="primary"
               label="Sign Up"

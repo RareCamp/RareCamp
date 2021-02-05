@@ -9,7 +9,7 @@ type TextColor = 'purple' | 'blue' | null;
 type LetterPicProps = {
   letter: any;
   className?: string | null;
-  color?: Color;
+  color?: string | Color;
   size: Size;
   textColor?: TextColor;
 };
