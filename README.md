@@ -1,31 +1,11 @@
-## Pre-requisites
+## Contributing
 
-* [AWS CLI](https://docs.aws.amazon.com/polly/latest/dg/setup-aws-cli.html)
-* Node.js
-* Git
-* GitHub Account
+To get started, review the following files:
 
-## Getting started
-To get started, run the following commands:
+* [CODE_OF_CONDUCT](CODE_OF_CONDUCT.md)
+* [CONTRIBUTING](CONTRIBUTING.md)
+* [DEVELOPMENT_GUIDE](DEVELOPMENT_GUIDE.md)
 
-```
-git clone git@github.com:RareCamp/RareCamp.git
-cd RareCamp
-npm run init
-```
-
-Add your AWS credentials as secrets to your GitHub Repository with the following keys:
-
-* `AWS_ACCESS_KEY_ID_DEV`
-* `AWS_SECRET_ACCESS_KEY_DEV`
-* `AWS_ACCESS_KEY_ID_STAGING`
-* `AWS_SECRET_ACCESS_KEY_STAGING`
-* `AWS_ACCESS_KEY_ID_PROD`
-* `AWS_SECRET_ACCESS_KEY_PROD`
-
-It's advised that development, staging, and production environments exist in separate AWS accounts. However, if you'd prefer to deploy to a single AWS Account for simplicity, you can simply specify the same credentials for each.
-
-Create a GitHub Personal Access Token and add it as a repository secret called `GH_PERSONAL_ACCESS_TOKEN`. This is used to create GitHub releases.
 
 ## High-level architecture
 
@@ -79,10 +59,10 @@ Serverless Framework is used to provision our infrastruture
 
 ## Manual/developer deployments
 
-Make a copy of the `example.env.development` file:
+Make a copy of the `env.example` file:
 
 ```shell
-cp example.env.development .env.development
+cp env.example .env.development
 ```
 
 Modify the values in your `.env.development` file. If you're using a shared developer account, you should set `SERVERLESS_SERVICE_SUFFIX=-brett`, ensuring the value you specify is unique and not used by other developers on your team.
@@ -90,9 +70,3 @@ Modify the values in your `.env.development` file. If you're using a shared deve
 Run `npm run deploy:dev` to deploy to your dev account.
 
 To deploy to staging and production manually, you can run `npm run deploy:staging` or `npm run deploy:prod` respectively.
-
-## Developing
-
-After deploying to your developer AWS account, run `npm run start:ui` to run your UI locally against your AWS resources in the cloud.
-
-If you want to run your API locally also, you can run `npm run start:api` and `npm run start:ui:offline` separately.
