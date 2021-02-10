@@ -30,6 +30,10 @@ credentials. If you use a different profile to store your config, then update `A
 
 ## Developing
 
+**Watch the walkthrough of code**
+[![Walkthrough of RareCamp code](https://img.youtube.com/vi/wAPUb0P5quY/0.jpg)](https://www.youtube.com/watch?v=wAPUb0P5quY)
+
+
 Before beginning any work, review [CONTRIBUTING](CONTRIBUTING.md).
 
 After deploying to your developer AWS account, run `npm run start:ui` to run your UI locally against your AWS resources in the cloud.
