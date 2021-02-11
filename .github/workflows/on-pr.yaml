@@ -9,14 +9,6 @@ env:
   AWS_DEFAULT_REGION: us-west-2
 
 jobs:
-  auto-approve-dependabot:
-    if: github.actor == 'dependabot[bot]' || github.actor == 'dependabot-preview[bot]'
-    runs-on: ubuntu-latest
-    steps:
-    - uses: hmarr/auto-approve-action@v2.0.0
-      with:
-        github-token: "${{ secrets.GITHUB_TOKEN }}"
-
   test-and-deploy-to-sandbox:
     if: github.actor != 'dependabot[bot]' && github.actor != 'dependabot-preview[bot]'
     runs-on: ubuntu-latest
@@ -29,10 +21,19 @@ jobs:
       with:
         node-version: 12.x
 
-    - name: Install package
+    - name: Audit packages
       run: |
-        (npm ci && npm audit --audit-level critical && npm test) & \
-        (cd packages/ui && npm ci && npm audit --audit-level critical && npm test)
+        (npm audit --audit-level critical) & \
+        (cd packages/ui && npm audit --audit-level critical)
+    
+    - name: Install packages
+      run: |
+        (npm ci) & \
+        (cd packages/ui && npm ci)
+
+    - name: Test packages
+      run: |
+        (cd packages/ui && npm test)
 
     - name: Deploy to sandboxed stack
       id: deploy_to_sandboxed_stack
