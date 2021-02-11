@@ -4,7 +4,8 @@ on:
   pull_request
 
 jobs:
-  auto-merge:
+  auto-merge-dependabot:
+    if: github.actor == 'dependabot[bot]' || github.actor == 'dependabot-preview[bot]'
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2

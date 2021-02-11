@@ -15,7 +15,7 @@ const {
 axios.interceptors.request.use(async function (config) {
   try {
     const currentUserSession = await Auth.currentSession()
-    const Authorization = currentUserSession.idToken.jwtToken
+    const Authorization = currentUserSession.getIdToken().getJwtToken();
     config.headers.Authorization = Authorization
   } catch (e) { /* Auth.currentSession() throws if not signed in 🤷‍♂️ */ }
 
