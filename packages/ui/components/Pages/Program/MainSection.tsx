@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
-import { Button } from 'components/Button';
+// import { Button } from 'components/Button';
+import { Button, Dropdown, Icon as SemanticIcon } from 'semantic-ui-react';
 import { Icon } from 'components/Icon';
 import { ChildrenProps } from 'types';
 import { Modal } from 'components/Modal';
+import { ADD_TASK_OPTIONS } from './Program.constant';
 import EditProgramModal from './EditProgramModal';
 import AccountSettingModal from './AccountSettingModal';
 
@@ -23,16 +25,53 @@ const MainSection = ({
   return (
     <main className="bg-primary">
       <div className="py-6 px-6 flex flex-col mb-4">
-        <div className="flex border border-gray-400 w-36">
-          <Button
+        <div>
+          <Button.Group style={{ border: 'none'}}>
+            <Button
+              className="p-2"
+              content="Invite"
+              color="black"
+              style={{ border: 'none', width: 140 }}
+              icon
+              basic
+              labelPosition="left"
+            >
+              <SemanticIcon 
+                name="plus" 
+                size="small" 
+                style={{ 
+                  backgroundColor: 'transparent', 
+                  fontSize: 14,
+                  fontWeight: 'normal'
+                }} 
+              />
+              Add Task
+            </Button>
+              <Dropdown
+                className='button icon'
+                floating
+                style={{ 
+                  backgroundColor: 'white', 
+                  border: '1px solid #000', 
+                  borderRadius: 0,
+                  borderLeftWidth: 0,
+                }}
+                options={ADD_TASK_OPTIONS}
+                onChange={() => {
+
+                }}
+                trigger={<></>}
+              />
+          </Button.Group> 
+          {/* <Button
             label="Add Task"
             size="md"
             color="custom"
             icon={<span className="text-xl">+</span>}
             className="text-sm focus:outline-none border-none py-1"
             onClick={() => {}}
-          />
-          <Button
+          /> */}
+          {/* <Button
             label=""
             size="xs"
             color="custom"
@@ -44,18 +83,8 @@ const MainSection = ({
             }
             className="text-xs text-black border-none focus:outline-none py-1"
             onClick={() => setAddSectionOpen(!isAddSectionOpen)}
-          />
+          /> */}
         </div>
-        {isAddSectionOpen && (
-          <Button
-            label="Add Section"
-            size="md"
-            color="tertiary"
-            icon="+"
-            className="absolute z-50 ml-28 mt-8 text-sm focus:outline-none"
-            onClick={() => {}}
-          />
-        )}
       </div>
       <div className="py-6 px-6 bg-primary w-full">{children}</div>
       {isEditProgramModalOpen && (

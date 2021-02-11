@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
+import { Button, Icon } from 'semantic-ui-react';
 import { LetterPic } from 'components/LetterPic';
-import { Icon } from 'components/Icon';
-import { Button } from 'components/Button';
+// import { Icon } from 'components/Icon';
+// import { Button } from 'components/Button';
 import { DropDown } from 'components/DropDown';
 import OWNER_DATA from 'fixtures/dropdown.json';
 import styles from 'styles/layout.module.css';
@@ -48,19 +49,14 @@ const Navbar = ({
           This program captures essential steps in the SSMD gene
           therapy roadmap.
         </span>
-        <Button
-          label=""
-          size="xs"
-          color="custom"
-          icon={
-            <Icon name="dot" className="w-4 cursor-pointer ml-2" />
-          }
-          className="text-xl text-black bg-gray-100 border-none focus:outline-none ml-2"
+        <Icon 
+          name="ellipsis vertical" 
+          color="grey" 
+          className="w-4 cursor-pointer ml-2"
           onClick={() => {
-            setOpenDropDown(!open);
+            setOpenDropDown(!open)
           }}
         />
-
         {open && (
           <DropDown
             className="w-48 text-sm"
@@ -151,14 +147,21 @@ const Navbar = ({
             }}
           />
         )}
-
         <Button
-          label="Invite"
-          size="md"
-          color="tertiary"
-          className="text-xs border border-blue-400 text-blue-400 focus:outline-none mr-4"
-          onClick={() => {}}
-        />
+          className="p-2"
+          content="Invite"
+          color="blue"
+          icon
+          labelPosition="left"
+          basic
+        >
+          <Icon 
+            name="user plus" 
+            size="large" 
+            style={{ backgroundColor: 'transparent' }} 
+          />
+          Invite
+        </Button>
         <ul
           className="flex items-center cursor-pointer"
           role="presentation"

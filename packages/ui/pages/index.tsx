@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
+import { Table, TableBody, Accordion, Icon } from 'semantic-ui-react';
 import { MainSection, TaskSection } from 'components/Pages/Program';
 import Navbar from 'components/AppLayout/Navbar';
 import { AppLayout } from 'components/AppLayout';
 import records from 'fixtures/dashboard.json';
-import { HOME_TABLE_HEADINGS } from 'constants/lists';
+import { HOME_TABLE_HEADINGS, TABLE_ROWS } from 'constants/lists';
 import styles from 'styles/program.module.css';
 import { Button } from 'components/Button';
 
-console.log('process.env', process.env)
 const USER_NAME = 'Ramya';
 const Home = () => {
   const [isEditProgramModalOpen, setEditProgramModalOpen] = useState(
@@ -26,6 +26,46 @@ const Home = () => {
     }
   }, [isAccountSettingModalOpen, isEditProgramModalOpen]);
 
+  function renderTableBody() {
+    return (
+      <Table.Body>
+        {
+          records.map(row => (
+            <Table.Row>
+              <Accordion>
+                <Accordion.Title style={{ fontSize: 20 }}>
+                  <Icon name="dropdown" />
+                  {row.title}
+                </Accordion.Title>
+                <Accordion.Content>
+                <Table celled>
+                  <Table.Body>
+                    {
+                      row.items.map(item => (
+                        <Table.Row>
+                          {
+                            Object.keys(item).map(key => (
+                              <Table.Cell>
+                                {item[key]}
+                              </Table.Cell>
+                            ))
+                          }
+                        </Table.Row>
+                      ))
+                    }
+                  </Table.Body>
+                </Table>
+                  
+                </Accordion.Content>
+              </Accordion>
+            </Table.Row>
+          ))
+        }
+       
+      </Table.Body>
+    )
+  }
+
   return (
     <AppLayout>
       <Navbar
@@ -39,7 +79,7 @@ const Home = () => {
         setAccountSettingModalOpen={setAccountSettingModalOpen}
         isAccountSettingModalOpen={isAccountSettingModalOpen}
       >
-        <table className="table-fixed">
+        {/* <table className="table-fixed">
           <thead>
             <tr className={`${styles['table-header']}`}>
               {HOME_TABLE_HEADINGS.map((heading) => (
@@ -63,7 +103,19 @@ const Home = () => {
               />
             </td>
           </tr>
-        </table>
+        </table> */}
+        <Table celled>
+          <Table.Header>
+            <Table.Row>
+              {
+                HOME_TABLE_HEADINGS.map(header => <Table.HeaderCell style={{ backgroundColor: '#ffffff' }}>{header}</Table.HeaderCell>)
+              }
+            </Table.Row>
+          </Table.Header>
+          <Table.Body>
+            {renderTableBody()}
+          </Table.Body>
+        </Table>
       </MainSection>
     </AppLayout>
   );

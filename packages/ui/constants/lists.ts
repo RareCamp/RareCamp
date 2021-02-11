@@ -21,6 +21,11 @@ export const HOME_TABLE_HEADINGS = [
   'End Date',
 ];
 
+export const TABLE_ROWS = [
+  'Planning',
+  'Create a Knock-in Mouse'
+]
+
 export const STATUS_TYPES = [
   { label: 'Completed', id: 'completed' },
   { label: 'In Progress', id: 'in-progress' },

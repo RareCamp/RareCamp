@@ -1,4 +1,5 @@
 import type { AppProps } from 'next/app';
+import 'semantic-ui-css/semantic.min.css'
 import 'tailwindcss/tailwind.css';
 import 'styles/globals.css';
 import Amplify, { Auth } from 'aws-amplify'
