@@ -2,7 +2,9 @@ import React, { useState } from 'react';
 import { LetterPic } from 'components/LetterPic';
 import { Icon } from 'components/Icon';
 import { Button } from 'components/Button';
+import { Button as AntButton } from 'antd';
 import { DropDown } from 'components/DropDown';
+import { UserAddOutlined } from '@ant-design/icons';
 import OWNER_DATA from 'fixtures/dropdown.json';
 import styles from 'styles/layout.module.css';
 import avatars from 'fixtures/avatar.json';
@@ -152,13 +154,21 @@ const Navbar = ({
           />
         )}
 
-        <Button
+        {/* <Button
           label="Invite"
           size="md"
           color="tertiary"
           className="text-xs border border-blue-400 text-blue-400 focus:outline-none mr-4"
           onClick={() => {}}
-        />
+        /> */}
+         <AntButton 
+          type="primary" 
+          icon={<UserAddOutlined />} 
+          ghost
+          size="large" 
+        >
+          Invite
+        </AntButton>
         <ul
           className="flex items-center cursor-pointer"
           role="presentation"

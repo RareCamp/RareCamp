@@ -1,10 +1,20 @@
 import React, { useState } from 'react';
 import { Button } from 'components/Button';
+import { Dropdown, Button as AntButton, Menu } from 'antd';
+import { CaretDownOutlined, PlusOutlined } from '@ant-design/icons';
 import { Icon } from 'components/Icon';
 import { ChildrenProps } from 'types';
 import { Modal } from 'components/Modal';
 import EditProgramModal from './EditProgramModal';
 import AccountSettingModal from './AccountSettingModal';
+
+const menu = (
+  <Menu>
+    <Menu.Item key="1">
+      1st menu item
+    </Menu.Item>
+  </Menu>
+);
 
 const MainSection = ({
   children,
@@ -23,28 +33,28 @@ const MainSection = ({
   return (
     <main className="bg-primary">
       <div className="py-6 px-6 flex flex-col mb-4">
-        <div className="flex border border-gray-400 w-36">
-          <Button
+        <div>
+          {/* <Button
             label="Add Task"
             size="md"
             color="custom"
             icon={<span className="text-xl">+</span>}
             className="text-sm focus:outline-none border-none py-1"
             onClick={() => {}}
-          />
-          <Button
-            label=""
-            size="xs"
-            color="custom"
-            icon={
-              <Icon
-                name="chevron-down"
-                className="w-6 ml-2 cursor-pointer"
-              />
-            }
-            className="text-xs text-black border-none focus:outline-none py-1"
-            onClick={() => setAddSectionOpen(!isAddSectionOpen)}
-          />
+          /> */}
+          <Dropdown.Button overlay={menu} placement="bottomCenter" icon={<CaretDownOutlined />}>
+            {/* <AntButton 
+              type="primary"
+              icon={<PlusOutlined />} 
+              ghost
+              size="large" 
+            > */}
+            <div className="flex items-center">
+              <PlusOutlined /> <p style={{ marginLeft: 10 }}>Add task</p>
+            </div>
+            
+            {/* </AntButton> */}
+          </Dropdown.Button>
         </div>
         {isAddSectionOpen && (
           <Button

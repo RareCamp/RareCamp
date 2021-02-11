@@ -1,5 +1,6 @@
 import type { AppProps } from 'next/app';
 import 'tailwindcss/tailwind.css';
+import 'antd/dist/antd.css';
 import 'styles/globals.css';
 import Amplify, { Auth } from 'aws-amplify'
 import axios from 'axios'

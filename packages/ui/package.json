@@ -18,6 +18,7 @@
     "@testing-library/react": "^11.2.2",
     "@testing-library/user-event": "^12.2.2",
     "@types/next": "^9.0.0",
+    "antd": "^4.12.3",
     "autoprefixer": "^10.1.0",
     "aws-amplify": "^3.3.17",
     "next": "10.0.3",

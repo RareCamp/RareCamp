@@ -8,5 +8,5 @@
 }
 
 .nav-bar{
-  @apply bg-white py-4 px-8 h-16 flex items-center justify-between border border-gray-100 hover:border-blue-400
+  @apply bg-white py-4 px-8 h-16 flex items-center justify-between border border-gray-100 hover:border-gray-100
 }
