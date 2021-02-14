@@ -1,0 +1,35 @@
+.completed {
+  @apply focus:outline-none p-2 ml-2 bg-green-400 text-white;
+}
+.in-progress {
+  @apply focus:outline-none p-2 ml-2 bg-yellow-500 text-white;
+}
+.not-started {
+  @apply focus:outline-none p-2 ml-2 text-gray-400 bg-gray-100;
+}
+.status-default {
+  @apply focus:outline-none text-gray-400 bg-gray-100;
+}
+
+.table-header > th {
+  @apply border border-gray-300 hover:border-blue-400 text-sm text-gray-500 font-semibold;
+}
+.table-header > th:not(:first-child) {
+  @apply w-36;
+}
+.table-header > th:first-child {
+  @apply w-2/6;
+}
+
+.border-1-gray-100 {
+  @apply border-r border border-gray-300;
+}
+.table-item {
+  @apply text-sm;
+}
+.table-item > td {
+  @apply border border-gray-300 hover:border-blue-400 py-2 px-1 cursor-pointer text-gray-500 font-extralight;
+}
+.table-item > td > input {
+  @apply outline-none w-full;
+}

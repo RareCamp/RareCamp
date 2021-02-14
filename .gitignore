@@ -3,6 +3,7 @@ dist
 .DS_Store
 stats.json
 .serverless
+.dynamodb
 
 .env.development
 .env.local
@@ -18,3 +19,4 @@ stack-outputs.json
 wizeline-academy/
 .idea
 .vscode
+.env

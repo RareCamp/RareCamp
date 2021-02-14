@@ -1,80 +1,72 @@
-import Head from 'next/head';
-import styles from 'styles/Home.module.css';
+import React, { useState, useEffect } from 'react';
+import { MainSection, TaskSection } from 'components/Pages/Program';
+import Navbar from 'components/AppLayout/Navbar';
+import { AppLayout } from 'components/AppLayout';
+import records from 'fixtures/dashboard.json';
+import { HOME_TABLE_HEADINGS } from 'constants/lists';
+import styles from 'styles/program.module.css';
+import { Button } from 'components/Button';
 
-export default function Home() {
-  return (
-    <div className={styles.container}>
-      <Head>
-        <title>Rarecamp</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to
-          <a href="https://github.com/RareCamp/RareCamp">Rarecamp</a>
-        </h1>
-
-        <p className={styles.description}>
-          Get started by editing
-          <code className={styles.code}>pages/index.js</code>
-        </p>
-
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h3>Documentation &rarr;</h3>
-            <p>
-              Find in-depth information about Next.js features and
-              API.
-            </p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h3>Learn &rarr;</h3>
-            <p>
-              Learn about Next.js in an interactive course with
-              quizzes!
-            </p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className={styles.card}
-          >
-            <h3>Examples &rarr;</h3>
-            <p>
-              Discover and deploy boilerplate example Next.js
-              projects.
-            </p>
-          </a>
-
-          <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with
-              Vercel.
-            </p>
-          </a>
-        </div>
-      </main>
-
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by
-          <img
-            src="/vercel.svg"
-            alt="Vercel Logo"
-            className={styles.logo}
-          />
-        </a>
-      </footer>
-    </div>
+console.log('process.env', process.env)
+const USER_NAME = 'Ramya';
+const Home = () => {
+  const [isEditProgramModalOpen, setEditProgramModalOpen] = useState(
+    false,
   );
-}
+  const [
+    isAccountSettingModalOpen,
+    setAccountSettingModalOpen,
+  ] = useState(false);
+
+  useEffect(() => {
+    if (isEditProgramModalOpen || isAccountSettingModalOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+  }, [isAccountSettingModalOpen, isEditProgramModalOpen]);
+
+  return (
+    <AppLayout>
+      <Navbar
+        setEditProgramModalOpen={setEditProgramModalOpen}
+        setAccountSettingModalOpen={setAccountSettingModalOpen}
+        username={USER_NAME}
+      />
+      <MainSection
+        setEditProgramModalOpen={setEditProgramModalOpen}
+        isEditProgramModalOpen={isEditProgramModalOpen}
+        setAccountSettingModalOpen={setAccountSettingModalOpen}
+        isAccountSettingModalOpen={isAccountSettingModalOpen}
+      >
+        <table className="table-fixed">
+          <thead>
+            <tr className={`${styles['table-header']}`}>
+              {HOME_TABLE_HEADINGS.map((heading) => (
+                <th key={heading}>{heading}</th>
+              ))}
+            </tr>
+          </thead>
+          {records.map((record) => (
+            <TaskSection record={record} key={record.title} />
+          ))}
+
+          <tr>
+            <td colSpan={6}>
+              <Button
+                onClick={() => {}}
+                icon={<span>+</span>}
+                label="Add Project"
+                color="tertiary"
+                size="custom"
+                className="py-4  px-4 text-xl border border-gray-300 w-full flex flex-start font-semibold focus:outline-none text-gray-300 hover:text-gray-400 hover:border-blue-400"
+              />
+            </td>
+          </tr>
+        </table>
+      </MainSection>
+    </AppLayout>
+  );
+};
+
+export default Home;

@@ -1,14 +1,15 @@
 import 'regenerator-runtime/runtime'
 import eventMocks from '@serverless/event-mocks'
-import awsLambdaMockContext from 'aws-lambda-mock-context'
 import { handler } from './auto-confirm-user'
 
 describe('auto-confirm-user: happy paths ', () => {
   test('Works', async () => {
-    const context = awsLambdaMockContext()
+    const context = {}
     const event = eventMocks(
       'aws:cognitoUserPool',
-    )
+      {
+        region: "us-west-2"
+      })
     await expect(handler(event, context)).resolves.toEqual({
       callerContext: { awsSdkVersion: '1', clientId: 'abc1234' },
       region: 'us-west-2',

@@ -1,0 +1,39 @@
+Resources:
+  UserTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      BillingMode: PAY_PER_REQUEST
+      PointInTimeRecoverySpecification:
+        PointInTimeRecoveryEnabled: false
+      KeySchema:
+        - KeyType: HASH
+          AttributeName: id
+      AttributeDefinitions:
+        - AttributeName: id
+          AttributeType: S
+
+  OrganizationsTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      BillingMode: PAY_PER_REQUEST
+      PointInTimeRecoverySpecification:
+        PointInTimeRecoveryEnabled: false
+      KeySchema:
+        - KeyType: HASH
+          AttributeName: id
+      AttributeDefinitions:
+        - AttributeName: id
+          AttributeType: S
+
+  DiseasesTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      BillingMode: PAY_PER_REQUEST
+      PointInTimeRecoverySpecification:
+        PointInTimeRecoveryEnabled: false
+      KeySchema:
+        - KeyType: HASH
+          AttributeName: omim
+      AttributeDefinitions:
+        - AttributeName: omim
+          AttributeType: S

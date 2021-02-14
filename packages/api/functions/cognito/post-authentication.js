@@ -1,4 +1,4 @@
-import { getUser, createUser } from '../../controllers/user'
+// import { getUser, createUser } from '../../controllers/user'
 
 exports.handler = async (event) => {
   const {
@@ -6,14 +6,14 @@ exports.handler = async (event) => {
     email,
   } = event.request.userAttributes
   console.info(`Successfully authenticated ${email} (${userId})`)
-  const user = await getUser({ id: userId })
+  // const user = await getUser({ id: userId })
 
-  if (!user) {
-    console.info(`User doesn't exist. Creating user with id ${userId}...`)
-    await createUser({
-      id: userId,
-    })
-  }
+  // if (!user) {
+  //   console.info(`User doesn't exist. Creating user with id ${userId}...`)
+  //   await createUser({
+  //     id: userId,
+  //   })
+  // }
 
   return event
 }

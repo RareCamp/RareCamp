@@ -1,0 +1,6 @@
+.selected-programs > div > p {
+    @apply text-gray-400 text-sm font-extralight
+}
+.selected-programs > div > h1 {
+    @apply  text-base font-semibold
+}

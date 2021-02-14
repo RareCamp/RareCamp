@@ -7,7 +7,7 @@
       "dom.iterable",
       "esnext"
     ],
-    "allowJs": true,
+    "allowJs": false,
     "skipLibCheck": true,
     "strict": false,
     "forceConsistentCasingInFileNames": true,
@@ -26,9 +26,14 @@
     "jest.config.js",
     "**/*.ts",
     "**/*.tsx",
-    "jest.config.js"
+    "jest.config.js",
+    "tailwind.config.js",
+    "postcss.config.js",
+    "styleMock.js"
   ],
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "out",
+    ".next"
   ]
 }
