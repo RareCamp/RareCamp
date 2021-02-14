@@ -9,11 +9,11 @@ referrred in the doc here.
 
 ## NOTE
 
-- All the APIs use the following prefix: `/api/v1/`. The prefix is skipped in the following descriptions for simplicity.
+- All the APIs use the following prefix: `api.example.com/v1/`. The prefix is skipped in the following descriptions for simplicity.
 
 - Authentication parameters is not shown the following API definitions for simplicity
 
-- Common HTTP Status like `401 Unauthorized` or `500 Internal Server Error` are not shown here for simplicity
+- Common HTTP Status like `401 Unauthorized` or `500 _internal Server Error` are not shown here for simplicity
 
 - We try to use standard REST HTTP verbs as much as possible. Any deviations are described clearly in the API.
 
@@ -22,7 +22,7 @@ referrred in the doc here.
   implementation, we will have high-level business logic methods that map to lower level data-model specific methods
   to interface with the database
 
-- As much as possiible, we have tried to separate an object's data from the way it's visually
+- As much as possiible, we have tried to separate an object's data from the way it is visually
   presented on the screen. This should simplify the backend logic and hopefully keep the
   data storage de-coupled from the visual presentation. This should also allow the UI to be
   rendered quickly without waiting for the entire data model to be parsed & processed.
@@ -38,15 +38,13 @@ referrred in the doc here.
   `{"program": {...}}`. This is a more extensible design allowing us to send other metadata
   along with the core entity.
 
-- All APIs have an `internal` blob containing metadata used for backend's house keeping purposes.
+- All APIs have an `_internal` blob containing metadata used for backend's house keeping purposes.
 
-## Sign up
+## User
 
-TBD
+Get details about the logged in user
 
-## Login
-
-`POST /login`
+`GET /user`
 
 **Response**
 
@@ -80,16 +78,11 @@ TBD
 `POST /logout`
 
 **Request**
-
-```
-
-```
+None
 
 **Response**
 
-```
-
-```
+None
 
 ## Get Workspace
 
@@ -99,9 +92,7 @@ Get all details necessary to display the workspace page.
 
 **Request**
 
-```
-
-```
+None
 
 **Response**
 
@@ -134,7 +125,7 @@ Get all details necessary to display the workspace page.
 
 Create a brand new program
 
-`PUT /workspace/<workspaceId>/program`
+`POST /workspace/<workspaceId>/program`
 
 **Request**
 All of the fields are optional.
@@ -154,7 +145,7 @@ All of the fields are optional.
 }
 ```
 
-**Request**
+**Response**
 Returns the full response of `Get Program API`. The ID returned in the response is the ID of
 the newly created program.
 
@@ -179,8 +170,8 @@ Get details for the Program page.
     "name": "<string>",
     "description": "<string>",
 
-    // Internal metadata used by the backend
-    "internal": {
+    // _internal metadata used by the backend
+    "_internal": {
         "lastUpdatedTime": "<iso-date-str>",
         "lastUpdatedUser": "<userId>",
     },
@@ -238,12 +229,12 @@ Get details for the Program page.
 
 ## Update Program: Add/Update Project, Add/Update Task Overview
 
-Called to update an existing program, details about it's constituent projects, and high level details about
-individual tasks within the project. It's also used when you add a new project or a new task. It's a very
+Called to update an existing program, details about its constituent projects, and high level details about
+individual tasks within the project. It is also used when you add a new project or a new task. It is a very
 broadly scoped API overloading a lot of functionality into one. We are using this structure for now because it
 simplifies the frontend UI logic.
 
-`POST /program/<programId>`
+`PUT /program/<programId>`
 
 **Request**
 Request sends an update copy of the entire structure returned by `Get Program API`. Backend will take care of splicing
@@ -307,7 +298,7 @@ Call this API to full details about a task in order to render the Task Detail pa
         "userId": "<userId>"
       }
     ],
-    "education": {
+    "guide": {
       "id": "<uuid>",
       "detailsUrl": "<string>",
       "title": "<string>",
@@ -334,11 +325,11 @@ Call this API to full details about a task in order to render the Task Detail pa
 
 ## Update Task Details
 
-Call this API to update all the task details. It's again a broadly scoped API for simplicity of the frontend.
+Call this API to update all the task details. It is again a broadly scoped API for simplicity of the frontend.
 
 NOTE: File uploads are not yet supported through this API. We will create a separate API for it.
 
-`POST /task/<taskId>`
+`PUT /task/<taskId>`
 
 **Request**
 Send an update copy of the respnose you received via `Get Task Details API`

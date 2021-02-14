@@ -94,7 +94,7 @@ A Task is the smallest unit of work from a planning point-of-view.
 - **ActualEndDate**: After the task was completed, this field stores the date when the task actually completed?
 - **Notes**: Notes collected and written by the users as they are working on the task
 - **Files**: Files and documents uploaded by the user to this task
-- **Education**: Education materials to help users make decisions and execute this task
+- **Guide**: Education materials to help users make decisions and execute this task
 - **ServiceProviders**: List of Service providers capable of executing this task
 
 ### ServiceProvider
@@ -109,7 +109,7 @@ A ServiceProvider is a person or institution providing service to advance the tr
 - **Email**
 - **User**: If the service provider has an account on the product, then link to the specific User entity
 
-### Education
+### Guide
 
 Education materials to guide users to make decisions and help them execute a project or a task.
 
@@ -134,7 +134,7 @@ Files uploaded by users on the platform.
 
 Collection of pre-built projects and tasks for users to chose from. When a new Program is created, we present users
 with a collection of Projects/Tasks copied from this library to help them get started quickly. When the user creates
-a new Project, they can optionally select one from this library. The projects and tasks have education material
+a new Project, they can optionally select one from this library. The projects and tasks have guidance education material
 associated with them.
 
 - **Id**:
