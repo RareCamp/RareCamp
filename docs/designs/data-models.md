@@ -39,8 +39,15 @@ organization.
 Information about the disease represented by the organization or the user
 
 - **Id**:
-- **Name**
+- **Name**: Name of this disease
+- **Abbreviation**: Short form abbreviation of disease name for ease of display
 - **OMIM ID**: OMIM is an online database that assigns an ID for diseases. Ex: https://omim.org/entry/250220
+- **Causal Gene**: Name of the gene that causes the disease
+- **Mutation Impact**: Explains what happens when there is a mutation in this gene.
+  This helps determine whether this disease will be a good fit for gene therapy
+- **Size of Protein**: How many amino acids are there in this protein? Determines our strategy
+  to build a gene therapy for this disease
+- **Organizations**: Organizations currently working on this disease
 
 ### Workspace
 
