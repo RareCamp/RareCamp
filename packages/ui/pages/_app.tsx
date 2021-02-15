@@ -1,5 +1,6 @@
 import type { AppProps } from 'next/app';
 import 'tailwindcss/tailwind.css';
+import 'antd/dist/antd.css';
 import 'styles/globals.css';
 import Amplify, { Auth } from 'aws-amplify'
 import axios from 'axios'
@@ -14,7 +15,7 @@ const {
 axios.interceptors.request.use(async function (config) {
   try {
     const currentUserSession = await Auth.currentSession()
-    const Authorization = currentUserSession.idToken.jwtToken
+    const Authorization = currentUserSession.getIdToken().getJwtToken();
     config.headers.Authorization = Authorization
   } catch (e) { /* Auth.currentSession() throws if not signed in 🤷‍♂️ */ }
 

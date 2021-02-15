@@ -17,5 +17,9 @@ module.exports = {
     'import/prefer-default-export': 'off',
     'react/prop-types': 'off',
     'react/require-default-props': 'off',
+    'semi': [
+      'error',
+      'never'
+    ],
   },
 };
