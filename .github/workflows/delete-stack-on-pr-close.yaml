@@ -22,7 +22,7 @@ jobs:
     - name: Setup AWS Credentials
       run: |
         mkdir ~/.aws
-        echo "[myapp_dev]
+        echo "[rarecamp_staging]
         aws_access_key_id = ${{ secrets.AWS_ACCESS_KEY_ID_DEV }}
         aws_secret_access_key = ${{ secrets.AWS_SECRET_ACCESS_KEY_DEV }}" > ~/.aws/credentials
 
