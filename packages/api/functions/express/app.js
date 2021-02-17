@@ -4,7 +4,7 @@ import cors from 'cors'
 import userRouter from './routes/user'
 import diseaseRouter from './routes/disease'
 
-const IS_DEVELOPMENT  = process.env.NODE_ENV === 'development'
+const IS_DEVELOPMENT = process.env.NODE_ENV === 'development'
 
 const app = express()
 const router = express.Router()
@@ -32,7 +32,7 @@ app.use((err, req, res, next) => {
   if (IS_DEVELOPMENT) {
     response.trace = err.stack
   }
-  
+
   res
     .status(statusCode)
     .json(response)

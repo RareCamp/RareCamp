@@ -1,6 +1,5 @@
 import AWS from 'aws-sdk'
 import DynamoDB from 'aws-sdk/clients/dynamodb'
-import { Table } from 'dynamodb-toolbox'
 
 // TODO: v3 https://github.com/deeheber/note-service/pull/4/files
 // const { fromIni } = require("@aws-sdk/credential-provider-ini");

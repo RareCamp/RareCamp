@@ -7,9 +7,9 @@ const diseaseRouter = express.Router()
 diseaseRouter.post('/', wrapAsync(async (req, res) => {
   const { disease } = req.body
 
-  const disease = await createDisease({ disease })
+  const diseaseItem = await createDisease({ disease })
   
-  res.json(disease)
+  res.json(diseaseItem)
 }))
 
 diseaseRouter.put('/:diseaseId', wrapAsync(async (req, res) => {

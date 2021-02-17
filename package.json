@@ -20,7 +20,9 @@
     "deploy-prepack:prod": "NODE_ENV=production sls deploy --package .serverless --stage production",
     "deploy:prod": "NODE_ENV=production sls deploy --stage production",
     "remove-stack:dev": "sls remove --stage development",
-    "zip-release": "zip -r release.zip .serverless serverless.yaml package.json package-lock.json"
+    "zip-release": "zip -r release.zip .serverless serverless.yaml package.json package-lock.json",
+    "lint": "eslint ./packages/api",
+    "lint:fix": "npm run lint -- --fix"
   },
   "keywords": [],
   "author": "",
@@ -33,9 +35,9 @@
     "@semantic-release/github": "^7.0.5",
     "@semantic-release/npm": "^7.0.5",
     "@semantic-release/release-notes-generator": "^9.0.1",
-    "eslint": "^5.16.0 || ^6.1.0",
-    "eslint-config-airbnb": "^18.0.1",
-    "eslint-plugin-import": "^2.18.2",
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb": "^18.2.1",
+    "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-react": "^7.14.3",
     "eslint-plugin-react-hooks": "^1.7.0",

@@ -12,7 +12,7 @@ export async function createDisease({
     id,
     ...disease,
   }
-  const diseaseItem = await Disease.update(item, { returnValues: 'ALL_NEW'})
+  const diseaseItem = await Disease.update(item, { returnValues: 'ALL_NEW' })
 
   log.info('DISEASE_CONTROLLER:DISEASE_CREATED', { diseaseItem })
 
@@ -26,7 +26,7 @@ export async function updateDisease({
   const diseaseItem = await Disease.update({
     id: diseaseId,
     ...disease,
-  }, { returnValues: 'ALL_NEW'})
+  }, { returnValues: 'ALL_NEW' })
 
   log.info('DISEASE_CONTROLLER:DISEASE_UPDATED', { diseaseItem })
 

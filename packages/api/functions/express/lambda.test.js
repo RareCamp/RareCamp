@@ -23,22 +23,22 @@ describe('api: happy paths ', () => {
       {
         path: `/${path}`,
         pathParameters: {
-          proxy: path
-        }
+          proxy: path,
+        },
       },
     )
     const response = await handler(event, context)
     expect(response).toEqual({
       body: '{"id":"existing-disease","name":"Existing disease"}',
-      "isBase64Encoded": false,
-      "multiValueHeaders": {
-        "access-control-allow-origin": ["*"],
-        "content-length": ["51"],
-        "content-type": ["application/json; charset=utf-8"],
-        "etag": ["W/\"33-i7Eq4Q65n+A6VwF4Ac5/PgHAUAk\""],
-        "x-powered-by": ["Express"]
+      isBase64Encoded: false,
+      multiValueHeaders: {
+        'access-control-allow-origin': ['*'],
+        'content-length': ['51'],
+        'content-type': ['application/json; charset=utf-8'],
+        etag: ['W/"33-i7Eq4Q65n+A6VwF4Ac5/PgHAUAk"'],
+        'x-powered-by': ['Express'],
       },
-      "statusCode": 200
+      statusCode: 200,
     })
     done()
   }, 10000)
