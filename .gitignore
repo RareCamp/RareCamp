@@ -20,3 +20,4 @@ wizeline-academy/
 .idea
 .vscode
 .env
+yarn.lock

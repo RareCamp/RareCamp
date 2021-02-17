@@ -1,13 +1,8 @@
-getDisease:
-  handler: packages/graphql/resolvers/getDisease.handler
-
 autoConfirmUser:
   handler: packages/api/functions/cognito/auto-confirm-user.handler
-  memorySize: 128
 
 postAuthN:
   handler: packages/api/functions/cognito/post-authentication.handler
-  memorySize: 128
   iamRoleStatements:
     - Effect: "Allow"
       Action:

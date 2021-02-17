@@ -87,7 +87,6 @@ Resources:
                 'cognito-identity.amazonaws.com:aud': !Ref CognitoIdentityPool
               'ForAnyValue:StringLike':
                 'cognito-identity.amazonaws.com:amr': authenticated
-      # TODO: Allow invoking AppSync API
       # Authenticated users are allowed to invoke the API
       # Policies:
       #   - PolicyName: InvokeApi
@@ -110,7 +109,6 @@ Resources:
   # Due to a Serverless Framework bug, we need to create our own Authorizer, instead of
   # simply specifying `authorizer.arn: !GetAtt CognitoUserPool.Arn` in the function.
   # https://github.com/serverless/serverless/issues/3212#issuecomment-450574093
-  # TODO: AppSync cognito authorizer
   # ApiGatewayAuthorizer:
   #   DependsOn:
   #     - ApiGatewayRestApi

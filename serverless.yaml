@@ -2,9 +2,9 @@ service: rarecamp${{env:SERVERLESS_SERVICE_SUFFIX, ''}}
 provider:
   name: aws
   stackName: ${{self:service}}-${{self:provider.stage}}
-  runtime: nodejs12.x
-  memorySize: 512
-  timeout: 6
+  runtime: nodejs14.x
+  memorySize: 128
+  timeout: 29
   logRetentionInDays: ${{self:custom.stages.${{self:provider.stage}}.logRetentionInDays}}
   stage: ${{opt:stage, env:NODE_ENV, 'development'}}
   profile: ${{self:custom.stageConfig.profile}}
@@ -31,15 +31,12 @@ plugins:
   - serverless-plugin-tracing
   - serverless-iam-roles-per-function
   - serverless-webpack
-  - serverless-appsync-plugin
-  # - serverless-apigateway-service-proxy
   - serverless-stack-output
   - serverless-cloudside-plugin
   - serverless-plugin-aws-alerts
   - '@brettstack/serverless-amplify-plugin'
   - serverless-dynamodb-local
   - serverless-offline
-  - serverless-appsync-simulator
   - serverless-stack-termination-protection
 
 custom:
@@ -98,7 +95,7 @@ custom:
     buildCommandEnvVars:
       prefix: 'REACT_APP_'
       allow:
-        - GraphQlApiUrl
+        - ApiEndpoint
         - CognitoIdentityPoolId,
         - CognitoUserPoolId,
         - CognitoUserPoolClientId,
@@ -131,7 +128,6 @@ custom:
     start:
       dbPath: '.dynamodb'
       migrate: false
-  appSync: ${{file(templates/graphql.yml)}}
 
 functions: ${{file(templates/functions.yml)}}
     

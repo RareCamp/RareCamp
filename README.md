@@ -17,9 +17,9 @@ The UI uses Next.js and is deployed on Amplify Console.
 
 User authentication is provided by AWS Cognito.
 
-### API - AppSync (GraphQL)
+### API - Express
 
-A fully-managed and serverless GraphQl API.
+A fully-managed and Serverless Express API.
 
 ### Database - DynamoDB
 
