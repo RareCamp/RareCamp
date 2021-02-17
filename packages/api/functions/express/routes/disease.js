@@ -5,17 +5,17 @@ import { createDisease, getDisease, queryOpenDiseases, updateDisease } from '../
 const diseaseRouter = express.Router()
 
 diseaseRouter.post('/', wrapAsync(async (req, res) => {
-  const { discordWebhookUrl } = req.body
+  const { disease } = req.body
 
-  const disease = await createDisease({ discordWebhookUrl })
+  const disease = await createDisease({ disease })
   
   res.json(disease)
 }))
 
 diseaseRouter.put('/:diseaseId', wrapAsync(async (req, res) => {
   const { diseaseId } = req.params
-  const { players } = req.body
-  const disease = await updateDisease({ diseaseId, players })
+  const { disease } = req.body
+  const disease = await updateDisease({ diseaseId, disease })
 
   res.json(disease)
 }))
@@ -31,18 +31,6 @@ diseaseRouter.get('/:diseaseId', wrapAsync(async (req, res) => {
   }
 
   return res.json(disease)
-}))
-
-diseaseRouter.get('/open-diseases', wrapAsync(async (req, res) => {
-  const diseases = await queryOpenDiseases()
-
-  if (!diseases) {
-    return res
-      .status(404)
-      .json({})
-  }
-
-  return res.json(diseases)
 }))
 
 export default diseaseRouter

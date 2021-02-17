@@ -65,6 +65,7 @@ custom:
     production:
       profile: rarecamp_prod
       logRetentionInDays: 14
+      pointInTimeRecoveryEnabled: true
       api:
         domainEnabled: false
         domainName: api.example.com

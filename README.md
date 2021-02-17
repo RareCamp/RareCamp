@@ -17,9 +17,9 @@ The UI uses Next.js and is deployed on Amplify Console.
 
 User authentication is provided by AWS Cognito.
 
-### API - Express
+### API - API Gateway + Lambda + Express
 
-A fully-managed and Serverless Express API.
+Express running on API Gateway + Lambda with the help of [Serverless Express](http://npmjs.com/package/@vendia/serverless-express).
 
 ### Database - DynamoDB
 

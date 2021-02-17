@@ -13,14 +13,7 @@ const Disease = new Entity({
     id: {
       partitionKey: true,
     },
-    discordWebhookUrl: {
-      type: 'string',
-      required: true,
-    },
-    players: {
-      type: 'map',
-    },
-    state: {
+    name: {
       type: 'string',
     },
   },

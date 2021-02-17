@@ -57,12 +57,5 @@
     "serverless-webpack": "^5.3.2",
     "webpack": "^4.44.2"
   },
-  "dependencies": {
-    "@vendia/serverless-express": "^4.3.1",
-    "archiver": "^5.1.0",
-    "body-parser": "^1.19.0",
-    "cors": "^2.8.5",
-    "dynamodb-toolbox": "^0.3.0",
-    "express": "^4.17.1"
-  }
+  "dependencies": {}
 }

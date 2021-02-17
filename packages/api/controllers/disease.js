@@ -10,7 +10,7 @@ export async function createDisease({
   const id = shortId.generate()
   const item = {
     id,
-    disease,
+    ...disease,
   }
   const diseaseItem = await Disease.update(item, { returnValues: 'ALL_NEW'})
 
@@ -25,7 +25,7 @@ export async function updateDisease({
 }) {
   const diseaseItem = await Disease.update({
     id: diseaseId,
-    players,
+    ...disease,
   }, { returnValues: 'ALL_NEW'})
 
   log.info('DISEASE_CONTROLLER:DISEASE_UPDATED', { diseaseItem })

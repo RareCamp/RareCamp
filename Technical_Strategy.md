@@ -19,6 +19,7 @@ A lot of workflow management data in our systems is confidential and needs to be
 *Data at-rest*: All data at rest will be encrypted using server-side encryption. We will use customer-managed KMS keys to ensure we have complete control over key creation and management. We’ll perform envelope encryption for encrypting all data at rest.
 
 #### Initial list of AWS Services used
+- API Gateway
 - DynamoDB
 - Lambda
 - S3
