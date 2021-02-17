@@ -19,21 +19,24 @@ jobs:
     - name: Setup Node.js
       uses: actions/setup-node@v1
       with:
-        node-version: 12.x
+        node-version: 14.x
 
     - name: Audit packages
       run: |
         (npm audit --audit-level critical) & \
-        (cd packages/ui && npm audit --audit-level critical)
+        (cd packages/ui && npm audit --audit-level critical) & \
+        (cd packages/api && npm audit --audit-level critical)
     
     - name: Install packages
       run: |
         (npm ci) & \
-        (cd packages/ui && npm ci)
+        (cd packages/ui && npm ci) & \
+        (cd packages/api && npm ci)
 
     - name: Test packages
       run: |
-        (cd packages/ui && npm test)
+        (cd packages/ui && npm test) & \
+        (cd packages/api && npm test)
 
     - name: Deploy to sandboxed stack
       id: deploy_to_sandboxed_stack

@@ -109,18 +109,49 @@ Resources:
   # Due to a Serverless Framework bug, we need to create our own Authorizer, instead of
   # simply specifying `authorizer.arn: !GetAtt CognitoUserPool.Arn` in the function.
   # https://github.com/serverless/serverless/issues/3212#issuecomment-450574093
-  # ApiGatewayAuthorizer:
-  #   DependsOn:
-  #     - ApiGatewayRestApi
-  #   Type: AWS::ApiGateway::Authorizer
-  #   Properties:
-  #     Name: CognitoAuthorizer
-  #     IdentitySource: method.request.header.Authorization
-  #     RestApiId:
-  #       Ref: ApiGatewayRestApi
-  #     Type: COGNITO_USER_POOLS
-  #     ProviderARNs:
-  #       - !GetAtt CognitoUserPool.Arn
+  ApiGatewayAuthorizer:
+    DependsOn:
+      - ApiGatewayRestApi
+    Type: AWS::ApiGateway::Authorizer
+    Properties:
+      Name: CognitoAuthorizer
+      IdentitySource: method.request.header.Authorization
+      RestApiId: !Ref ApiGatewayRestApi
+      Type: COGNITO_USER_POOLS
+      ProviderARNs:
+        - !GetAtt CognitoUserPool.Arn
+    
+  ExpressIamRoleLambdaExecution:
+    Properties:
+      ManagedPolicyArns:
+        - 'arn:aws:iam::aws:policy/CloudWatchLambdaInsightsExecutionRolePolicy'
+
+  MonthlyBudget:
+    Type: AWS::Budgets::Budget
+    Properties:
+      Budget:
+        BudgetName: Monthly
+        BudgetType: COST
+        TimeUnit: MONTHLY
+        BudgetLimit:
+          Amount: 5
+          Unit: USD
+      NotificationsWithSubscribers:
+        - Notification:
+            NotificationType: ACTUAL
+            ComparisonOperator: GREATER_THAN
+            Threshold: 10 # 1st alert sent when % of Monthly total is spent.
+          Subscribers:
+            - SubscriptionType: EMAIL
+              Address: ${{self:custom.stageConfig.alarms.notificationEmail}}
+        - Notification:
+            NotificationType: ACTUAL
+            ComparisonOperator: GREATER_THAN
+            Threshold: 95 # 2nd alert sent when % of Monthly total is spent.
+          Subscribers:
+          - SubscriptionType: EMAIL
+            Address: ${{self:custom.stageConfig.alarms.notificationEmail}}
+
 Outputs:
   CognitoUserPoolId:
     Description: ID of the Cognito User Pool
@@ -136,3 +167,13 @@ Outputs:
 
   UserTableName:
     Value: !Ref UserTable
+
+  DiseaseTableName:
+    Value: !Ref DiseaseTable
+
+  ApiEndpoint:
+    Value:
+      Fn::If:
+        - IsApiCustomDomainEnabled
+        - https://${{self:custom.stageConfig.api.domainName, ''}}
+        - !Sub https://${ApiGatewayRestApi}.execute-api.${AWS::Region}.amazonaws.com/${{self:provider.stage}}

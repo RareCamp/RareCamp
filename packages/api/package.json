@@ -1,0 +1,44 @@
+{
+  "name": "rarecamp-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "handler.js",
+  "scripts": {
+    "test": "jest",
+    "test:watch": "npm run test -- --watch",
+    "start:dev": "IS_OFFLINE=true serverless offline start",
+    "package": "serverless package && zip -r api.zip .serverless serverless.yaml package.json package-lock.json",
+    "deploy": "sls deploy",
+    "deploy-package": "serverless deploy --package .serverless"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "PolyForm Perimeter License 1.0.0",
+  "devDependencies": {
+    "@babel/cli": "^7.12.13",
+    "@babel/core": "^7.12.13",
+    "@babel/node": "^7.12.13",
+    "@babel/plugin-transform-async-to-generator": "^7.12.13",
+    "@babel/preset-env": "^7.12.13",
+    "@serverless/event-mocks": "^1.1.1",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.26.2",
+    "jest": "^26.6.3",
+    "jest-dynalite": "^3.3.1"
+  },
+  "dependencies": {
+    "@middy/core": "^1.5.2",
+    "@middy/sqs-partial-batch-failure": "^1.5.2",
+    "@vendia/serverless-express": "^4.3.1",
+    "aws-sdk": "^2.839.0",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "discord.js": "^12.5.1",
+    "dotenv": "^8.2.0",
+    "dynamodb-toolbox": "^0.3.3",
+    "express": "^4.17.1",
+    "lodash": "^4.17.20",
+    "node-fetch": "^2.6.1",
+    "shortid": "^2.2.16",
+    "winston": "^3.3.3"
+  }
+}
