@@ -126,31 +126,34 @@ Resources:
       ManagedPolicyArns:
         - 'arn:aws:iam::aws:policy/CloudWatchLambdaInsightsExecutionRolePolicy'
 
-  MonthlyBudget:
-    Type: AWS::Budgets::Budget
-    Properties:
-      Budget:
-        BudgetName: Monthly
-        BudgetType: COST
-        TimeUnit: MONTHLY
-        BudgetLimit:
-          Amount: 5
-          Unit: USD
-      NotificationsWithSubscribers:
-        - Notification:
-            NotificationType: ACTUAL
-            ComparisonOperator: GREATER_THAN
-            Threshold: 10 # 1st alert sent when % of Monthly total is spent.
-          Subscribers:
-            - SubscriptionType: EMAIL
-              Address: ${{self:custom.stageConfig.alarms.notificationEmail}}
-        - Notification:
-            NotificationType: ACTUAL
-            ComparisonOperator: GREATER_THAN
-            Threshold: 95 # 2nd alert sent when % of Monthly total is spent.
-          Subscribers:
-          - SubscriptionType: EMAIL
-            Address: ${{self:custom.stageConfig.alarms.notificationEmail}}
+  # Getting the following error when trying to set a budger:
+  # An error occurred: MonthlyBudget - Account 804659574807 is a linked account.
+  # To enable budgets for your account, ask the payer account to enable budgets first.
+  # MonthlyBudget:
+  #   Type: AWS::Budgets::Budget
+  #   Properties:
+  #     Budget:
+  #       BudgetName: Monthly
+  #       BudgetType: COST
+  #       TimeUnit: MONTHLY
+  #       BudgetLimit:
+  #         Amount: 5
+  #         Unit: USD
+  #     NotificationsWithSubscribers:
+  #       - Notification:
+  #           NotificationType: ACTUAL
+  #           ComparisonOperator: GREATER_THAN
+  #           Threshold: 10 # 1st alert sent when % of Monthly total is spent.
+  #         Subscribers:
+  #           - SubscriptionType: EMAIL
+  #             Address: ${{self:custom.stageConfig.alarms.notificationEmail}}
+  #       - Notification:
+  #           NotificationType: ACTUAL
+  #           ComparisonOperator: GREATER_THAN
+  #           Threshold: 95 # 2nd alert sent when % of Monthly total is spent.
+  #         Subscribers:
+  #         - SubscriptionType: EMAIL
+  #           Address: ${{self:custom.stageConfig.alarms.notificationEmail}}
 
 Outputs:
   CognitoUserPoolId:
