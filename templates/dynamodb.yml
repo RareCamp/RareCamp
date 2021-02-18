@@ -4,7 +4,7 @@ Resources:
     Properties:
       BillingMode: PAY_PER_REQUEST
       PointInTimeRecoverySpecification:
-        PointInTimeRecoveryEnabled: false
+        PointInTimeRecoveryEnabled: ${{self:custom.stageConfig.pointInTimeRecoveryEnabled, false}}
       KeySchema:
         - KeyType: HASH
           AttributeName: id
@@ -12,12 +12,12 @@ Resources:
         - AttributeName: id
           AttributeType: S
 
-  OrganizationsTable:
+  OrganizationTable:
     Type: AWS::DynamoDB::Table
     Properties:
       BillingMode: PAY_PER_REQUEST
       PointInTimeRecoverySpecification:
-        PointInTimeRecoveryEnabled: false
+        PointInTimeRecoveryEnabled: ${{self:custom.stageConfig.pointInTimeRecoveryEnabled, false}}
       KeySchema:
         - KeyType: HASH
           AttributeName: id
@@ -25,15 +25,15 @@ Resources:
         - AttributeName: id
           AttributeType: S
 
-  DiseasesTable:
+  DiseaseTable:
     Type: AWS::DynamoDB::Table
     Properties:
       BillingMode: PAY_PER_REQUEST
       PointInTimeRecoverySpecification:
-        PointInTimeRecoveryEnabled: false
+        PointInTimeRecoveryEnabled: ${{self:custom.stageConfig.pointInTimeRecoveryEnabled, false}}
       KeySchema:
         - KeyType: HASH
-          AttributeName: omim
+          AttributeName: id
       AttributeDefinitions:
-        - AttributeName: omim
+        - AttributeName: id
           AttributeType: S

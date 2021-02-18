@@ -8,8 +8,9 @@ describe('auto-confirm-user: happy paths ', () => {
     const event = eventMocks(
       'aws:cognitoUserPool',
       {
-        region: "us-west-2"
-      })
+        region: 'us-west-2',
+      },
+    )
     await expect(handler(event, context)).resolves.toEqual({
       callerContext: { awsSdkVersion: '1', clientId: 'abc1234' },
       region: 'us-west-2',

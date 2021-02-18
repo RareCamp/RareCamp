@@ -1,13 +1,42 @@
-getDisease:
-  handler: packages/graphql/resolvers/getDisease.handler
-
 autoConfirmUser:
   handler: packages/api/functions/cognito/auto-confirm-user.handler
-  memorySize: 128
+
+express:
+    handler: packages/api/functions/express/lambda.handler
+    memorySize: 1024
+    layers:
+      - !Sub "arn:aws:lambda:${AWS::Region}:580247275435:layer:LambdaInsightsExtension:12"
+    events:
+      - http:
+         method: ANY
+         path: /
+      - http: 
+         method: ANY
+         path: '{proxy+}'
+    iamRoleStatements:
+      - Effect: "Allow"
+        Action:
+          - "xray:PutTraceSegments"
+          - "xray:PutTelemetryRecords"
+        Resource:
+          - "*"
+      - Effect: "Allow"
+        Action:
+          - dynamodb:BatchGetItem
+          - dynamodb:BatchWriteItem
+          - dynamodb:DeleteItem
+          - dynamodb:GetItem
+          - dynamodb:PutItem
+          - dynamodb:Query
+          - dynamodb:Scan
+          - dynamodb:UpdateItem
+        Resource:
+          - !GetAtt DiseaseTable.Arn
+          - !GetAtt UserTable.Arn
 
 postAuthN:
   handler: packages/api/functions/cognito/post-authentication.handler
-  memorySize: 128
+  memorySize: 512
   iamRoleStatements:
     - Effect: "Allow"
       Action:

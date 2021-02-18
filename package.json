@@ -20,7 +20,9 @@
     "deploy-prepack:prod": "NODE_ENV=production sls deploy --package .serverless --stage production",
     "deploy:prod": "NODE_ENV=production sls deploy --stage production",
     "remove-stack:dev": "sls remove --stage development",
-    "zip-release": "zip -r release.zip .serverless serverless.yaml package.json package-lock.json"
+    "zip-release": "zip -r release.zip .serverless serverless.yaml package.json package-lock.json",
+    "lint": "eslint ./packages/api",
+    "lint:fix": "npm run lint -- --fix"
   },
   "keywords": [],
   "author": "",
@@ -33,17 +35,16 @@
     "@semantic-release/github": "^7.0.5",
     "@semantic-release/npm": "^7.0.5",
     "@semantic-release/release-notes-generator": "^9.0.1",
-    "eslint": "^5.16.0 || ^6.1.0",
-    "eslint-config-airbnb": "^18.0.1",
-    "eslint-plugin-import": "^2.18.2",
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb": "^18.2.1",
+    "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-react": "^7.14.3",
     "eslint-plugin-react-hooks": "^1.7.0",
     "nodemon": "^2.0.3",
     "semantic-release": "^17.3.0",
-    "serverless": "^2.19.0",
+    "serverless": "^2.25.1",
     "serverless-apigateway-service-proxy": "^1.7.0",
-    "serverless-appsync-simulator": "^0.11.0",
     "serverless-cloudside-plugin": "^1.0.3",
     "serverless-domain-manager": "^3.3.2",
     "serverless-dotenv-plugin": "^2.4.2",
@@ -58,14 +59,5 @@
     "serverless-webpack": "^5.3.2",
     "webpack": "^4.44.2"
   },
-  "dependencies": {
-    "@vendia/serverless-express": "^3.4.0",
-    "archiver": "^5.1.0",
-    "body-parser": "^1.19.0",
-    "cors": "^2.8.5",
-    "dynamodb-toolbox": "^0.3.0",
-    "express": "^4.17.1",
-    "replace-in-file": "^6.0.0",
-    "serverless-appsync-plugin": "^1.6.0"
-  }
+  "dependencies": {}
 }
