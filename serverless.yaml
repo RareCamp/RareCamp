@@ -96,7 +96,7 @@ custom:
       artifactBaseDirectory: packages/ui/out
       preBuildWorkingDirectory: packages/ui
     buildCommandEnvVars:
-      prefix: 'REACT_APP_'
+      prefix: 'NEXT_PUBLIC_'
       allow:
         - ApiEndpoint
         - CognitoIdentityPoolId,
