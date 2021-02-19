@@ -10,6 +10,6 @@ const serverlessExpressInstance = serverlessExpress({
 
 export const handler = (event, context) => {
   addLogMetadata({ metadata: { awsRequestId: context.awsRequestId } })
-
+  console.log(event, context)
   return serverlessExpressInstance(event, context)
 }

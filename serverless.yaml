@@ -1,8 +1,9 @@
 service: rarecamp${{env:SERVERLESS_SERVICE_SUFFIX, ''}}
 provider:
   name: aws
-  stackName: ${{self:service}}-${{self:provider.stage}}
-  runtime: nodejs14.x
+  # NOTE: serverless-offline doesn't work for nodejs14.x
+  # See https://github.com/lambci/docker-lambda/issues/329
+  runtime: ${{env:LAMBDA_RUNTIME, 'nodejs12.x'}}
   memorySize: 128
   timeout: 29
   logRetentionInDays: ${{self:custom.stages.${{self:provider.stage}}.logRetentionInDays}}

@@ -9,7 +9,7 @@ diseaseRouter.post('/', wrapAsync(async (req, res) => {
 
   const diseaseItem = await createDisease({ disease })
 
-  res.json(diseaseItem)
+  res.json({ disease: diseaseItem })
 }))
 
 diseaseRouter.put('/:diseaseId', wrapAsync(async (req, res) => {
@@ -17,7 +17,7 @@ diseaseRouter.put('/:diseaseId', wrapAsync(async (req, res) => {
   const { disease } = req.body
   const diseaseItem = await updateDisease({ diseaseId, disease })
 
-  res.json(diseaseItem)
+  res.json({ disease: diseaseItem })
 }))
 
 diseaseRouter.get('/:diseaseId', wrapAsync(async (req, res) => {
@@ -30,7 +30,7 @@ diseaseRouter.get('/:diseaseId', wrapAsync(async (req, res) => {
       .json({})
   }
 
-  return res.json(disease)
+  return res.json({ disease })
 }))
 
 export default diseaseRouter
