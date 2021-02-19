@@ -99,9 +99,9 @@ custom:
       prefix: 'NEXT_PUBLIC_'
       allow:
         - ApiEndpoint
-        - CognitoIdentityPoolId,
-        - CognitoUserPoolId,
-        - CognitoUserPoolClientId,
+        - CognitoIdentityPoolId
+        - CognitoUserPoolId
+        - CognitoUserPoolClientId
   webpack:
     webpackConfig: ./functions.webpack.config.js
   output:
