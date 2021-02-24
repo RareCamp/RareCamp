@@ -18,6 +18,7 @@ provider:
   environment:
     USER_TABLE: !Ref UserTable
     DISEASE_TABLE: !Ref DiseaseTable
+    PROJECT_TABLE: !Ref ProjectTable
 
     # Enable connection reuse for AWS SDK for instant performance boost
     # https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/node-reusing-connections.html
