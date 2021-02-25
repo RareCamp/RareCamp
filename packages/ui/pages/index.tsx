@@ -1,13 +1,60 @@
 import React, { useState, useEffect } from 'react';
+import { Table, Collapse, Badge } from 'antd';
 import { MainSection, TaskSection } from 'components/Pages/Program';
 import Navbar from 'components/AppLayout/Navbar';
 import { AppLayout } from 'components/AppLayout';
 import records from 'fixtures/dashboard.json';
-import { HOME_TABLE_HEADINGS } from 'constants/lists';
+import { TASK_TABLE_HEADINGS } from 'constants/tableHeaders';
 import styles from 'styles/program.module.css';
 import { Button } from 'components/Button';
 
-console.log('process.env', process.env)
+
+export const TASK_SUB_TABLE_HEADINGS = [
+  {
+    title: 'TaskName',
+    dataIndex: 'taskname',
+    key: 'taskname',
+    width: '40%'
+  },
+  {
+    title: 'Status',
+    dataIndex: 'status',
+    key: 'status',
+    render: (text, value, index) => {
+      if (text === 'COMPLETE') {
+        return (
+          <Badge
+            count={text}
+            style={{ backgroundColor: '#52c41a', borderRadius: 0 }}
+          />
+        )
+      }
+      return text
+    }
+  },
+  {
+    title: 'Owner',
+    dataIndex: 'owner',
+    key: 'owner',
+  },
+  {
+    title: 'Budget',
+    dataIndex: 'budget',
+    key: 'budget',
+  },
+  {
+    title: 'Start Date',
+    dataIndex: 'start_date',
+    key: 'start_date',
+  },
+  {
+    title: 'End Date',
+    dataIndex: 'end_date',
+    key: 'end_dates',
+  }
+];
+
+
 const USER_NAME = 'Ramya';
 const Home = () => {
   const [isEditProgramModalOpen, setEditProgramModalOpen] = useState(
@@ -26,6 +73,31 @@ const Home = () => {
     }
   }, [isAccountSettingModalOpen, isEditProgramModalOpen]);
 
+  function expandedRowRender() {
+    return (
+      <Table 
+        columns={TASK_SUB_TABLE_HEADINGS}
+        pagination={false}
+        bordered
+        dataSource={[
+          {
+            taskname: 'Consult with an expert to identify gaps and create a plan',
+            status: 'COMPLETE',
+            owner: 'Rachel',
+            budget: '0',
+            start_date: '12/5/2021',
+            end_date: '12/23/2021',
+          }
+        ]}
+        components={{
+          header: {
+            row: (props) => null
+          }
+        }}
+      />
+    )
+  }
+
   return (
     <AppLayout>
       <Navbar
@@ -39,7 +111,7 @@ const Home = () => {
         setAccountSettingModalOpen={setAccountSettingModalOpen}
         isAccountSettingModalOpen={isAccountSettingModalOpen}
       >
-        <table className="table-fixed">
+        {/* <table className="table-fixed">
           <thead>
             <tr className={`${styles['table-header']}`}>
               {HOME_TABLE_HEADINGS.map((heading) => (
@@ -63,7 +135,33 @@ const Home = () => {
               />
             </td>
           </tr>
-        </table>
+        </table> */}
+      
+       
+            <Table 
+              dataSource={[
+                {
+                  taskname: 'Initial Planning',
+                  status: '',
+                  owner: '',
+                  budget: '',
+                  start_date: '',
+                  end_date: '',
+                  key: "1"
+                },
+                {
+                  taskname: 'ADD_TASK',
+                  status: '',
+                  owner: '',
+                  budget: '',
+                  start_date: '',
+                  end_date: '',
+                  key: "2"
+                },
+              ]}
+              expandable={{ expandedRowRender }}
+              columns={TASK_TABLE_HEADINGS}
+            />
       </MainSection>
     </AppLayout>
   );
