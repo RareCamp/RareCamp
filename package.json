@@ -8,7 +8,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "init": "npm i && cd packages/ui && npm i",
     "start:ui": "cd packages/ui && npm run dev",
-    "start:ui:offline": "NEXT_PUBLIC_ApiEndpoint=http://localhost:4911 npm run start:ui",
+    "start:ui:offline": "cd packages/ui && npm run dev:offline",
     "start:api": "LAMBDA_RUNTIME=nodejs12.x sls offline cloudside --cloudStage=development",
     "package:dev": "sls package --stage development",
     "deploy-prepack:dev": "sls deploy --package .serverless --stage development",

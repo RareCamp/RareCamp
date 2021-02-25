@@ -69,7 +69,7 @@ const federated = {
 export default withAuthenticator(MyApp, {
   usernameAttributes: 'email',
   signUpConfig,
-  includeGreetings: true,
+  includeGreetings: false,
   hideDefault: true,
   authenticatorComponents: [
     <SignIn federated={federated} />,
