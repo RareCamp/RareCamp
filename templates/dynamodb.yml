@@ -46,7 +46,11 @@ Resources:
         PointInTimeRecoveryEnabled: ${{self:custom.stageConfig.pointInTimeRecoveryEnabled, false}}
       KeySchema:
         - KeyType: HASH
+          AttributeName: userId
+        - KeyType: RANGE
           AttributeName: id
       AttributeDefinitions:
+        - AttributeName: userId
+          AttributeType: S
         - AttributeName: id
           AttributeType: S

@@ -1,6 +1,7 @@
 import express from 'express'
 import bodyParser from 'body-parser'
 import cors from 'cors'
+import { getCurrentInvoke } from '@vendia/serverless-express'
 import userRouter from './routes/user'
 import diseaseRouter from './routes/disease'
 import projectRouter from './routes/project'
@@ -12,6 +13,20 @@ const router = express.Router()
 // router.use(cookieParser())
 router.use(cors())
 router.use(bodyParser.json())
+
+router.use((req, res, next) => {
+  const { event } = getCurrentInvoke()
+  const { claims } = event.requestContext.authorizer
+  const { sub: id, email } = claims
+  const groups = claims['cognito:groups']
+  req.cognitoUser = {
+    id,
+    email,
+    groups,
+  }
+  next()
+})
+
 app.use('/', router)
 app.use('/users', userRouter)
 app.use('/diseases', diseaseRouter)

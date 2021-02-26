@@ -17,14 +17,15 @@ module.exports = {
     },
     {
       TableName: process.env.PROJECT_TABLE,
-      KeySchema: [{ AttributeName: 'id', KeyType: 'HASH' }],
-      AttributeDefinitions: [{ AttributeName: 'id', AttributeType: 'S' }],
+      KeySchema: [{ AttributeName: 'userId', KeyType: 'HASH' }, { AttributeName: 'id', KeyType: 'RANGE' }],
+      AttributeDefinitions: [{ AttributeName: 'userId', AttributeType: 'S' }, { AttributeName: 'id', AttributeType: 'S' }],
       ProvisionedThroughput: {
         ReadCapacityUnits: 1,
         WriteCapacityUnits: 1,
       },
       data: [
         {
+          userId: 'abc123',
           id: 'existing-project',
           name: 'Existing project',
         },

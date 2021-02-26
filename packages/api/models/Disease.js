@@ -13,9 +13,13 @@ const Disease = new Entity({
     id: {
       partitionKey: true,
     },
-    name: {
-      type: 'string',
-    },
+    name: 'string',
+    abbreviation: 'string',
+    omimId: 'string',
+    causalGene: 'string',
+    mutationImpact: 'string',
+    proteinSize: 'number',
+    organizationsWorkingOnDisease: 'list',
   },
   table: DiseaseTable,
 })

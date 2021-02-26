@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "dev:offline": "NEXT_PUBLIC_ApiEndpoint=http://localhost:4911 npm run dev",
     "build-only": "next build",
     "build": "next build && next export",
     "start": "next start",

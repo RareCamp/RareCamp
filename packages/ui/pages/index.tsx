@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios'
+import { Layout } from 'antd'
 import { MainSection, TaskSection } from 'components/Pages/Program';
 import Navbar from 'components/AppLayout/Navbar';
 import { AppLayout } from 'components/AppLayout';
@@ -26,6 +27,9 @@ const Home = () => {
       console.log('fetchUsersResponse', fetchUsersResponse)
       const users = fetchUsersResponse.data
       setUsers(users)
+      const fetchProjectsResponse = await axios.get('/projects')
+      console.log('fetchProjectsResponse', fetchProjectsResponse)
+      const projects = fetchProjectsResponse.data
     }
     fetchAndSetUsers()
   }, [])
@@ -40,11 +44,20 @@ const Home = () => {
 
   return (
     <AppLayout>
+      <Layout.Header className={styles['site-layout-background']} style={{ padding: 0 }}>
       <Navbar
         setEditProgramModalOpen={setEditProgramModalOpen}
         setAccountSettingModalOpen={setAccountSettingModalOpen}
         username={USER_NAME}
       />
+        </Layout.Header>
+      <Layout.Content style={{ margin: '0 16px' }}>
+        {/* <Layout.Breadcrumb style={{ margin: '16px 0' }}>
+          <Layout.Breadcrumb.Item>User</Layout.Breadcrumb.Item>
+          <Layout.Breadcrumb.Item>Bill</Layout.Breadcrumb.Item>
+        </Layout.Breadcrumb> */}
+        <div className="site-layout-background" style={{ padding: 24, minHeight: 360 }}>
+        
       <MainSection
         setEditProgramModalOpen={setEditProgramModalOpen}
         isEditProgramModalOpen={isEditProgramModalOpen}
@@ -77,6 +90,8 @@ const Home = () => {
           </tr>
         </table>
       </MainSection>
+        </div>
+      </Layout.Content>
     </AppLayout>
   );
 };

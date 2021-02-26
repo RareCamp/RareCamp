@@ -11,7 +11,10 @@ const User = new Entity({
   name: 'User',
   attributes: {
     id: { partitionKey: true },
-    name: { type: 'string' },
+    firstName: 'string',
+    familyName: 'string',
+    organization: 'string',
+    workspaces: 'list',
   },
   table: UserTable,
 })
