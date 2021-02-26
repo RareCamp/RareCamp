@@ -1,12 +1,12 @@
 import Link from 'next/link';
 import { useForm } from 'react-hook-form';
-import { Button } from 'components/Button';
-import { InputField } from 'components/InputField';
-import {
-  AS_REQUIRED,
-  AS_EMAIL,
-  AS_PASSWORD,
-} from 'constants/validations';
+// import { InputField } from 'components/InputField';
+import { Input, Button } from 'antd';
+// import {
+//   AS_REQUIRED,
+//   AS_EMAIL,
+//   AS_PASSWORD,
+// } from 'constants/validations';
 import { Logo } from 'components/Logo';
 
 const SignIn = () => {
@@ -34,7 +34,7 @@ const SignIn = () => {
             className="flex flex-col mt-5 h-full"
             onSubmit={handleSubmit(onSubmit)}
           >
-            <InputField
+            {/* <InputField
               reference={register({
                 ...AS_REQUIRED,
                 ...AS_EMAIL,
@@ -43,14 +43,16 @@ const SignIn = () => {
               name="EMAIL"
               placeholder="Email"
               error={errors.EMAIL && errors.EMAIL.message}
-            />
-            <InputField
+            /> */}
+            <Input placeholder="Basic usage" size="large" />
+            {/* <InputField
               reference={register({ ...AS_PASSWORD })}
               type="password"
               name="PASSWORD"
               placeholder="Password"
               error={errors.PASSWORD && errors.PASSWORD.message}
-            />
+            /> */}
+            <Input placeholder="Basic usage" size="large" />
             <p className="text-sm mt-4 ">
               <span className="text-btn-primary ml-1 cursor-pointer hover:text-blue-500">
                 Forgot your password?
@@ -63,14 +65,15 @@ const SignIn = () => {
                   Remember
                 </span>
               </div>
-              <Button
+              {/* <Button
                 label="Sign in"
                 color="primary"
                 size="md"
                 className="text-white"
                 onClick={() => {}}
                 type="submit"
-              />
+              /> */}
+              <Button type="primary">Sign in</Button>
             </div>
           </form>
         </div>

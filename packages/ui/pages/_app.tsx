@@ -1,6 +1,5 @@
 import type { AppProps } from 'next/app';
 import { useEffect } from 'react';
-import 'tailwindcss/tailwind.css';
 import 'antd/dist/antd.css';
 import 'styles/globals.css';
 import '@aws-amplify/ui/dist/style.css'

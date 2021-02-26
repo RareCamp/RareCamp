@@ -1,7 +1,14 @@
-.drop-down{
-    @apply absolute  bg-white  shadow-xl  text-black z-50 flex flex-col;
+.drop-down {
+    position: absolute;
+    background-color: #ffffff;
+    color: black;
+    z-index: 50;
+    display: flex;
+    flex-direction: column;
 }
 
-.drop-down > li{
-    @apply text-black py-4 px-2 block  cursor-pointer;
+.drop-down > li {
+    color: black;
+    padding: 16px 8px;
+    cursor: pointer;
 }

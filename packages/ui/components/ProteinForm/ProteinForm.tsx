@@ -1,5 +1,5 @@
-import { Button } from 'components/Button';
 import { Icon } from 'components/Icon';
+import { Button } from 'antd';
 import React from 'react';
 
 function ProteinForm({
@@ -54,7 +54,7 @@ function ProteinForm({
             </label>
           </div>
           <div className="flex mt-4">
-            <Button
+            {/* <Button
               label="Back"
               color="tertiary"
               size="sm"
@@ -64,8 +64,18 @@ function ProteinForm({
                 setBasicInfo(false);
                 setShowMutationForm(true);
               }}
-            />
+            /> */}
             <Button
+              onClick={() => {
+                setShowProteinForm(false);
+                setBasicInfo(false);
+                setShowMutationForm(true);
+              }}
+            >
+              Back
+            </Button>
+
+            {/* <Button
               label="Determine Feasibility"
               color="primary"
               size="custom"
@@ -76,7 +86,17 @@ function ProteinForm({
                 setShowProteinForm(false);
                 setShowEligibleSection(true);
               }}
-            />
+            /> */}
+            <Button
+              onClick={() => {
+                setBasicInfo(false);
+                setShowMutationForm(false);
+                setShowProteinForm(false);
+                setShowEligibleSection(true);
+              }}
+            >
+              Determine Feasibility
+            </Button>
           </div>
         </form>
       </div>

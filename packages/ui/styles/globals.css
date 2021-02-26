@@ -1,13 +1,16 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-
 /* .drop-down > li {
     @apply text-black py-4 px-2 block hover:bg-gray-300;
 } */
 
-
 .owner--dropdown > li {
-    @apply text-black py-2 px-2 block hover:bg-gray-300;
+    color: black;
+    padding: 10px 10px;
+    display: block;
+}
+
+.owner--dropdown > li:hover {
+    background-color: lightgray;
 }
