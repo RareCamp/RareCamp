@@ -18,3 +18,9 @@ export function getUser({ id }) {
 export function scanUsers() {
   return User.scan()
 }
+
+export function getCurrentUser(req) {
+  return getUser({
+    id: req.cognitoUser.id,
+  })
+}

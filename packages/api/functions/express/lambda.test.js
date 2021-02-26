@@ -29,13 +29,13 @@ describe('api: happy paths ', () => {
     )
     const response = await handler(event, context)
     expect(response).toEqual({
-      body: '{"id":"existing-disease","name":"Existing disease"}',
+      body: JSON.stringify({ disease: { id: 'existing-disease', name: 'Existing disease' } }),
       isBase64Encoded: false,
       multiValueHeaders: {
         'access-control-allow-origin': ['*'],
-        'content-length': ['51'],
+        'content-length': ['63'],
         'content-type': ['application/json; charset=utf-8'],
-        etag: ['W/"33-i7Eq4Q65n+A6VwF4Ac5/PgHAUAk"'],
+        etag: ['W/"3f-QTeT4MNp+LEmtpd/mp+sAjNaEco"'],
         'x-powered-by': ['Express'],
       },
       statusCode: 200,

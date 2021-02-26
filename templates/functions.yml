@@ -8,11 +8,19 @@ express:
       - !Sub "arn:aws:lambda:${AWS::Region}:580247275435:layer:LambdaInsightsExtension:12"
     events:
       - http:
-         method: ANY
-         path: /
+          method: ANY
+          path: /
+          cors: true
+          authorizer:
+            type: COGNITO_USER_POOLS
+            authorizerId: !Ref ApiGatewayAuthorizer
       - http: 
-         method: ANY
-         path: '{proxy+}'
+          method: ANY
+          path: '{proxy+}'
+          cors: true
+          authorizer:
+            type: COGNITO_USER_POOLS
+            authorizerId: !Ref ApiGatewayAuthorizer
     iamRoleStatements:
       - Effect: "Allow"
         Action:

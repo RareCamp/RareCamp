@@ -1,8 +1,9 @@
 service: rarecamp${{env:SERVERLESS_SERVICE_SUFFIX, ''}}
 provider:
   name: aws
-  stackName: ${{self:service}}-${{self:provider.stage}}
-  runtime: nodejs14.x
+  # NOTE: serverless-offline doesn't work for nodejs14.x
+  # See https://github.com/lambci/docker-lambda/issues/329
+  runtime: ${{env:LAMBDA_RUNTIME, 'nodejs12.x'}}
   memorySize: 128
   timeout: 29
   logRetentionInDays: ${{self:custom.stages.${{self:provider.stage}}.logRetentionInDays}}
@@ -17,6 +18,7 @@ provider:
   environment:
     USER_TABLE: !Ref UserTable
     DISEASE_TABLE: !Ref DiseaseTable
+    PROJECT_TABLE: !Ref ProjectTable
 
     # Enable connection reuse for AWS SDK for instant performance boost
     # https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/node-reusing-connections.html
@@ -95,12 +97,12 @@ custom:
       artifactBaseDirectory: packages/ui/out
       preBuildWorkingDirectory: packages/ui
     buildCommandEnvVars:
-      prefix: 'REACT_APP_'
+      prefix: 'NEXT_PUBLIC_'
       allow:
         - ApiEndpoint
-        - CognitoIdentityPoolId,
-        - CognitoUserPoolId,
-        - CognitoUserPoolClientId,
+        - CognitoIdentityPoolId
+        - CognitoUserPoolId
+        - CognitoUserPoolClientId
   webpack:
     webpackConfig: ./functions.webpack.config.js
   output:

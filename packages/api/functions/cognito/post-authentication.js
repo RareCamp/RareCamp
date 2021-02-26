@@ -8,7 +8,7 @@ exports.handler = async (event) => {
   console.info(`Successfully authenticated ${email} (${userId})`)
   const user = await getUser({ id: userId })
 
-  if (!user) {
+  if (!user.Item) {
     console.info(`User doesn't exist. Creating user with id ${userId}...`)
     await createUser({
       id: userId,

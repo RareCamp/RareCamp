@@ -39,9 +39,7 @@ Before beginning any work, review [CONTRIBUTING](CONTRIBUTING.md).
 
 After deploying to your developer AWS account, run `npm run start:ui` to run your UI locally against your AWS resources in the cloud.
 
-<!-- If you want to run your API locally also, you can run `npm run start:api` and `npm run start:ui:offline` separately. -->
-
-We're working on improved documentation for development workflow.
+To run the Express API locally, run `npm run start:api` in a seperate terminal window. Then, instead of running `npm run start:ui`, run `npm run start:ui:offline` to run the UI using the local API endpoint.
 
 ## (optional) Configuring GitHub Actions Secrets
 

@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "dev:offline": "NEXT_PUBLIC_ApiEndpoint=http://localhost:4911 npm run dev",
     "build-only": "next build",
     "build": "next build && next export",
     "start": "next start",
@@ -21,6 +22,7 @@
     "antd": "^4.12.3",
     "autoprefixer": "^10.1.0",
     "aws-amplify": "^3.3.17",
+    "aws-amplify-react": "^4.2.23",
     "next": "10.0.3",
     "postcss": "^8.2.1",
     "react": "17.0.1",
