@@ -34,3 +34,32 @@
   justify-content: space-between;
   border: 1px solid lightgray;
 }
+
+.ul-One {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.ul-Two {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 40%;
+  /* w-2/5  */
+  /* px-12 */
+  padding: 0 24px;
+}
+
+.tooltip {
+  position: absolute;
+  padding: 20px;
+  color: #fff;
+  background-color: black;
+  font-size: small;
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  width: 250px;
+  top: 12;
+}

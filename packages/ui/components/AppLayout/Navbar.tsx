@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import { LetterPic } from 'components/LetterPic';
-import { Icon } from 'components/Icon';
 import { Button as AntButton } from 'antd';
 import { DropDown } from 'components/DropDown';
-import { UserAddOutlined } from '@ant-design/icons';
+import { UserAddOutlined, MoreOutlined } from '@ant-design/icons';
 import OWNER_DATA from 'fixtures/dropdown.json';
 import styles from 'styles/layout.module.css';
 import avatars from 'fixtures/avatar.json';
@@ -29,27 +28,48 @@ const Navbar = ({
     'inline-block h-6 w-6 rounded-full ring-2 ring-white text-sm';
   return (
     <nav className={`${styles['nav-bar']}`}>
-      <ul className="flex justify-between items-center">
-        <li className="text-2xl font-bold mr-1">SSMD Gene Therapy</li>
-        <span className="w-4 h-4 rounded-full flex flex-col border mt-2  border-gray-300">
+      <ul className={styles['ul-One']}>
+        <li
+          style={{
+            fontSize: '24px',
+            fontWeight: 'bold',
+            marginRight: '2px',
+          }}
+        >
+          SSMD Gene Therapy
+        </li>
+        <span
+          style={{
+            width: '16px',
+            height: '16px',
+            borderRadius: '100%',
+            display: 'flex',
+            flexDirection: 'column',
+            marginTop: '2px',
+            border: '1px solid lightgray',
+          }}
+        >
           <span
             onMouseOver={() => setHover(true)}
             onFocus={() => setHover(true)}
             onMouseOut={() => setHover(false)}
             onBlur={() => setHover(false)}
-            className="m-auto text-gray-500 text-xs cursor-pointer"
+            style={{
+              margin: 'auto',
+              color: 'lightgray',
+              fontSize: 'x-small',
+              cursor: 'pointer',
+            }}
+            // className="m-auto text-gray-500 text-xs cursor-pointer"
           >
             i
           </span>
         </span>
-        <span
-          style={tooltipStyle}
-          className="absolute  bg-black shadow-xl py-4 px-4 text-white text-sm z-50 flex flex-col w-72  top-12"
-        >
+        <span style={tooltipStyle} className={styles['tooltip']}>
           This program captures essential steps in the SSMD gene
           therapy roadmap.
         </span>
-        <Button
+        {/* <Button
           label=""
           size="xs"
           color="custom"
@@ -60,8 +80,13 @@ const Navbar = ({
           onClick={() => {
             setOpenDropDown(!open);
           }}
+        /> */}
+        <AntButton
+          onClick={() => {
+            setOpenDropDown(!open);
+          }}
+          icon={<MoreOutlined />}
         />
-
         {open && (
           <DropDown
             className="w-48 text-sm"
@@ -80,7 +105,7 @@ const Navbar = ({
           />
         )}
       </ul>
-      <ul className="flex justify-between items-center w-2/5 px-12">
+      <ul className={styles['ul-Two']}>
         <li
           className="flex cursor-pointer mr-4"
           role="presentation"
@@ -161,11 +186,11 @@ const Navbar = ({
           className="text-xs border border-blue-400 text-blue-400 focus:outline-none mr-4"
           onClick={() => {}}
         /> */}
-         <AntButton 
-          type="primary" 
-          icon={<UserAddOutlined />} 
+        <AntButton
+          type="primary"
+          icon={<UserAddOutlined />}
           ghost
-          size="large" 
+          size="large"
         >
           Invite
         </AntButton>
