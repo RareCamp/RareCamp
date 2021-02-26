@@ -1,4 +1,5 @@
 /*  Any array of items including navlinks, options in selectbox */
+import { Collapse } from 'antd';
 import { IconNameType } from 'components/Icon/Icon';
 import type { Task } from 'types';
 
@@ -20,6 +21,7 @@ export const HOME_TABLE_HEADINGS = [
   'Start Date',
   'End Date',
 ];
+
 
 export const STATUS_TYPES = [
   { label: 'Completed', id: 'completed' },
