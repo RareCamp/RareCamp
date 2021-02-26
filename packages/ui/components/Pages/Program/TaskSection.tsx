@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { ADD_TASK } from 'constants/labels';
 import { INITIAL_TASK_VALUE } from 'constants/lists';
-import { Button } from 'components/Button';
+import { CaretDownOutlined, PlusOutlined } from '@ant-design/icons';
+import { Dropdown, Button, Menu } from 'antd';
 import { SectionHeader, TableRow } from 'components/Pages/Program';
 import type { Task } from 'types';
 
@@ -38,14 +39,17 @@ const TaskSection = ({ record }: RecordProps) => {
           ))}
           <tr>
             <td colSpan={6}>
-              <Button
+              {/* <Button
                 onClick={() => addRow()}
                 icon={<span>+</span>}
                 label={ADD_TASK}
                 color="tertiary"
                 size="custom"
                 className="py-4 px-4 flex flex-start w-full focus:outline-none text-gray-300 hover:text-gray-400 border border-gray-300 hover:border-blue-400"
-              />
+              /> */}
+
+<Button icon={<PlusOutlined />}>{ADD_TASK}</Button>
+
             </td>
           </tr>
         </>

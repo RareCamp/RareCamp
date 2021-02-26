@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
-import { Button } from 'components/Button';
-import { Dropdown, Button as AntButton, Menu } from 'antd';
+import { Dropdown, Button, Menu } from 'antd';
 import { CaretDownOutlined, PlusOutlined } from '@ant-design/icons';
-import { Icon } from 'components/Icon';
 import { ChildrenProps } from 'types';
 import { Modal } from 'components/Modal';
 import EditProgramModal from './EditProgramModal';
@@ -10,9 +8,7 @@ import AccountSettingModal from './AccountSettingModal';
 
 const menu = (
   <Menu>
-    <Menu.Item key="1">
-      1st menu item
-    </Menu.Item>
+    <Menu.Item key="1">1st menu item</Menu.Item>
   </Menu>
 );
 
@@ -42,7 +38,11 @@ const MainSection = ({
             className="text-sm focus:outline-none border-none py-1"
             onClick={() => {}}
           /> */}
-          <Dropdown.Button overlay={menu} placement="bottomCenter" icon={<CaretDownOutlined />}>
+          <Dropdown.Button
+            overlay={menu}
+            placement="bottomCenter"
+            icon={<CaretDownOutlined />}
+          >
             {/* <AntButton 
               type="primary"
               icon={<PlusOutlined />} 
@@ -50,21 +50,17 @@ const MainSection = ({
               size="large" 
             > */}
             <div className="flex items-center">
-              <PlusOutlined /> <p style={{ marginLeft: 10 }}>Add task</p>
+              <PlusOutlined />{' '}
+              <p style={{ marginLeft: 10 }}>Add task</p>
             </div>
-            
+
             {/* </AntButton> */}
           </Dropdown.Button>
         </div>
         {isAddSectionOpen && (
-          <Button
-            label="Add Section"
-            size="md"
-            color="tertiary"
-            icon="+"
-            className="absolute z-50 ml-28 mt-8 text-sm focus:outline-none"
-            onClick={() => {}}
-          />
+          <Button type="primary" icon={<PlusOutlined />}>
+            add
+          </Button>
         )}
       </div>
       <div className="py-6 px-6 bg-primary w-full">{children}</div>

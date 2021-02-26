@@ -1,5 +1,5 @@
-import { Button } from 'components/Button';
 import { Icon } from 'components/Icon';
+import { Button } from 'antd';
 import React from 'react';
 
 const ModalHeader = ({
@@ -12,7 +12,7 @@ const ModalHeader = ({
   return (
     <div className="flex justify-between items-center px-4 border-b border-gray-200 pb-6 pt-2">
       <h4 className="font-semibold">{modalName}</h4>
-      <Button
+      {/* <Button
         icon={
           <Icon
             name="close"
@@ -24,7 +24,8 @@ const ModalHeader = ({
         onClick={onClick}
         size="xs"
         color="tertiary"
-      />
+      /> */}
+      <Button type="primary">Close</Button>
     </div>
   );
 };

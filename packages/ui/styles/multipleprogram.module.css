@@ -1,6 +1,9 @@
 .selected-programs > div > p {
-    @apply text-gray-400 text-sm font-extralight
+    color: lightgray;
+    font-size: small;
+    font-weight: lighter;
 }
 .selected-programs > div > h1 {
-    @apply  text-base font-semibold
+     font-size: medium;
+     font-weight: bold;
 }

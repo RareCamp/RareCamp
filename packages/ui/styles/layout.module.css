@@ -1,12 +1,36 @@
 .notification-count {
-  @apply absolute -top-1 left-3 w-4 h-4 rounded-full bg-red-500 px-1 py-0 flex flex-col justify-between;
+  position: absolute;
+  top: -1;
+  left: 3;
+  width: 12px;
+  height: 12px;
+  border-radius: 100%;
+  background-color: red;
+  padding: 0 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .sidebar-item {
-  @apply flex items-center px-5 py-2 text-white text-sm focus:bg-purple-600 
-  focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50;
+  display: flex;
+  align-items: center;
+  padding: 10px 25px;
+  color: white;
+  font-size: small;
 }
 
-.nav-bar{
-  @apply bg-white py-4 px-8 h-16 flex items-center justify-between border border-gray-100 hover:border-gray-100
+.sidebar-item:focus {
+  background-color: purple;
+  outline: none;
+}
+
+.nav-bar {
+  background-color: #ffffff;
+  padding: 10px 20px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid lightgray;
 }

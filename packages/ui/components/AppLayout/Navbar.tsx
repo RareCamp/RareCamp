@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { LetterPic } from 'components/LetterPic';
 import { Icon } from 'components/Icon';
-import { Button } from 'components/Button';
 import { Button as AntButton } from 'antd';
 import { DropDown } from 'components/DropDown';
 import { UserAddOutlined } from '@ant-design/icons';

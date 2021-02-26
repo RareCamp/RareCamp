@@ -1,8 +1,7 @@
 import Link from 'next/link';
 import { useForm } from 'react-hook-form';
 import { Auth } from 'aws-amplify';
-import { Button } from 'components/Button';
-import { InputField } from 'components/InputField';
+import { Button, Input } from 'antd';
 import { AS_REQUIRED, AS_EMAIL } from 'constants/validations';
 import { Logo } from 'components/Logo';
 
@@ -14,21 +13,21 @@ const SignUp = () => {
     // console.log(data);
   };
 
-  async function signup () {
-      try {
-          // const { user } = await Auth.signUp({
-          //     username,
-          //     password,
-          //     attributes: {
-          //         email,          // optional
-          //         phone_number,   // optional - E.164 number convention
-          //         // other custom attributes 
-          //     }
-          // });
-          // console.log(user);
-      } catch (error) {
-          console.log('error signing up:', error);
-      }
+  async function signup() {
+    try {
+      // const { user } = await Auth.signUp({
+      //     username,
+      //     password,
+      //     attributes: {
+      //         email,          // optional
+      //         phone_number,   // optional - E.164 number convention
+      //         // other custom attributes
+      //     }
+      // });
+      // console.log(user);
+    } catch (error) {
+      console.log('error signing up:', error);
+    }
   }
   return (
     <section className="px-4">
@@ -48,7 +47,7 @@ const SignUp = () => {
             className="flex flex-col mt-5"
             onSubmit={handleSubmit(onSubmit)}
           >
-            <InputField
+            {/* <InputField
               reference={register({
                 ...AS_REQUIRED,
                 ...AS_EMAIL,
@@ -57,16 +56,19 @@ const SignUp = () => {
               name="EMAIL"
               placeholder="Email"
               error={errors.EMAIL && errors.EMAIL.message}
-            />
-            <Button
+            /> */}
+            <Input placeholder="email" />
+            {/* <Button
               type="submit"
               onClick={signup}
               size="lg"
               color="primary"
               label="Sign Up"
               className="mt-4 text-white text-sm"
-            />
-
+            /> */}
+            <Button type="primary" onClick={signup}>
+              Submit
+            </Button>
             <p className="text-xs mt-4 flex flex-col justify-between h-9">
               <span className="text-gray-400 text-extralight">
                 By signing up, you acknowledge you have read and
