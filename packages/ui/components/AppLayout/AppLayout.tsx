@@ -39,7 +39,7 @@ const AppLayout = ({ children }: ChildrenProps) => {
   collapsed={collapsed}
   onCollapse={onCollapse}
   >
-    <div className={styles.logo} />
+    <div data-testid="AppLayout-logo" className={styles.logo} />
     <Menu defaultSelectedKeys={['create-project']} mode="inline">
       <Menu.Item key="create-project" icon={<FileOutlined />} onClick={createProject}>
         Create Project

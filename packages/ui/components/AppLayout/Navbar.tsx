@@ -96,18 +96,19 @@ const Navbar = ({
               color="primary"
               className={`text-gray-600 ${avatarStyle}`}
             />
-            {avatars.map((item): any => {
+            {avatars.map((avatar): any => {
               return (
                 <LetterPic
+                  key={avatar.id}
                   letter={
                     <img
                       className="inline-block h-6 w-6 rounded-full ring-transparent"
-                      src={item.src}
+                      src={avatar.src}
                       alt=""
                     />
                   }
                   size="sm"
-                  color={item.color}
+                  color={avatar.color}
                   className={`${avatarStyle}`}
                   textColor="blue"
                 />
