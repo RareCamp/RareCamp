@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Layout, Table, Collapse, Badge } from 'antd';
 import axios from 'axios'
-import { Layout } from 'antd'
 import { MainSection, TaskSection } from 'components/Pages/Program';
 import Navbar from 'components/AppLayout/Navbar';
 import { AppLayout } from 'components/AppLayout';

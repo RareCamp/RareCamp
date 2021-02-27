@@ -37,29 +37,3 @@ jobs:
       run: |
         (cd packages/ui && npm test) & \
         (cd packages/api && npm test)
-
-    - name: Deploy to sandboxed stack
-      id: deploy_to_sandboxed_stack
-      run: |
-        mkdir ~/.aws
-        echo "[rarecamp_dev]
-        aws_access_key_id=${{ secrets.AWS_ACCESS_KEY_ID_DEV }}
-        aws_secret_access_key=${{ secrets.AWS_SECRET_ACCESS_KEY_DEV }}" > ~/.aws/credentials
-        # TODO: How to also get the PR origin repo if it's coming from an external contributor
-        # See: env.GITHUB_REF, env.GITHUB_HEAD_REF, GITHUB_BASE_REF https://help.github.com/en/actions/configuring-and-managing-workflows/using-environment-variables
-
-        # Just testing the AWS Creds 
-        aws --debug --profile rarecamp_dev cloudformation list-stacks
-        AWS_PROFILE=rarecamp_dev NODE_ENV=production ALARMS_NOTIFICATION_EMAIL=alert@example.com SERVERLESS_SERVICE_SUFFIX=-${{ github.event.number }} npm run deploy:dev
-        WEBSITE_URL=https://$(grep -o 'DefaultDomain": "[^"]*' ./stack-outputs.json | grep -o '[^"]*$')
-        echo "::set-output name=websiteUrl::$WEBSITE_URL"
-    
-    - name: Comment on PR with stack outputs
-      uses: unsplash/comment-on-pr@v1.2.0
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        msg: "Website: [${{steps.deploy_to_sandboxed_stack.outputs.websiteUrl}}](${{steps.deploy_to_sandboxed_stack.outputs.websiteUrl}})"
-        check_for_duplicate_msg: true
-
-    # TODO: Additional end-to-end tests
