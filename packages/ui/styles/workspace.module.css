@@ -1,3 +1,7 @@
-.info-form > input {
-    @apply mt-6 placeholder-gray-800 font-extralight;
+.info-form>input {
+    width: 100%;
+    margin-top: 1.5rem;
+    --tw-placeholder-opacity: 1;
+    color: rgba(31, 41, 55, var(--tw-placeholder-opacity));
+    font-weight: lighter;
 }

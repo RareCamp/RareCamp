@@ -21,14 +21,15 @@ const LetterPic = ({
   size = 'md',
   textColor = 'purple',
 }: LetterPicProps) => {
-  const btnClassses = `lp ${className} ${
+  const btnClassses = `${styles['lp']} ${className} ${
     color === 'custom' ? null : styles[`letterpic-${color}`]
   } ${size === 'custom' ? null : styles[`letterpic-${size}`]}`;
 
   return (
     <li className={btnClassses}>
       <span
-        className={`m-auto ${styles[`lettercolor-${textColor}`]}`}
+        style={{ margin: 'auto' }}
+        className={`${styles[`lettercolor-${textColor}`]}`}
       >
         {letter}
       </span>

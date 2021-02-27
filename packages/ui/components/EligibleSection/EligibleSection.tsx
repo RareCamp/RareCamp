@@ -1,22 +1,20 @@
-import { Button } from 'components/Button';
+import { Button } from 'antd';
 import React from 'react';
-
+import styles from './eligible.module.css';
 function EligibleSection({
   setShowEligibleSection,
   isShowEligibleSection,
 }: any) {
   return (
-    <div className="flex justify-between ">
-      <div className="flex flex-col items-center w-3/5">
+    <div className={styles['eligible-section']}>
+      <div className={styles['eligible-divOne']}>
         <img
           src="/Illustrations15.png"
           width={300}
           alt="proteinformImage"
         />
-        <h1 className="font-semibold text-2xl mt-6">
-          SSMD may be eligible for a AAV based Gene Therapy
-        </h1>
-        <p className="text-gray-400 font-extralight mt-6 text-sm text-center">
+        <h1>SSMD may be eligible for a AAV based Gene Therapy</h1>
+        <p>
           The results are fowarded to our science team for further
           validation. They will reach out to you to collect more gene
           and patient information to confirm Gene therapy feasibility.
@@ -25,33 +23,33 @@ function EligibleSection({
           for your Gene therapy treatment.
         </p>
         <Button
-          label="Create a new program"
-          icon="+"
-          size="custom"
-          color="primary"
-          className="text-xs w-42 py-2 px-4 rounded text-white mt-6 focus:outline-none"
+          // icon="+"
+          type="primary"
+          size="middle"
+          // color="primary"
+
+          style={{ marginTop: '1.5rem' }}
+          // className="text-xs w-42 py-2 px-4 rounded text-white mt-6 focus:outline-none"
           onClick={() => {
             setShowEligibleSection(false);
           }}
-        />
+        >
+          Create a new Program +
+        </Button>
       </div>
-      <div className="w-2/5 px-4 flex flex-col justify-center items-center">
-        <div className="">
+      <div className={styles['eligible-divTwo']}>
+        <div>
           {isShowEligibleSection ? (
-            <h1 className="text-center  mb-10 text-gray-400 text-base extralight">
-              How was this determined?
-            </h1>
+            <h1>How was this determined?</h1>
           ) : (
-            <h1 className="text-center  mb-10 text-gray-400 text-base extralight">
-              How was this determined?
-            </h1>
+            <h1>How was this determined?</h1>
           )}
         </div>
-        <p className="text-center text-sm text-gray-400 font-extralight">
+        <p>
           Lorem ipsum, or lipsum as it is sometimes known, is dummy
           text used in laying out print, graphic or web designs.
         </p>
-        <p className="text-center text-sm text-gray-400 font-extralight">
+        <p>
           The passage is attributed to an unknown typesetter in the
           15th century who is thought to have scrambled parts of
           Ciceros De.

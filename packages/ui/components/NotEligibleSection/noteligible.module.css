@@ -1,0 +1,51 @@
+.not-eligible-section {
+    display: flex;
+    justify-content: space-between;
+}
+
+.not-eligible-divOne {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 60%;
+}
+
+.not-eligible-divOne > h1 {
+    font-weight: bold;
+    font-size: 1.5rem;
+    line-height: 2rem;
+    margin-top: 1.5rem;
+}
+.not-eligible-divOne > p {
+    text-align: center;
+    font-size: small;
+    margin-top: 1.5rem;
+    --tw-text-opacity: 1;
+    color: rgba(156, 163, 175, var(--tw-text-opacity));
+    font-weight: lighter;
+}
+/* className="w-2/5 px-4 flex flex-col justify-center items-center" */
+.not-eligible-divTwo {
+    width: 40%;
+    padding: 0 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.not-eligible-divTwo > div > h1{
+    text-align: center;
+    margin-bottom: 2.5rem;
+    --tw-text-opacity: 1;
+    color: rgba(156, 163, 175, var(--tw-text-opacity));
+    font-weight: lighter;
+    font-size: 1rem;
+    line-height: 1.5rem;
+}
+.not-eligible-divTwo > p{
+    text-align: center;
+    font-size: small;
+    --tw-text-opacity: 1;
+    color: rgba(156, 163, 175, var(--tw-text-opacity));
+    font-weight: lighter;
+}
