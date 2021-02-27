@@ -1,6 +1,7 @@
 import { Icon } from 'components/Icon';
 import { Button } from 'antd';
 import React from 'react';
+import styles from './proteinform.module.css';
 
 function ProteinForm({
   setBasicInfo,
@@ -10,50 +11,74 @@ function ProteinForm({
   showProteinForm,
 }: any) {
   return (
-    <div className="flex justify-between ">
-      <div className="w-3/5">
-        <h1 className="mt-6 text-2xl font-normal">
-          What is the size of the protein?
-        </h1>
-        <form className="w-full">
-          <div className="mt-4">
+    <div className={styles['protein-form']}>
+      <div style={{ width: '60%' }}>
+        <h1>What is the size of the protein?</h1>
+        <form style={{ width: '100%' }}>
+          <div style={{ marginTop: '1rem' }}>
             <label
               htmlFor="less-amino"
-              className="ml-1 text-sm flex items-center"
+              // className="ml-1 text-sm flex items-center"
+              style={{
+                marginLeft: ' 0.25rem',
+                fontSize: 'small',
+                display: 'flex',
+                alignItems: 'center',
+              }}
             >
-              <input type="radio" id="less-amino" className="mr-2" />
+              <input
+                type="radio"
+                id="less-amino"
+                style={{ marginRight: '0.5rem' }}
+              />
               <Icon
                 name="chevron-left"
-                className="w-4 ml-1 text-black"
+                className={styles['icon-left']}
               />
               1100 amino acids
             </label>
             <br />
           </div>
-          <div className="mt-4">
+          <div style={{ marginTop: '1rem' }}>
             <label
               htmlFor="more-amino"
-              className="ml-1 text-sm flex items-center"
+              style={{
+                marginLeft: ' 0.25rem',
+                fontSize: 'small',
+                display: 'flex',
+                alignItems: 'center',
+              }}
+              // className="ml-1 text-sm flex items-center"
             >
-              <input type="radio" id="more-amino" className="mr-2" />
+              <input
+                type="radio"
+                id="more-amino"
+                style={{ marginRight: '0.5rem' }}
+              />
               <Icon
                 name="chevron-right"
-                className="w-4 ml-1 text-black"
+                className={styles['arow-icon']}
               />{' '}
               1100 amino acids
             </label>
             <br />
           </div>
-          <div className="mt-4">
+          <div style={{ marginTop: '1rem' }}>
             <label
               htmlFor="4"
-              className="ml-1 text-sm flex items-center"
+              style={{
+                marginLeft: '0.25rem',
+                fontSize: 'small',
+                display: 'flex',
+                alignItems: 'center',
+              }}
+              // className="ml-1 text-sm flex items-center"
             >
-              <input type="radio" className="mr-4" />
+              <input type="radio" style={{ marginRight: '0.75rem' }} />
               Dont Know
             </label>
           </div>
-          <div className="flex mt-4">
+          <div style={{ display: 'flex', marginTop: '1rem' }}>
             {/* <Button
               label="Back"
               color="tertiary"
@@ -94,13 +119,14 @@ function ProteinForm({
                 setShowProteinForm(false);
                 setShowEligibleSection(true);
               }}
+              style={{ marginLeft: '0.25rem' }}
             >
               Determine Feasibility
             </Button>
           </div>
         </form>
       </div>
-      <div className="w-2/5 px-4 flex flex-col justify-center items-center">
+      <div className={styles['protein-form-one']}>
         <div>
           {showProteinForm ? (
             <img
@@ -110,11 +136,11 @@ function ProteinForm({
             />
           ) : null}
         </div>
-        <p className="text-center text-sm text-gray-400 font-extralight">
+        <p>
           Lorem ipsum, or lipsum as it is sometimes known, is dummy
           text used in laying out print, graphic or web designs.
         </p>
-        <p className="text-center text-sm text-gray-400 font-extralight">
+        <p>
           The passage is attributed to an unknown typesetter in the
           15th century who is thought to have scrambled parts of
           Ciceros De.

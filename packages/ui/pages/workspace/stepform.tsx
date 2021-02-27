@@ -8,6 +8,7 @@ import { MutationForm } from 'components/MutationForm';
 import { ProteinForm } from 'components/ProteinForm';
 import { EligibleSection } from 'components/EligibleSection';
 import { NotEligibleSection } from 'components/NotEligibleSection';
+import styles from 'styles/stepform.module.css';
 
 const stepform = () => {
   const [showBasicInfoForm, setBasicInfo] = useState(true);
@@ -19,15 +20,15 @@ const stepform = () => {
 
   return (
     <AppLayout>
-      <div className="bg-gray-300 h-screen flex flex-col">
-        <div className="flex bg-white border-b py-4 border-gray-200 w-full px-6">
-          <h1 className="font-semibold">WorkSpace</h1>
+      <div className={styles['stepform']}>
+        <div className={styles['stepform-divOne']}>
+          <h1 style={{ fontWeight: 'bold' }}>WorkSpace</h1>
         </div>
         <div>
-          <div className="flex justify-between bg-white px-4 py-4 border-b border-gray-200">
-            <div className="flex items-center justify-between px-4">
+          <div className={styles['stepform-divTwo']}>
+            <div className={styles['stepform-divThree']}>
               <Link href="/workspace">
-                <span className="w-4 cursor-pointer">
+                <span style={{ width: '1rem', cursor: 'pointer' }}>
                   <Icon
                     name="arrowleft"
                     className="hover:text-gray-400"
@@ -35,11 +36,11 @@ const stepform = () => {
                 </span>
               </Link>
 
-              <div className="flex flex-col justify-between h-14 ml-4">
-                <h1 className="font-semibold">
+              <div className={styles['stepform-divFour']}>
+                <h1 style={{ fontWeight: 'bold' }}>
                   Determine feasibility for AAV based Gene Therapy
                 </h1>
-                <p className="text-sm text-gray-500">
+                <p>
                   Complete the short questionnaire crafted by our
                   network of scientists to assess AAV based gene
                   therapy feasibility.
@@ -47,64 +48,98 @@ const stepform = () => {
               </div>
             </div>
           </div>
-          <div className="px-4">
-            <div className="bg-white mt-8 px-4 p-6 rounded-xl">
-              <div className="w-3/5">
+          <div style={{ padding: '0 1rem' }}>
+            <div className={styles['stepform-divFive']}>
+              <div style={{ width: '60%' }}>
                 {showProteinForm ||
                 showMutationForm ||
                 showBasicInfoForm ? (
-                  <div className="flex justify-between  items-center">
-                    <div className="flex items-center">
+                  <div
+                    // className="flex justify-between  items-center"
+                    style={{
+                      display: 'flex',
+                      justifyContent: 'space-between',
+                      alignItems: 'center',
+                    }}
+                  >
+                    <div
+                      // className="flex items-center"
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                      }}
+                    >
                       <LetterPic
                         letter="1"
                         color="custom"
                         textColor={null}
-                        className="bg-blue-400 text-white text-sm border-b-2 border-gray-200"
+                        className={styles['lp']}
                         size="sm"
                       />
-                      <span className="ml-1">Basic Info</span>
+                      <span style={{ marginLeft: '0.25rem' }}>
+                        Basic Info
+                      </span>
                     </div>
                     <span
-                      className={`w-32 border-b-2 ${
+                      className={`${styles['span']} ${
                         showMutationForm || showProteinForm
-                          ? 'border-blue-400'
-                          : 'border-gray-200 '
+                          ? styles['b-blue']
+                          : styles['b-gray']
                       }`}
                     />
-                    <div className="flex items-center">
+                    <div
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                      }}
+                    >
                       <LetterPic
                         letter="2"
                         color="custom"
                         textColor={null}
-                        className={`text-sm border ${
+                        className={`${styles['lp-One']} ${
                           showMutationForm || showProteinForm
-                            ? 'border-blue-400  bg-blue-400 text-white'
-                            : 'border-gray-200 text-gray-400 '
+                            ? styles['br-blue']
+                            : styles['br-gray']
                         }`}
                         size="sm"
                       />
-                      <span className="ml-1">Mutation</span>
+                      <span style={{ marginLeft: '0.25rem' }}>
+                        Mutation
+                      </span>
                     </div>
                     <span
-                      className={`w-32 border-b-2 ${
+                      className={`${styles['span']} ${
                         showProteinForm
-                          ? 'border-blue-400'
-                          : 'border-gray-200 '
+                          ? styles['b-blue']
+                          : styles['b-gray']
                       }`}
+                      // className={`${styles['span']}${
+                      //   showProteinForm
+                      //     ? styles['b-blue']
+                      //     : styles['b-gray']
+                      // }`}
                     />
-                    <div className="flex items-center">
+                    <div
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                      }}
+                    >
                       <LetterPic
                         letter="3"
                         color="custom"
                         textColor={null}
-                        className={` text-sm  border ${
+                        className={` ${styles['lp-One']} ${
                           showProteinForm
-                            ? 'border-blue-400 bg-blue-400 text-white'
-                            : 'border-gray-200 text-gray-400'
+                            ? styles['br-blue']
+                            : styles['br-gray']
                         }`}
                         size="sm"
                       />
-                      <span className="ml-1">Protein</span>
+                      <span style={{ marginLeft: '0.25rem' }}>
+                        Protein
+                      </span>
                     </div>
                   </div>
                 ) : null}

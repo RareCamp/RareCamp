@@ -1,0 +1,107 @@
+.stepform {
+    --tw-bg-opacity: 1;
+    background-color: rgba(209, 213, 219, var(--tw-bg-opacity));
+    display: flex;
+    flex-direction: column;
+}
+
+.stepform-divOne {
+    display: flex;
+    background-color: #ffffff;
+    border-bottom-width: 1;
+    -tw-border-opacity: 1;
+    border-color: rgba(229, 231, 235, var(--tw-border-opacity));
+    padding: 1rem 1.5rem;
+    width: 100%;
+}
+
+.stepform-divTwo {
+    display: flex;
+    justify-content: space-between;
+    background-color: #ffffff;
+    padding: 1rem;
+    border-bottom: 1rem;
+    -tw-border-opacity: 1;
+    border-color: rgba(229, 231, 235, var(--tw-border-opacity));
+}
+
+.stepform-divThree {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 1rem;
+}
+
+.stepform-divFour {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-left: 1rem;
+    height: 3.5rem;
+}
+
+.stepform-divFour>p {
+    /* className="text-sm text-gray-500 */
+    font-size: small;
+    --tw-text-opacity: 1;
+    color: rgba(107, 114, 128, var(--tw-text-opacity));
+}
+
+/* bg-white mt-8 px-4 p-6 rounded-xl */
+
+.stepform-divFive {
+    background-color: #ffffff;
+    margin-top: 4rem;
+    padding: 2rem;
+    border-radius: 25px;
+}
+
+.span {
+    width: 8rem;
+    border-bottom-width: thin;
+    border-style: solid;
+}
+
+.b-blue {
+    --tw-border-opacity: 1;
+    border-color: rgba(96, 165, 250, var(--tw-border-opacity));
+}
+
+.b-gray {
+    --tw-border-opacity: 1;
+    border-color: rgba(229, 231, 235, var(--tw-border-opacity));
+}
+
+.lp {
+    /* bg-blue-400 text-white text-sm border-b-2 border-gray-200 */
+    --tw-bg-opacity: 1;
+    background-color: rgba(96, 165, 250, var(--tw-bg-opacity));
+    color: #ffffff;
+    font-size: small;
+    border-bottom-width: 2;
+    border-style: solid;
+    --tw-border-opacity: 1;
+    border-color: rgba(229, 231, 235, var(--tw-border-opacity));
+}
+
+.lp-One {
+    font-size: small;
+    border-width: 1;
+    border-style: solid;
+}
+
+.br-blue {
+    /* 'border-blue-400 bg-blue-400 text-white' */
+    --tw-border-opacity: 1;
+    border-color: rgba(96, 165, 250, var(--tw-border-opacity));
+    color: #fff;
+    --tw-bg-opacity: 1;
+    background-color: rgba(96, 165, 250, var(--tw-bg-opacity));
+}
+
+.br-gray {
+    --tw-border-opacity: 1;
+    border-color: rgba(229, 231, 235, var(--tw-border-opacity));
+    --tw-text-opacity: 1;
+    color: rgba(156, 163, 175, var(--tw-text-opacity));
+}
