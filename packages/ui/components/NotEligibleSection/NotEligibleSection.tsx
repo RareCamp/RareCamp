@@ -18,24 +18,11 @@ function NotEligibleSection({ isShowEligibleSection }: any) {
           out to our science team for futher evaluation.
         </p>
         <div>
-          <Button
-            // label="Talk to our science team"
-            // icon=""
-            // size="custom"
-            // onClick={() => {}}
-            type="primary"
-            // className="text-xs w-42 py-2 px-4 rounded text-white mt-6 focus:outline-none"
-          >
-            Talk to our science team
-          </Button>
+          <Button type="primary">Talk to our science team</Button>
           <Link href="/workspace">
             <Button
-              // label="Add program"
               icon="+"
               style={{ marginLeft: '0.5rem' }}
-              // size="custom"
-              // color="tertiary"
-              // className="text-xs w-42 border border-blue-400 ml-2 py-2 px-4 rounded text-gray-400 mt-6 focus:outline-none"
               onClick={() => {}}
             >
               Add program

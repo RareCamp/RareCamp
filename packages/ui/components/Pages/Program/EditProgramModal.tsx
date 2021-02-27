@@ -18,14 +18,6 @@ const EditProgramModal = ({
         }}
       />
       <form className="flex flex-col px-2 mt-8 pb-6">
-        {/* <InputField
-          label="Program Name"
-          value="SSMD Gene Therapy"
-          className="text-sm text-gray-500 text-light mt-8"
-          name="Program Name"
-          placeholder=""
-          reference={inputRef}
-        /> */}
         <Input placeholder="Basic usage" />
         <label
           htmlFor="description"
@@ -42,13 +34,6 @@ const EditProgramModal = ({
         </label>
 
         <div className="flex justify-end mt-4">
-          {/* <Button
-            label="Cancel"
-            size="sm"
-            color="tertiary"
-            className="text-sm text-black focus:outline-none"
-            onClick={() => setEditProgramModalOpen(false)}
-          /> */}
           <Button onClick={() => setEditProgramModalOpen(false)}>
             Cancel
           </Button>
@@ -58,13 +43,6 @@ const EditProgramModal = ({
           >
             Save
           </Button>
-          {/* <Button
-            label="Save"
-            size="md"
-            color="primary"
-            className="text-sm text-white  focus:outline-none"
-            onClick={() => {}}
-          /> */}
         </div>
       </form>
     </>

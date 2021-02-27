@@ -22,13 +22,11 @@ function MutationForm({
                 display: 'flex',
                 alignItems: 'center',
               }}
-              // className="ml-1 text-sm flex items-center"
             >
               <input
                 type="radio"
                 id="protein-loss"
                 style={{ marginRight: '0.5rem' }}
-                // className="mr-2"
               />
               Mutation leads to a LOSS of function or LOWER expression
               of gene or protein
@@ -45,13 +43,11 @@ function MutationForm({
                 display: 'flex',
                 alignItems: 'center',
               }}
-              // className="ml-1 text-sm flex items-center"
             >
               <input
                 type="radio"
                 id="mutation-lead-btn"
                 style={{ marginRight: '0.5rem' }}
-                // className="mr-2"
               />
               Mutation leads to a GAIN of function of gene or protein
             </label>
@@ -66,7 +62,6 @@ function MutationForm({
                 display: 'flex',
                 alignItems: 'center',
               }}
-              // className="ml-1 text-sm flex items-center"
             >
               <input
                 type="radio"
@@ -86,12 +81,10 @@ function MutationForm({
                 display: 'flex',
                 alignItems: 'center',
               }}
-              // className="ml-1 text-sm flex items-center"
             >
               <input
                 type="radio"
                 id="dont-know-btn"
-                // className="mr-2"
                 style={{ marginRight: '0.5rem' }}
               />
               Dont Know
@@ -99,10 +92,7 @@ function MutationForm({
           </div>
           <div style={{ display: 'flex', marginTop: '1rem' }}>
             <Button
-              // label="Back"
-              // type="primary"
               size="small"
-              // className="block text-xs text-gray-400 focus:outline-none"
               onClick={() => {
                 setShowProteinForm(false);
                 setBasicInfo(true);
@@ -112,11 +102,9 @@ function MutationForm({
               Back
             </Button>
             <Button
-              // label="Next"
               type="primary"
               size="small"
               style={{ marginLeft: '0.25rem' }}
-              // className="block text-xs text-white focus:outline-none ml-1"
               onClick={() => {
                 setShowProteinForm(true);
                 setBasicInfo(false);

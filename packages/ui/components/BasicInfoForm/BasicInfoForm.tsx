@@ -16,33 +16,13 @@ const BasicInfoForm = ({
         <form className={`${styles['info-form']}`}>
           <Input
             placeholder="Enter disease name"
-            // className="mt-4 placeholder-gray-400 font-extralight"
             name="diseasename"
-            // value=""
-            // reference={inputRef}
           />
-          <Input
-            // label="Casual Gene Name"
-            placeholder="Enter gene name"
-            // className="mt-4 placeholder-gray-400 font-extralight"
-            // name="casualname"
-            value=""
-            // reference={inputRef}
-          />
-          <Input
-            // label="Foundation/Patient Organization Name "
-            placeholder="Please enter name of the foundation or patient organization"
-            // className="mt-4 placeholder-gray-400 font-extralight"
-            // name="foundationname"
-            // value=""
-            // reference={inputRef}
-          />
+          <Input placeholder="Enter gene name" value="" />
+          <Input placeholder="Please enter name of the foundation or patient organization" />
           <Button
-            // label="Next"
-            // color="primary"
             type="primary"
             style={{ marginTop: '20px' }}
-            // className="text-white text-xs focus:outline-none"
             onClick={() => {
               setShowMutationForm(true);
               setShowProteinForm(false);

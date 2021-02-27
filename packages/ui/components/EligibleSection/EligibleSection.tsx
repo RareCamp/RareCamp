@@ -23,13 +23,9 @@ function EligibleSection({
           for your Gene therapy treatment.
         </p>
         <Button
-          // icon="+"
           type="primary"
           size="middle"
-          // color="primary"
-
           style={{ marginTop: '1.5rem' }}
-          // className="text-xs w-42 py-2 px-4 rounded text-white mt-6 focus:outline-none"
           onClick={() => {
             setShowEligibleSection(false);
           }}

@@ -1,6 +1,5 @@
 import Link from 'next/link';
 import { useForm } from 'react-hook-form';
-// import { InputField } from 'components/InputField';
 import { Input, Button } from 'antd';
 // import {
 //   AS_REQUIRED,
