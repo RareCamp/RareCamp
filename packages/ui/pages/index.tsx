@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useRouter } from 'next/router'
 import { Layout, Table, Collapse, Badge } from 'antd';
 import axios from 'axios'
 import { MainSection, TaskSection } from 'components/Pages/Program';
@@ -8,6 +9,7 @@ import records from 'fixtures/dashboard.json';
 import { TASK_TABLE_HEADINGS } from 'constants/tableHeaders';
 import styles from 'styles/program.module.css';
 import { Button } from 'components/Button';
+import { useProgramsContext } from 'context/programs';
 
 export const TASK_SUB_TABLE_HEADINGS = [
   {
@@ -55,6 +57,16 @@ export const TASK_SUB_TABLE_HEADINGS = [
 ];
 const USER_NAME = 'Ramya';
 const Home = () => {
+  const router = useRouter()
+  const programsContext = useProgramsContext()
+  const isFirstTimeVisitor = !programsContext.programs.length
+  
+  if (isFirstTimeVisitor) {
+    console.log('router is', router)
+    router.push('/workspace/stepform')
+    return null
+  }
+  
   const [isEditProgramModalOpen, setEditProgramModalOpen] = useState(
     false,
   );
@@ -62,21 +74,6 @@ const Home = () => {
     isAccountSettingModalOpen,
     setAccountSettingModalOpen,
   ] = useState(false);
-
-  const [users, setUsers] = useState(null)
-
-  useEffect(() => {
-    async function fetchAndSetUsers() {
-      const fetchUsersResponse = await axios.get('/users')
-      console.log('fetchUsersResponse', fetchUsersResponse)
-      const users = fetchUsersResponse.data
-      setUsers(users)
-      const fetchProjectsResponse = await axios.get('/projects')
-      console.log('fetchProjectsResponse', fetchProjectsResponse)
-      const projects = fetchProjectsResponse.data
-    }
-    fetchAndSetUsers()
-  }, [])
 
   useEffect(() => {
     if (isEditProgramModalOpen || isAccountSettingModalOpen) {

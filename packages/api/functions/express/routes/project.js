@@ -11,8 +11,8 @@ const projectRouter = express.Router()
 
 projectRouter.post('/', wrapAsync(async (req, res) => {
   const { project } = req.body
-  const userId = req.cognitoUser.id
-  const projectItem = await createProject({ userId, project })
+  const programId = req.cognitoUser.id
+  const projectItem = await createProject({ programId, project })
 
   res.json({ project: projectItem })
 }))

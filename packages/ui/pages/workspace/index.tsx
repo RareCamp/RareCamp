@@ -7,7 +7,7 @@ import {
 } from 'components/Pages/Workspace';
 
 function Workspace() {
-  const [isFirstTimeVisitor] = useState(true);
+  const isFirstTimeVisitor = true
 
   return (
     <AppLayout>

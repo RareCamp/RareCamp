@@ -16,7 +16,7 @@ module.exports = {
       ],
     },
     {
-      TableName: process.env.PROJECT_TABLE,
+      TableName: process.env.PROGRAM_TABLE,
       KeySchema: [{ AttributeName: 'userId', KeyType: 'HASH' }, { AttributeName: 'id', KeyType: 'RANGE' }],
       AttributeDefinitions: [{ AttributeName: 'userId', AttributeType: 'S' }, { AttributeName: 'id', AttributeType: 'S' }],
       ProvisionedThroughput: {
@@ -26,6 +26,22 @@ module.exports = {
       data: [
         {
           userId: 'abc123',
+          id: 'existing-program',
+          name: 'Existing program',
+        },
+      ],
+    },
+    {
+      TableName: process.env.PROJECT_TABLE,
+      KeySchema: [{ AttributeName: 'programId', KeyType: 'HASH' }, { AttributeName: 'id', KeyType: 'RANGE' }],
+      AttributeDefinitions: [{ AttributeName: 'programId', AttributeType: 'S' }, { AttributeName: 'id', AttributeType: 'S' }],
+      ProvisionedThroughput: {
+        ReadCapacityUnits: 1,
+        WriteCapacityUnits: 1,
+      },
+      data: [
+        {
+          programId: 'abc123',
           id: 'existing-project',
           name: 'Existing project',
         },

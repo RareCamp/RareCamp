@@ -3,17 +3,17 @@ import Project from '../models/Project'
 import { log } from '../utils/logger'
 
 export async function createProject({
-  userId,
+  programId,
   project,
 }) {
-  if (!userId) throw new Error('userId is required')
+  if (!programId) throw new Error('programId is required')
   if (!project) throw new Error('project is required')
 
   const id = shortId.generate()
   const item = {
     ...project,
     id,
-    userId,
+    programId,
   }
   const projectItem = await Project.update(item, { returnValues: 'ALL_NEW' })
 
@@ -36,14 +36,24 @@ export async function updateProject({
   return projectItem.Attributes
 }
 
-export async function getProject({ projectId }) {
-  const projectItem = await Project.get({ id: projectId })
+export async function getProject({ programId, projectId }) {
+  const projectItem = await Project.get({ programId, id: projectId })
 
   if (!projectItem) {
     return null
   }
 
   return projectItem.Item
+}
+
+export async function getProjects({ programId }) {
+  const projectItems = await Project.query({ programId })
+
+  if (!projectItems) {
+    return null
+  }
+
+  return projectItems.Item
 }
 
 export function scanProjects() {

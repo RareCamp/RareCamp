@@ -1,17 +1,17 @@
 import { Table, Entity } from 'dynamodb-toolbox'
 import { dynamoDbDocumentClient } from '../dynamodb-init'
 
-const ProjectTable = new Table({
-  name: process.env.PROJECT_TABLE,
-  partitionKey: 'programId',
+const ProgramTable = new Table({
+  name: process.env.PROGRAM_TABLE,
+  partitionKey: 'userId',
   sortKey: 'id',
   DocumentClient: dynamoDbDocumentClient,
 })
 
-const Project = new Entity({
-  name: 'Project',
+const Program = new Entity({
+  name: 'Program',
   attributes: {
-    programId: {
+    userId: {
       partitionKey: true,
     },
     id: {
@@ -22,7 +22,7 @@ const Project = new Entity({
     status: 'string',
     education: 'list',
   },
-  table: ProjectTable,
+  table: ProgramTable,
 })
 
-export default Project
+export default Program

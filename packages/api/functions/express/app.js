@@ -5,6 +5,7 @@ import { getCurrentInvoke } from '@vendia/serverless-express'
 import userRouter from './routes/user'
 import diseaseRouter from './routes/disease'
 import projectRouter from './routes/project'
+import programRouter from './routes/program'
 
 const IS_DEVELOPMENT = process.env.NODE_ENV === 'development'
 
@@ -31,6 +32,7 @@ app.use('/', router)
 app.use('/users', userRouter)
 app.use('/diseases', diseaseRouter)
 app.use('/projects', projectRouter)
+app.use('/programs', programRouter)
 
 app.use((req, res, next) => {
   const err = new Error('Not Found')
