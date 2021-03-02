@@ -1,6 +1,6 @@
-import { Button } from 'antd';
 import React from 'react';
 import styles from './mutation.module.css';
+import { Form, Input, Button, Checkbox } from 'antd';
 
 function MutationForm({
   setShowProteinForm,
@@ -8,96 +8,81 @@ function MutationForm({
   setShowMutationForm,
   showMutationForm,
 }: any) {
+
+const layout = {
+  labelCol: { span: 8 },
+  wrapperCol: { span: 16 },
+};
+const tailLayout = {
+  wrapperCol: { offset: 8, span: 16 },
+};
+
+const Demo = () => {
+  const onFinish = (values: any) => {
+    console.log('Success:', values);
+  };
+
+  const onFinishFailed = (errorInfo: any) => {
+    console.log('Failed:', errorInfo);
+  };
   return (
     <div className={styles['mutation-form']}>
       <div style={{ width: '60%' }}>
         <h1>How do mutations in this gene cause the disease?</h1>
-        <form style={{ width: '100%' }}>
-          <div style={{ marginTop: '1rem' }}>
-            <label
-              htmlFor="protein-loss"
-              style={{
-                marginLeft: ' 0.25rem',
-                fontSize: 'small',
-                display: 'flex',
-                alignItems: 'center',
-              }}
-              // className="ml-1 text-sm flex items-center"
-            >
-              <input
-                type="radio"
-                id="protein-loss"
-                style={{ marginRight: '0.5rem' }}
-                // className="mr-2"
-              />
-              Mutation leads to a LOSS of function or LOWER expression
-              of gene or protein
-            </label>
-            <br />
-          </div>
-          <div style={{ marginTop: '1rem' }}>
-            <label
-              htmlFor="2"
-              id="mutation-lead-btn"
-              style={{
-                marginLeft: ' 0.25rem',
-                fontSize: 'small',
-                display: 'flex',
-                alignItems: 'center',
-              }}
-              // className="ml-1 text-sm flex items-center"
-            >
-              <input
-                type="radio"
-                id="mutation-lead-btn"
-                style={{ marginRight: '0.5rem' }}
-                // className="mr-2"
-              />
-              Mutation leads to a GAIN of function of gene or protein
-            </label>
-            <br />
-          </div>
-          <div style={{ marginTop: '1rem' }}>
-            <label
-              htmlFor="more-protein-btn"
-              style={{
-                marginLeft: ' 0.25rem',
-                fontSize: 'small',
-                display: 'flex',
-                alignItems: 'center',
-              }}
-              // className="ml-1 text-sm flex items-center"
-            >
-              <input
-                type="radio"
+        <Form
+      {...layout}
+      name="basic"
+      initialValues={{ remember: true }}
+      onFinish={onFinish}
+      onFinishFailed={onFinishFailed}
+    >
+      <Form.Item
+        label="Mutation leads to a LOSS of function or LOWER expression
+        of gene or protein"
+        name="protein-loss"
+        htmlFor="protein-loss"
+        style={{
+          marginLeft: ' 0.25rem',
+          fontSize: 'small',
+          display: 'flex',
+          alignItems: 'center',
+        }}
+      >
+        <Input type="radio"   id="protein-loss"
+                style={{ marginRight: '0.5rem' }}/>
+      </Form.Item>
+
+      <Form.Item
+        label=" Mutation leads to a GAIN of function of gene or protein"
+        htmlFor="2"
+        name="mutation-lead-btn"
+        id="mutation-lead-btn"
+        style={{
+          marginLeft: ' 0.25rem',
+          fontSize: 'small',
+          display: 'flex',
+          alignItems: 'center',
+        }}
+      >
+        <Input   type="radio"
                 id="more-protein-btn"
-                style={{ marginRight: '0.5rem' }}
-              />
-              Mutation leads to a MORE protein to be produced
-            </label>
-            <br />
-          </div>
-          <div style={{ marginTop: '1rem' }}>
-            <label
-              htmlFor="dont-know-btn"
+                style={{ marginRight: '0.5rem' }} />
+      </Form.Item>
+
+      <Form.Item label="Dont Know"  htmlFor="dont-know-btn"
               style={{
                 marginLeft: ' 0.25rem',
                 fontSize: 'small',
                 display: 'flex',
                 alignItems: 'center',
-              }}
-              // className="ml-1 text-sm flex items-center"
-            >
-              <input
-                type="radio"
+              }}>
+        <Input  type="radio"
                 id="dont-know-btn"
                 // className="mr-2"
-                style={{ marginRight: '0.5rem' }}
-              />
-              Dont Know
-            </label>
-          </div>
-          <div style={{ display: 'flex', marginTop: '1rem' }}>
+                style={{ marginRight: '0.5rem' }}/>
+      </Form.Item>
+
+      <Form.Item style={{ display: 'flex', marginTop: '1rem' }} {...tailLayout}>
             <Button
               // label="Back"
               // type="primary"
@@ -125,7 +110,122 @@ function MutationForm({
             >
               Next
             </Button>
-          </div>
+      </Form.Item>
+    </Form>
+        <form style={{ width: '100%' }}>
+          {/* <div style={{ marginTop: '1rem' }}>
+            <label
+              htmlFor="protein-loss"
+              style={{
+                marginLeft: ' 0.25rem',
+                fontSize: 'small',
+                display: 'flex',
+                alignItems: 'center',
+              }}
+              // className="ml-1 text-sm flex items-center"
+            >
+              <input
+                type="radio"
+                id="protein-loss"
+                style={{ marginRight: '0.5rem' }}
+                // className="mr-2"
+              />
+              Mutation leads to a LOSS of function or LOWER expression
+              of gene or protein
+            </label>
+            <br />
+          </div> */}
+          {/* <div style={{ marginTop: '1rem' }}>
+            <label
+              htmlFor="2"
+              id="mutation-lead-btn"
+              style={{
+                marginLeft: ' 0.25rem',
+                fontSize: 'small',
+                display: 'flex',
+                alignItems: 'center',
+              }}
+              // className="ml-1 text-sm flex items-center"
+            >
+              <input
+                type="radio"
+                id="mutation-lead-btn"
+                style={{ marginRight: '0.5rem' }}
+                // className="mr-2"
+              />
+              Mutation leads to a GAIN of function of gene or protein
+            </label>
+            <br />
+          </div> */}
+          {/* <div style={{ marginTop: '1rem' }}>
+            <label
+              htmlFor="more-protein-btn"
+              style={{
+                marginLeft: ' 0.25rem',
+                fontSize: 'small',
+                display: 'flex',
+                alignItems: 'center',
+              }}
+              // className="ml-1 text-sm flex items-center"
+            >
+              <input
+                type="radio"
+                id="more-protein-btn"
+                style={{ marginRight: '0.5rem' }}
+              />
+              Mutation leads to a MORE protein to be produced
+            </label>
+            <br />
+          </div> */}
+          {/* <div style={{ marginTop: '1rem' }}>
+            <label
+              htmlFor="dont-know-btn"
+              style={{
+                marginLeft: ' 0.25rem',
+                fontSize: 'small',
+                display: 'flex',
+                alignItems: 'center',
+              }}
+              // className="ml-1 text-sm flex items-center"
+            >
+              <input
+                type="radio"
+                id="dont-know-btn"
+                // className="mr-2"
+                style={{ marginRight: '0.5rem' }}
+              />
+              Dont Know
+            </label>
+          </div> */}
+          {/* <div style={{ display: 'flex', marginTop: '1rem' }}>
+            <Button
+              // label="Back"
+              // type="primary"
+              size="small"
+              // className="block text-xs text-gray-400 focus:outline-none"
+              onClick={() => {
+                setShowProteinForm(false);
+                setBasicInfo(true);
+                setShowMutationForm(false);
+              }}
+            >
+              Back
+            </Button>
+            <Button
+              // label="Next"
+              type="primary"
+              size="small"
+              style={{ marginLeft: '0.25rem' }}
+              // className="block text-xs text-white focus:outline-none ml-1"
+              onClick={() => {
+                setShowProteinForm(true);
+                setBasicInfo(false);
+                setShowMutationForm(false);
+              }}
+            >
+              Next
+            </Button>
+          </div> */}
         </form>
       </div>
       <div className={styles['mutation-form-one']}>
