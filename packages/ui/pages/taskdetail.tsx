@@ -8,6 +8,7 @@ import dynamic from 'next/dynamic';
 
 const DynamicComponent = dynamic(
   () => import('../components/Editor'),
+  { ssr: false },
 );
 const USER_NAME = 'Ramya';
 
@@ -104,9 +105,7 @@ const Taskdetail = () => {
                 id="files"
                 style={{ visibility: 'hidden' }}
                 type="file"
-              >
-                <label>Select Image</label>
-              </input>
+              />
             </div>
           </div>
         </div>
