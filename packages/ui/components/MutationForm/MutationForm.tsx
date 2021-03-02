@@ -22,6 +22,10 @@ function MutationForm({
                 display: 'flex',
                 alignItems: 'center',
               }}
+<<<<<<< HEAD
+=======
+              // className="ml-1 text-sm flex items-center"
+>>>>>>> pipe/feat/antd-comp
             >
               <input
                 type="radio"
@@ -62,6 +66,10 @@ function MutationForm({
                 display: 'flex',
                 alignItems: 'center',
               }}
+<<<<<<< HEAD
+=======
+              // className="ml-1 text-sm flex items-center"
+>>>>>>> pipe/feat/antd-comp
             >
               <input
                 type="radio"
