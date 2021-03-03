@@ -62,7 +62,6 @@ const Home = () => {
   const isFirstTimeVisitor = !programsContext.programs.length
   
   if (isFirstTimeVisitor) {
-    console.log('router is', router)
     router.push('/workspace/stepform')
     return null
   }

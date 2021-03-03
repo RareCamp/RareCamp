@@ -53,7 +53,6 @@ function MyApp({ Component, pageProps }: AppProps) {
   useEffect(() => {
     async function fetchAndSetPrograms() {
       const fetchProgramsResponse = await axios.get('/programs')
-      console.log('fetchProgramsResponse?.data?.Items', fetchProgramsResponse?.data?.programs?.Items)
       setPrograms(fetchProgramsResponse?.data?.programs?.Items || [])
     }
     /*
