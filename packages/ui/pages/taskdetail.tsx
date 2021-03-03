@@ -2,9 +2,14 @@ import { AppLayout } from 'components/AppLayout';
 import Navbar from 'components/AppLayout/Navbar';
 import React, { useState } from 'react';
 import { MoreOutlined } from '@ant-design/icons';
-import { Button as AntButton, Button } from 'antd';
+import { Button as AntButton, Button, Dropdown } from 'antd';
 // import { Editor } from '';
+import styles from 'styles/dropdown.module.css';
 import dynamic from 'next/dynamic';
+import { LetterPic } from 'components/LetterPic';
+import { DropDown } from 'components/DropDown';
+import OWNER_DATA from 'fixtures/dropdown.json';
+import { Icon } from 'components/Icon';
 
 const DynamicComponent = dynamic(
   () => import('../components/Editor'),
@@ -21,6 +26,8 @@ const Taskdetail = () => {
     setAccountSettingModalOpen,
   ] = useState(false);
 
+  const [open, setOpenDropDown] = useState(false);
+  const [isUserDropDownOpen, setUserDropDown] = useState(false);
   return (
     <AppLayout>
       {/* <Navbar
@@ -79,12 +86,134 @@ const Taskdetail = () => {
           >
             <div style={{ display: 'flex', flexDirection: 'column' }}>
               <span>Status</span>
-              <span>In Progress</span>
+              <span
+                style={{
+                  backgroundColor: 'orange',
+                  color: '#fff',
+                  padding: '1px 2px',
+                }}
+              >
+                In Progress
+              </span>
             </div>
-            <div style={{ display: 'flex', flexDirection: 'column' }}>
+            <div
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                position: 'relative',
+              }}
+            >
               <span>Owner</span>
-              <span>Ramya</span>
+              <span
+                style={{
+                  display: 'flex',
+                  padding: '0 4px',
+                  border: '1px solid lightblue',
+                }}
+              >
+                <LetterPic letter="R" size="sm" />{' '}
+                <span style={{ marginLeft: '4px' }}>Ramya</span>
+                <span>
+                  {isUserDropDownOpen ? (
+                    <svg
+                      onClick={() =>
+                        setUserDropDown(!isUserDropDownOpen)
+                      }
+                      style={{ width: '25px' }}
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                  ) : (
+                    <svg
+                      onClick={() =>
+                        setUserDropDown(!isUserDropDownOpen)
+                      }
+                      style={{ width: '25px' }}
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M9 5l7 7-7 7"
+                      />
+                    </svg>
+                  )}
+                </span>
+              </span>
+              {isUserDropDownOpen && (
+                <DropDown
+                  data={OWNER_DATA}
+                  className={styles['d-d']}
+                  render={(item) => {
+                    return (
+                      <div
+                        key={item.ownerName}
+                        style={{
+                          display: 'flex',
+                          alignItems: 'center',
+                          padding: '1rem 0.5rem',
+                          borderBottomColor: 'lightgray',
+                          borderBottomWidth: '1',
+                        }}
+                        // className="flex items-center px-2 py-4 border-b border-gray-300 border hover:border-blue-400"
+                      >
+                        <LetterPic
+                          letter={item.letter}
+                          color={item.bgColor}
+                          className=""
+                          size="md"
+                          textColor={item.letterColor}
+                        />
+                        <div
+                          style={{
+                            display: 'flex',
+                            flexDirection: 'column',
+                            justifyContent: 'space-between',
+                            height: '3rem',
+                            padding: '0 0.5rem',
+                            marginLeft: '0.5rem',
+                            cursor: 'pointer',
+                          }}
+                        >
+                          <span
+                            style={{
+                              color: 'lightgray',
+                              fontSize: 'medium',
+                              fontWeight: 'normal',
+                              display: 'block',
+                            }}
+                          >
+                            {item.ownerName}
+                          </span>
+                          <span
+                            style={{
+                              color: 'lightgray',
+                              fontSize: 'medium',
+                              fontWeight: 'normal',
+                              display: 'block',
+                            }}
+                          >
+                            {item.ownerEmail}
+                          </span>
+                        </div>
+                      </div>
+                    );
+                  }}
+                />
+              )}
             </div>
+
             <div style={{ display: 'flex', flexDirection: 'column' }}>
               <span>Budget</span>
               <span>$0</span>
@@ -99,11 +228,11 @@ const Taskdetail = () => {
             </div>
           </div>
           <div>
-            <DynamicComponent />{' '}
+            <DynamicComponent />
             <div style={{ marginTop: '120px' }}>
               <input
                 id="files"
-                style={{ visibility: 'hidden' }}
+                // style={{ visibility: 'hidden' }}
                 type="file"
               />
             </div>

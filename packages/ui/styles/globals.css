@@ -5,12 +5,16 @@
     @apply text-black py-4 px-2 block hover:bg-gray-300;
 } */
 
-.owner--dropdown > li {
+.owner--dropdown>li {
     color: black;
     padding: 10px 10px;
     display: block;
 }
 
-.owner--dropdown > li:hover {
+.owner--dropdown>li:hover {
     background-color: lightgray;
+}
+
+.icon-task {
+    width: 4px;
 }
