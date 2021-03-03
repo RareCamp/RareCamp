@@ -1,10 +1,24 @@
 import { Button } from 'components/Button';
 import React from 'react';
+import axios from 'axios'
+import { useRouter } from 'next/router';
 
 function EligibleSection({
   setShowEligibleSection,
   isShowEligibleSection,
 }: any) {
+  const router = useRouter()
+  async function createProgram() {
+    const createProgramResponse = await axios.post('/programs', {
+      program: {
+        name: 'test',
+      }
+    })
+    if (createProgramResponse?.data?.program) {
+      router.push(`/programs/${createProgramResponse.data.program.id}`)
+    }
+  }
+
   return (
     <div className="flex justify-between ">
       <div className="flex flex-col items-center w-3/5">
@@ -30,9 +44,7 @@ function EligibleSection({
           size="custom"
           color="primary"
           className="text-xs w-42 py-2 px-4 rounded text-white mt-6 focus:outline-none"
-          onClick={() => {
-            setShowEligibleSection(false);
-          }}
+          onClick={createProgram}
         />
       </div>
       <div className="w-2/5 px-4 flex flex-col justify-center items-center">

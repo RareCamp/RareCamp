@@ -1,4 +1,5 @@
 import { render, screen } from '@testing-library/react';
+import { ProgramsContext } from 'context/programs';
 import IndexPage from 'pages/index';
 
 describe('IndexPage', () => {
@@ -18,7 +19,10 @@ describe('IndexPage', () => {
     });
   });
   test('shows the invite header and table', () => {
-    render(<IndexPage></IndexPage>);
+    const programsContextValue = {
+      programs: [{}]
+    }
+    render(<ProgramsContext.Provider value={programsContextValue}><IndexPage></IndexPage></ProgramsContext.Provider>);
     const invite = screen.getByRole('button', {
       name: /invite/i,
     });

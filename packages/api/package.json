@@ -37,8 +37,8 @@
     "dynamodb-toolbox": "^0.3.3",
     "express": "^4.17.1",
     "lodash": "^4.17.20",
+    "nanoid": "^3.1.20",
     "node-fetch": "^2.6.1",
-    "shortid": "^2.2.16",
     "winston": "^3.3.3"
   }
 }

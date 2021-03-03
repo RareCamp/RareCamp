@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import type { AppProps } from 'next/app';
 import { useEffect } from 'react';
 import 'styles/antd.less';
@@ -14,9 +15,10 @@ import {
   SignUp,
   ForgotPassword,
   RequireNewPassword,
-  Greetings,
-} from 'aws-amplify-react';
-import axios from 'axios';
+  Greetings
+} from 'aws-amplify-react'
+import axios from 'axios'
+import { ProgramsContext } from 'context/programs';
 
 // Set Authorization header on all requests if user is signed in
 axios.interceptors.request.use(async function (config) {
@@ -46,8 +48,31 @@ Amplify.configure({
 });
 
 function MyApp({ Component, pageProps }: AppProps) {
+  const [programs, setPrograms] = useState([])
+  // const [me, setMe] = useState(null)
+  useEffect(() => {
+    async function fetchAndSetPrograms() {
+      const fetchProgramsResponse = await axios.get('/programs')
+      setPrograms(fetchProgramsResponse?.data?.programs?.Items || [])
+    }
+    /*
+    async function fetchAndSetMe() {
+      const fetchMeResponse = await axios.get('/me')
+      console.log('fetchMeResponse', fetchMeResponse)
+      const me = fetchMeResponse.data
+      setMe(me)
+    }
+    fetchAndSetMe()
+    */
+    fetchAndSetPrograms()
+  }, [])
+
   /* eslint-disable react/jsx-props-no-spreading */
-  return <Component {...pageProps} />;
+  return (
+    <ProgramsContext.Provider value={{programs}}>
+      <Component {...pageProps} />
+    </ProgramsContext.Provider>
+  )
 }
 
 // HACK: Skip ConfirmSignUp view since e're auto-confirming via the Lambda Function

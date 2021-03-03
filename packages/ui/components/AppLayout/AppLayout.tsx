@@ -5,7 +5,6 @@ import {
 } from '@ant-design/icons';
 import { useRouter } from 'next/router';
 import { ChildrenProps } from 'types';
-import axios from 'axios'
 import styles from './AppLayout.module.css'
 
 const { Footer, Sider } = Layout;
@@ -23,15 +22,6 @@ const AppLayout = ({ children }: ChildrenProps) => {
     if (!isAuthenticated) router.push('/signin');
   }, []);
 
-  async function createProject() {
-    const createProjectResponse = await axios.post('/projects', {
-      project: {
-        name: 'test',
-      }
-    })
-    console.log(createProjectResponse)
-  }
-
   return <Layout style={{ minHeight: '100vh' }}>
   <Sider
   className={styles.sider}
@@ -40,9 +30,9 @@ const AppLayout = ({ children }: ChildrenProps) => {
   onCollapse={onCollapse}
   >
     <div data-testid="AppLayout-logo" className={styles.logo} />
-    <Menu defaultSelectedKeys={['create-project']} mode="inline">
-      <Menu.Item key="create-project" icon={<FileOutlined />} onClick={createProject}>
-        Create Project
+    <Menu defaultSelectedKeys={['programs']} mode="inline">
+      <Menu.Item key="programs" icon={<FileOutlined />}>
+        Programs
       </Menu.Item>
     </Menu>
   </Sider>

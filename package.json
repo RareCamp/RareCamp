@@ -5,7 +5,7 @@
   "description": "",
   "main": "handler.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "(cd packages/ui && npm test) & (cd packages/api && npm test)",
     "init": "npm i && cd packages/ui && npm i",
     "start:ui": "cd packages/ui && npm run dev",
     "start:ui:offline": "cd packages/ui && npm run dev:offline",
