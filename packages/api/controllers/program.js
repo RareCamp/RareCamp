@@ -1,5 +1,5 @@
-import shortId from 'shortid'
 import Program from '../models/Program'
+import { generateId } from '../utils/id'
 import { log } from '../utils/logger'
 
 export async function createProgram({
@@ -9,7 +9,7 @@ export async function createProgram({
   if (!userId) throw new Error('userId is required')
   if (!program) throw new Error('program is required')
 
-  const id = shortId.generate()
+  const id = generateId()
   const item = {
     ...program,
     id,

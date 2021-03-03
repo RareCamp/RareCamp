@@ -1,5 +1,5 @@
-import shortId from 'shortid'
 import Project from '../models/Project'
+import { generateId } from '../utils/id'
 import { log } from '../utils/logger'
 
 export async function createProject({
@@ -9,7 +9,7 @@ export async function createProject({
   if (!programId) throw new Error('programId is required')
   if (!project) throw new Error('project is required')
 
-  const id = shortId.generate()
+  const id = generateId()
   const item = {
     ...project,
     id,

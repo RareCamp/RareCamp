@@ -1,5 +1,5 @@
-import shortId from 'shortid'
 import Disease from '../models/Disease'
+import { generateId } from '../utils/id'
 import { log } from '../utils/logger'
 
 export async function createDisease({
@@ -7,7 +7,7 @@ export async function createDisease({
 }) {
   if (!disease) throw new Error('disease is required')
 
-  const id = shortId.generate()
+  const id = generateId()
   const item = {
     id,
     ...disease,
