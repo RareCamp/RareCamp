@@ -71,3 +71,20 @@ Resources:
           AttributeType: S
         - AttributeName: id
           AttributeType: S
+
+  TaskTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      BillingMode: PAY_PER_REQUEST
+      PointInTimeRecoverySpecification:
+        PointInTimeRecoveryEnabled: ${{self:custom.stageConfig.pointInTimeRecoveryEnabled, false}}
+      KeySchema:
+        - KeyType: HASH
+          AttributeName: projectId
+        - KeyType: RANGE
+          AttributeName: id
+      AttributeDefinitions:
+        - AttributeName: projectId
+          AttributeType: S
+        - AttributeName: id
+          AttributeType: S

@@ -23,24 +23,24 @@ const AppLayout = ({ children }: ChildrenProps) => {
   }, []);
 
   return <Layout style={{ minHeight: '100vh' }}>
-  <Sider
-  className={styles.sider}
-  collapsible
-  collapsed={collapsed}
-  onCollapse={onCollapse}
-  >
-    <div data-testid="AppLayout-logo" className={styles.logo} />
-    <Menu defaultSelectedKeys={['programs']} mode="inline">
-      <Menu.Item key="programs" icon={<FileOutlined />}>
-        Programs
-      </Menu.Item>
-    </Menu>
-  </Sider>
-  <Layout className={styles['site-layout']}>
-    {children}
-    <Footer style={{ textAlign: 'center' }}>RareCamp ©2021</Footer>
+    <Sider
+      className={styles.sider}
+      collapsible
+      collapsed={collapsed}
+      onCollapse={onCollapse}
+    >
+      <div data-testid="AppLayout-logo" className={styles.logo} />
+      <Menu defaultSelectedKeys={['programs']} mode="inline">
+        <Menu.Item key="programs" icon={<FileOutlined />}>
+          Programs
+        </Menu.Item>
+      </Menu>
+    </Sider>
+    <Layout className={styles['site-layout']}>
+      {children}
+      <Footer style={{ textAlign: 'center' }}>RareCamp ©2021</Footer>
+    </Layout>
   </Layout>
-</Layout>
 };
 
 export default AppLayout;

@@ -2,7 +2,6 @@ import express from 'express'
 import bodyParser from 'body-parser'
 import cors from 'cors'
 import { getCurrentInvoke } from '@vendia/serverless-express'
-import userRouter from './routes/user'
 import diseaseRouter from './routes/disease'
 import projectRouter from './routes/project'
 import programRouter from './routes/program'
@@ -29,7 +28,6 @@ router.use((req, res, next) => {
 })
 
 app.use('/', router)
-app.use('/users', userRouter)
 app.use('/diseases', diseaseRouter)
 app.use('/projects', projectRouter)
 app.use('/programs', programRouter)
