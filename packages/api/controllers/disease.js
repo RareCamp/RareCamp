@@ -5,8 +5,6 @@ import { log } from '../utils/logger'
 export async function createDisease({
   disease,
 }) {
-  if (!disease) throw new Error('disease is required')
-
   const id = generateId()
   const item = {
     id,
@@ -24,8 +22,8 @@ export async function updateDisease({
   disease,
 }) {
   const diseaseItem = await Disease.update({
-    id: diseaseId,
     ...disease,
+    id: diseaseId,
   }, { returnValues: 'ALL_NEW' })
 
   log.info('DISEASE_CONTROLLER:DISEASE_UPDATED', { diseaseItem })

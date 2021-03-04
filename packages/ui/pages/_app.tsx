@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import type { AppProps } from 'next/app';
 import { useEffect } from 'react';
+import { useQueryClient, useQuery, QueryClient, QueryClientProvider } from 'react-query'
 import 'styles/antd.less';
 import 'styles/example.less';
 import '@aws-amplify/ui/dist/style.css';
@@ -46,33 +47,24 @@ Amplify.configure({
       process.env.NEXT_PUBLIC_CognitoUserPoolClientId,
   },
 });
+const queryClient = new QueryClient()
 
-function MyApp({ Component, pageProps }: AppProps) {
-  const [programs, setPrograms] = useState([])
-  // const [me, setMe] = useState(null)
-  useEffect(() => {
-    async function fetchAndSetPrograms() {
-      const fetchProgramsResponse = await axios.get('/programs')
-      setPrograms(fetchProgramsResponse?.data?.programs?.Items || [])
-    }
-    /*
-    async function fetchAndSetMe() {
-      const fetchMeResponse = await axios.get('/me')
-      console.log('fetchMeResponse', fetchMeResponse)
-      const me = fetchMeResponse.data
-      setMe(me)
-    }
-    fetchAndSetMe()
-    */
-    fetchAndSetPrograms()
-  }, [])
-
+function MyAppWrapper({ Component, pageProps }: AppProps) {
   /* eslint-disable react/jsx-props-no-spreading */
   return (
-    <ProgramsContext.Provider value={{programs}}>
-      <Component {...pageProps} />
-    </ProgramsContext.Provider>
+    <QueryClientProvider client={queryClient}>
+      <MyApp Component={Component} pageProps={pageProps} />
+    </QueryClientProvider>
   )
+}
+
+function MyApp({ Component, pageProps }: AppProps) {
+  const programsQuery = useQuery('programs', () => axios.get('/programs'))
+  if (!programsQuery.isFetched) return null
+
+  return <ProgramsContext.Provider value={{programs: programsQuery?.data?.data?.programs}}>
+    <Component {...pageProps} />
+  </ProgramsContext.Provider>
 }
 
 // HACK: Skip ConfirmSignUp view since e're auto-confirming via the Lambda Function
@@ -96,23 +88,23 @@ const federated = {
 };
 
 // @ts-ignore
-// export default withAuthenticator(MyApp, {
-//   usernameAttributes: 'email',
-//   signUpConfig,
-//   includeGreetings: false,
-//   hideDefault: true,
-//   authenticatorComponents: [
-//     <SignIn federated={federated} />,
-//     <ConfirmSignIn />,
-//     <VerifyContact />,
-//     <SignUp signUpConfig={signUpConfig} />,
-//     // @ts-ignore
-//     <ConfirmSignUpRedirectToSignIn override="ConfirmSignUp" />,
-//     <ForgotPassword />,
-//     <RequireNewPassword />,
-//     <Loading />,
-//     <Greetings />,
-//   ],
-// });
+export default withAuthenticator(MyAppWrapper, {
+  usernameAttributes: 'email',
+  signUpConfig,
+  includeGreetings: false,
+  hideDefault: true,
+  authenticatorComponents: [
+    <SignIn federated={federated} />,
+    <ConfirmSignIn />,
+    <VerifyContact />,
+    <SignUp signUpConfig={signUpConfig} />,
+    // @ts-ignore
+    <ConfirmSignUpRedirectToSignIn override="ConfirmSignUp" />,
+    <ForgotPassword />,
+    <RequireNewPassword />,
+    <Loading />,
+    <Greetings />,
+  ],
+});
 
-export default MyApp;
+// export default MyAppWrapper;

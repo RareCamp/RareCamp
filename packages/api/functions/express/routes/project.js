@@ -1,13 +1,15 @@
 import express from 'express'
+import taskRouter from './task'
 import wrapAsync from '../wrap-async'
 import {
   createProject,
   getProject,
   updateProject,
   scanProjects,
+  getProjects,
 } from '../../../controllers/project'
 
-const projectRouter = express.Router()
+const projectRouter = express.Router({ mergeParams: true })
 
 projectRouter.post('/', wrapAsync(async (req, res) => {
   const { project } = req.body
@@ -18,21 +20,26 @@ projectRouter.post('/', wrapAsync(async (req, res) => {
 }))
 
 projectRouter.put('/:projectId', wrapAsync(async (req, res) => {
-  const { projectId } = req.params
+  const userId = req.cognitoUser.id
+  const { projectId, programId } = req.params
   const { project } = req.body
-  const projectItem = await updateProject({ projectId, project })
+  const projectItem = await updateProject({
+    userId, programId, projectId, project,
+  })
 
   res.json({ project: projectItem })
 }))
 
 projectRouter.get('/', wrapAsync(async (req, res) => {
-  const projects = await scanProjects()
+  const userId = req.cognitoUser.id
+  const projects = await getProjects({ userId })
   res.json({ projects })
 }))
 
 projectRouter.get('/:projectId', wrapAsync(async (req, res) => {
-  const { projectId } = req.params
-  const project = await getProject({ projectId })
+  const userId = req.cognitoUser.id
+  const { projectId, programId } = req.params
+  const project = await getProject({ userId, programId, projectId })
 
   if (!project) {
     return res
@@ -42,5 +49,8 @@ projectRouter.get('/:projectId', wrapAsync(async (req, res) => {
 
   return res.json({ project })
 }))
+
+// task routes
+projectRouter.use('/:projectId/tasks', taskRouter)
 
 export default projectRouter

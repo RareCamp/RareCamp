@@ -33,7 +33,6 @@ router.use((req, res, next) => {
 })
 
 app.use('/', router)
-app.use('/users', userRouter)
 app.use('/diseases', diseaseRouter)
 app.use('/projects', projectRouter)
 app.use('/programs', programRouter)

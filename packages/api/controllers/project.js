@@ -3,17 +3,15 @@ import { generateId } from '../utils/id'
 import { log } from '../utils/logger'
 
 export async function createProject({
+  userId,
   programId,
   project,
 }) {
-  if (!programId) throw new Error('programId is required')
-  if (!project) throw new Error('project is required')
-
   const id = generateId()
   const item = {
     ...project,
+    programId: `${userId}#${programId}`,
     id,
-    programId,
   }
   const projectItem = await Project.update(item, { returnValues: 'ALL_NEW' })
 
@@ -23,12 +21,15 @@ export async function createProject({
 }
 
 export async function updateProject({
+  userId,
+  programId,
   projectId,
   project,
 }) {
   const projectItem = await Project.update({
-    id: projectId,
     ...project,
+    programId: `${userId}#${programId}`,
+    id: projectId,
   }, { returnValues: 'ALL_NEW' })
 
   log.info('PROJECT_CONTROLLER:PROJECT_UPDATED', { projectItem })
@@ -36,8 +37,8 @@ export async function updateProject({
   return projectItem.Attributes
 }
 
-export async function getProject({ programId, projectId }) {
-  const projectItem = await Project.get({ programId, id: projectId })
+export async function getProject({ userId, programId, projectId }) {
+  const projectItem = await Project.get({ programId: `${userId}#${programId}`, id: projectId })
 
   if (!projectItem) {
     return null
@@ -46,16 +47,12 @@ export async function getProject({ programId, projectId }) {
   return projectItem.Item
 }
 
-export async function getProjects({ programId }) {
-  const projectItems = await Project.query({ programId })
+export async function getProjects({ userId, programId }) {
+  const projectItems = await Project.query(`${userId}#${programId}`)
 
   if (!projectItems) {
     return null
   }
 
   return projectItems.Item
-}
-
-export function scanProjects() {
-  return Project.scan()
 }
