@@ -7,6 +7,10 @@ export async function createTask({
   projectId,
   task,
 }) {
+  if (!userId) throw new Error('userId is required')
+  if (!projectId) throw new Error('projectId is required')
+  if (!task) throw new Error('task is required')
+
   const taskId = generateId()
   const item = {
     ...task,
@@ -26,6 +30,11 @@ export async function updateTask({
   taskId,
   task,
 }) {
+  if (!userId) throw new Error('userId is required')
+  if (!projectId) throw new Error('projectId is required')
+  if (!taskId) throw new Error('taskId is required')
+  if (!task) throw new Error('task is required')
+
   const taskItem = await Task.update({
     ...task,
     projectId: `${userId}#${projectId}`,
@@ -38,6 +47,10 @@ export async function updateTask({
 }
 
 export async function getTask({ userId, projectId, taskId }) {
+  if (!userId) throw new Error('userId is required')
+  if (!projectId) throw new Error('projectId is required')
+  if (!taskId) throw new Error('taskId is required')
+
   const taskItem = await Task.get({ projectId: `${userId}#${projectId}`, id: taskId })
 
   if (!taskItem) {
@@ -48,6 +61,9 @@ export async function getTask({ userId, projectId, taskId }) {
 }
 
 export async function getTasks({ userId, projectId }) {
+  if (!userId) throw new Error('userId is required')
+  if (!projectId) throw new Error('projectId is required')
+
   const taskItems = await Task.query(`${userId}#${projectId}`)
 
   if (!taskItems) {

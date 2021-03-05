@@ -5,6 +5,7 @@ import { log } from '../utils/logger'
 export async function createDisease({
   disease,
 }) {
+  if (!disease) throw new Error('disease is required')
   const id = generateId()
   const item = {
     id,
@@ -21,6 +22,9 @@ export async function updateDisease({
   diseaseId,
   disease,
 }) {
+  if (!diseaseId) throw new Error('diseaseId is required')
+  if (!disease) throw new Error('disease is required')
+
   const diseaseItem = await Disease.update({
     ...disease,
     id: diseaseId,
@@ -32,6 +36,8 @@ export async function updateDisease({
 }
 
 export async function getDisease({ diseaseId }) {
+  if (!diseaseId) throw new Error('diseaseId is required')
+
   const diseaseItem = await Disease.get({ id: diseaseId })
 
   if (!diseaseItem) {

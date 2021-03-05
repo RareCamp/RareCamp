@@ -6,6 +6,9 @@ export async function createProgram({
   userId,
   program,
 }) {
+  if (!userId) throw new Error('userId is required')
+  if (!program) throw new Error('program is required')
+
   const id = generateId()
   const item = {
     ...program,
@@ -24,6 +27,10 @@ export async function updateProgram({
   programId,
   program,
 }) {
+  if (!userId) throw new Error('userId is required')
+  if (!programId) throw new Error('programId is required')
+  if (!program) throw new Error('program is required')
+
   const programItem = await Program.update({
     ...program,
     userId,
@@ -36,10 +43,15 @@ export async function updateProgram({
 }
 
 export function getPrograms({ userId }) {
+  if (!userId) throw new Error('userId is required')
+
   return Program.query(userId)
 }
 
 export async function getProgram({ userId, programId }) {
+  if (!userId) throw new Error('userId is required')
+  if (!programId) throw new Error('programId is required')
+
   const programItem = await Program.get({ userId, id: programId })
 
   if (!programItem) {
