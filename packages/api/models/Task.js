@@ -3,7 +3,7 @@ import { dynamoDbDocumentClient } from '../dynamodb-init'
 
 const TaskTable = new Table({
   name: process.env.TASK_TABLE,
-  // userId#projectId
+  // NOTE: partitionKey format is userId#projectId
   partitionKey: 'projectId',
   sortKey: 'id',
   DocumentClient: dynamoDbDocumentClient,
