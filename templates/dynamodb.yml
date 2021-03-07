@@ -54,6 +54,18 @@ Resources:
           AttributeType: S
         - AttributeName: id
           AttributeType: S
+        - AttributeName: workspaceId
+          AttributeType: S
+      LocalSecondaryIndexes:
+        - IndexName: WSI
+          KeySchema:
+            - KeyType: HASH
+              AttributeName: userId
+            - KeyType: RANGE
+              AttributeName: workspaceId
+          Projection:
+            ProjectionType: "ALL"
+
 
   ProjectTable:
     Type: AWS::DynamoDB::Table
@@ -71,3 +83,32 @@ Resources:
           AttributeType: S
         - AttributeName: id
           AttributeType: S
+
+  WorkspaceTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      BillingMode: PAY_PER_REQUEST
+      PointInTimeRecoverySpecification:
+        PointInTimeRecoveryEnabled: ${{self:custom.stageConfig.pointInTimeRecoveryEnabled, false}}
+      KeySchema:
+        - KeyType: HASH
+          AttributeName: userId
+        - KeyType: RANGE
+          AttributeName: id
+      AttributeDefinitions:
+        - AttributeName: userId
+          AttributeType: S
+        - AttributeName: id
+          AttributeType: S
+        - AttributeName: diseaseId
+          AttributeType: S
+      LocalSecondaryIndexes:
+        - IndexName: DSI
+          KeySchema:
+            - KeyType: HASH
+              AttributeName: userId
+            - KeyType: RANGE
+              AttributeName: diseaseId
+          Projection:
+            ProjectionType: "ALL"
+

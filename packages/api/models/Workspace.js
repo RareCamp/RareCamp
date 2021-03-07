@@ -1,16 +1,16 @@
 import { Table, Entity } from 'dynamodb-toolbox'
 import { dynamoDbDocumentClient } from '../dynamodb-init'
 
-const ProgramTable = new Table({
-  name: process.env.PROGRAM_TABLE,
+const WorkspaceTable = new Table({
+  name: process.env.WORKSPACE_TABLE,
   partitionKey: 'userId',
   sortKey: 'id',
-  indexes: { WSI: { partitionKey: 'userId', sortKey: 'workspaceId' } },
+  indexes: { DSI: { partitionKey: 'userId', sortKey: 'diseaseId' } },
   DocumentClient: dynamoDbDocumentClient,
 })
 
-const Program = new Entity({
-  name: 'Program',
+const Workspace = new Entity({
+  name: 'Workspace',
   attributes: {
     userId: {
       partitionKey: true,
@@ -18,13 +18,12 @@ const Program = new Entity({
     id: {
       sortKey: true,
     },
-    workspaceId: 'string',
+    diseaseId: 'string',
     name: 'string',
     description: 'string',
-    status: 'string',
-    education: 'list',
+    programs: 'list',
   },
-  table: ProgramTable,
+  table: WorkspaceTable,
 })
 
-export default Program
+export default Workspace

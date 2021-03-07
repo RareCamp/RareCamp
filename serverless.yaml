@@ -20,6 +20,7 @@ provider:
     DISEASE_TABLE: !Ref DiseaseTable
     PROGRAM_TABLE: !Ref ProgramTable
     PROJECT_TABLE: !Ref ProjectTable
+    WORKSPACE_TABLE: !Ref WorkspaceTable
 
     # Enable connection reuse for AWS SDK for instant performance boost
     # https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/node-reusing-connections.html
@@ -135,7 +136,7 @@ custom:
       migrate: false
 
 functions: ${{file(templates/functions.yml)}}
-    
+
 resources:
   - ${{file(templates/resources.yml)}}
   - ${{file(templates/dynamodb.yml)}}
