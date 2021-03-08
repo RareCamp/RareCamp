@@ -1,8 +1,8 @@
-import shortId from 'shortid'
 import User from '../models/User'
+import { generateId } from '../utils/id'
 
 export function createUser({
-  id = shortId.generate(),
+  id = generateId(),
   name,
 }) {
   return User.put({

@@ -1,10 +1,26 @@
 import { Button } from 'antd';
 import React from 'react';
+import axios from 'axios';
+import { useRouter } from 'react-dom';
 import styles from './eligible.module.css';
 function EligibleSection({
   setShowEligibleSection,
   isShowEligibleSection,
 }: any) {
+  const router = useRouter();
+  async function createProgram() {
+    const createProgramResponse = await axios.post('/programs', {
+      program: {
+        name: 'test',
+      },
+    });
+    if (createProgramResponse?.data?.program) {
+      router.push(
+        `/programs/${createProgramResponse.data.program.id}`,
+      );
+    }
+  }
+
   return (
     <div className={styles['eligible-section']}>
       <div className={styles['eligible-divOne']}>

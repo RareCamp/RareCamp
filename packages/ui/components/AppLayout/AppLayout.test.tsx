@@ -9,6 +9,6 @@ describe('AppLayout', () => {
       </AppLayout>,
     );
 
-    expect(screen.getByTestId('app-layout')).toHaveClass('w-full');
+    expect(screen.getByTestId('AppLayout-logo')).toHaveClass('logo');
   });
 });

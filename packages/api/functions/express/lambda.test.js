@@ -10,6 +10,25 @@ function makeContext() {
   }
 }
 
+function createEventWithCognito(service, eventValues) {
+  const event = createEvent(
+    service,
+    eventValues,
+  )
+
+  event.requestContext = {
+    authorizer: {
+      claims: {
+        sub: 'userid123',
+        email: 'user@example.com',
+        'cognito:groups': '',
+      },
+    },
+  }
+
+  return event
+}
+
 const {
   handler,
 } = require('./lambda')
@@ -17,8 +36,8 @@ const {
 describe('api: happy paths ', () => {
   test('Get disease', async (done) => {
     const context = makeContext()
-    const path = 'disease/existing-disease'
-    const event = createEvent(
+    const path = 'diseases/existing-disease'
+    const event = createEventWithCognito(
       'aws:apiGateway',
       {
         path: `/${path}`,

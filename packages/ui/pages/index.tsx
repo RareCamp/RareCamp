@@ -1,17 +1,73 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import { Layout } from 'antd';
+import { useRouter } from 'next/router'
+import { Layout, Table, Collapse, Badge } from 'antd';
+import axios from 'axios'
 import { MainSection, TaskSection } from 'components/Pages/Program';
 import Navbar from 'components/AppLayout/Navbar';
 import { AppLayout } from 'components/AppLayout';
 import records from 'fixtures/dashboard.json';
-import { HOME_TABLE_HEADINGS } from 'constants/lists';
+import { TASK_TABLE_HEADINGS } from 'constants/tableHeaders';
 import styles from 'styles/program.module.css';
 import { Button } from 'antd';
+import { useProgramsContext } from 'context/programs';
 
+
+export const TASK_SUB_TABLE_HEADINGS = [
+  {
+    title: 'TaskName',
+    dataIndex: 'taskname',
+    key: 'taskname',
+    width: '40%'
+  },
+  {
+    title: 'Status',
+    dataIndex: 'status',
+    key: 'status',
+    render: (text, value, index) => {
+      if (text === 'COMPLETE') {
+        return (
+          <Badge
+            count={text}
+            style={{ backgroundColor: '#52c41a', borderRadius: 0 }}
+          />
+        )
+      }
+      return text
+    }
+  },
+  {
+    title: 'Owner',
+    dataIndex: 'owner',
+    key: 'owner',
+  },
+  {
+    title: 'Budget',
+    dataIndex: 'budget',
+    key: 'budget',
+  },
+  {
+    title: 'Start Date',
+    dataIndex: 'start_date',
+    key: 'start_date',
+  },
+  {
+    title: 'End Date',
+    dataIndex: 'end_date',
+    key: 'end_dates',
+  }
+];
 const USER_NAME = 'Ramya';
 
 const Home = () => {
+  const router = useRouter()
+  const programsContext = useProgramsContext()
+  const isFirstTimeVisitor = !programsContext.programs.length
+  
+  if (isFirstTimeVisitor) {
+    router.push('/workspace/stepform')
+    return null
+  }
+  
   const [isEditProgramModalOpen, setEditProgramModalOpen] = useState(
     false,
   );
@@ -20,21 +76,6 @@ const Home = () => {
     setAccountSettingModalOpen,
   ] = useState(false);
 
-  const [users, setUsers] = useState(null);
-
-  useEffect(() => {
-    async function fetchAndSetUsers() {
-      const fetchUsersResponse = await axios.get('/users');
-      console.log('fetchUsersResponse', fetchUsersResponse);
-      const users = fetchUsersResponse.data;
-      setUsers(users);
-      const fetchProjectsResponse = await axios.get('/projects');
-      console.log('fetchProjectsResponse', fetchProjectsResponse);
-      const projects = fetchProjectsResponse.data;
-    }
-    fetchAndSetUsers();
-  }, []);
-
   useEffect(() => {
     if (isEditProgramModalOpen || isAccountSettingModalOpen) {
       document.body.style.overflow = 'hidden';
@@ -42,6 +83,31 @@ const Home = () => {
       document.body.style.overflow = '';
     }
   }, [isAccountSettingModalOpen, isEditProgramModalOpen]);
+
+  function expandedRowRender() {
+    return (
+      <Table 
+        columns={TASK_SUB_TABLE_HEADINGS}
+        pagination={false}
+        bordered
+        dataSource={[
+          {
+            taskname: 'Consult with an expert to identify gaps and create a plan',
+            status: 'COMPLETE',
+            owner: 'Rachel',
+            budget: '0',
+            start_date: '12/5/2021',
+            end_date: '12/23/2021',
+          }
+        ]}
+        components={{
+          header: {
+            row: (props) => null
+          }
+        }}
+      />
+    )
+  }
 
   return (
     <AppLayout>
@@ -73,7 +139,7 @@ const Home = () => {
             <table className="table-fixed">
               <thead>
                 <tr className={`${styles['table-header']}`}>
-                  {HOME_TABLE_HEADINGS.map((heading) => (
+                  {TASK_TABLE_HEADINGS.map((heading) => (
                     <th key={heading}>{heading}</th>
                   ))}
                 </tr>

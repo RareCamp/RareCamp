@@ -4,10 +4,10 @@ import { AppLayout } from './index';
 describe('AppLayout#Sidebar', () => {
   test('shows the links', () => {
     render(<AppLayout> </AppLayout>);
-    const workspace = screen.getByRole('button', {
-      name: /workspace/i,
+    const programsMenuItem = screen.getByRole('menuitem', {
+      name: /Programs/i,
     });
-    expect(workspace).toBeInTheDocument();
+    expect(programsMenuItem).toBeInTheDocument();
   });
 });
 
