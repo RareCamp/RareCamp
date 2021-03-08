@@ -1,19 +1,11 @@
 import Link from 'next/link';
 import { useForm } from 'react-hook-form';
-// import { InputField } from 'components/InputField';
 import { Input, Button } from 'antd';
-// import {
-//   AS_REQUIRED,
-//   AS_EMAIL,
-//   AS_PASSWORD,
-// } from 'constants/validations';
 import { Logo } from 'components/Logo';
 
 const SignIn = () => {
   const { register, handleSubmit, errors } = useForm();
-  const onSubmit = () => {
-    // console.log(data);
-  };
+  const onSubmit = () => {};
   return (
     <section className="px-4">
       <div className="bg-secondary h-screen flex justify-between px-52 py-16 ">
@@ -34,24 +26,7 @@ const SignIn = () => {
             className="flex flex-col mt-5 h-full"
             onSubmit={handleSubmit(onSubmit)}
           >
-            {/* <InputField
-              reference={register({
-                ...AS_REQUIRED,
-                ...AS_EMAIL,
-              })}
-              type="email"
-              name="EMAIL"
-              placeholder="Email"
-              error={errors.EMAIL && errors.EMAIL.message}
-            /> */}
             <Input placeholder="Basic usage" size="large" />
-            {/* <InputField
-              reference={register({ ...AS_PASSWORD })}
-              type="password"
-              name="PASSWORD"
-              placeholder="Password"
-              error={errors.PASSWORD && errors.PASSWORD.message}
-            /> */}
             <Input placeholder="Basic usage" size="large" />
             <p className="text-sm mt-4 ">
               <span className="text-btn-primary ml-1 cursor-pointer hover:text-blue-500">
@@ -65,14 +40,6 @@ const SignIn = () => {
                   Remember
                 </span>
               </div>
-              {/* <Button
-                label="Sign in"
-                color="primary"
-                size="md"
-                className="text-white"
-                onClick={() => {}}
-                type="submit"
-              /> */}
               <Button type="primary">Sign in</Button>
             </div>
           </form>

@@ -55,7 +55,6 @@ const stepform = () => {
                 showMutationForm ||
                 showBasicInfoForm ? (
                   <div
-                    // className="flex justify-between  items-center"
                     style={{
                       display: 'flex',
                       justifyContent: 'space-between',

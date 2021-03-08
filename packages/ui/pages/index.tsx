@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
-// import Router from 'next/router'
-
 import { Layout, Table, Collapse, Badge } from 'antd';
 import axios from 'axios';
 import { MainSection, TaskSection } from 'components/Pages/Program';
@@ -125,10 +123,6 @@ const Home = () => {
         />
       </Layout.Header>
       <Layout.Content style={{ margin: '0 16px' }}>
-        {/* <Layout.Breadcrumb style={{ margin: '16px 0' }}>
-          <Layout.Breadcrumb.Item>User</Layout.Breadcrumb.Item>
-          <Layout.Breadcrumb.Item>Bill</Layout.Breadcrumb.Item>
-        </Layout.Breadcrumb> */}
         <div
           className="site-layout-background"
           style={{ padding: 24, minHeight: 360 }}
@@ -153,14 +147,6 @@ const Home = () => {
 
               <tr>
                 <td colSpan={6}>
-                  {/* <Button
-                    onClick={() => {}}
-                    icon={<span>+</span>}
-                    label="Add Project"
-                    color="tertiary"
-                    size="custom"
-                    className="py-4  px-4 text-xl border border-gray-300 w-full flex flex-start font-semibold focus:outline-none text-gray-300 hover:text-gray-400 hover:border-blue-400"
-                  /> */}
                   <Button>+ Add Project</Button>
                 </td>
               </tr>

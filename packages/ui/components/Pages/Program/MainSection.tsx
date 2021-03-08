@@ -30,31 +30,15 @@ const MainSection = ({
     <main className="bg-primary">
       <div className="py-6 px-6 flex flex-col mb-4">
         <div>
-          {/* <Button
-            label="Add Task"
-            size="md"
-            color="custom"
-            icon={<span className="text-xl">+</span>}
-            className="text-sm focus:outline-none border-none py-1"
-            onClick={() => {}}
-          /> */}
           <Dropdown.Button
             overlay={menu}
             placement="bottomCenter"
             icon={<CaretDownOutlined />}
           >
-            {/* <AntButton 
-              type="primary"
-              icon={<PlusOutlined />} 
-              ghost
-              size="large" 
-            > */}
             <div className="flex items-center">
               <PlusOutlined />{' '}
               <p style={{ marginLeft: 10 }}>Add task</p>
             </div>
-
-            {/* </AntButton> */}
           </Dropdown.Button>
         </div>
         {isAddSectionOpen && (

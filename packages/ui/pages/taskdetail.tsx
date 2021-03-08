@@ -3,7 +3,6 @@ import Navbar from 'components/AppLayout/Navbar';
 import React, { useState } from 'react';
 import { MoreOutlined } from '@ant-design/icons';
 import { Button as AntButton, Button, Dropdown } from 'antd';
-// import { Editor } from '';
 import styles from 'styles/dropdown.module.css';
 import dynamic from 'next/dynamic';
 import { LetterPic } from 'components/LetterPic';
@@ -30,12 +29,6 @@ const Taskdetail = () => {
   const [isUserDropDownOpen, setUserDropDown] = useState(false);
   return (
     <AppLayout>
-      {/* <Navbar
-        setEditProgramModalOpen={setEditProgramModalOpen}
-        setAccountSettingModalOpen={setAccountSettingModalOpen}
-        username={USER_NAME}
-      /> */}
-
       <section
         style={{
           display: 'flex',
@@ -166,7 +159,6 @@ const Taskdetail = () => {
                           borderBottomColor: 'lightgray',
                           borderBottomWidth: '1',
                         }}
-                        // className="flex items-center px-2 py-4 border-b border-gray-300 border hover:border-blue-400"
                       >
                         <LetterPic
                           letter={item.letter}
@@ -230,11 +222,7 @@ const Taskdetail = () => {
           <div>
             <DynamicComponent />
             <div style={{ marginTop: '120px' }}>
-              <input
-                id="files"
-                // style={{ visibility: 'hidden' }}
-                type="file"
-              />
+              <input id="files" type="file" />
             </div>
           </div>
         </div>

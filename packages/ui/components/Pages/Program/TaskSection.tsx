@@ -39,17 +39,7 @@ const TaskSection = ({ record }: RecordProps) => {
           ))}
           <tr>
             <td colSpan={6}>
-              {/* <Button
-                onClick={() => addRow()}
-                icon={<span>+</span>}
-                label={ADD_TASK}
-                color="tertiary"
-                size="custom"
-                className="py-4 px-4 flex flex-start w-full focus:outline-none text-gray-300 hover:text-gray-400 border border-gray-300 hover:border-blue-400"
-              /> */}
-
-<Button icon={<PlusOutlined />}>{ADD_TASK}</Button>
-
+              <Button icon={<PlusOutlined />}>{ADD_TASK}</Button>
             </td>
           </tr>
         </>

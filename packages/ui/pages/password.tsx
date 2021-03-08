@@ -4,9 +4,7 @@ import { Logo } from 'components/Logo';
 
 const Password = () => {
   const { register, handleSubmit, errors } = useForm();
-  const onSubmit = () => {
-    // console.log(data);
-  };
+  const onSubmit = () => {};
   return (
     <section className="px-4">
       <div className="bg-secondary flex justify-between h-screen px-52 py-16">
@@ -20,44 +18,10 @@ const Password = () => {
             onSubmit={handleSubmit(onSubmit)}
           >
             <div className="flex flex-column justify-between mt-2">
-              {/* <InputField
-                reference={register({
-                  ...AS_NAME,
-                })}
-                name="FIRSTNAME"
-                placeholder="First name"
-                error={errors.FIRSTNAME && errors.FIRSTNAME.message}
-                label="First Name"
-                className="mr-4"
-              /> */}
               <Input placeholder="First name" />
               <Input placeholder="Last name" />
-              {/* <InputField
-                reference={register}
-                name="LASTNAME"
-                placeholder="Last name"
-                label="Last Name"
-              /> */}
             </div>
-            {/* <InputField
-              reference={register({
-                ...AS_PASSWORD,
-              })}
-              type="password"
-              name="PASSWORD"
-              placeholder="Password"
-              label="Password"
-              error={errors.PASSWORD && errors.PASSWORD.message}
-            /> */}
             <Input placeholder="Password" />
-            {/* <Button
-              onClick={() => {}}
-              color="primary"
-              size="lg"
-              label="Continue"
-              className="mt-4 text-white text-xs focus:outline-none"
-              type="submit"
-            /> */}
             <Button type="primary">Continue</Button>
           </form>
         </div>
@@ -74,7 +38,6 @@ const Password = () => {
             alt="signup"
             className="self-center h-full w-full"
           />
-          {/* <Icon name="form" className="object-contain  w-full..." /> */}
         </div>
       </div>
     </section>

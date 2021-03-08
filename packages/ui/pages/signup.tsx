@@ -5,26 +5,12 @@ import { Button, Input } from 'antd';
 import { AS_REQUIRED, AS_EMAIL } from 'constants/validations';
 import { Logo } from 'components/Logo';
 
-// https://docs.amplify.aws/lib/auth/emailpassword/q/platform/js
-
 const SignUp = () => {
   const { register, handleSubmit, errors } = useForm();
-  const onSubmit = () => {
-    // console.log(data);
-  };
+  const onSubmit = () => {};
 
   async function signup() {
     try {
-      // const { user } = await Auth.signUp({
-      //     username,
-      //     password,
-      //     attributes: {
-      //         email,          // optional
-      //         phone_number,   // optional - E.164 number convention
-      //         // other custom attributes
-      //     }
-      // });
-      // console.log(user);
     } catch (error) {
       console.log('error signing up:', error);
     }
@@ -47,25 +33,8 @@ const SignUp = () => {
             className="flex flex-col mt-5"
             onSubmit={handleSubmit(onSubmit)}
           >
-            {/* <InputField
-              reference={register({
-                ...AS_REQUIRED,
-                ...AS_EMAIL,
-              })}
-              type="email"
-              name="EMAIL"
-              placeholder="Email"
-              error={errors.EMAIL && errors.EMAIL.message}
-            /> */}
             <Input placeholder="email" />
-            {/* <Button
-              type="submit"
-              onClick={signup}
-              size="lg"
-              color="primary"
-              label="Sign Up"
-              className="mt-4 text-white text-sm"
-            /> */}
+
             <Button type="primary" onClick={signup}>
               Submit
             </Button>
@@ -99,7 +68,6 @@ const SignUp = () => {
             alt="signup"
             className="self-center h-full w-full"
           />
-          {/* <Icon name="form" className="object-contain  w-full..." /> */}
         </div>
       </div>
     </section>
