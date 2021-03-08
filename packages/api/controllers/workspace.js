@@ -36,7 +36,7 @@ export async function getWorkspaces({
   userId,
 }) {
   validateUuid(userId)
-  const workspaces = await Workspace.scan({ filters: { attr: 'userId', eq: userId } })
+  const workspaces = await Workspace.query(userId)
 
   log.info('workspace_CONTROLLER:workspaces_FETCHED', { workspaces })
 
