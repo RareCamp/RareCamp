@@ -3,13 +3,13 @@ import React from 'react';
 import styles from './proteinform.module.css';
 import { Form, Input, Button, Checkbox } from 'antd';
 
-function ProteinForm({
+const ProteinForm = ({
   setBasicInfo,
   setShowMutationForm,
   setShowProteinForm,
   setShowEligibleSection,
   showProteinForm,
-}: any) {
+}: any) => {
   const layout = {
     labelCol: { span: 8 },
     wrapperCol: { span: 16 },
@@ -148,5 +148,5 @@ function ProteinForm({
       </div>
     );
   };
-}
+};
 export default ProteinForm;

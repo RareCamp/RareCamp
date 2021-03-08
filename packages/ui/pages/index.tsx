@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/router';
+// import Router from 'next/router'
+
 import { Layout, Table, Collapse, Badge } from 'antd';
-import axios from 'axios'
+import axios from 'axios';
 import { MainSection, TaskSection } from 'components/Pages/Program';
 import Navbar from 'components/AppLayout/Navbar';
 import { AppLayout } from 'components/AppLayout';
@@ -11,13 +13,12 @@ import styles from 'styles/program.module.css';
 import { Button } from 'antd';
 import { useProgramsContext } from 'context/programs';
 
-
 export const TASK_SUB_TABLE_HEADINGS = [
   {
     title: 'TaskName',
     dataIndex: 'taskname',
     key: 'taskname',
-    width: '40%'
+    width: '40%',
   },
   {
     title: 'Status',
@@ -30,10 +31,10 @@ export const TASK_SUB_TABLE_HEADINGS = [
             count={text}
             style={{ backgroundColor: '#52c41a', borderRadius: 0 }}
           />
-        )
+        );
       }
-      return text
-    }
+      return text;
+    },
   },
   {
     title: 'Owner',
@@ -54,20 +55,21 @@ export const TASK_SUB_TABLE_HEADINGS = [
     title: 'End Date',
     dataIndex: 'end_date',
     key: 'end_dates',
-  }
+  },
 ];
 const USER_NAME = 'Ramya';
 
 const Home = () => {
-  const router = useRouter()
-  const programsContext = useProgramsContext()
-  const isFirstTimeVisitor = !programsContext.programs.length
-  
+  const router = useRouter();
+  const programsContext = useProgramsContext();
+  const isFirstTimeVisitor = !programsContext.programs.length;
+
   if (isFirstTimeVisitor) {
-    router.push('/workspace/stepform')
-    return null
+    typeof window !== 'undefined' &&
+      router.push('/workspace/stepform');
+    return null;
   }
-  
+
   const [isEditProgramModalOpen, setEditProgramModalOpen] = useState(
     false,
   );
@@ -86,27 +88,28 @@ const Home = () => {
 
   function expandedRowRender() {
     return (
-      <Table 
+      <Table
         columns={TASK_SUB_TABLE_HEADINGS}
         pagination={false}
         bordered
         dataSource={[
           {
-            taskname: 'Consult with an expert to identify gaps and create a plan',
+            taskname:
+              'Consult with an expert to identify gaps and create a plan',
             status: 'COMPLETE',
             owner: 'Rachel',
             budget: '0',
             start_date: '12/5/2021',
             end_date: '12/23/2021',
-          }
+          },
         ]}
         components={{
           header: {
-            row: (props) => null
-          }
+            row: (props) => null,
+          },
         }}
       />
-    )
+    );
   }
 
   return (

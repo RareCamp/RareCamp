@@ -4,11 +4,11 @@ import { Icon } from 'components/Icon';
 import { LetterPic } from 'components/LetterPic';
 import Link from 'next/link';
 import { BasicInfoForm } from 'components/BasicInfoForm';
-import { MutationForm } from 'components/MutationForm';
-import { ProteinForm } from 'components/ProteinForm';
 import { EligibleSection } from 'components/EligibleSection';
 import { NotEligibleSection } from 'components/NotEligibleSection';
 import styles from 'styles/stepform.module.css';
+import { MutationForm } from 'components/MutationForm';
+import { ProteinForm } from 'components/ProteinForm';
 
 const stepform = () => {
   const [showBasicInfoForm, setBasicInfo] = useState(true);
