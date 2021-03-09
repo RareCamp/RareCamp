@@ -1,0 +1,8 @@
+.editor {
+    margin-top: 120px;
+
+}
+
+.ck-editor__editable_inline {
+    min-height: 500px;
+}

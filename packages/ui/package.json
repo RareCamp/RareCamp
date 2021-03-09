@@ -14,6 +14,8 @@
     "test": "jest "
   },
   "dependencies": {
+    "@ckeditor/ckeditor5-build-classic": "^26.0.0",
+    "@ckeditor/ckeditor5-react": "^3.0.2",
     "@testing-library/dom": "^7.28.1",
     "@testing-library/jest-dom": "^5.11.6",
     "@testing-library/react": "^11.2.2",

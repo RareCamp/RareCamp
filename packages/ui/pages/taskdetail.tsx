@@ -221,7 +221,7 @@ const Taskdetail = () => {
           </div>
           <div>
             <DynamicComponent />
-            <div style={{ marginTop: '120px' }}>
+            <div style={{ marginTop: '30px' }}>
               <input id="files" type="file" />
             </div>
           </div>
