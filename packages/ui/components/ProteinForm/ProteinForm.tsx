@@ -33,19 +33,17 @@ const ProteinForm = ({
       <div style={{ width: '60%' }}>
         <h1>What is the size of the protein?</h1>
         <Form
-          {...layout}
           name="basic"
           initialValues={{ remember: true }}
           onFinish={Demo}
           onFinishFailed={onFinishFailed}
         >
           <Form.Item
-            label="1100 amino acids"
             htmlFor="less-amino"
             style={{
-              marginLeft: ' 0.25rem',
               fontSize: 'small',
               display: 'flex',
+              justifyContent: 'space-between',
               alignItems: 'center',
             }}
           >
@@ -58,15 +56,15 @@ const ProteinForm = ({
               name="chevron-left"
               className={styles['icon-left']}
             />
+            1100 amino acids
           </Form.Item>
 
           <Form.Item
-            label="1100 mino acids"
             htmlFor="more-amino"
             style={{
-              marginLeft: ' 0.25rem',
               fontSize: 'small',
               display: 'flex',
+              justifyContent: 'space-between',
               alignItems: 'center',
             }}
           >
@@ -75,33 +73,29 @@ const ProteinForm = ({
               id="more-amino"
               style={{ marginRight: '0.5rem' }}
             />
-            <Icon
-              name="chevron-right"
-              className={styles['arow-icon']}
-            />{' '}
+            <div style={{ display: 'flex' }}>
+              <Icon
+                name="chevron-right"
+                className={styles['arow-icon']}
+              />
+              1100 mino acids
+            </div>
           </Form.Item>
 
           <Form.Item
-            label="Dont Know"
             htmlFor="dont-know-btn"
             style={{
-              marginLeft: ' 0.25rem',
               fontSize: 'small',
               display: 'flex',
+              justifyContent: 'space-between',
               alignItems: 'center',
             }}
           >
-            <Input
-              type="radio"
-              id="dont-know-btn"
-              style={{ marginRight: '0.5rem' }}
-            />
+            <Input type="radio" id="dont-know-btn" />
+            Dont Know
           </Form.Item>
 
-          <Form.Item
-            style={{ display: 'flex', marginTop: '1rem' }}
-            {...tailLayout}
-          >
+          <Form.Item style={{ display: 'flex', marginTop: '1rem' }}>
             <Button
               onClick={() => {
                 setShowProteinForm(false);

@@ -31,36 +31,32 @@ const MutationForm = ({
       <div style={{ width: '60%' }}>
         <h1>How do mutations in this gene cause the disease?</h1>
         <Form
-          {...layout}
           name="basic"
           initialValues={{ remember: true }}
           onFinish={Demo}
           onFinishFailed={onFinishFailed}
         >
-          <Input
-            type="radio"
-            id="protein-loss"
-            style={{ marginRight: '0.5rem' }}
-          />
           <Form.Item
-            label="Mutation leads to a LOSS of function or LOWER expression
-        of gene or protein"
+            label=""
             name="protein-loss"
             htmlFor="protein-loss"
             style={{
-              marginLeft: ' 0.25rem',
+              marginLeft: '0.25rem',
               fontSize: 'small',
               display: 'flex',
               alignItems: 'center',
             }}
-          ></Form.Item>
-          <Input
-            type="radio"
-            id="more-protein-btn"
-            style={{ marginRight: '0.5rem' }}
-          />
+          >
+            <Input
+              type="radio"
+              id="protein-loss"
+              style={{ marginRight: '0.5rem' }}
+            />
+            Mutation leads to a LOSS of function or LOWER expression
+            of gene or protein
+          </Form.Item>
+
           <Form.Item
-            label=" Mutation leads to a GAIN of function of gene or protein"
             htmlFor="2"
             name="mutation-lead-btn"
             id="mutation-lead-btn"
@@ -70,15 +66,16 @@ const MutationForm = ({
               display: 'flex',
               alignItems: 'center',
             }}
-          ></Form.Item>
-          <Input
-            type="radio"
-            id="dont-know-btn"
-            // className="mr-2"
-            style={{ marginRight: '0.5rem' }}
-          />
+          >
+            <Input
+              type="radio"
+              id="more-protein-btn"
+              style={{ marginRight: '0.5rem' }}
+            />{' '}
+            Mutation leads to a GAIN of function of gene or protein
+          </Form.Item>
+
           <Form.Item
-            label="Dont Know"
             htmlFor="dont-know-btn"
             style={{
               marginLeft: ' 0.25rem',
@@ -86,11 +83,17 @@ const MutationForm = ({
               display: 'flex',
               alignItems: 'center',
             }}
-          ></Form.Item>
+          >
+            <Input
+              type="radio"
+              id="dont-know-btn"
+              style={{ marginRight: '0.5rem' }}
+            />
+            Dont Know
+          </Form.Item>
 
           <Form.Item
             style={{ display: 'flex', justifyContent: 'start' }}
-            {...tailLayout}
           >
             <Button
               // label="Back"
