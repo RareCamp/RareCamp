@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState } from 'react';
 import type { AppProps } from 'next/app';
 import { useEffect } from 'react';
 import 'styles/antd.less';
@@ -15,9 +15,9 @@ import {
   SignUp,
   ForgotPassword,
   RequireNewPassword,
-  Greetings
-} from 'aws-amplify-react'
-import axios from 'axios'
+  Greetings,
+} from 'aws-amplify-react';
+import axios from 'axios';
 import { ProgramsContext } from 'context/programs';
 
 // Set Authorization header on all requests if user is signed in
@@ -48,12 +48,18 @@ Amplify.configure({
 });
 
 function MyApp({ Component, pageProps }: AppProps) {
-  const [programs, setPrograms] = useState([])
+  const [programs, setPrograms] = useState([]);
   // const [me, setMe] = useState(null)
   useEffect(() => {
     async function fetchAndSetPrograms() {
-      const fetchProgramsResponse = await axios.get('/programs')
-      setPrograms(fetchProgramsResponse?.data?.programs?.Items || [])
+      try {
+        const fetchProgramsResponse = await axios.get('/programs');
+        setPrograms(
+          fetchProgramsResponse?.data?.programs?.Items || [],
+        );
+      } catch {
+        console.log('Error fetching programs');
+      }
     }
     /*
     async function fetchAndSetMe() {
@@ -64,15 +70,15 @@ function MyApp({ Component, pageProps }: AppProps) {
     }
     fetchAndSetMe()
     */
-    fetchAndSetPrograms()
-  }, [])
+    fetchAndSetPrograms();
+  }, []);
 
   /* eslint-disable react/jsx-props-no-spreading */
   return (
-    <ProgramsContext.Provider value={{programs}}>
+    <ProgramsContext.Provider value={{ programs }}>
       <Component {...pageProps} />
     </ProgramsContext.Provider>
-  )
+  );
 }
 
 // HACK: Skip ConfirmSignUp view since e're auto-confirming via the Lambda Function

@@ -1,3 +1,17 @@
 .info-form > input {
-    @apply mt-6 placeholder-gray-800 font-extralight;
+  @apply mt-6 placeholder-gray-800 font-extralight;
+}
+
+.icon {
+  height: 5rem;
+  width: 5rem;
+  cursor: pointer;
+}
+
+.infoContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 2rem;
+  border-bottom: 1px solid gray;
 }

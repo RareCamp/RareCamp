@@ -8,6 +8,7 @@ import { MutationForm } from 'components/MutationForm';
 import { ProteinForm } from 'components/ProteinForm';
 import { EligibleSection } from 'components/EligibleSection';
 import { NotEligibleSection } from 'components/NotEligibleSection';
+import styles from 'styles/workspace.module.css';
 
 const stepform = () => {
   const [showBasicInfoForm, setBasicInfo] = useState(true);
@@ -24,14 +25,11 @@ const stepform = () => {
           <h1 className="font-semibold">WorkSpace</h1>
         </div>
         <div>
-          <div className="flex justify-between bg-white px-4 py-4 border-b border-gray-200">
+          <div className={styles.infoContainer}>
             <div className="flex items-center justify-between px-4">
               <Link href="/workspace">
                 <span className="w-4 cursor-pointer">
-                  <Icon
-                    name="arrowleft"
-                    className="hover:text-gray-400"
-                  />
+                  <Icon name="arrowleft" className={styles.icon} />
                 </span>
               </Link>
 
