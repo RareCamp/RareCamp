@@ -1,15 +1,12 @@
 import { AppLayout } from 'components/AppLayout';
-import Navbar from 'components/AppLayout/Navbar';
 import React, { useState } from 'react';
 import { MoreOutlined } from '@ant-design/icons';
 import { Button as AntButton, Button, Dropdown } from 'antd';
-import styles from 'styles/dropdown.module.css';
 import taskstyles from 'styles/taskdetail.module.css';
 import dynamic from 'next/dynamic';
 import { LetterPic } from 'components/LetterPic';
 import { DropDown } from 'components/DropDown';
 import OWNER_DATA from 'fixtures/dropdown.json';
-import { Icon } from 'components/Icon';
 
 const DynamicComponent = dynamic(
   () => import('../components/Editor'),
@@ -109,18 +106,14 @@ const Taskdetail = () => {
               {isUserDropDownOpen && (
                 <DropDown
                   data={OWNER_DATA}
-                  className={styles['d-d']}
                   render={(item) => {
                     return (
                       <div
-                        key={item.ownerName}
                         style={{
                           display: 'flex',
-                          alignItems: 'center',
-                          padding: '1rem 0.5rem',
-                          borderBottomColor: 'lightgray',
-                          borderBottomWidth: '1',
+                          padding: '10px 5px',
                         }}
+                        key={item.ownerName}
                       >
                         <LetterPic
                           letter={item.letter}
@@ -203,11 +196,7 @@ const Taskdetail = () => {
               About knoc-in mouse models
             </h1>
             <div
-              style={{
-                display: 'flex',
-                justifyContent: 'center',
-                height: '120px',
-              }}
+              className={taskstyles['taskdetail--wrapper--divEight']}
             >
               <img
                 src="/Group307@2x.png"
@@ -222,21 +211,8 @@ const Taskdetail = () => {
               <a>Read more</a>
             </p>
           </div>
-          <div
-            style={{
-              backgroundColor: '#ffffff',
-              padding: '2rem',
-            }}
-          >
-            <h1
-              style={{
-                fontSize: 'large',
-                fontWeight: 'bold',
-                marginRight: '10px',
-              }}
-            >
-              Connect with Service Providers
-            </h1>
+          <div className={taskstyles['taskdetail--wrapper--divNine']}>
+            <h1>Connect with Service Providers</h1>
             <div>
               <div
                 style={{

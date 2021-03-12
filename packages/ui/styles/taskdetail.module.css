@@ -84,3 +84,28 @@
     display: flex;
     flex-direction: column;
 }
+
+.taskdetail--wrapper--dropdownDiv {
+    display: flex;
+    align-items: center;
+    padding: 1rem 0.5rem;
+    border-bottom-color: lightgray;
+    border-bottom-width: 1;
+}
+
+.taskdetail--wrapper--divEight {
+    display: flex;
+    justify-content: center;
+    height: 120px;
+}
+
+.taskdetail--wrapper--divNine {
+    background-color: #ffffff;
+    padding: 2rem;
+}
+
+.taskdetail--wrapper--divNine > h1 {
+    font-size: large;
+    font-weight: bold;
+    margin-Right: 10px;
+}
