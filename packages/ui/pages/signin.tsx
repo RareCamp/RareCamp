@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
 import { Button } from 'components/Button';
 import { InputField } from 'components/InputField';
@@ -8,11 +9,19 @@ import {
   AS_PASSWORD,
 } from 'constants/validations';
 import { Logo } from 'components/Logo';
+import { Auth } from 'aws-amplify';
 
 const SignIn = () => {
+  const router = useRouter();
   const { register, handleSubmit, errors } = useForm();
-  const onSubmit = () => {
-    // console.log(data);
+  const onSubmit = (data) => {
+    Auth.signIn(data.email, data.password)
+      .then(() => {
+        router.push('/');
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
   return (
     <section className="px-4">
@@ -40,16 +49,16 @@ const SignIn = () => {
                 ...AS_EMAIL,
               })}
               type="email"
-              name="EMAIL"
+              name="email"
               placeholder="Email"
-              error={errors.EMAIL && errors.EMAIL.message}
+              error={errors.email && errors.email.message}
             />
             <InputField
               reference={register({ ...AS_PASSWORD })}
               type="password"
-              name="PASSWORD"
+              name="password"
               placeholder="Password"
-              error={errors.PASSWORD && errors.PASSWORD.message}
+              error={errors.password && errors.password.message}
             />
             <p className="text-sm mt-4 ">
               <span className="text-btn-primary ml-1 cursor-pointer hover:text-blue-500">

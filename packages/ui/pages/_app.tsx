@@ -1,23 +1,11 @@
-import { useState } from 'react'
+import { useState } from 'react';
 import type { AppProps } from 'next/app';
 import { useEffect } from 'react';
 import 'styles/antd.less';
 import 'styles/example.less';
 import '@aws-amplify/ui/dist/style.css';
-
 import Amplify, { Auth } from 'aws-amplify';
-import {
-  withAuthenticator,
-  Loading,
-  SignIn,
-  ConfirmSignIn,
-  VerifyContact,
-  SignUp,
-  ForgotPassword,
-  RequireNewPassword,
-  Greetings
-} from 'aws-amplify-react'
-import axios from 'axios'
+import axios from 'axios';
 import { ProgramsContext } from 'context/programs';
 
 // Set Authorization header on all requests if user is signed in
@@ -39,21 +27,29 @@ axios.defaults.baseURL = process.env.NEXT_PUBLIC_ApiEndpoint;
 
 Amplify.configure({
   Auth: {
-    // region: process.env.NEXT_PUBLIC_region,
-    identityPoolId: process.env.NEXT_PUBLIC_CognitoIdentityPoolId,
-    userPoolId: process.env.NEXT_PUBLIC_CognitoUserPoolId,
-    userPoolWebClientId:
-      process.env.NEXT_PUBLIC_CognitoUserPoolClientId,
+    region: 'ap-south-1',
+    identityPoolRegion: 'ap-south-1',
+    identityPoolId: 'ap-south-1:89d2a625-af3c-43b1-bba6-f5b309c14b83',
+    userPoolId: 'ap-south-1_AnYbk8zYQ',
+    userPoolWebClientId: '4rdvrmqsvsj8vkn6gdnc46sb6u',
+    appClientSecret:
+      '1k95g3nosj05g7euvarfr8dgn671liouqom3lnfu2j1sfaat6qil',
   },
 });
 
 function MyApp({ Component, pageProps }: AppProps) {
-  const [programs, setPrograms] = useState([])
+  const [programs, setPrograms] = useState([]);
   // const [me, setMe] = useState(null)
   useEffect(() => {
     async function fetchAndSetPrograms() {
-      const fetchProgramsResponse = await axios.get('/programs')
-      setPrograms(fetchProgramsResponse?.data?.programs?.Items || [])
+      try {
+        const fetchProgramsResponse = await axios.get('/programs');
+        setPrograms(
+          fetchProgramsResponse?.data?.programs?.Items || [],
+        );
+      } catch {
+        console.log('object');
+      }
     }
     /*
     async function fetchAndSetMe() {
@@ -64,15 +60,15 @@ function MyApp({ Component, pageProps }: AppProps) {
     }
     fetchAndSetMe()
     */
-    fetchAndSetPrograms()
-  }, [])
+    fetchAndSetPrograms();
+  }, []);
 
   /* eslint-disable react/jsx-props-no-spreading */
   return (
-    <ProgramsContext.Provider value={{programs}}>
+    <ProgramsContext.Provider value={{ programs }}>
       <Component {...pageProps} />
     </ProgramsContext.Provider>
-  )
+  );
 }
 
 // HACK: Skip ConfirmSignUp view since e're auto-confirming via the Lambda Function
@@ -88,31 +84,5 @@ const signUpConfig = {
   hideAllDefaults: true,
   hiddenDefaults: ['phone_number'],
 };
-
-const federated = {
-  // google_client_id: 'abc123abc123abc123abc123',
-  // facebook_app_id: 'abc123abc123abc123abc123',
-  // amazon_client_id: 'abc123abc123abc123abc123',
-};
-
-// @ts-ignore
-// export default withAuthenticator(MyApp, {
-//   usernameAttributes: 'email',
-//   signUpConfig,
-//   includeGreetings: false,
-//   hideDefault: true,
-//   authenticatorComponents: [
-//     <SignIn federated={federated} />,
-//     <ConfirmSignIn />,
-//     <VerifyContact />,
-//     <SignUp signUpConfig={signUpConfig} />,
-//     // @ts-ignore
-//     <ConfirmSignUpRedirectToSignIn override="ConfirmSignUp" />,
-//     <ForgotPassword />,
-//     <RequireNewPassword />,
-//     <Loading />,
-//     <Greetings />,
-//   ],
-// });
 
 export default MyApp;
