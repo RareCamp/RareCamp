@@ -1,7 +1,7 @@
 import { Icon } from 'components/Icon';
 import React from 'react';
 import styles from './proteinform.module.css';
-import { Form, Input, Button, Checkbox } from 'antd';
+import { Form, Input, Button } from 'antd';
 
 const ProteinForm = ({
   setBasicInfo,
@@ -52,10 +52,10 @@ const ProteinForm = ({
               id="less-amino"
               style={{ marginRight: '0.5rem' }}
             />
-            <Icon
+            {/* <Icon
               name="chevron-left"
               className={styles['icon-left']}
-            />
+            /> */}
             1100 amino acids
           </Form.Item>
 
@@ -73,13 +73,11 @@ const ProteinForm = ({
               id="more-amino"
               style={{ marginRight: '0.5rem' }}
             />
-            <div style={{ display: 'flex' }}>
-              <Icon
-                name="chevron-right"
-                className={styles['arow-icon']}
-              />
-              1100 mino acids
-            </div>
+            {/* <Icon
+              name="chevron-right"
+              className={styles['arow-icon']}
+            /> */}
+            1100 mino acids
           </Form.Item>
 
           <Form.Item

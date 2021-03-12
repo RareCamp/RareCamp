@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { MoreOutlined } from '@ant-design/icons';
 import { Button as AntButton, Button, Dropdown } from 'antd';
 import styles from 'styles/dropdown.module.css';
+import taskstyles from 'styles/taskdetail.module.css';
 import dynamic from 'next/dynamic';
 import { LetterPic } from 'components/LetterPic';
 import { DropDown } from 'components/DropDown';
@@ -29,24 +30,9 @@ const Taskdetail = () => {
   const [isUserDropDownOpen, setUserDropDown] = useState(false);
   return (
     <AppLayout>
-      <section
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          backgroundColor: '#ffffff',
-          padding: '1rem 2.5rem',
-        }}
-      >
-        <div style={{ display: 'flex', alignItems: 'center' }}>
-          <h1
-            style={{
-              fontSize: 'large',
-              fontWeight: 'bold',
-              marginRight: '10px',
-            }}
-          >
-            Understand knock-in mouse model
-          </h1>
+      <section className={taskstyles['taskdetail--wrapper']}>
+        <div className={taskstyles['taskdetail--wrapper--divOne']}>
+          <h1>Understand knock-in mouse model</h1>
           <AntButton onClick={() => {}} icon={<MoreOutlined />} />
         </div>
         <p style={{ color: 'lightgray' }}>
@@ -57,52 +43,28 @@ const Taskdetail = () => {
         </p>
       </section>
       <section
-        style={{
-          padding: '20px',
-          display: 'flex',
-          justifyContent: 'space-between',
-        }}
+        className={taskstyles['taskdetail--wrapper--sectionOne']}
       >
-        <div
-          style={{
-            width: '60%',
-
-            backgroundColor: '#ffffff',
-            padding: '2rem',
-          }}
-        >
+        <div className={taskstyles['taskdetail--wrapper--divTwo']}>
           <div
-            style={{
-              display: 'flex',
-              justifyContent: 'space-between',
-            }}
+            className={taskstyles['taskdetail--wrapper--divThree']}
           >
-            <div style={{ display: 'flex', flexDirection: 'column' }}>
+            <div
+              className={taskstyles['taskdetail--wrapper--divFour']}
+            >
               <span>Status</span>
               <span
-                style={{
-                  backgroundColor: 'orange',
-                  color: '#fff',
-                  padding: '1px 2px',
-                }}
+                className={taskstyles['taskdetail--wrapper--span']}
               >
                 In Progress
               </span>
             </div>
             <div
-              style={{
-                display: 'flex',
-                flexDirection: 'column',
-                position: 'relative',
-              }}
+              className={taskstyles['taskdetail--wrapper--divFive']}
             >
               <span>Owner</span>
               <span
-                style={{
-                  display: 'flex',
-                  padding: '0 4px',
-                  border: '1px solid lightblue',
-                }}
+                className={taskstyles['taskdetail-wrapper-spanTwo']}
               >
                 <LetterPic letter="R" size="sm" />{' '}
                 <span style={{ marginLeft: '4px' }}>Ramya</span>
@@ -168,33 +130,25 @@ const Taskdetail = () => {
                           textColor={item.letterColor}
                         />
                         <div
-                          style={{
-                            display: 'flex',
-                            flexDirection: 'column',
-                            justifyContent: 'space-between',
-                            height: '3rem',
-                            padding: '0 0.5rem',
-                            marginLeft: '0.5rem',
-                            cursor: 'pointer',
-                          }}
+                          className={
+                            taskstyles['taskdetail--wrapper--divSix']
+                          }
                         >
                           <span
-                            style={{
-                              color: 'lightgray',
-                              fontSize: 'medium',
-                              fontWeight: 'normal',
-                              display: 'block',
-                            }}
+                            className={
+                              taskstyles[
+                                'taskdetail--wrapper--spanThree'
+                              ]
+                            }
                           >
                             {item.ownerName}
                           </span>
                           <span
-                            style={{
-                              color: 'lightgray',
-                              fontSize: 'medium',
-                              fontWeight: 'normal',
-                              display: 'block',
-                            }}
+                            className={
+                              taskstyles[
+                                'taskdetail--wrapper--spanFour'
+                              ]
+                            }
                           >
                             {item.ownerEmail}
                           </span>
@@ -206,15 +160,21 @@ const Taskdetail = () => {
               )}
             </div>
 
-            <div style={{ display: 'flex', flexDirection: 'column' }}>
+            <div
+              className={taskstyles['taskdetail--wrapper--divSeven']}
+            >
               <span>Budget</span>
               <span>$0</span>
             </div>
-            <div style={{ display: 'flex', flexDirection: 'column' }}>
+            <div
+              className={taskstyles['taskdetail--wrapper--divSeven']}
+            >
               <span>Start Date</span>
               <span>12/05/2020</span>
             </div>
-            <div style={{ display: 'flex', flexDirection: 'column' }}>
+            <div
+              className={taskstyles['taskdetail--wrapper--divSeven']}
+            >
               <span>End Date</span>
               <span>12/05/2020</span>
             </div>
@@ -286,7 +246,9 @@ const Taskdetail = () => {
               >
                 <img src="/image6@3x.png" width={100} />
                 <div
-                  style={{ display: 'flex', flexDirection: 'column' }}
+                  className={
+                    taskstyles['taskdetail--wrapper--divSeven']
+                  }
                 >
                   <span>Charles River</span>
                   <span>Biotech Services</span>
@@ -305,7 +267,9 @@ const Taskdetail = () => {
               >
                 <img src="/image5@3x.png" width={100} />
                 <div
-                  style={{ display: 'flex', flexDirection: 'column' }}
+                  className={
+                    taskstyles['taskdetail--wrapper--divSeven']
+                  }
                 >
                   <span>Cyagen</span>
                   <span>Biotech Services</span>
@@ -325,7 +289,9 @@ const Taskdetail = () => {
               >
                 <img src="/image1@3x.png" width={100} />
                 <div
-                  style={{ display: 'flex', flexDirection: 'column' }}
+                  className={
+                    taskstyles['taskdetail--wrapper--divSeven']
+                  }
                 >
                   <span>Jacksons Lab</span>
                   <span>Biotech Services</span>

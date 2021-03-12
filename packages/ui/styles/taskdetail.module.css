@@ -1,0 +1,86 @@
+.taskdetail--wrapper {
+    display: flex;
+    flex-direction: column;
+    background-color: #ffffff;
+    padding: 1rem 2.5rem;
+}
+
+.taskdetail--wrapper--divOne {
+    display: flex;
+    align-items: center;
+}
+
+.taskdetail--wrapper--divOne>h1 {
+    font-size: large;
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.taskdetail--wrapper--sectionOne {
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.taskdetail--wrapper--divTwo {
+    width: 60%;
+    background-color: #ffffff;
+    padding: 2rem;
+}
+
+.taskdetail--wrapper--divThree {
+    display: flex;
+    justify-content: space-between;
+}
+
+.taskdetail--wrapper--divFour {
+    display: flex;
+    flex-direction: column;
+}
+
+.taskdetail--wrapper--span {
+    background-color: orange;
+    color: #fff;
+    padding: 1px 2px;
+}
+
+.taskdetail--wrapper--divFive {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.taskdetail-wrapper-spanTwo {
+    display: flex;
+    padding: 0 4px;
+    border: 1px solid lightblue;
+}
+
+.taskdetail--wrapper--divSix {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 3rem;
+    padding: 0 0.5rem;
+    margin-left: 0.5rem;
+    cursor: pointer,
+}
+
+.taskdetail-wrapper-spanThree {
+    color: lightgray;
+    font-size: medium;
+    font-weight: normal;
+    display: block;
+}
+
+.taskdetail-wrapper-spanFour {
+    color: lightgray;
+    font-size: medium;
+    font-weight: normal;
+    display: block;
+}
+
+.taskdetail--wrapper--divSeven {
+    display: flex;
+    flex-direction: column;
+}
