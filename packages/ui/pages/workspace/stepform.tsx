@@ -10,6 +10,10 @@ import styles from 'styles/stepform.module.css';
 import { MutationForm } from 'components/MutationForm';
 import { ProteinForm } from 'components/ProteinForm';
 
+import { Steps } from 'antd';
+
+const { Step } = Steps;
+
 const stepform = () => {
   const [showBasicInfoForm, setBasicInfo] = useState(true);
   const [showMutationForm, setShowMutationForm] = useState(false);
@@ -17,6 +21,7 @@ const stepform = () => {
   const [isShowEligibleSection, setShowEligibleSection] = useState(
     false,
   );
+  const [current, setCurrent] = useState(0);
 
   return (
     <AppLayout>
@@ -54,97 +59,105 @@ const stepform = () => {
                 {showProteinForm ||
                 showMutationForm ||
                 showBasicInfoForm ? (
-                  <div
-                    style={{
-                      display: 'flex',
-                      justifyContent: 'space-between',
-                      alignItems: 'center',
-                    }}
-                  >
-                    <div
-                      // className="flex items-center"
+                  <>
+                    <Steps current={current}>
+                      <Step title="Basic Info" />
+                      <Step title="Mutation" />
+                      <Step title=" Protein" />
+                    </Steps>
+
+                    {/* <div
                       style={{
                         display: 'flex',
+                        justifyContent: 'space-between',
                         alignItems: 'center',
                       }}
                     >
-                      <LetterPic
-                        letter="1"
-                        color="custom"
-                        textColor={null}
-                        className={styles['lp']}
-                        size="sm"
-                      />
-                      <span style={{ marginLeft: '0.25rem' }}>
-                        Basic Info
-                      </span>
-                    </div>
-                    <span
-                      className={`${styles['span']} ${
-                        showMutationForm || showProteinForm
-                          ? styles['b-blue']
-                          : styles['b-gray']
-                      }`}
-                    />
-                    <div
-                      style={{
-                        display: 'flex',
-                        alignItems: 'center',
-                      }}
-                    >
-                      <LetterPic
-                        letter="2"
-                        color="custom"
-                        textColor={null}
-                        className={`${styles['lp-One']} ${
+                      <div
+                        style={{
+                          display: 'flex',
+                          alignItems: 'center',
+                        }}
+                      >
+                        <LetterPic
+                          letter="1"
+                          color="custom"
+                          textColor={null}
+                          className={styles['lp']}
+                          size="sm"
+                        />
+                        <span style={{ marginLeft: '0.25rem' }}>
+                          Basic Info
+                        </span>
+                      </div>
+                      <span
+                        className={`${styles['span']} ${
                           showMutationForm || showProteinForm
-                            ? styles['br-blue']
-                            : styles['br-gray']
+                            ? styles['b-blue']
+                            : styles['b-gray']
                         }`}
-                        size="sm"
                       />
-                      <span style={{ marginLeft: '0.25rem' }}>
-                        Mutation
-                      </span>
-                    </div>
-                    <span
-                      className={`${styles['span']} ${
-                        showProteinForm
-                          ? styles['b-blue']
-                          : styles['b-gray']
-                      }`}
-                      // className={`${styles['span']}${
-                      //   showProteinForm
-                      //     ? styles['b-blue']
-                      //     : styles['b-gray']
-                      // }`}
-                    />
-                    <div
-                      style={{
-                        display: 'flex',
-                        alignItems: 'center',
-                      }}
-                    >
-                      <LetterPic
-                        letter="3"
-                        color="custom"
-                        textColor={null}
-                        className={` ${styles['lp-One']} ${
+                      <div
+                        style={{
+                          display: 'flex',
+                          alignItems: 'center',
+                        }}
+                      >
+                        <LetterPic
+                          letter="2"
+                          color="custom"
+                          textColor={null}
+                          className={`${styles['lp-One']} ${
+                            showMutationForm || showProteinForm
+                              ? styles['br-blue']
+                              : styles['br-gray']
+                          }`}
+                          size="sm"
+                        />
+                        <span style={{ marginLeft: '0.25rem' }}>
+                          Mutation
+                        </span>
+                      </div>
+                      <span
+                        className={`${styles['span']} ${
                           showProteinForm
-                            ? styles['br-blue']
-                            : styles['br-gray']
+                            ? styles['b-blue']
+                            : styles['b-gray']
                         }`}
-                        size="sm"
+                        // className={`${styles['span']}${
+                        //   showProteinForm
+                        //     ? styles['b-blue']
+                        //     : styles['b-gray']
+                        // }`}
                       />
-                      <span style={{ marginLeft: '0.25rem' }}>
-                        Protein
-                      </span>
-                    </div>
-                  </div>
+                      <div
+                        style={{
+                          display: 'flex',
+                          alignItems: 'center',
+                        }}
+                      >
+                        <LetterPic
+                          letter="3"
+                          color="custom"
+                          textColor={null}
+                          className={` ${styles['lp-One']} ${
+                            showProteinForm
+                              ? styles['br-blue']
+                              : styles['br-gray']
+                          }`}
+                          size="sm"
+                        />
+                        <span style={{ marginLeft: '0.25rem' }}>
+                          Protein
+                        </span>
+                      </div>
+                    </div> */}
+                  </>
                 ) : null}
               </div>
               {showBasicInfoForm && (
                 <BasicInfoForm
+                  setCurrent={setCurrent}
                   setShowMutationForm={setShowMutationForm}
                   setShowProteinForm={setShowProteinForm}
                   setBasicInfo={setBasicInfo}
@@ -154,6 +167,7 @@ const stepform = () => {
 
               {showMutationForm && (
                 <MutationForm
+                  setCurrent={setCurrent}
                   setShowProteinForm={setShowProteinForm}
                   setBasicInfo={setBasicInfo}
                   setShowMutationForm={setShowMutationForm}
@@ -162,6 +176,7 @@ const stepform = () => {
               )}
               {showProteinForm && (
                 <ProteinForm
+                  setCurrent={setCurrent}
                   setBasicInfo={setBasicInfo}
                   setShowMutationForm={setShowMutationForm}
                   setShowProteinForm={setShowProteinForm}

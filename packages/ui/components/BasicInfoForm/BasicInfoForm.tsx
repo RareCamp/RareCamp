@@ -7,6 +7,7 @@ const BasicInfoForm = ({
   setShowProteinForm,
   setBasicInfo,
   showBasicInfoForm,
+  setCurrent
 }: any) => {
   const inputRef = useRef(null);
   return (
@@ -27,6 +28,7 @@ const BasicInfoForm = ({
               setShowMutationForm(true);
               setShowProteinForm(false);
               setBasicInfo(false);
+              setCurrent(1)
             }}
           >
             Next

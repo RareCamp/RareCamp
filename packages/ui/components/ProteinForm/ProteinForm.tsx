@@ -9,6 +9,7 @@ const ProteinForm = ({
   setShowProteinForm,
   setShowEligibleSection,
   showProteinForm,
+  setCurrent,
 }: any) => {
   const layout = {
     labelCol: { span: 8 },
@@ -106,6 +107,7 @@ const ProteinForm = ({
                 setShowProteinForm(false);
                 setBasicInfo(false);
                 setShowMutationForm(true);
+                setCurrent(1);
               }}
             >
               Back

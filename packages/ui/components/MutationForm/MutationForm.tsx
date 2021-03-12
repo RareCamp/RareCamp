@@ -6,6 +6,7 @@ const MutationForm = ({
   setShowProteinForm,
   setBasicInfo,
   setShowMutationForm,
+  setCurrent,
   showMutationForm,
 }) => {
   const layout = {
@@ -21,7 +22,7 @@ const MutationForm = ({
       console.log('Success:', values);
     };
   };
-                                                 
+
   const onFinishFailed = (errorInfo: any) => {
     console.log('Failed:', errorInfo);
   };
@@ -36,6 +37,11 @@ const MutationForm = ({
           onFinish={Demo}
           onFinishFailed={onFinishFailed}
         >
+          <Input
+            type="radio"
+            id="protein-loss"
+            style={{ marginRight: '0.5rem' }}
+          />
           <Form.Item
             label="Mutation leads to a LOSS of function or LOWER expression
         of gene or protein"
@@ -47,14 +53,12 @@ const MutationForm = ({
               display: 'flex',
               alignItems: 'center',
             }}
-          >
-            <Input
-              type="radio"
-              id="protein-loss"
-              style={{ marginRight: '0.5rem' }}
-            />
-          </Form.Item>
-
+          ></Form.Item>
+          <Input
+            type="radio"
+            id="more-protein-btn"
+            style={{ marginRight: '0.5rem' }}
+          />
           <Form.Item
             label=" Mutation leads to a GAIN of function of gene or protein"
             htmlFor="2"
@@ -66,14 +70,13 @@ const MutationForm = ({
               display: 'flex',
               alignItems: 'center',
             }}
-          >
-            <Input
-              type="radio"
-              id="more-protein-btn"
-              style={{ marginRight: '0.5rem' }}
-            />
-          </Form.Item>
-
+          ></Form.Item>
+          <Input
+            type="radio"
+            id="dont-know-btn"
+            // className="mr-2"
+            style={{ marginRight: '0.5rem' }}
+          />
           <Form.Item
             label="Dont Know"
             htmlFor="dont-know-btn"
@@ -83,17 +86,10 @@ const MutationForm = ({
               display: 'flex',
               alignItems: 'center',
             }}
-          >
-            <Input
-              type="radio"
-              id="dont-know-btn"
-              // className="mr-2"
-              style={{ marginRight: '0.5rem' }}
-            />
-          </Form.Item>
+          ></Form.Item>
 
           <Form.Item
-            style={{ display: 'flex', marginTop: '1rem' }}
+            style={{ display: 'flex', justifyContent: 'start' }}
             {...tailLayout}
           >
             <Button
@@ -105,6 +101,7 @@ const MutationForm = ({
                 setShowProteinForm(false);
                 setBasicInfo(true);
                 setShowMutationForm(false);
+                setCurrent(0);
               }}
             >
               Back
@@ -119,6 +116,7 @@ const MutationForm = ({
                 setShowProteinForm(true);
                 setBasicInfo(false);
                 setShowMutationForm(false);
+                setCurrent(2);
               }}
             >
               Next
