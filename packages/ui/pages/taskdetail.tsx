@@ -1,5 +1,5 @@
 import { AppLayout } from 'components/AppLayout';
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { MoreOutlined } from '@ant-design/icons';
 import { Button as AntButton, Button, Dropdown } from 'antd';
 import taskstyles from 'styles/taskdetail.module.css';
@@ -25,6 +25,22 @@ const Taskdetail = () => {
 
   const [open, setOpenDropDown] = useState(false);
   const [isUserDropDownOpen, setUserDropDown] = useState(false);
+  const [file, selectedFile] = useState('');
+  // Create a reference to the hidden file input element
+  const hiddenFileInput: any = useRef(null);
+
+  // Programatically click the hidden file input element
+  // when the Button component is clicked
+  const handleClick = (event) => {
+    hiddenFileInput.current.click();
+  };
+  // Call a function (passed as a prop from the parent component)
+  // to handle the user-selected file
+  const handleChange = (event) => {
+    const fileUploaded = event.target.files[0];
+    console.log(fileUploaded, 'si');
+    selectedFile(fileUploaded);
+  };
   return (
     <AppLayout>
       <section className={taskstyles['taskdetail--wrapper']}>
@@ -108,13 +124,7 @@ const Taskdetail = () => {
                   data={OWNER_DATA}
                   render={(item) => {
                     return (
-                      <div
-                        style={{
-                          display: 'flex',
-                          padding: '10px 5px',
-                        }}
-                        key={item.ownerName}
-                      >
+                      <li key={item.ownerName}>
                         <LetterPic
                           letter={item.letter}
                           color={item.bgColor}
@@ -146,7 +156,7 @@ const Taskdetail = () => {
                             {item.ownerEmail}
                           </span>
                         </div>
-                      </div>
+                      </li>
                     );
                   }}
                 />
@@ -175,7 +185,14 @@ const Taskdetail = () => {
           <div>
             <DynamicComponent />
             <div style={{ marginTop: '30px' }}>
-              <input id="files" type="file" />
+              <Button onClick={handleClick}>Upload a file</Button>
+              <input
+                type="file"
+                ref={hiddenFileInput}
+                onChange={handleChange}
+                style={{ display: 'none' }}
+              />
+              <p>{file}</p>
             </div>
           </div>
         </div>
