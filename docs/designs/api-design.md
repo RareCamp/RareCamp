@@ -1,11 +1,11 @@
 # API Design
 
 The following document describes the individual APIs used in this application, request/response models,
-and HTTP Status Codes. In the future, this document will be superseeded by the Swagger model definition as the
+and HTTP Status Codes. In the future, this document will be superseded by the Swagger model definition as the
 source of truth. At that point, we will use this document the behavior of individual APIs instead.
 
 Refer to the [Data Model Doc](./data-models.md) for source of truth details about each entity
-referrred in the doc here.
+referred in the doc here.
 
 ## NOTE
 
@@ -38,13 +38,13 @@ referrred in the doc here.
   `{"program": {...}}`. This is a more extensible design allowing us to send other metadata
   along with the core entity.
 
-- All APIs have an `_internal` blob containing metadata used for backend's house keeping purposes.
+- All APIs have an `_internal` blob containing metadata used for backend's housekeeping purposes.
 
 ## User
 
 Get details about the logged in user
 
-`GET /user`
+`GET /me`
 
 **Response**
 
@@ -67,7 +67,6 @@ Get details about the logged in user
     ]
   },
   "ui": {
-    // Shows the ID of the workspace that the user logs in by default.
     "defaultWorkspaceId": "<uuid>"
   }
 }
@@ -107,19 +106,31 @@ None
         "name": "<string>",
         "description": "<string>"
       }
-    ],
-    "disease": {
-      "id": "<uuid>",
-      "name": "<string>",
-      "abbreviation": "<string>",
-      "omimId": "<string>",
-      "causalGene": "<string>",
-      "mutationImpact": "<string>",
-      "sizeOfProtein": "<string>"
-    }
+    ]
   }
 }
 ```
+
+Create a new workspace.
+
+`POST /workspace`
+
+**Request**
+
+```json
+{
+  "workspace": {
+    "id": "<uuid>",
+    "name": "<string>",
+    "description": "<string>"
+  }
+}
+```
+
+**Response**
+Returns the full response of `Get Workspace API`. The ID returned in the response is the ID of
+the newly created program.
+
 
 ## Create Program
 
@@ -128,7 +139,7 @@ Create a brand new program
 `POST /workspace/<workspaceId>/program`
 
 **Request**
-All of the fields are optional.
+All the fields are optional, expect the name of the program.
 
 ```json
 {
@@ -170,12 +181,6 @@ Get details for the Program page.
     "name": "<string>",
     "description": "<string>",
 
-    // _internal metadata used by the backend
-    "_internal": {
-        "lastUpdatedTime": "<iso-date-str>",
-        "lastUpdatedUser": "<userId>",
-    },
-
     "projects": [
         {
             "id": "<uuid>",
@@ -189,7 +194,6 @@ Get details for the Program page.
                     "description": "<string>",
                     "status": "<string>",
                     "assignee": [
-                        // List of users assigned to this task
                         {
                             "id": "<uuid>",
                             "firstName": "<string>",
@@ -198,7 +202,7 @@ Get details for the Program page.
                     ],
                     "budget": {
                         "amount": "<number>",
-                        "currency": "<string>",
+                        "currency": "<string>"
                     },
                     "duration": "<string>",
                     "estimatedStartDate": "<iso-date-str>",
@@ -241,7 +245,7 @@ Request sends an update copy of the entire structure returned by `Get Program AP
 individual elements and storing them in appropriate tables.
 
 **Response**
-Returns a complete response of `Get Program API`. Makes it very easy for frontend to refresh the program page using
+Returns a complete response of `Get Program API`. Makes it very easy for a frontend to refresh the program page using
 the existing Program page rendering logic.
 
 **HTTP Status Code**
@@ -318,7 +322,7 @@ Call this API to full details about a task in order to render the Task Detail pa
   },
 
   "ui": {
-    "serviceProvdersOrder": ["serviceProvderId1", "serviceProviderId2"]
+    "serviceProvidersOrder": ["serviceProviderId1", "serviceProviderId2"]
   }
 }
 ```
@@ -332,7 +336,7 @@ NOTE: File uploads are not yet supported through this API. We will create a sepa
 `PUT /task/<taskId>`
 
 **Request**
-Send an update copy of the respnose you received via `Get Task Details API`
+Send an update copy of the response you received via `Get Task Details API`
 
 **Response**
 Returns a complete response of `Get Task Details API` for ease of refreshing the UI.

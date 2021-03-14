@@ -9,7 +9,7 @@ terms.
 
 ## Entities
 
-This section describes the entites and fields within each of them.
+This section describes the entities and fields within each of them.
 
 ### User (aka Account)
 
@@ -21,7 +21,7 @@ they created within the product.
 - **Email**
 - **Password**
 - **Organization**: Which organization is this person affiliated with?
-- **Workspaces**: Workspaces owned by this user. Currently we only support one workspace for a user
+- **Workspaces**: Workspaces owned by this user. Currently, we only support one workspace for a user
 
 ### Organization
 
@@ -54,7 +54,9 @@ Information about the disease represented by the organization or the user
 Workspace is a logical grouping of Programs within the product.
 
 - **Id**:
+- **user**: owner of the workspace
 - **Name**: (unused)
+- **Description**: (to be added)
 - **Programs**: List of programs within this workspace
 
 ### Program
@@ -103,7 +105,7 @@ A ServiceProvider is a person or institution providing service to advance the tr
 
 - **Id**:
 - **Name**
-- **Type**: What type of an service provider is this entity? CRO, Biomedical research, Consultant etc.
+- **Type**: What type of service provider is this entity? CRO, Biomedical research, Consultant etc.
 - **Services**: Description of types of services provided
 - **Website**
 - **Email**
@@ -125,7 +127,7 @@ Education materials to guide users to make decisions and help them execute a pro
 Files uploaded by users on the platform.
 
 - **Id**: Internal unique identifier for each file
-- **OriginalName**: Original name of the file when user uploaded it. Our system could change the name in future for internal storage purposes. We are using this to track the original file name to help users remember the file.
+- **OriginalName**: The original name of the file when user uploaded it. Our system could change the name in future for internal storage purposes. We are using this to track the original file name to help users remember the file.
 - **Description**
 - **Location**: Internal location where the file is stored and can be retrieved from
 - **User**: The user that uploaded the file
@@ -145,3 +147,9 @@ associated with them.
 Defines the permissions a particular user has within the product. A user can be affiliated with multiple Programs in different capacities like creator/collaborator, etc. This information will be captured in Roles
 
 TBD
+
+## Data model diagram
+
+**Note**: The following diagram represents the data model entities hierarchy and relationships to which the system implementation should adhere, and it does not refer to any database schema or normalization.
+
+<p align="center"><img src="../diagrams/data-model.png" alt="OpenTreatment Data Model" height="1000"/></p>
