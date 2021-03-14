@@ -75,11 +75,11 @@ Resources:
         PointInTimeRecoveryEnabled: ${{self:custom.stageConfig.pointInTimeRecoveryEnabled, false}}
       KeySchema:
         - KeyType: HASH
-          AttributeName: programId
+          AttributeName: programKey
         - KeyType: RANGE
           AttributeName: id
       AttributeDefinitions:
-        - AttributeName: programId
+        - AttributeName: programKey
           AttributeType: S
         - AttributeName: id
           AttributeType: S
@@ -112,3 +112,19 @@ Resources:
           Projection:
             ProjectionType: "ALL"
 
+  TaskTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      BillingMode: PAY_PER_REQUEST
+      PointInTimeRecoverySpecification:
+        PointInTimeRecoveryEnabled: ${{self:custom.stageConfig.pointInTimeRecoveryEnabled, false}}
+      KeySchema:
+        - KeyType: HASH
+          AttributeName: projectKey
+        - KeyType: RANGE
+          AttributeName: id
+      AttributeDefinitions:
+        - AttributeName: projectKey
+          AttributeType: S
+        - AttributeName: id
+          AttributeType: S

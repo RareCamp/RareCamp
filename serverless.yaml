@@ -21,6 +21,7 @@ provider:
     PROGRAM_TABLE: !Ref ProgramTable
     PROJECT_TABLE: !Ref ProjectTable
     WORKSPACE_TABLE: !Ref WorkspaceTable
+    TASK_TABLE: !Ref TaskTable
 
     # Enable connection reuse for AWS SDK for instant performance boost
     # https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/node-reusing-connections.html

@@ -61,7 +61,8 @@ const Home = () => {
   const programsContext = useProgramsContext()
   const isFirstTimeVisitor = !programsContext.programs.length
   
-  if (isFirstTimeVisitor) {
+  // HACK: check if process.browser or we get a Next error
+  if (process.browser && isFirstTimeVisitor) {
     router.push('/workspace/stepform')
     return null
   }

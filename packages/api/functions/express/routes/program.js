@@ -4,9 +4,9 @@ import {
   createProgram,
   getProgram,
   updateProgram,
-  scanPrograms,
+  getPrograms,
 } from '../../../controllers/program'
-import { getProjects } from '../../../controllers/project'
+import projectRouter from './project'
 
 const programRouter = express.Router()
 
@@ -20,20 +20,24 @@ programRouter.post('/', wrapAsync(async (req, res) => {
 
 programRouter.put('/:programId', wrapAsync(async (req, res) => {
   const { programId } = req.params
+  const userId = req.cognitoUser.id
   const { program } = req.body
-  const programItem = await updateProgram({ programId, program })
+  const programItem = await updateProgram({ userId, programId, program })
 
   res.json({ program: programItem })
 }))
 
 programRouter.get('/', wrapAsync(async (req, res) => {
-  const programs = await scanPrograms()
-  res.json({ programs })
+  const userId = req.cognitoUser.id
+  const programs = await getPrograms({ userId })
+  const programItems = programs.Items || []
+  res.json({ programs: programItems })
 }))
 
 programRouter.get('/:programId', wrapAsync(async (req, res) => {
   const { programId } = req.params
-  const program = await getProgram({ programId })
+  const userId = req.cognitoUser.id
+  const program = await getProgram({ userId, programId })
 
   if (!program) {
     return res
@@ -44,19 +48,7 @@ programRouter.get('/:programId', wrapAsync(async (req, res) => {
   return res.json({ program })
 }))
 
-programRouter.get('/:programId/projects', wrapAsync(async (req, res) => {
-  const { programId } = req.params
-  const program = await getProgram({ programId })
-
-  if (!program) {
-    return res
-      .status(404)
-      .json({})
-  }
-
-  const projects = await getProjects({ programId })
-
-  return res.json({ projects })
-}))
+// project routes
+programRouter.use('/:projectId/tasks', projectRouter)
 
 export default programRouter
