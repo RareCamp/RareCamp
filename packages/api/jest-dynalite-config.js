@@ -49,15 +49,15 @@ module.exports = {
     },
     {
       TableName: process.env.TASK_TABLE,
-      KeySchema: [{ AttributeName: 'projectId', KeyType: 'HASH' }, { AttributeName: 'id', KeyType: 'RANGE' }],
-      AttributeDefinitions: [{ AttributeName: 'projectId', AttributeType: 'S' }, { AttributeName: 'id', AttributeType: 'S' }],
+      KeySchema: [{ AttributeName: 'projectKey', KeyType: 'HASH' }, { AttributeName: 'id', KeyType: 'RANGE' }],
+      AttributeDefinitions: [{ AttributeName: 'projectKey', AttributeType: 'S' }, { AttributeName: 'id', AttributeType: 'S' }],
       ProvisionedThroughput: {
         ReadCapacityUnits: 1,
         WriteCapacityUnits: 1,
       },
       data: [
         {
-          projectId: 'user1#project1',
+          projectKey: 'user1#project1',
           id: 'existing-project',
           name: 'Existing project',
         },

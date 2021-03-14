@@ -15,7 +15,7 @@ export async function createTask({
   const partitionKey = getPk({ userId, projectId })
   const item = {
     ...task,
-    projectId: partitionKey,
+    projectKey: partitionKey,
     id: taskId,
   }
   const taskItem = await Task.update(item, { returnValues: 'ALL_NEW' })
@@ -39,7 +39,7 @@ export async function updateTask({
   const partitionKey = getPk({ userId, projectId })
   const taskItem = await Task.update({
     ...task,
-    projectId: partitionKey,
+    projectKey: partitionKey,
     id: taskId,
   }, { returnValues: 'ALL_NEW' })
 
@@ -54,7 +54,7 @@ export async function getTask({ userId, projectId, taskId }) {
   if (!taskId) throw new Error('taskId is required')
 
   const partitionKey = getPk({ userId, projectId })
-  const taskItem = await Task.get({ projectId: partitionKey, id: taskId })
+  const taskItem = await Task.get({ projectKey: partitionKey, id: taskId })
 
   if (!taskItem) {
     return null
