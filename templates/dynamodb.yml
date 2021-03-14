@@ -75,11 +75,11 @@ Resources:
         PointInTimeRecoveryEnabled: ${{self:custom.stageConfig.pointInTimeRecoveryEnabled, false}}
       KeySchema:
         - KeyType: HASH
-          AttributeName: programId
+          AttributeName: programKey
         - KeyType: RANGE
           AttributeName: id
       AttributeDefinitions:
-        - AttributeName: programId
+        - AttributeName: programKey
           AttributeType: S
         - AttributeName: id
           AttributeType: S

@@ -5,7 +5,6 @@ import {
   createProject,
   getProject,
   updateProject,
-  scanProjects,
   getProjects,
 } from '../../../controllers/project'
 

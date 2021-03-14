@@ -33,15 +33,15 @@ module.exports = {
     },
     {
       TableName: process.env.PROJECT_TABLE,
-      KeySchema: [{ AttributeName: 'programId', KeyType: 'HASH' }, { AttributeName: 'id', KeyType: 'RANGE' }],
-      AttributeDefinitions: [{ AttributeName: 'programId', AttributeType: 'S' }, { AttributeName: 'id', AttributeType: 'S' }],
+      KeySchema: [{ AttributeName: 'programKey', KeyType: 'HASH' }, { AttributeName: 'id', KeyType: 'RANGE' }],
+      AttributeDefinitions: [{ AttributeName: 'programKey', AttributeType: 'S' }, { AttributeName: 'id', AttributeType: 'S' }],
       ProvisionedThroughput: {
         ReadCapacityUnits: 1,
         WriteCapacityUnits: 1,
       },
       data: [
         {
-          programId: 'user1#program1',
+          programKey: 'user1#program1',
           id: 'existing-project',
           name: 'Existing project',
         },
