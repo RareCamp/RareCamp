@@ -6,7 +6,7 @@
   "main": "handler.js",
   "scripts": {
     "test": "(cd packages/ui && npm test) & (cd packages/api && npm test)",
-    "init": "npm i && cd packages/ui && npm i",
+    "init": "npm i && cd packages/ui && npm i && cd packages/api && npm i",
     "start:ui": "cd packages/ui && npm run dev",
     "start:ui:offline": "cd packages/ui && npm run dev:offline",
     "start:api": "LAMBDA_RUNTIME=nodejs12.x sls offline cloudside --cloudStage=development",
