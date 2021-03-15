@@ -18,9 +18,9 @@ const Workspace = new Entity({
     id: {
       sortKey: true,
     },
-    diseaseId: 'string',
     name: 'string',
     description: 'string',
+    isDefault: { default: false, type: 'boolean' },
     programs: 'list',
   },
   table: WorkspaceTable,

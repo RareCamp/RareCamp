@@ -2,6 +2,7 @@ import express from 'express'
 import wrapAsync from '../wrap-async'
 import { scanUsers, getUser } from '../../../controllers/user'
 
+// TODO: this routes should be removed
 const userRouter = express.Router()
 userRouter.get('/', wrapAsync(async (req, res) => {
   const users = await scanUsers()

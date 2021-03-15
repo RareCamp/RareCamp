@@ -33,7 +33,8 @@ programRouter.get('/', wrapAsync(async (req, res) => {
 
 programRouter.get('/:programId', wrapAsync(async (req, res) => {
   const { programId } = req.params
-  const program = await getProgram({ programId })
+  const userId = req.cognitoUser.id
+  const program = await getProgram({ programId, userId })
 
   if (!program) {
     return res
