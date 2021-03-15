@@ -49,11 +49,11 @@ Amplify.configure({
 });
 const queryClient = new QueryClient()
 
-function MyAppWrapper({ Component, pageProps }: AppProps) {
+function MyAppWrapper(props: AppProps) {
   /* eslint-disable react/jsx-props-no-spreading */
   return (
     <QueryClientProvider client={queryClient}>
-      <MyApp Component={Component} pageProps={pageProps} />
+      <MyApp {...props} />
     </QueryClientProvider>
   )
 }
