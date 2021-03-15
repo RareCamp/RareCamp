@@ -48,7 +48,7 @@ plugins:
 custom:
   stages:
     development:
-      profile: ${{env:AWS_PROFILE}}
+      profile: rarecamp_dev
       logRetentionInDays: 1
       amplify:
       api:
