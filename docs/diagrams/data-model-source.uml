@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>DATABASE</ID>
+  <OriginalElement>97949c56-81d4-44c7-87b4-0edb00a7e86b.SCHEMA:openTreatment_1</OriginalElement>
+  <nodes>
+    <node x="422.75" y="699.0">97949c56-81d4-44c7-87b4-0edb00a7e86b.TABLE:openTreatment_1.Guide</node>
+    <node x="423.25" y="421.0">97949c56-81d4-44c7-87b4-0edb00a7e86b.TABLE:openTreatment_1.ServiceProvider</node>
+    <node x="51.0" y="950.0">97949c56-81d4-44c7-87b4-0edb00a7e86b.TABLE:openTreatment_1.Disease</node>
+    <node x="314.0" y="977.0">97949c56-81d4-44c7-87b4-0edb00a7e86b.TABLE:openTreatment_1.Project</node>
+    <node x="109.09444444444446" y="170.0">97949c56-81d4-44c7-87b4-0edb00a7e86b.TABLE:openTreatment_1.Users</node>
+    <node x="185.09444444444446" y="0.0">97949c56-81d4-44c7-87b4-0edb00a7e86b.TABLE:openTreatment_1.Organization</node>
+    <node x="170.72222222222226" y="461.5">97949c56-81d4-44c7-87b4-0edb00a7e86b.TABLE:openTreatment_1.Workspace</node>
+    <node x="155.72222222222226" y="726.0">97949c56-81d4-44c7-87b4-0edb00a7e86b.TABLE:openTreatment_1.Program</node>
+    <node x="324.3777777777778" y="1255.0">97949c56-81d4-44c7-87b4-0edb00a7e86b.TABLE:openTreatment_1.Task</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="97949c56-81d4-44c7-87b4-0edb00a7e86b.TABLE:openTreatment_1.ServiceProvider" target="97949c56-81d4-44c7-87b4-0edb00a7e86b.TABLE:openTreatment_1.Users">
+      <point x="0.0" y="-114.0" />
+      <point x="615.25" y="396.0" />
+      <point x="380.7611111111112" y="396.0" />
+      <point x="108.66666666666674" y="100.5" />
+    </edge>
+    <edge source="97949c56-81d4-44c7-87b4-0edb00a7e86b.TABLE:openTreatment_1.Task" target="97949c56-81d4-44c7-87b4-0edb00a7e86b.TABLE:openTreatment_1.Users">
+      <point x="-113.25" y="-235.5" />
+      <point x="362.1277777777778" y="1230.0" />
+      <point x="40.5" y="1230.0" />
+      <point x="40.5" y="396.0" />
+      <point x="163.42777777777783" y="396.0" />
+      <point x="-108.66666666666663" y="100.5" />
+    </edge>
+    <edge source="97949c56-81d4-44c7-87b4-0edb00a7e86b.TABLE:openTreatment_1.Task" target="97949c56-81d4-44c7-87b4-0edb00a7e86b.TABLE:openTreatment_1.Guide">
+      <point x="37.75" y="-235.5" />
+      <point x="513.1277777777777" y="1230.0" />
+      <point x="543.0" y="1230.0" />
+      <point x="543.0" y="925.0" />
+      <point x="559.25" y="925.0" />
+      <point x="45.5" y="100.5" />
+    </edge>
+    <edge source="97949c56-81d4-44c7-87b4-0edb00a7e86b.TABLE:openTreatment_1.Project" target="97949c56-81d4-44c7-87b4-0edb00a7e86b.TABLE:openTreatment_1.Program">
+      <point x="-48.0" y="-100.5" />
+      <point x="362.0" y="925.0" />
+      <point x="308.7222222222223" y="925.0" />
+      <point x="51.0" y="73.5" />
+    </edge>
+    <edge source="97949c56-81d4-44c7-87b4-0edb00a7e86b.TABLE:openTreatment_1.Task" target="97949c56-81d4-44c7-87b4-0edb00a7e86b.TABLE:openTreatment_1.Project">
+      <point x="-37.75" y="-235.5" />
+      <point x="437.6277777777778" y="1230.0" />
+      <point x="410.0" y="1230.0" />
+      <point x="0.0" y="100.5" />
+    </edge>
+    <edge source="97949c56-81d4-44c7-87b4-0edb00a7e86b.TABLE:openTreatment_1.Users" target="97949c56-81d4-44c7-87b4-0edb00a7e86b.TABLE:openTreatment_1.Organization">
+      <point x="0.0" y="-100.5" />
+      <point x="0.0" y="60.0" />
+    </edge>
+    <edge source="97949c56-81d4-44c7-87b4-0edb00a7e86b.TABLE:openTreatment_1.Disease" target="97949c56-81d4-44c7-87b4-0edb00a7e86b.TABLE:openTreatment_1.Program">
+      <point x="0.0" y="-127.5" />
+      <point x="172.5" y="925.0" />
+      <point x="206.72222222222226" y="925.0" />
+      <point x="-51.0" y="73.5" />
+    </edge>
+    <edge source="97949c56-81d4-44c7-87b4-0edb00a7e86b.TABLE:openTreatment_1.Project" target="97949c56-81d4-44c7-87b4-0edb00a7e86b.TABLE:openTreatment_1.Guide">
+      <point x="48.0" y="-100.5" />
+      <point x="458.0" y="925.0" />
+      <point x="468.25" y="925.0" />
+      <point x="-45.5" y="100.5" />
+    </edge>
+    <edge source="97949c56-81d4-44c7-87b4-0edb00a7e86b.TABLE:openTreatment_1.Program" target="97949c56-81d4-44c7-87b4-0edb00a7e86b.TABLE:openTreatment_1.Workspace">
+      <point x="0.0" y="-73.5" />
+      <point x="0.0" y="73.5" />
+    </edge>
+    <edge source="97949c56-81d4-44c7-87b4-0edb00a7e86b.TABLE:openTreatment_1.Task" target="97949c56-81d4-44c7-87b4-0edb00a7e86b.TABLE:openTreatment_1.ServiceProvider">
+      <point x="113.25" y="-235.5" />
+      <point x="588.6277777777777" y="1230.0" />
+      <point x="615.25" y="1230.0" />
+      <point x="0.0" y="114.0" />
+    </edge>
+    <edge source="97949c56-81d4-44c7-87b4-0edb00a7e86b.TABLE:openTreatment_1.Workspace" target="97949c56-81d4-44c7-87b4-0edb00a7e86b.TABLE:openTreatment_1.Users">
+      <point x="0.0" y="-73.5" />
+      <point x="257.7222222222223" y="396.0" />
+      <point x="272.09444444444443" y="396.0" />
+      <point x="0.0" y="100.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.424971363115693" x="404.0" y="401.79245283018867" />
+  <SelectedNodes>
+    <node>97949c56-81d4-44c7-87b4-0edb00a7e86b.TABLE:openTreatment_1.Task</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Key columns</Category>
+    <Category>Virtual foreign keys</Category>
+    <Category>Columns</Category>
+  </Categories>
+</Diagram>
+
