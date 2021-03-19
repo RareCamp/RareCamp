@@ -58,7 +58,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           fetchProgramsResponse?.data?.programs?.Items || [],
         );
       } catch {
-        console.log('Error fetching programs');
+        alert('Error fetching programs');
       }
     }
     /*
