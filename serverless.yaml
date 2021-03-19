@@ -20,6 +20,8 @@ provider:
     DISEASE_TABLE: !Ref DiseaseTable
     PROGRAM_TABLE: !Ref ProgramTable
     PROJECT_TABLE: !Ref ProjectTable
+    WORKSPACE_TABLE: !Ref WorkspaceTable
+    TASK_TABLE: !Ref TaskTable
 
     # Enable connection reuse for AWS SDK for instant performance boost
     # https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/node-reusing-connections.html
@@ -46,7 +48,7 @@ plugins:
 custom:
   stages:
     development:
-      profile: ${{env:AWS_PROFILE}}
+      profile: rarecamp_dev
       logRetentionInDays: 1
       amplify:
       api:
@@ -135,7 +137,7 @@ custom:
       migrate: false
 
 functions: ${{file(templates/functions.yml)}}
-    
+
 resources:
   - ${{file(templates/resources.yml)}}
   - ${{file(templates/dynamodb.yml)}}

@@ -57,15 +57,15 @@ export const TASK_SUB_TABLE_HEADINGS = [
 ];
 const USER_NAME = 'Ramya';
 const Home = () => {
-  const router = useRouter();
-  const programsContext = useProgramsContext();
-  const isFirstTimeVisitor = !programsContext.programs.length;
-
-  // if (isFirstTimeVisitor) {
-  //   router.push('/workspace/stepform')
-  //   return null
-  // }
-
+  const router = useRouter()
+  const programsContext = useProgramsContext()
+  const isFirstTimeVisitor = !programsContext.programs.length
+  
+  // HACK: check if process.browser or we get a Next error
+  if (process.browser && isFirstTimeVisitor) {
+    router.push('/workspace/stepform')
+    return null
+  }
   const [isEditProgramModalOpen, setEditProgramModalOpen] = useState(
     false,
   );

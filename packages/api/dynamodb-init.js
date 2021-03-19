@@ -4,7 +4,9 @@ import DynamoDB from 'aws-sdk/clients/dynamodb'
 // TODO: v3 https://github.com/deeheber/note-service/pull/4/files
 // const { fromIni } = require("@aws-sdk/credential-provider-ini");
 
-const { AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, NODE_ENV } = process.env
+const {
+  AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, NODE_ENV,
+} = process.env
 
 // For local development, get creds from ~/.aws/credentials
 // Alternatively, set AWS_PROFILE env var

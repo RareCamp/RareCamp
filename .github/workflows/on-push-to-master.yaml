@@ -23,7 +23,8 @@ jobs:
     - name: Install package
       run: |
         (npm ci && npm audit --audit-level critical && npm test) & \
-        (cd packages/ui && npm ci && npm audit --audit-level critical && npm test)
+        (cd packages/ui && npm ci && npm audit --audit-level critical && npm test) & \
+        (cd packages/api && npm ci && npm audit --audit-level critical && npm test)
 
     - name: Deploy to staging
       run: |

@@ -22,9 +22,8 @@ Ensure you have the following tools and accounts before beginning:
     file_contents=$(<.env.example) && echo "${file_contents//SERVERLESS_SERVICE_SUFFIX=/SERVERLESS_SERVICE_SUFFIX=-$USER}" > .env.development
     ```
 
-1. Ensure you have AWS Creditials configured in your local machine. If not, run `aws configure` to configure 
-credentials. If you use a different profile to store your config, then update `AWS_PROFILE` in .env.development.
-1. Run `npm run deploy:dev` to deploy the entire stack to your AWS account specified in `AWS_PROFILE`
+1. Add a profile called `[rarecamp_dev]` to your `.aws/credentials` file
+1. Run `npm run deploy:dev` to deploy the application to your AWS account
 1. Run this command to get the URL where the website is hosted: `grep -o 'DefaultDomain": "[^"]*' ./stack-outputs.json | grep -o '[^"]*$'`
 
 
