@@ -1,11 +1,22 @@
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
 import { Input, Button } from 'antd';
 import { Logo } from 'components/Logo';
+import { Auth } from 'aws-amplify';
 
 const SignIn = () => {
+  const router = useRouter();
   const { register, handleSubmit, errors } = useForm();
-  const onSubmit = () => {};
+  const onSubmit = (data) => {
+    Auth.signIn(data.email, data.password)
+      .then(() => {
+        router.push('/');
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   return (
     <section className="px-4">
       <div className="bg-secondary h-screen flex justify-between px-52 py-16 ">

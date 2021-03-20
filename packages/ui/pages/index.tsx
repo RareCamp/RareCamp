@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { Layout, Table, Collapse, Badge } from 'antd';
+import axios from 'axios';
 import { MainSection, TaskSection } from 'components/Pages/Program';
 import Navbar from 'components/AppLayout/Navbar';
 import { AppLayout } from 'components/AppLayout';
@@ -57,16 +58,15 @@ export const TASK_SUB_TABLE_HEADINGS = [
 const USER_NAME = 'Ramya';
 
 const Home = () => {
-  const router = useRouter();
-  const programsContext = useProgramsContext();
-  const isFirstTimeVisitor = !programsContext.programs.length;
-
-  if (isFirstTimeVisitor) {
-    typeof window !== 'undefined' &&
-      router.push('/workspace/stepform');
-    return null;
+  const router = useRouter()
+  const programsContext = useProgramsContext()
+  const isFirstTimeVisitor = !programsContext.programs.length
+  
+  // HACK: check if process.browser or we get a Next error
+  if (process.browser && isFirstTimeVisitor) {
+    router.push('/workspace/stepform')
+    return null
   }
-
   const [isEditProgramModalOpen, setEditProgramModalOpen] = useState(
     false,
   );

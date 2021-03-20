@@ -3,17 +3,20 @@ import { generateId } from '../utils/id'
 import { log } from '../utils/logger'
 
 export async function createProject({
+  userId,
   programId,
   project,
 }) {
+  if (!userId) throw new Error('userId is required')
   if (!programId) throw new Error('programId is required')
   if (!project) throw new Error('project is required')
 
   const id = generateId()
+  const partitionKey = getPk({ userId, programId })
   const item = {
     ...project,
+    programKey: partitionKey,
     id,
-    programId,
   }
   const projectItem = await Project.update(item, { returnValues: 'ALL_NEW' })
 
@@ -23,12 +26,21 @@ export async function createProject({
 }
 
 export async function updateProject({
+  userId,
+  programId,
   projectId,
   project,
 }) {
+  if (!userId) throw new Error('userId is required')
+  if (!programId) throw new Error('programId is required')
+  if (!projectId) throw new Error('projectId is required')
+  if (!project) throw new Error('project is required')
+
+  const partitionKey = getPk({ userId, programId })
   const projectItem = await Project.update({
-    id: projectId,
     ...project,
+    programKey: partitionKey,
+    id: projectId,
   }, { returnValues: 'ALL_NEW' })
 
   log.info('PROJECT_CONTROLLER:PROJECT_UPDATED', { projectItem })
@@ -36,8 +48,13 @@ export async function updateProject({
   return projectItem.Attributes
 }
 
-export async function getProject({ programId, projectId }) {
-  const projectItem = await Project.get({ programId, id: projectId })
+export async function getProject({ userId, programId, projectId }) {
+  if (!userId) throw new Error('userId is required')
+  if (!programId) throw new Error('programId is required')
+  if (!projectId) throw new Error('projectId is required')
+
+  const partitionKey = getPk({ userId, programId })
+  const projectItem = await Project.get({ programKey: partitionKey, id: projectId })
 
   if (!projectItem) {
     return null
@@ -46,8 +63,12 @@ export async function getProject({ programId, projectId }) {
   return projectItem.Item
 }
 
-export async function getProjects({ programId }) {
-  const projectItems = await Project.query({ programId })
+export async function getProjects({ userId, programId }) {
+  if (!userId) throw new Error('userId is required')
+  if (!programId) throw new Error('programId is required')
+
+  const partitionKey = getPk({ userId, programId })
+  const projectItems = await Project.query(partitionKey)
 
   if (!projectItems) {
     return null
@@ -56,6 +77,9 @@ export async function getProjects({ programId }) {
   return projectItems.Item
 }
 
-export function scanProjects() {
-  return Project.scan()
+function getPk({ userId, programId }) {
+  if (!userId) throw new Error('userId is required')
+  if (!programId) throw new Error('programId is required')
+
+  return `${userId}#${programId}`
 }

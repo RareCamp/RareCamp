@@ -36,9 +36,12 @@
     "dotenv": "^8.2.0",
     "dynamodb-toolbox": "^0.3.3",
     "express": "^4.17.1",
+    "faker": "^5.4.0",
+    "http-status-codes": "^2.1.4",
     "lodash": "^4.17.20",
     "nanoid": "^3.1.20",
     "node-fetch": "^2.6.1",
-    "winston": "^3.3.3"
+    "winston": "^3.3.3",
+    "yup": "^0.32.9"
   }
 }
