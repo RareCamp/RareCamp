@@ -1,86 +1,125 @@
-import { Button } from 'components/Button';
 import { Icon } from 'components/Icon';
 import React from 'react';
+import styles from './proteinform.module.css';
+import { Form, Input, Button } from 'antd';
 
-function ProteinForm({
+const ProteinForm = ({
   setBasicInfo,
   setShowMutationForm,
   setShowProteinForm,
   setShowEligibleSection,
   showProteinForm,
-}: any) {
+  setCurrent,
+}: any) => {
+  const layout = {
+    labelCol: { span: 8 },
+    wrapperCol: { span: 16 },
+  };
+  const tailLayout = {
+    wrapperCol: { offset: 8, span: 16 },
+  };
+
+  const Demo = () => {
+    const onFinish = (values: any) => {
+      console.log('Success:', values);
+    };
+  };
+
+  const onFinishFailed = (errorInfo: any) => {
+    console.log('Failed:', errorInfo);
+  };
   return (
-    <div className="flex justify-between ">
-      <div className="w-3/5">
-        <h1 className="mt-6 text-2xl font-normal">
-          What is the size of the protein?
-        </h1>
-        <form className="w-full">
-          <div className="mt-4">
-            <label
-              htmlFor="less-amino"
-              className="ml-1 text-sm flex items-center"
-            >
-              <input type="radio" id="less-amino" className="mr-2" />
-              <Icon
-                name="chevron-left"
-                className="w-4 ml-1 text-black"
-              />
-              1100 amino acids
-            </label>
-            <br />
-          </div>
-          <div className="mt-4">
-            <label
-              htmlFor="more-amino"
-              className="ml-1 text-sm flex items-center"
-            >
-              <input type="radio" id="more-amino" className="mr-2" />
-              <Icon
-                name="chevron-right"
-                className="w-4 ml-1 text-black"
-              />{' '}
-              1100 amino acids
-            </label>
-            <br />
-          </div>
-          <div className="mt-4">
-            <label
-              htmlFor="4"
-              className="ml-1 text-sm flex items-center"
-            >
-              <input type="radio" className="mr-4" />
-              Dont Know
-            </label>
-          </div>
-          <div className="flex mt-4">
+    <div className={styles['protein-form']}>
+      <div style={{ width: '60%' }}>
+        <h1>What is the size of the protein?</h1>
+        <Form
+          name="basic"
+          initialValues={{ remember: true }}
+          onFinish={Demo}
+          onFinishFailed={onFinishFailed}
+        >
+          <Form.Item
+            htmlFor="less-amino"
+            style={{
+              fontSize: 'small',
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+            }}
+          >
+            <Input
+              type="radio"
+              id="less-amino"
+              style={{ marginRight: '0.5rem' }}
+            />
+            {/* <Icon
+              name="chevron-left"
+              className={styles['icon-left']}
+            /> */}
+            1100 amino acids
+          </Form.Item>
+
+          <Form.Item
+            htmlFor="more-amino"
+            style={{
+              fontSize: 'small',
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+            }}
+          >
+            <Input
+              type="radio"
+              id="more-amino"
+              style={{ marginRight: '0.5rem' }}
+            />
+            {/* <Icon
+              name="chevron-right"
+              className={styles['arow-icon']}
+            /> */}
+            1100 mino acids
+          </Form.Item>
+
+          <Form.Item
+            htmlFor="dont-know-btn"
+            style={{
+              fontSize: 'small',
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+            }}
+          >
+            <Input type="radio" id="dont-know-btn" />
+            Dont Know
+          </Form.Item>
+
+          <Form.Item style={{ display: 'flex', marginTop: '1rem' }}>
             <Button
-              label="Back"
-              color="tertiary"
-              size="sm"
-              className="block text-xs text-gray-400 focus:outline-none"
               onClick={() => {
                 setShowProteinForm(false);
                 setBasicInfo(false);
                 setShowMutationForm(true);
+                setCurrent(1);
               }}
-            />
+            >
+              Back
+            </Button>
+
             <Button
-              label="Determine Feasibility"
-              color="primary"
-              size="custom"
-              className="block text-xs text-white  py-2 px-4 rounded focus:outline-none ml-1"
               onClick={() => {
                 setBasicInfo(false);
                 setShowMutationForm(false);
                 setShowProteinForm(false);
                 setShowEligibleSection(true);
               }}
-            />
-          </div>
-        </form>
+              style={{ marginLeft: '0.25rem' }}
+            >
+              Determine Feasibility
+            </Button>
+          </Form.Item>
+        </Form>
       </div>
-      <div className="w-2/5 px-4 flex flex-col justify-center items-center">
+      <div className={styles['protein-form-one']}>
         <div>
           {showProteinForm ? (
             <img
@@ -90,11 +129,11 @@ function ProteinForm({
             />
           ) : null}
         </div>
-        <p className="text-center text-sm text-gray-400 font-extralight">
+        <p>
           Lorem ipsum, or lipsum as it is sometimes known, is dummy
           text used in laying out print, graphic or web designs.
         </p>
-        <p className="text-center text-sm text-gray-400 font-extralight">
+        <p>
           The passage is attributed to an unknown typesetter in the
           15th century who is thought to have scrambled parts of
           Ciceros De.
@@ -102,6 +141,6 @@ function ProteinForm({
       </div>
     </div>
   );
-}
+};
 
 export default ProteinForm;

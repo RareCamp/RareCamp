@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
 import { Auth } from 'aws-amplify';
-import { Button } from 'components/Button';
+import { Button, Input } from 'antd';
 import { InputField } from 'components/InputField';
 import {
   AS_REQUIRED,
@@ -11,8 +11,6 @@ import {
   AS_PASSWORD,
 } from 'constants/validations';
 import { Logo } from 'components/Logo';
-
-// https://docs.amplify.aws/lib/auth/emailpassword/q/platform/js
 
 const SignUp = () => {
   const router = useRouter();
@@ -158,7 +156,6 @@ const SignUp = () => {
             alt="signup"
             className="self-center h-full w-full"
           />
-          {/* <Icon name="form" className="object-contain  w-full..." /> */}
         </div>
       </div>
     </section>

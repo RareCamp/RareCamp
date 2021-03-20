@@ -8,7 +8,7 @@ import { AppLayout } from 'components/AppLayout';
 import records from 'fixtures/dashboard.json';
 import { TASK_TABLE_HEADINGS } from 'constants/tableHeaders';
 import styles from 'styles/program.module.css';
-import { Button } from 'components/Button';
+import { Button } from 'antd';
 import { useProgramsContext } from 'context/programs';
 
 export const TASK_SUB_TABLE_HEADINGS = [
@@ -56,6 +56,7 @@ export const TASK_SUB_TABLE_HEADINGS = [
   },
 ];
 const USER_NAME = 'Ramya';
+
 const Home = () => {
   const router = useRouter()
   const programsContext = useProgramsContext()
@@ -121,10 +122,6 @@ const Home = () => {
         />
       </Layout.Header>
       <Layout.Content style={{ margin: '0 16px' }}>
-        {/* <Layout.Breadcrumb style={{ margin: '16px 0' }}>
-          <Layout.Breadcrumb.Item>User</Layout.Breadcrumb.Item>
-          <Layout.Breadcrumb.Item>Bill</Layout.Breadcrumb.Item>
-        </Layout.Breadcrumb> */}
         <div
           className="site-layout-background"
           style={{ padding: 24, minHeight: 360 }}
@@ -135,56 +132,24 @@ const Home = () => {
             setAccountSettingModalOpen={setAccountSettingModalOpen}
             isAccountSettingModalOpen={isAccountSettingModalOpen}
           >
-            {/* <table className="table-fixed">
-          <thead>
-            <tr className={`${styles['table-header']}`}>
-              {HOME_TABLE_HEADINGS.map((heading) => (
-                <th key={heading}>{heading}</th>
+            <table className="table-fixed">
+              <thead>
+                <tr className={`${styles['table-header']}`}>
+                  {TASK_TABLE_HEADINGS.map((heading) => (
+                    <th key={heading}>{heading}</th>
+                  ))}
+                </tr>
+              </thead>
+              {records.map((record) => (
+                <TaskSection record={record} key={record.title} />
               ))}
-            </tr>
-          </thead>
-          {records.map((record) => (
-            <TaskSection record={record} key={record.title} />
-          ))}
 
-          <tr>
-            <td colSpan={6}>
-              <Button
-                onClick={() => {}}
-                icon={<span>+</span>}
-                label="Add Project"
-                color="tertiary"
-                size="custom"
-                className="py-4  px-4 text-xl border border-gray-300 w-full flex flex-start font-semibold focus:outline-none text-gray-300 hover:text-gray-400 hover:border-blue-400"
-              />
-            </td>
-          </tr>
-        </table> */}
-
-            <Table
-              dataSource={[
-                {
-                  taskname: 'Initial Planning',
-                  status: '',
-                  owner: '',
-                  budget: '',
-                  start_date: '',
-                  end_date: '',
-                  key: '1',
-                },
-                {
-                  taskname: 'ADD_TASK',
-                  status: '',
-                  owner: '',
-                  budget: '',
-                  start_date: '',
-                  end_date: '',
-                  key: '2',
-                },
-              ]}
-              expandable={{ expandedRowRender }}
-              columns={TASK_TABLE_HEADINGS}
-            />
+              <tr>
+                <td colSpan={6}>
+                  <Button>+ Add Project</Button>
+                </td>
+              </tr>
+            </table>
           </MainSection>
         </div>
       </Layout.Content>

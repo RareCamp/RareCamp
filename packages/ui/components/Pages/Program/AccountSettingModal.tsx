@@ -1,15 +1,30 @@
 import React, { useRef } from 'react';
-import { Button } from 'components/Button';
-import { InputField } from 'components/InputField';
 import { LetterPic } from 'components/LetterPic';
 import { ModalHeader } from 'components/Modal';
+import { Form, Input, Button } from 'antd';
 
 const AccountSettingModal = ({
   setAccountSettingModalOpen,
 }: {
   setAccountSettingModalOpen: Function;
 }) => {
-  const inputRef = useRef(null);
+  const layout = {
+    labelCol: { span: 8 },
+    wrapperCol: { span: 16 },
+  };
+  const tailLayout = {
+    wrapperCol: { offset: 8, span: 16 },
+  };
+
+  const Demo = () => {
+    const onFinish = (values: any) => {
+      console.log('Success:', values);
+    };
+  };
+
+  const onFinishFailed = (errorInfo: any) => {
+    console.log('Failed:', errorInfo);
+  };
 
   return (
     <>
@@ -27,66 +42,33 @@ const AccountSettingModal = ({
             className="mt-10"
           />
         </div>
-        <form className="flex flex-col px-2 pb-6">
+
+        <Form
+          {...layout}
+          name="basic"
+          initialValues={{ remember: true }}
+          onFinish={Demo}
+          onFinishFailed={onFinishFailed}
+        >
           <div className="flex items-center">
-            <InputField
-              label="Full Name"
-              value=""
-              className="text-sm text-gray-500 text-light mt-8 inline-block"
-              name="firstname"
-              placeholder="first name"
-              reference={inputRef}
-            />
-            <InputField
-              label="."
-              value=""
-              className="text-sm text-gray-500 text-light mt-8 inline-block ml-2"
-              name="lastname"
-              placeholder="last name"
-              reference={inputRef}
-            />
+            <Input placeholder="first name" />
+
+            <Input placeholder="last name" />
           </div>
-          <InputField
-            label="Email"
-            placeholder="Example@gmail.com"
-            className="text-sm text-gray-500 text-light mt-8"
-            name="email"
-            value=""
-            reference={inputRef}
-          />
-          <InputField
-            label="Organization Name"
-            placeholder="Example Foundation"
-            className="text-sm text-gray-500 text-light mt-8"
-            name="organization"
-            reference={inputRef}
-            value=""
-          />
-          <InputField
-            label="Organization Website"
-            placeholder="Foundation.org"
-            className="text-sm text-gray-500 text-light mt-8"
-            name="organization"
-            reference={inputRef}
-            value=""
-          />
+          <Input placeholder="Example@gmail.com" />
+
+          <Input placeholder="Example Foundation" />
+
+          <Input placeholder="Foundation.org" />
           <div className="flex justify-end mt-4">
-            <Button
-              label="Cancel"
-              size="sm"
-              color="tertiary"
-              className="text-sm text-black focus:outline-none"
-              onClick={() => setAccountSettingModalOpen(false)}
-            />
-            <Button
-              label="Save"
-              size="md"
-              color="primary"
-              className="text-sm text-white  focus:outline-none"
-              onClick={() => {}}
-            />
+            <Button onClick={() => setAccountSettingModalOpen(false)}>
+              Cancel
+            </Button>
+            <Button type="primary" onClick={() => {}}>
+              Save
+            </Button>
           </div>
-        </form>
+        </Form>
       </div>
     </>
   );

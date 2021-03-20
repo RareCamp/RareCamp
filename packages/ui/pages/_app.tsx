@@ -74,24 +74,4 @@ function ConfirmSignUpRedirectToSignIn({ authState, onStateChange }) {
 //   // amazon_client_id: 'abc123abc123abc123abc123',
 // };
 
-// // @ts-ignore
-// export default withAuthenticator(MyAppWrapper, {
-//   usernameAttributes: 'email',
-//   signUpConfig,
-//   includeGreetings: false,
-//   hideDefault: true,
-//   authenticatorComponents: [
-//     <SignIn federated={federated} />,
-//     <ConfirmSignIn />,
-//     <VerifyContact />,
-//     <SignUp signUpConfig={signUpConfig} />,
-//     // @ts-ignore
-//     <ConfirmSignUpRedirectToSignIn override="ConfirmSignUp" />,
-//     <ForgotPassword />,
-//     <RequireNewPassword />,
-//     <Loading />,
-//     <Greetings />,
-//   ],
-// });
-
-export default MyAppWrapper;
+export default MyApp;
