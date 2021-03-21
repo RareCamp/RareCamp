@@ -12,8 +12,9 @@ const projectRouter = express.Router({ mergeParams: true })
 
 projectRouter.post('/', wrapAsync(async (req, res) => {
   const { project } = req.body
-  const programId = req.cognitoUser.id
-  const projectItem = await createProject({ programId, project })
+  const userId = req.cognitoUser.id
+  const { programId } = req.params
+  const projectItem = await createProject({ programId, project, userId })
 
   res.json({ project: projectItem })
 }))
@@ -31,7 +32,8 @@ projectRouter.put('/:projectId', wrapAsync(async (req, res) => {
 
 projectRouter.get('/', wrapAsync(async (req, res) => {
   const userId = req.cognitoUser.id
-  const projects = await getProjects({ userId })
+  const { programId } = req.params
+  const projects = await getProjects({ userId, programId })
   res.json({ projects })
 }))
 

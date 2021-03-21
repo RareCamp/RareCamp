@@ -13,10 +13,9 @@ export async function createTask({
   if (!task) throw new Error('task is required')
   if (task.notes && task.notes.length) task.notes = task.notes.map(sanitizeHtml)
   const taskId = generateId()
-  const partitionKey = getPk({ userId, projectId })
   const item = {
     ...task,
-    projectKey: partitionKey,
+    projectId,
     id: taskId,
   }
   const taskItem = await Task.update(item, { returnValues: 'ALL_NEW' })
@@ -37,10 +36,9 @@ export async function updateTask({
   if (!taskId) throw new Error('taskId is required')
   if (!task) throw new Error('task is required')
   if (task.notes && task.notes.length) task.notes = task.notes.map(sanitizeHtml)
-  const partitionKey = getPk({ userId, projectId })
   const taskItem = await Task.update({
     ...task,
-    projectKey: partitionKey,
+    projectId,
     id: taskId,
   }, { returnValues: 'ALL_NEW' })
 
@@ -54,8 +52,7 @@ export async function getTask({ userId, projectId, taskId }) {
   if (!projectId) throw new Error('projectId is required')
   if (!taskId) throw new Error('taskId is required')
 
-  const partitionKey = getPk({ userId, projectId })
-  const taskItem = await Task.get({ projectKey: partitionKey, id: taskId })
+  const taskItem = await Task.get({ projectId, id: taskId })
 
   if (!taskItem) {
     return null
@@ -68,19 +65,11 @@ export async function getTasks({ userId, projectId }) {
   if (!userId) throw new Error('userId is required')
   if (!projectId) throw new Error('projectId is required')
 
-  const partitionKey = getPk({ userId, projectId })
-  const taskItems = await Task.query(partitionKey)
+  const taskItems = await Task.query(projectId)
 
   if (!taskItems) {
     return null
   }
 
-  return taskItems.Item
-}
-
-function getPk({ userId, projectId }) {
-  if (!userId) throw new Error('userId is required')
-  if (!projectId) throw new Error('projectId is required')
-
-  return `${userId}#${projectId}`
+  return taskItems.Items
 }

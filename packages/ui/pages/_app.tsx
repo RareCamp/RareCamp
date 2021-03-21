@@ -74,4 +74,4 @@ function ConfirmSignUpRedirectToSignIn({ authState, onStateChange }) {
 //   // amazon_client_id: 'abc123abc123abc123abc123',
 // };
 
-export default MyApp;
+export default MyAppWrapper;

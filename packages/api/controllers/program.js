@@ -10,13 +10,7 @@ import { createTask } from './task'
 import NotFoundError from '../errors/NotFoundError'
 import { getDefaultWorkspace, getWorkspaceByIdAndUserId } from './workspace'
 import { createProject } from './project'
-
-function getPk({ userId, workspaceId }) {
-  if (!userId) throw new Error('userId is required')
-  if (!workspaceId) throw new Error('workspaceId is required')
-
-  return `${userId}#${workspaceId}`
-}
+import { getUser } from './user'
 
 export async function createProgram({
   userId,
@@ -30,13 +24,11 @@ export async function createProgram({
     if (!userDefaultWorkspace) {
       throw new BadRequestError('workspaceId is required')
     }
-    program.workspaceId = getPk({ workspaceId: userDefaultWorkspace.id, userId })
+    program.workspaceId = userDefaultWorkspace.id
   }
-  program.workspaceKey = getPk({ workspaceId: program.workspaceId, userId })
 
   const {
     disease,
-    workspaceId,
     ...item
   } = program
   item.id = generateId()
@@ -53,11 +45,20 @@ export async function createProgram({
     programId: item.id,
     project: defaultProject,
   })
-  project.tasks = await Promise.all(defaultTasks.map((task) => createTask({
-    userId,
-    projectId: project.id,
-    task,
-  })))
+  project.tasks = await Promise.all(defaultTasks.map(async (task) => {
+    const { Item: user } = await getUser({ id: userId })
+    task.assignee = [{
+      id: user.id,
+      firstName: user.firstName,
+      lastname: user.lastName,
+      thumbnailColor: user.thumbnailColor || '#bbdefb',
+    }]
+    return createTask({
+      userId,
+      projectId: project.id,
+      task,
+    })
+  }))
   log.info('PROGRAM_CONTROLLER:PROGRAM_CREATED', { programItem })
 
   return {
@@ -78,7 +79,6 @@ export async function updateProgram({
 
   const programItem = await Program.update({
     ...program,
-    userId,
     id: programId,
   }, { returnValues: 'ALL_NEW' })
 
@@ -88,12 +88,13 @@ export async function updateProgram({
 }
 
 export async function getProgram({ programId, userId }) {
-  const programItem = await Program.get({ id: programId })
-  if (!programItem) throw new NotFoundError('Program Can not be found')
-  const workspace = await getWorkspaceByIdAndUserId({ id: programId.workspaceId, userId })
+  const { Items } = await Program.scan({ filters: { attr: 'id', eq: programId } })
+  if (Items.length === 0) throw new NotFoundError('Program Can not be found')
+  const [programItem] = Items
+  const workspace = await getWorkspaceByIdAndUserId({ id: programItem.workspaceId, userId })
   if (!workspace) throw new NotFoundError('Program Can not be found')
-
-  return programItem.Item
+  programItem.workspace = workspace.Item
+  return programItem
 }
 
 export function scanPrograms(workspaceId) {

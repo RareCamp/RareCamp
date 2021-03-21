@@ -12,10 +12,9 @@ export async function createProject({
   if (!project) throw new Error('project is required')
 
   const id = generateId()
-  const partitionKey = getPk({ userId, programId })
   const item = {
     ...project,
-    programKey: partitionKey,
+    programId,
     id,
   }
   const projectItem = await Project.update(item, { returnValues: 'ALL_NEW' })
@@ -36,10 +35,9 @@ export async function updateProject({
   if (!projectId) throw new Error('projectId is required')
   if (!project) throw new Error('project is required')
 
-  const partitionKey = getPk({ userId, programId })
   const projectItem = await Project.update({
     ...project,
-    programKey: partitionKey,
+    programId,
     id: projectId,
   }, { returnValues: 'ALL_NEW' })
 
@@ -53,8 +51,7 @@ export async function getProject({ userId, programId, projectId }) {
   if (!programId) throw new Error('programId is required')
   if (!projectId) throw new Error('projectId is required')
 
-  const partitionKey = getPk({ userId, programId })
-  const projectItem = await Project.get({ programKey: partitionKey, id: projectId })
+  const projectItem = await Project.get({ programId, id: projectId })
 
   if (!projectItem) {
     return null
@@ -67,19 +64,11 @@ export async function getProjects({ userId, programId }) {
   if (!userId) throw new Error('userId is required')
   if (!programId) throw new Error('programId is required')
 
-  const partitionKey = getPk({ userId, programId })
-  const projectItems = await Project.query(partitionKey)
+  const projectItems = await Project.query(programId)
 
   if (!projectItems) {
     return null
   }
 
-  return projectItems.Item
-}
-
-function getPk({ userId, programId }) {
-  if (!userId) throw new Error('userId is required')
-  if (!programId) throw new Error('programId is required')
-
-  return `${userId}#${programId}`
+  return projectItems.Items
 }

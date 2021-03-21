@@ -38,41 +38,6 @@ Resources:
         - AttributeName: id
           AttributeType: S
 
-  ProgramTable:
-    Type: AWS::DynamoDB::Table
-    Properties:
-      BillingMode: PAY_PER_REQUEST
-      PointInTimeRecoverySpecification:
-        PointInTimeRecoveryEnabled: ${{self:custom.stageConfig.pointInTimeRecoveryEnabled, false}}
-      KeySchema:
-        - KeyType: HASH
-          AttributeName: workspaceKey
-        - KeyType: RANGE
-          AttributeName: id
-      AttributeDefinitions:
-        - AttributeName: workspaceKey
-          AttributeType: S
-        - AttributeName: id
-          AttributeType: S
-
-
-  ProjectTable:
-    Type: AWS::DynamoDB::Table
-    Properties:
-      BillingMode: PAY_PER_REQUEST
-      PointInTimeRecoverySpecification:
-        PointInTimeRecoveryEnabled: ${{self:custom.stageConfig.pointInTimeRecoveryEnabled, false}}
-      KeySchema:
-        - KeyType: HASH
-          AttributeName: programKey
-        - KeyType: RANGE
-          AttributeName: id
-      AttributeDefinitions:
-        - AttributeName: programKey
-          AttributeType: S
-        - AttributeName: id
-          AttributeType: S
-
   WorkspaceTable:
     Type: AWS::DynamoDB::Table
     Properties:
@@ -90,6 +55,40 @@ Resources:
         - AttributeName: id
           AttributeType: S
 
+  ProgramTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      BillingMode: PAY_PER_REQUEST
+      PointInTimeRecoverySpecification:
+        PointInTimeRecoveryEnabled: ${{self:custom.stageConfig.pointInTimeRecoveryEnabled, false}}
+      KeySchema:
+        - KeyType: HASH
+          AttributeName: workspaceId
+        - KeyType: RANGE
+          AttributeName: id
+      AttributeDefinitions:
+        - AttributeName: workspaceId
+          AttributeType: S
+        - AttributeName: id
+          AttributeType: S
+
+  ProjectTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      BillingMode: PAY_PER_REQUEST
+      PointInTimeRecoverySpecification:
+        PointInTimeRecoveryEnabled: ${{self:custom.stageConfig.pointInTimeRecoveryEnabled, false}}
+      KeySchema:
+        - KeyType: HASH
+          AttributeName: programId
+        - KeyType: RANGE
+          AttributeName: id
+      AttributeDefinitions:
+        - AttributeName: programId
+          AttributeType: S
+        - AttributeName: id
+          AttributeType: S
+
   TaskTable:
     Type: AWS::DynamoDB::Table
     Properties:
@@ -98,11 +97,11 @@ Resources:
         PointInTimeRecoveryEnabled: ${{self:custom.stageConfig.pointInTimeRecoveryEnabled, false}}
       KeySchema:
         - KeyType: HASH
-          AttributeName: projectKey
+          AttributeName: projectId
         - KeyType: RANGE
           AttributeName: id
       AttributeDefinitions:
-        - AttributeName: projectKey
+        - AttributeName: projectId
           AttributeType: S
         - AttributeName: id
           AttributeType: S

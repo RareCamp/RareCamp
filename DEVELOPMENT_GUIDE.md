@@ -18,7 +18,7 @@ Ensure you have the following tools and accounts before beginning:
     ```bash
     git clone git@github.com:RareCamp/RareCamp.git
     cd RareCamp
-    npm run init
+    npm i
     file_contents=$(<.env.example) && echo "${file_contents//SERVERLESS_SERVICE_SUFFIX=/SERVERLESS_SERVICE_SUFFIX=-$USER}" > .env.development
     ```
 
