@@ -18,6 +18,7 @@ export const defaultTasks = [{
   description: 'This task is to gain an understanding of what knock-in mouse model is, the high level process to design and build and the cost/time it takes to develop a model.'
     + 'Please work with an expert to determine if this is the right model for you.',
   status: taskStatuses.IN_PROGRESS,
+  // TODO: assignee to be defaulted to the current user
   assignee: [],
   budget: {
     currency: '$',

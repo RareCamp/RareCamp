@@ -4,7 +4,7 @@ import {
   createProgram,
   getProgram,
   updateProgram,
-  getPrograms,
+  scanPrograms,
 } from '../../../controllers/program'
 import projectRouter from './project'
 
@@ -29,7 +29,7 @@ programRouter.put('/:programId', wrapAsync(async (req, res) => {
 
 programRouter.get('/', wrapAsync(async (req, res) => {
   const userId = req.cognitoUser.id
-  const programs = await getPrograms({ userId })
+  const programs = await scanPrograms({ userId })
   const programItems = programs.Items || []
   res.json({ programs: programItems })
 }))
@@ -49,6 +49,6 @@ programRouter.get('/:programId', wrapAsync(async (req, res) => {
 }))
 
 // project routes
-programRouter.use('/:projectId/tasks', projectRouter)
+programRouter.use('/:programId/projects', projectRouter)
 
 export default programRouter

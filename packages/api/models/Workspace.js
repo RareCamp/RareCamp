@@ -5,7 +5,6 @@ const WorkspaceTable = new Table({
   name: process.env.WORKSPACE_TABLE,
   partitionKey: 'userId',
   sortKey: 'id',
-  indexes: { DSI: { partitionKey: 'userId', sortKey: 'diseaseId' } },
   DocumentClient: dynamoDbDocumentClient,
 })
 

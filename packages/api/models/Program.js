@@ -3,8 +3,7 @@ import { dynamoDbDocumentClient } from '../dynamodb-init'
 
 const ProgramTable = new Table({
   name: process.env.PROGRAM_TABLE,
-  // NOTE: partitionKey format is userId#workspaceId
-  partitionKey: 'workspaceKey',
+  partitionKey: 'workspaceId',
   sortKey: 'id',
   DocumentClient: dynamoDbDocumentClient,
 })
@@ -12,7 +11,7 @@ const ProgramTable = new Table({
 const Program = new Entity({
   name: 'Program',
   attributes: {
-    workspaceKey: {
+    workspaceId: {
       partitionKey: true,
     },
     id: {

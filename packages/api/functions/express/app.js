@@ -4,13 +4,13 @@ import cors from 'cors'
 import { getCurrentInvoke } from '@vendia/serverless-express'
 import { StatusCodes } from 'http-status-codes'
 import diseaseRouter from './routes/disease'
-import projectRouter from './routes/project'
 import programRouter from './routes/program'
 import workspaceRouter from './routes/workspace'
 import { UnAuthorizedError, UserInputValidationError } from '../../errors'
 import { log } from '../../utils/logger'
 import profileRouter from './routes/profile'
 import BadRequestError from '../../errors/BadRequestError'
+import taskRouter from './routes/task'
 
 const IS_DEVELOPMENT = process.env.NODE_ENV === 'development'
 
@@ -35,10 +35,9 @@ router.use((req, res, next) => {
 })
 
 app.use('/', router)
-// app.use('/users', userRouter)
 app.use('/me', profileRouter)
 app.use('/diseases', diseaseRouter)
-app.use('/projects', projectRouter)
+app.use('/projects/:projectId/tasks', taskRouter)
 app.use('/programs', programRouter)
 app.use('/workspaces', workspaceRouter)
 
