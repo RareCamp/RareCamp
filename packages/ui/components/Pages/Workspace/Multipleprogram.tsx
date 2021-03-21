@@ -1,8 +1,8 @@
 import React from 'react';
-import { Button } from 'components/Button';
 import { Card } from 'components/Card';
-import { Icon } from 'components/Icon';
 import { LetterPic } from 'components/LetterPic';
+import { Button } from 'antd';
+import { CaretDownOutlined, PlusOutlined } from '@ant-design/icons';
 import styles from 'styles/multipleprogram.module.css';
 import programs from 'fixtures/programs.json';
 import selectedprograms from 'fixtures/selectedprograms.json';
@@ -58,7 +58,7 @@ function MultipleProgram() {
           );
         })}
         <div className="bg-white h-44 w-1/4 px-4 py-2 mr-4 mt-4 rounded flex flex-col justify-center items-center">
-          <Button
+          {/* <Button
             color="tertiary"
             size="md"
             icon={
@@ -70,7 +70,10 @@ function MultipleProgram() {
             label="Add Program"
             onClick={() => {}}
             className="text-xs border-none focus:outline-none cursor-pointer"
-          />
+          /> */}
+          <Button type="primary" icon={<PlusOutlined />}>
+            Add Program
+          </Button>
         </div>
       </div>
       <div className="py-4 px-4  mt-4">
@@ -79,13 +82,14 @@ function MultipleProgram() {
             <h1 className="text-base font-semibold">
               SSMD may be eligible for AAV based Gene Therapy
             </h1>
-            <Button
+            {/* <Button
               label="Modify Responses"
               size="custom"
               color="tertiary"
               className="text-sm text-gray-400 border border-gray-200 py-2 px-4 rounded focus:outline-none"
               onClick={() => {}}
-            />
+            /> */}
+            <Button icon={<PlusOutlined />}>Modify Responses</Button>
           </div>
           <div
             className={`${styles['selected-programs']} w-4/5 flex justify-between items-center mt-4  pb-4`}

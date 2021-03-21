@@ -1,18 +1,21 @@
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
-import { Button } from 'components/Button';
-import { InputField } from 'components/InputField';
-import {
-  AS_REQUIRED,
-  AS_EMAIL,
-  AS_PASSWORD,
-} from 'constants/validations';
+import { Input, Button } from 'antd';
 import { Logo } from 'components/Logo';
+import { Auth } from 'aws-amplify';
 
 const SignIn = () => {
+  const router = useRouter();
   const { register, handleSubmit, errors } = useForm();
-  const onSubmit = () => {
-    // console.log(data);
+  const onSubmit = (data) => {
+    Auth.signIn(data.email, data.password)
+      .then(() => {
+        router.push('/');
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
   return (
     <section className="px-4">
@@ -34,23 +37,8 @@ const SignIn = () => {
             className="flex flex-col mt-5 h-full"
             onSubmit={handleSubmit(onSubmit)}
           >
-            <InputField
-              reference={register({
-                ...AS_REQUIRED,
-                ...AS_EMAIL,
-              })}
-              type="email"
-              name="EMAIL"
-              placeholder="Email"
-              error={errors.EMAIL && errors.EMAIL.message}
-            />
-            <InputField
-              reference={register({ ...AS_PASSWORD })}
-              type="password"
-              name="PASSWORD"
-              placeholder="Password"
-              error={errors.PASSWORD && errors.PASSWORD.message}
-            />
+            <Input placeholder="Basic usage" size="large" />
+            <Input placeholder="Basic usage" size="large" />
             <p className="text-sm mt-4 ">
               <span className="text-btn-primary ml-1 cursor-pointer hover:text-blue-500">
                 Forgot your password?
@@ -63,14 +51,7 @@ const SignIn = () => {
                   Remember
                 </span>
               </div>
-              <Button
-                label="Sign in"
-                color="primary"
-                size="md"
-                className="text-white"
-                onClick={() => {}}
-                type="submit"
-              />
+              <Button type="primary">Sign in</Button>
             </div>
           </form>
         </div>

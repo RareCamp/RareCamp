@@ -1,5 +1,4 @@
 import { APP_NAME } from 'constants/application';
-// import Image from 'next/image';
 import Link from 'next/link';
 
 const EmailConfirmation = () => {

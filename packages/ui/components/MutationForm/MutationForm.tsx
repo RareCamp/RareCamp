@@ -1,103 +1,133 @@
-import { Button } from 'components/Button';
 import React from 'react';
+import styles from './mutation.module.css';
+import { Form, Input, Button } from 'antd';
 
-function MutationForm({
+const MutationForm = ({
   setShowProteinForm,
   setBasicInfo,
   setShowMutationForm,
+  setCurrent,
   showMutationForm,
-}: any) {
+}) => {
+  const layout = {
+    labelCol: { span: 8 },
+    wrapperCol: { span: 16 },
+  };
+  const tailLayout = {
+    wrapperCol: { offset: 8, span: 16 },
+  };
+
+  const Demo = () => {
+    const onFinish = (values: any) => {
+      console.log('Success:', values);
+    };
+  };
+
+  const onFinishFailed = (errorInfo: any) => {
+    console.log('Failed:', errorInfo);
+  };
   return (
-    <div className="flex justify-between ">
-      <div className="w-3/5">
-        <h1 className="mt-6 text-2xl font-normal">
-          How do mutations in this gene cause the disease?
-        </h1>
-        <form className="w-full">
-          <div className="mt-4">
-            <label
-              htmlFor="protein-loss"
-              className="ml-1 text-sm flex items-center"
-            >
-              <input
-                type="radio"
-                id="protein-loss"
-                className="mr-2"
-              />
-              Mutation leads to a LOSS of function or LOWER expression
-              of gene or protein
-            </label>
-            <br />
-          </div>
-          <div className="mt-4">
-            <label
-              htmlFor="2"
-              id="mutation-lead-btn"
-              className="ml-1 text-sm flex items-center"
-            >
-              <input
-                type="radio"
-                id="mutation-lead-btn"
-                className="mr-2"
-              />
-              Mutation leads to a GAIN of function of gene or protein
-            </label>
-            <br />
-          </div>
-          <div className="mt-4">
-            <label
-              htmlFor="more-protein-btn"
-              className="ml-1 text-sm flex items-center"
-            >
-              <input
-                type="radio"
-                id="more-protein-btn"
-                className="mr-2"
-              />
-              Mutation leads to a MORE protein to be produced
-            </label>
-            <br />
-          </div>
-          <div className="mt-4">
-            <label
-              htmlFor="dont-know-btn"
-              className="ml-1 text-sm flex items-center"
-            >
-              <input
-                type="radio"
-                id="dont-know-btn"
-                className="mr-2"
-              />
-              Dont Know
-            </label>
-          </div>
-          <div className="flex mt-4">
+    <div className={styles['mutation-form']}>
+      <div style={{ width: '60%' }}>
+        <h1>How do mutations in this gene cause the disease?</h1>
+        <Form
+          name="basic"
+          initialValues={{ remember: true }}
+          onFinish={Demo}
+          onFinishFailed={onFinishFailed}
+        >
+          <Form.Item
+            label=""
+            name="protein-loss"
+            htmlFor="protein-loss"
+            style={{
+              marginLeft: '0.25rem',
+              fontSize: 'small',
+              display: 'flex',
+              alignItems: 'center',
+            }}
+          >
+            <Input
+              type="radio"
+              id="protein-loss"
+              style={{ marginRight: '0.5rem' }}
+            />
+            Mutation leads to a LOSS of function or LOWER expression
+            of gene or protein
+          </Form.Item>
+
+          <Form.Item
+            htmlFor="2"
+            name="mutation-lead-btn"
+            id="mutation-lead-btn"
+            style={{
+              marginLeft: ' 0.25rem',
+              fontSize: 'small',
+              display: 'flex',
+              alignItems: 'center',
+            }}
+          >
+            <Input
+              type="radio"
+              id="more-protein-btn"
+              style={{ marginRight: '0.5rem' }}
+            />{' '}
+            Mutation leads to a GAIN of function of gene or protein
+          </Form.Item>
+
+          <Form.Item
+            htmlFor="dont-know-btn"
+            style={{
+              marginLeft: ' 0.25rem',
+              fontSize: 'small',
+              display: 'flex',
+              alignItems: 'center',
+            }}
+          >
+            <Input
+              type="radio"
+              id="dont-know-btn"
+              style={{ marginRight: '0.5rem' }}
+            />
+            Dont Know
+          </Form.Item>
+
+          <Form.Item
+            style={{ display: 'flex', justifyContent: 'start' }}
+          >
             <Button
-              label="Back"
-              color="tertiary"
-              size="sm"
-              className="block text-xs text-gray-400 focus:outline-none"
+              // label="Back"
+              // type="primary"
+              size="small"
+              // className="block text-xs text-gray-400 focus:outline-none"
               onClick={() => {
                 setShowProteinForm(false);
                 setBasicInfo(true);
                 setShowMutationForm(false);
+                setCurrent(0);
               }}
-            />
+            >
+              Back
+            </Button>
             <Button
-              label="Next"
-              color="primary"
-              size="sm"
-              className="block text-xs text-white focus:outline-none ml-1"
+              // label="Next"
+              type="primary"
+              size="small"
+              style={{ marginLeft: '0.25rem' }}
+              // className="block text-xs text-white focus:outline-none ml-1"
               onClick={() => {
                 setShowProteinForm(true);
                 setBasicInfo(false);
                 setShowMutationForm(false);
+                setCurrent(2);
               }}
-            />
-          </div>
-        </form>
+            >
+              Next
+            </Button>
+          </Form.Item>
+        </Form>
       </div>
-      <div className="w-2/5 px-4 flex flex-col justify-center items-center">
+      <div className={styles['mutation-form-one']}>
         <div>
           {showMutationForm ? (
             <img
@@ -107,11 +137,11 @@ function MutationForm({
             />
           ) : null}
         </div>
-        <p className="text-center text-sm text-gray-400 font-extralight">
+        <p>
           Lorem ipsum, or lipsum as it is sometimes known, is dummy
           text used in laying out print, graphic or web designs.
         </p>
-        <p className="text-center text-sm text-gray-400 font-extralight">
+        <p>
           The passage is attributed to an unknown typesetter in the
           15th century who is thought to have scrambled parts of
           Ciceros De.
@@ -119,6 +149,6 @@ function MutationForm({
       </div>
     </div>
   );
-}
+};
 
 export default MutationForm;

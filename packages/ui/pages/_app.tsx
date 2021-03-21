@@ -1,24 +1,12 @@
-import { useState } from 'react'
+import { useState } from 'react';
 import type { AppProps } from 'next/app';
 import { useEffect } from 'react';
 import { useQueryClient, useQuery, QueryClient, QueryClientProvider } from 'react-query'
 import 'styles/antd.less';
 import 'styles/example.less';
 import '@aws-amplify/ui/dist/style.css';
-
 import Amplify, { Auth } from 'aws-amplify';
-import {
-  withAuthenticator,
-  Loading,
-  SignIn,
-  ConfirmSignIn,
-  VerifyContact,
-  SignUp,
-  ForgotPassword,
-  RequireNewPassword,
-  Greetings
-} from 'aws-amplify-react'
-import axios from 'axios'
+import axios from 'axios';
 import { ProgramsContext } from 'context/programs';
 
 // Set Authorization header on all requests if user is signed in
@@ -43,8 +31,7 @@ Amplify.configure({
     // region: process.env.NEXT_PUBLIC_region,
     identityPoolId: process.env.NEXT_PUBLIC_CognitoIdentityPoolId,
     userPoolId: process.env.NEXT_PUBLIC_CognitoUserPoolId,
-    userPoolWebClientId:
-      process.env.NEXT_PUBLIC_CognitoUserPoolClientId,
+    userPoolWebClientId: process.env.NEXT_PUBLIC_CognitoUserPoolClientId,
   },
 });
 const queryClient = new QueryClient()
@@ -76,35 +63,15 @@ function ConfirmSignUpRedirectToSignIn({ authState, onStateChange }) {
   return null;
 }
 
-const signUpConfig = {
-  hideAllDefaults: true,
-  hiddenDefaults: ['phone_number'],
-};
+// const signUpConfig = {
+//   hideAllDefaults: true,
+//   hiddenDefaults: ['phone_number'],
+// };
 
-const federated = {
-  // google_client_id: 'abc123abc123abc123abc123',
-  // facebook_app_id: 'abc123abc123abc123abc123',
-  // amazon_client_id: 'abc123abc123abc123abc123',
-};
+// const federated = {
+//   // google_client_id: 'abc123abc123abc123abc123',
+//   // facebook_app_id: 'abc123abc123abc123abc123',
+//   // amazon_client_id: 'abc123abc123abc123abc123',
+// };
 
-// @ts-ignore
-export default withAuthenticator(MyAppWrapper, {
-  usernameAttributes: 'email',
-  signUpConfig,
-  includeGreetings: false,
-  hideDefault: true,
-  authenticatorComponents: [
-    <SignIn federated={federated} />,
-    <ConfirmSignIn />,
-    <VerifyContact />,
-    <SignUp signUpConfig={signUpConfig} />,
-    // @ts-ignore
-    <ConfirmSignUpRedirectToSignIn override="ConfirmSignUp" />,
-    <ForgotPassword />,
-    <RequireNewPassword />,
-    <Loading />,
-    <Greetings />,
-  ],
-});
-
-// export default MyAppWrapper;
+export default MyApp;

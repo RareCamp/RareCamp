@@ -69,39 +69,6 @@ const SectionHeader = ({
             {description}
           </span>
         </td>
-        {/* <td className="flex justify-center py-4">
-          <Button
-            onClick={() => {
-              setSectionDropDown(!isSectionDropDownOpen);
-            }}
-            label=""
-            icon={
-              <Icon name="dot" className="w-6 cursor-pointer ml-2" />
-            }
-            color="tertiary"
-            size="xs"
-            className="text-black border-gray-300  focus:outline-none"
-          />
-          {isSectionDropDownOpen && (
-            <DropDown
-              data={[
-                { link: 'Edit Project Details' },
-                { link: 'Duplicate Project' },
-                { link: 'Delete Project' },
-              ]}
-              render={(item) => (
-                <li
-                  onClick={() => setProjectModalOpen(true)}
-                  role="presentation"
-                  className="text-black py-4 px-2 block border border-gray-100 hover:border-blue-400"
-                >
-                  {item.link}
-                </li>
-              )}
-              className="text-xs"
-            />
-          )}
-        </td> */}
       </tr>
       {isEditProjectModalOpen && (
         <Modal>

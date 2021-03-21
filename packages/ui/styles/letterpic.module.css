@@ -1,46 +1,70 @@
 .lp {
-    @apply  flex flex-col rounded-full;
+    display: flex;
+    flex-direction: column;
+    border-radius: 100%;
 }
 
 .letterpic-sm {
-    @apply lp w-8 h-8;
+    display: flex;
+    flex-direction: column;
+    border-radius: 100%;
+    width: 24px;
+    height: 24px;
 }
 
 .letterpic-md {
-    @apply lp w-12 h-12;
+    display: flex;
+    flex-direction: column;
+    border-radius: 100%;
+    width: 36px;
+    height: 36px;
 }
 
 .letterpic-lg {
-    @apply lp w-20 h-20;
+    display: flex;
+    flex-direction: column;
+    border-radius: 100%;
+    width: 48px;
+    height: 48px;
 }
 
 .letterpic-xs {
-    @apply lp w-8 h-8;
+    display: flex;
+    flex-direction: column;
+    border-radius: 100%;
+    width: 12px;
+    height: 12px;
 }
 
 .letterpic-primary {
-    @apply bg-letterpic-primary;
+    background-color: #efdbff
 }
 
 .letterpic-secondary {
-    @apply bg-letterpic-secondary;
+    background-color: #b5f5ec;
 }
 
 .letterpic-tertiary {
-    @apply bg-letterpic-tertiary;
+    background-color: #ffffff
 }
 
 .lettercolor-purple {
-    @apply text-lettercolor-purple;
+    color: #6c5ea1;
 }
 
 .lettercolor-blue {
-    @apply text-lettercolor-blue;
+    color: #4bb1b2;
 }
-.avatar {
-    @apply flex -space-x-1 overflow-hidden;
 
+.avatar {
+    display: flex;
+    margin: 0 -10px;
+    overflow: hidden;
 }
-.avatar > li {
-    @apply inline-block h-6 w-6 rounded-full ring-2 ring-white;
+
+.avatar>li {
+    display: inline-block;
+    height: 12px;
+    width: 12px;
+    border-radius: 100%;
 }
