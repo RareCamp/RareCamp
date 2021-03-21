@@ -1,3 +1,4 @@
+import sanitizeHtml from 'sanitize-html'
 import Task from '../models/Task'
 import { generateId } from '../utils/id'
 import { log } from '../utils/logger'
@@ -10,7 +11,7 @@ export async function createTask({
   if (!userId) throw new Error('userId is required')
   if (!projectId) throw new Error('projectId is required')
   if (!task) throw new Error('task is required')
-
+  if (task.notes && task.notes.length) task.notes = task.notes.map(sanitizeHtml)
   const taskId = generateId()
   const partitionKey = getPk({ userId, projectId })
   const item = {
@@ -35,7 +36,7 @@ export async function updateTask({
   if (!projectId) throw new Error('projectId is required')
   if (!taskId) throw new Error('taskId is required')
   if (!task) throw new Error('task is required')
-
+  if (task.notes && task.notes.length) task.notes = task.notes.map(sanitizeHtml)
   const partitionKey = getPk({ userId, projectId })
   const taskItem = await Task.update({
     ...task,

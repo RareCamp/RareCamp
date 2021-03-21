@@ -21,6 +21,7 @@ const Workspace = new Entity({
     diseaseId: 'string',
     name: 'string',
     description: 'string',
+    isDefault: 'boolean',
     programs: 'list',
   },
   table: WorkspaceTable,

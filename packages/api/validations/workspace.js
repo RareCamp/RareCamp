@@ -12,7 +12,6 @@ const diseaseSchema = yup.object({
 const workspaceSchema = yup.object().shape({
   name: yup.string().min(1).max(256).required(),
   description: yup.string().min(1).max(4096),
-  disease: diseaseSchema,
 })
 
 export const validateWorkspaceDto = (dto) => {
