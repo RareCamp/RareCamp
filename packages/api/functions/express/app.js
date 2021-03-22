@@ -38,7 +38,7 @@ app.use('/', router)
 app.use('/me', profileRouter)
 app.use('/diseases', diseaseRouter)
 app.use('/projects/:projectId/tasks', taskRouter)
-app.use('/programs', programRouter)
+app.use('/workspaces/:workspaceId/programs', programRouter)
 app.use('/workspaces', workspaceRouter)
 
 app.use((req, res, next) => {

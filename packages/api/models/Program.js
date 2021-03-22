@@ -7,7 +7,6 @@ const ProgramTable = new Table({
   sortKey: 'id',
   DocumentClient: dynamoDbDocumentClient,
 })
-
 const Program = new Entity({
   name: 'Program',
   attributes: {
