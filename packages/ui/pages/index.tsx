@@ -65,7 +65,6 @@ const Home = () => {
   useEffect(() => {
     if (isFirstTimeVisitor) {
       router.push('/workspace/stepform');
-      return null;
     }
   }, []);
 

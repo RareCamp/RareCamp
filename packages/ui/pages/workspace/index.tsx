@@ -16,7 +16,9 @@ function Workspace() {
           description={
             isFirstTimeVisitor
               ? 'Our goal today is to get you one step ahead in your gene therapy treatment roadmap'
-              : 'Let us see what you got'      />       <div className="px-4 flex justify-center mt-8">1 className="text-2xl font-semibold mt-4 text-center">
+              : 'Let us see what you got' }
+        />
+        <div className="px-4 flex justify-center mt-8"><h1 className="text-2xl font-semibold mt-4 text-center">
                 Begin by determining Gene Therapy feasibility
               </h1>
               <p className="text-gray-400 font-extralight mt-4 text-center">
@@ -39,10 +41,7 @@ function Workspace() {
               </button>
             </div>
           </div>
-        ) : (
-          <MultipleProgram />
-        )}
-      </div>
+        <MultipleProgram />
     </AppLayout>
   );
 }
