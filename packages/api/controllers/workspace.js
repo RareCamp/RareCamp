@@ -4,18 +4,10 @@ import { log } from '../utils/logger'
 import { validateUuid } from '../validations/common'
 import { validateWorkspaceDto } from '../validations/workspace'
 
-export async function getDefaultWorkspace(userId) {
-  const defaultWorkspace = await Workspace.scan({
-    limit: 1,
-    filters: [{
-      attr: 'isDefault',
-      eq: true,
-    }, {
-      attr: 'userId',
-      eq: userId,
-    }],
-  })
-  return defaultWorkspace.Items && defaultWorkspace.Items[0]
+export async function getDefaultWorkspace({ userId }) {
+  const workspaces = await getWorkspaces({ userId })
+  if (workspaces) return workspaces.Items.find(({ isDefault }) => isDefault)
+  return null
 }
 
 export async function createWorkspace({

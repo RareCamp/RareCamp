@@ -27,7 +27,7 @@ export async function createProgram({
     item.diseaseId = diseaseDB.id
   }
 
-  const programItem = await Program.update(item, { returnValues: 'ALL_NEW' })
+  const programItem = await Program.update({ ...item, workspaceId }, { returnValues: 'ALL_NEW' })
 
   const project = await createProject({
     userId,
