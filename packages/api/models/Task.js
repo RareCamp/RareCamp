@@ -20,7 +20,7 @@ const Task = new Entity({
     name: 'string',
     description: 'string',
     status: 'string',
-    assignee: 'list',
+    assignees: 'list',
     budget: 'map',
     duration: 'string',
     estimatedStartDate: 'string',
