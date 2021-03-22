@@ -41,7 +41,7 @@ module.exports = {
       },
       data: [
         {
-          programId: 'user1#program1',
+          programId: 'program1',
           id: 'existing-project',
           name: 'Existing project',
         },
@@ -57,7 +57,7 @@ module.exports = {
       },
       data: [
         {
-          projectId: 'user1#project1',
+          projectId: 'project1',
           id: 'existing-project',
           name: 'Existing project',
         },
