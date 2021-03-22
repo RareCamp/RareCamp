@@ -30,13 +30,14 @@ export async function createWorkspace({
   } = workspace
 
   const id = generateId()
-  const doesDefaultExit = !!(await getDefaultWorkspace(userId))
+  const defaultWorkspace = await getDefaultWorkspace({ userId })
+  const doesDefaultWorkspaceExist = Boolean(defaultWorkspace)
   const workspaceItem = await Workspace.update({
     userId,
     id,
     name,
     description,
-    isDefault: !doesDefaultExit,
+    isDefault: !doesDefaultWorkspaceExist,
   }, { returnValues: 'ALL_NEW' })
 
   log.info('workspace_CONTROLLER:workspace_CREATED', { workspaceItem })
