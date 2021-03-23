@@ -1,15 +1,8 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useForm } from 'react-hook-form';
 import { Auth } from 'aws-amplify';
-import { Button, Input } from 'antd';
-import { InputField } from 'components/InputField';
-import {
-  AS_REQUIRED,
-  AS_EMAIL,
-  AS_PASSWORD,
-} from 'constants/validations';
+import { Button, Form, Input } from 'antd';
 import { Logo } from 'components/Logo';
 
 const SignUp = () => {
@@ -19,7 +12,6 @@ const SignUp = () => {
   const [email, setEmail] = useState('');
   const [otp, setOtp] = useState('');
 
-  const { register, handleSubmit, errors } = useForm();
   const onSubmit = (data) => {
     console.log(data);
     setEmail(data.email);
@@ -54,37 +46,26 @@ const SignUp = () => {
             </Link>
           </span>
           {!isOtp ? (
-            <form
+            <Form
               className="flex flex-col mt-5"
-              onSubmit={handleSubmit(onSubmit)}
+              onFinish={onSubmit}
             >
-              <InputField
-                reference={register({
-                  ...AS_REQUIRED,
-                  ...AS_EMAIL,
-                })}
-                type="email"
-                name="email"
-                placeholder="Email"
-                error={errors.email && errors.email.message}
-              />
-              <InputField
-                reference={register({
-                  ...AS_REQUIRED,
-                  ...AS_PASSWORD,
-                })}
-                type="password"
-                name="password"
-                placeholder="password"
-                error={errors.password && errors.password.message}
-              />
+            <Form.Item
+            label='Email'
+            name='email'
+          >
+            <Input type="email" />
+          </Form.Item>
+              <Form.Item
+              label='Password'
+              name='password'
+            >
+              <Input type="password" />
+            </Form.Item>
               <Button
-                type="submit"
-                size="lg"
-                color="primary"
-                label="Sign Up"
-                className="mt-4 text-white text-sm"
-              />
+                htmlType="submit"
+                type="primary"
+              >Sign up</Button>
 
               <p className="text-xs mt-4 flex flex-col justify-between h-9">
                 <span className="text-gray-400 text-extralight">
@@ -101,29 +82,22 @@ const SignUp = () => {
                   </span>
                 </span>
               </p>
-            </form>
+            </Form>
           ) : (
-            <form
+            <Form
               className="flex flex-col mt-5"
-              onSubmit={handleSubmit(validateOtp)}
+              onFinish={validateOtp}
             >
-              <InputField
-                key={otp}
-                reference={register({
-                  ...AS_REQUIRED,
-                })}
-                type="number"
-                name="otp"
-                placeholder="Enter OTP"
-                error={errors.otp && errors.otp.message}
-              />
+                <Form.Item
+                label='Enter One-Time Password'
+                name='otp'
+              >
+                <Input type="number" />
+              </Form.Item>
               <Button
-                type="submit"
-                size="lg"
-                color="primary"
-                label="OTP"
-                className="mt-4 text-white text-sm"
-              />
+                htmlType="submit"
+                type="primary"
+              >OTP</Button>
 
               <p className="text-xs mt-4 flex flex-col justify-between h-9">
                 <span className="text-gray-400 text-extralight">
@@ -140,7 +114,7 @@ const SignUp = () => {
                   </span>
                 </span>
               </p>
-            </form>
+            </Form>
           )}
         </div>
         <div className="w-1/2 bg-white rounded-r-lg object-contain">
