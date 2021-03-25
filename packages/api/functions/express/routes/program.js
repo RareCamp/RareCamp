@@ -2,42 +2,43 @@ import express from 'express'
 import wrapAsync from '../wrap-async'
 import {
   createProgram,
-  getProgram,
+  getProgramWithWorkspace,
   updateProgram,
   getPrograms,
 } from '../../../controllers/program'
 import projectRouter from './project'
 
-const programRouter = express.Router()
+const programRouter = express.Router({ mergeParams: true })
 
 programRouter.post('/', wrapAsync(async (req, res) => {
   const { program } = req.body
+  const { workspaceId } = req.params
   const userId = req.cognitoUser.id
-  const programItem = await createProgram({ userId, program })
+  const programItem = await createProgram({ userId, workspaceId, program })
 
   res.json({ program: programItem })
 }))
 
 programRouter.put('/:programId', wrapAsync(async (req, res) => {
-  const { programId } = req.params
-  const userId = req.cognitoUser.id
+  const { programId, workspaceId } = req.params
   const { program } = req.body
-  const programItem = await updateProgram({ userId, programId, program })
+  const programItem = await updateProgram({ workspaceId, programId, program })
 
   res.json({ program: programItem })
 }))
 
 programRouter.get('/', wrapAsync(async (req, res) => {
-  const userId = req.cognitoUser.id
-  const programs = await getPrograms({ userId })
+  const { workspaceId } = req.params
+
+  const programs = await getPrograms(workspaceId)
   const programItems = programs.Items || []
   res.json({ programs: programItems })
 }))
 
 programRouter.get('/:programId', wrapAsync(async (req, res) => {
-  const { programId } = req.params
+  const { programId, workspaceId } = req.params
   const userId = req.cognitoUser.id
-  const program = await getProgram({ userId, programId })
+  const program = await getProgramWithWorkspace({ userId, programId, workspaceId })
 
   if (!program) {
     return res
@@ -49,6 +50,6 @@ programRouter.get('/:programId', wrapAsync(async (req, res) => {
 }))
 
 // project routes
-programRouter.use('/:projectId/tasks', projectRouter)
+programRouter.use('/:programId/projects', projectRouter)
 
 export default programRouter

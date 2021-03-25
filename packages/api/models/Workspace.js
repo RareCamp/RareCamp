@@ -5,7 +5,6 @@ const WorkspaceTable = new Table({
   name: process.env.WORKSPACE_TABLE,
   partitionKey: 'userId',
   sortKey: 'id',
-  indexes: { DSI: { partitionKey: 'userId', sortKey: 'diseaseId' } },
   DocumentClient: dynamoDbDocumentClient,
 })
 
@@ -21,6 +20,7 @@ const Workspace = new Entity({
     diseaseId: 'string',
     name: 'string',
     description: 'string',
+    isDefault: 'boolean',
     programs: 'list',
   },
   table: WorkspaceTable,

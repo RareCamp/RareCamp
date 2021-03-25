@@ -33,15 +33,15 @@ module.exports = {
     },
     {
       TableName: process.env.PROJECT_TABLE,
-      KeySchema: [{ AttributeName: 'programKey', KeyType: 'HASH' }, { AttributeName: 'id', KeyType: 'RANGE' }],
-      AttributeDefinitions: [{ AttributeName: 'programKey', AttributeType: 'S' }, { AttributeName: 'id', AttributeType: 'S' }],
+      KeySchema: [{ AttributeName: 'programId', KeyType: 'HASH' }, { AttributeName: 'id', KeyType: 'RANGE' }],
+      AttributeDefinitions: [{ AttributeName: 'programId', AttributeType: 'S' }, { AttributeName: 'id', AttributeType: 'S' }],
       ProvisionedThroughput: {
         ReadCapacityUnits: 1,
         WriteCapacityUnits: 1,
       },
       data: [
         {
-          programKey: 'user1#program1',
+          programId: 'program1',
           id: 'existing-project',
           name: 'Existing project',
         },
@@ -49,15 +49,15 @@ module.exports = {
     },
     {
       TableName: process.env.TASK_TABLE,
-      KeySchema: [{ AttributeName: 'projectKey', KeyType: 'HASH' }, { AttributeName: 'id', KeyType: 'RANGE' }],
-      AttributeDefinitions: [{ AttributeName: 'projectKey', AttributeType: 'S' }, { AttributeName: 'id', AttributeType: 'S' }],
+      KeySchema: [{ AttributeName: 'projectId', KeyType: 'HASH' }, { AttributeName: 'id', KeyType: 'RANGE' }],
+      AttributeDefinitions: [{ AttributeName: 'projectId', AttributeType: 'S' }, { AttributeName: 'id', AttributeType: 'S' }],
       ProvisionedThroughput: {
         ReadCapacityUnits: 1,
         WriteCapacityUnits: 1,
       },
       data: [
         {
-          projectKey: 'user1#project1',
+          projectId: 'project1',
           id: 'existing-project',
           name: 'Existing project',
         },

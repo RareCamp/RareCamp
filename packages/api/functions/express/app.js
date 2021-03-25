@@ -3,13 +3,14 @@ import bodyParser from 'body-parser'
 import cors from 'cors'
 import { getCurrentInvoke } from '@vendia/serverless-express'
 import { StatusCodes } from 'http-status-codes'
-// import userRouter from './routes/user'
 import diseaseRouter from './routes/disease'
-import projectRouter from './routes/project'
 import programRouter from './routes/program'
 import workspaceRouter from './routes/workspace'
-import UserInputValidationError from '../../errors/UserInputValidationError'
+import { UnAuthorizedError, UserInputValidationError } from '../../errors'
 import { log } from '../../utils/logger'
+import profileRouter from './routes/profile'
+import BadRequestError from '../../errors/BadRequestError'
+import taskRouter from './routes/task'
 
 const IS_DEVELOPMENT = process.env.NODE_ENV === 'development'
 
@@ -22,6 +23,7 @@ router.use(bodyParser.json())
 router.use((req, res, next) => {
   const { event } = getCurrentInvoke()
   const { claims } = event.requestContext.authorizer
+  if (!claims || !claims.sub) throw new UnAuthorizedError()
   const { sub: id, email } = claims
   const groups = claims['cognito:groups']
   req.cognitoUser = {
@@ -33,9 +35,10 @@ router.use((req, res, next) => {
 })
 
 app.use('/', router)
+app.use('/me', profileRouter)
 app.use('/diseases', diseaseRouter)
-app.use('/projects', projectRouter)
-app.use('/programs', programRouter)
+app.use('/projects/:projectId/tasks', taskRouter)
+app.use('/workspaces/:workspaceId/programs', programRouter)
 app.use('/workspaces', workspaceRouter)
 
 app.use((req, res, next) => {
@@ -57,6 +60,10 @@ app.use((err, req, res, next) => {
   }
   if (err instanceof UserInputValidationError) {
     res.status(StatusCodes.UNPROCESSABLE_ENTITY).json({ errors: err.errors })
+  } else if (err instanceof UnAuthorizedError) {
+    res.status(StatusCodes.UNAUTHORIZED).json()
+  } else if (err instanceof BadRequestError) {
+    res.status(StatusCodes.BAD_REQUEST).json({ message: err.message })
   } else {
     res
       .status(statusCode)
