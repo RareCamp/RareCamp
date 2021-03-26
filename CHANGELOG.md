@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/RareCamp/RareCamp/compare/v1.0.0...v1.0.1) (2021-03-26)
+
+
+### Bug Fixes
+
+* package templates in release ([56e17b0](https://github.com/RareCamp/RareCamp/commit/56e17b0ddc87f32eea6c56ce090020917b43e752))
+
 # 1.0.0 (2021-03-26)
 
 
