@@ -22,7 +22,7 @@
     "deploy-prepack:prod": "NODE_ENV=production sls deploy --package .serverless --stage production",
     "deploy:prod": "NODE_ENV=production sls deploy --stage production",
     "remove-stack:dev": "sls remove --stage development",
-    "zip-release": "zip -r release.zip .serverless serverless.yaml package.json package-lock.json",
+    "zip-release": "zip -r release.zip .serverless templates serverless.yaml package.json package-lock.json",
     "lint": "eslint ./packages/api",
     "lint:fix": "npm run lint -- --fix"
   },
