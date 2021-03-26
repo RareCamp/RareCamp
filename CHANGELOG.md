@@ -1,3 +1,10 @@
+## [1.0.2](https://github.com/RareCamp/RareCamp/compare/v1.0.1...v1.0.2) (2021-03-26)
+
+
+### Bug Fixes
+
+* update package-lock.json ([31de169](https://github.com/RareCamp/RareCamp/commit/31de1696d29343b35785cfdf811f9305f81d4157))
+
 ## [1.0.1](https://github.com/RareCamp/RareCamp/compare/v1.0.0...v1.0.1) (2021-03-26)
 
 
