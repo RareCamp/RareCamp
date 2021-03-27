@@ -6,9 +6,9 @@ export async function createDisease({
   disease,
 }) {
   if (!disease) throw new Error('disease is required')
-  const id = generateId()
+  const diseaseId = generateId()
   const item = {
-    id,
+    diseaseId,
     ...disease,
   }
   const diseaseItem = await Disease.update(item, { returnValues: 'ALL_NEW' })
@@ -27,7 +27,7 @@ export async function updateDisease({
 
   const diseaseItem = await Disease.update({
     ...disease,
-    id: diseaseId,
+    diseaseId,
   }, { returnValues: 'ALL_NEW' })
 
   log.info('DISEASE_CONTROLLER:DISEASE_UPDATED', { diseaseItem })
@@ -38,7 +38,7 @@ export async function updateDisease({
 export async function getDisease({ diseaseId }) {
   if (!diseaseId) throw new Error('diseaseId is required')
 
-  const diseaseItem = await Disease.get({ id: diseaseId })
+  const diseaseItem = await Disease.get({ diseaseId })
 
   if (!diseaseItem) {
     return null

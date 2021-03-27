@@ -6,7 +6,7 @@ import { validateWorkspaceDto } from '../validations/workspace'
 
 export async function getDefaultWorkspace({ userId }) {
   const workspaces = await getWorkspaces({ userId })
-  if (workspaces) return workspaces.Items.find(({ isDefault }) => isDefault)
+  if (workspaces) return workspaces.find(({ isDefault }) => isDefault)
   return null
 }
 
@@ -21,12 +21,12 @@ export async function createWorkspace({
     description,
   } = workspace
 
-  const id = generateId()
+  const workspaceId = generateId()
   const defaultWorkspace = await getDefaultWorkspace({ userId })
   const doesDefaultWorkspaceExist = Boolean(defaultWorkspace)
   const workspaceItem = await Workspace.update({
     userId,
-    id,
+    workspaceId,
     name,
     description,
     isDefault: !doesDefaultWorkspaceExist,
@@ -43,14 +43,14 @@ export async function getWorkspaces({
   validateUuid(userId)
   const workspaces = await Workspace.query(userId)
 
-  log.info('workspace_CONTROLLER:workspaces_FETCHED', { workspaces })
+  log.info('workspace_CONTROLLER:workspaces_FETCHED', { workspaces: workspaces.Items })
 
-  return workspaces
+  return workspaces.Items
 }
 
 export async function getWorkspaceByIdAndUserId({
-  id,
+  workspaceId,
   userId,
 }) {
-  return Workspace.get({ id, userId })
+  return Workspace.get({ workspaceId, userId })
 }

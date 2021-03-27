@@ -13,7 +13,7 @@ const programRouter = express.Router({ mergeParams: true })
 programRouter.post('/', wrapAsync(async (req, res) => {
   const { program } = req.body
   const { workspaceId } = req.params
-  const userId = req.cognitoUser.id
+  const { userId } = req.cognitoUser
   const programItem = await createProgram({ userId, workspaceId, program })
 
   res.json({ program: programItem })
@@ -37,7 +37,7 @@ programRouter.get('/', wrapAsync(async (req, res) => {
 
 programRouter.get('/:programId', wrapAsync(async (req, res) => {
   const { programId, workspaceId } = req.params
-  const userId = req.cognitoUser.id
+  const { userId } = req.cognitoUser
   const program = await getProgramWithWorkspace({ userId, programId, workspaceId })
 
   if (!program) {
@@ -50,6 +50,6 @@ programRouter.get('/:programId', wrapAsync(async (req, res) => {
 }))
 
 // project routes
-programRouter.use('/:programId/projects', projectRouter)
+// programRouter.use('/:programId/projects', projectRouter)
 
 export default programRouter

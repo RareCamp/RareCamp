@@ -11,11 +11,11 @@ export async function createProject({
   if (!programId) throw new Error('programId is required')
   if (!project) throw new Error('project is required')
 
-  const id = generateId()
+  const projectId = generateId()
   const item = {
     ...project,
     programId,
-    id,
+    projectId,
   }
   const projectItem = await Project.update(item, { returnValues: 'ALL_NEW' })
 
@@ -38,7 +38,7 @@ export async function updateProject({
   const projectItem = await Project.update({
     ...project,
     programId,
-    id: projectId,
+    projectId,
   }, { returnValues: 'ALL_NEW' })
 
   log.info('PROJECT_CONTROLLER:PROJECT_UPDATED', { projectItem })
@@ -51,7 +51,7 @@ export async function getProject({ userId, programId, projectId }) {
   if (!programId) throw new Error('programId is required')
   if (!projectId) throw new Error('projectId is required')
 
-  const projectItem = await Project.get({ programId, id: projectId })
+  const projectItem = await Project.get({ programId, projectId })
 
   if (!projectItem) {
     return null

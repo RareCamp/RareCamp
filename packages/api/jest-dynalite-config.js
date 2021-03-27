@@ -2,39 +2,39 @@ module.exports = {
   tables: [
     {
       TableName: process.env.DISEASE_TABLE,
-      KeySchema: [{ AttributeName: 'id', KeyType: 'HASH' }],
-      AttributeDefinitions: [{ AttributeName: 'id', AttributeType: 'S' }],
+      KeySchema: [{ AttributeName: 'diseaseId', KeyType: 'HASH' }],
+      AttributeDefinitions: [{ AttributeName: 'diseaseId', AttributeType: 'S' }],
       ProvisionedThroughput: {
         ReadCapacityUnits: 1,
         WriteCapacityUnits: 1,
       },
       data: [
         {
-          id: 'existing-disease',
+          diseaseId: 'existing-disease',
           name: 'Existing disease',
         },
       ],
     },
     {
       TableName: process.env.PROGRAM_TABLE,
-      KeySchema: [{ AttributeName: 'userId', KeyType: 'HASH' }, { AttributeName: 'id', KeyType: 'RANGE' }],
-      AttributeDefinitions: [{ AttributeName: 'userId', AttributeType: 'S' }, { AttributeName: 'id', AttributeType: 'S' }],
+      KeySchema: [{ AttributeName: 'workspaceId', KeyType: 'HASH' }, { AttributeName: 'programId', KeyType: 'RANGE' }],
+      AttributeDefinitions: [{ AttributeName: 'workspaceId', AttributeType: 'S' }, { AttributeName: 'programId', AttributeType: 'S' }],
       ProvisionedThroughput: {
         ReadCapacityUnits: 1,
         WriteCapacityUnits: 1,
       },
       data: [
         {
-          userId: 'abc123',
-          id: 'existing-program',
+          workspaceId: 'abc123',
+          programId: 'existing-program',
           name: 'Existing program',
         },
       ],
     },
     {
       TableName: process.env.PROJECT_TABLE,
-      KeySchema: [{ AttributeName: 'programId', KeyType: 'HASH' }, { AttributeName: 'id', KeyType: 'RANGE' }],
-      AttributeDefinitions: [{ AttributeName: 'programId', AttributeType: 'S' }, { AttributeName: 'id', AttributeType: 'S' }],
+      KeySchema: [{ AttributeName: 'programId', KeyType: 'HASH' }, { AttributeName: 'projectId', KeyType: 'RANGE' }],
+      AttributeDefinitions: [{ AttributeName: 'programId', AttributeType: 'S' }, { AttributeName: 'projectId', AttributeType: 'S' }],
       ProvisionedThroughput: {
         ReadCapacityUnits: 1,
         WriteCapacityUnits: 1,
@@ -42,15 +42,15 @@ module.exports = {
       data: [
         {
           programId: 'program1',
-          id: 'existing-project',
+          projectId: 'existing-project',
           name: 'Existing project',
         },
       ],
     },
     {
       TableName: process.env.TASK_TABLE,
-      KeySchema: [{ AttributeName: 'projectId', KeyType: 'HASH' }, { AttributeName: 'id', KeyType: 'RANGE' }],
-      AttributeDefinitions: [{ AttributeName: 'projectId', AttributeType: 'S' }, { AttributeName: 'id', AttributeType: 'S' }],
+      KeySchema: [{ AttributeName: 'projectId', KeyType: 'HASH' }, { AttributeName: 'taskId', KeyType: 'RANGE' }],
+      AttributeDefinitions: [{ AttributeName: 'projectId', AttributeType: 'S' }, { AttributeName: 'taskId', AttributeType: 'S' }],
       ProvisionedThroughput: {
         ReadCapacityUnits: 1,
         WriteCapacityUnits: 1,
@@ -58,23 +58,39 @@ module.exports = {
       data: [
         {
           projectId: 'project1',
-          id: 'existing-project',
+          taskId: 'existing-project',
           name: 'Existing project',
         },
       ],
     },
     {
       TableName: process.env.USER_TABLE,
-      KeySchema: [{ AttributeName: 'id', KeyType: 'HASH' }],
-      AttributeDefinitions: [{ AttributeName: 'id', AttributeType: 'S' }],
+      KeySchema: [{ AttributeName: 'userId', KeyType: 'HASH' }],
+      AttributeDefinitions: [{ AttributeName: 'userId', AttributeType: 'S' }],
       ProvisionedThroughput: {
         ReadCapacityUnits: 1,
         WriteCapacityUnits: 1,
       },
       data: [
         {
-          id: 'existing-user',
+          userId: 'existing-user',
           name: 'Existing user',
+        },
+      ],
+    },
+    {
+      TableName: process.env.WORKSPACE_TABLE,
+      KeySchema: [{ AttributeName: 'userId', KeyType: 'HASH' }, { AttributeName: 'workspaceId', KeyType: 'RANGE' }],
+      AttributeDefinitions: [{ AttributeName: 'userId', AttributeType: 'S' }, { AttributeName: 'workspaceId', AttributeType: 'S' }],
+      ProvisionedThroughput: {
+        ReadCapacityUnits: 1,
+        WriteCapacityUnits: 1,
+      },
+      data: [
+        {
+          workspaceId: 'existing-workspace',
+          userId: 'existing-user',
+          name: 'Existing workspace',
         },
       ],
     },

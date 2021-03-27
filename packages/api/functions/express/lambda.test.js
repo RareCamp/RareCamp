@@ -47,14 +47,14 @@ describe('api: happy paths ', () => {
       },
     )
     const response = await handler(event, context)
-    expect(response).toEqual({
-      body: JSON.stringify({ disease: { id: 'existing-disease', name: 'Existing disease' } }),
+    expect(response).toMatch({
+      body: JSON.stringify({ disease: { diseaseId: 'existing-disease', name: 'Existing disease' } }),
       isBase64Encoded: false,
       multiValueHeaders: {
         'access-control-allow-origin': ['*'],
-        'content-length': ['63'],
+        'content-length': ['70'],
         'content-type': ['application/json; charset=utf-8'],
-        etag: ['W/"3f-QTeT4MNp+LEmtpd/mp+sAjNaEco"'],
+        etag: ['W/"46-sJIzOhwjJFkevMddf52QxFC3kgc\"'],
         'x-powered-by': ['Express'],
       },
       statusCode: 200,

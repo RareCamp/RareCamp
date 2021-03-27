@@ -20,31 +20,31 @@ export async function createProgram({
     disease,
     ...item
   } = program
-  item.id = generateId()
+  item.programId = generateId()
   let diseaseDB = {}
   if (disease) {
     diseaseDB = await createDisease({ disease })
-    item.diseaseId = diseaseDB.id
+    item.diseaseId = diseaseDB.diseaseId
   }
 
   const programItem = await Program.update({ ...item, workspaceId }, { returnValues: 'ALL_NEW' })
 
   const project = await createProject({
     userId,
-    programId: item.id,
+    programId: item.programId,
     project: DEFAULT_PROJECT,
   })
   project.tasks = await Promise.all(DEFAULT_TASKS.map(async (task) => {
-    const { Item: user } = await getUser({ id: userId })
-    task.assignee = [{
-      id: user.id,
+    const { Item: user } = await getUser({ userId })
+    task.assignees = [{
+      userId: user.userId,
       firstName: user.firstName,
       lastname: user.lastName,
       thumbnailColor: user.thumbnailColor || '#bbdefb',
     }]
     return createTask({
       userId,
-      projectId: project.id,
+      projectId: project.projectId,
       task,
     })
   }))
@@ -69,7 +69,7 @@ export async function updateProgram({
   const programItem = await Program.update({
     ...program,
     workspaceId,
-    id: programId,
+    programId,
   }, { returnValues: 'ALL_NEW' })
 
   log.info('PROGRAM_CONTROLLER:PROGRAM_UPDATED', { programItem })
@@ -78,9 +78,9 @@ export async function updateProgram({
 }
 
 export async function getProgramWithWorkspace({ programId, userId, workspaceId }) {
-  const { Item: program } = await Program.get({ workspaceId, id: programId })
+  const { Item: program } = await Program.get({ workspaceId, programId })
   if (!program) throw new NotFoundError('Program Can not be found')
-  const workspace = await getWorkspaceByIdAndUserId({ id: program.workspaceId, userId })
+  const workspace = await getWorkspaceByIdAndUserId({ workspaceId: program.workspaceId, userId })
   if (!workspace) throw new NotFoundError('Program Can not be found')
   return { ...program, workspace }
 }

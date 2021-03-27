@@ -4,7 +4,7 @@ import { dynamoDbDocumentClient } from '../dynamodb-init'
 const ProjectTable = new Table({
   name: process.env.PROJECT_TABLE,
   partitionKey: 'programId',
-  sortKey: 'id',
+  sortKey: 'projectId',
   DocumentClient: dynamoDbDocumentClient,
 })
 
@@ -14,7 +14,7 @@ const Project = new Entity({
     programId: {
       partitionKey: true,
     },
-    id: {
+    projectId: {
       sortKey: true,
     },
     name: 'string',

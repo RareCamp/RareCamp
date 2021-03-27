@@ -4,7 +4,7 @@ import { dynamoDbDocumentClient } from '../dynamodb-init'
 const ProgramTable = new Table({
   name: process.env.PROGRAM_TABLE,
   partitionKey: 'workspaceId',
-  sortKey: 'id',
+  sortKey: 'programId',
   DocumentClient: dynamoDbDocumentClient,
 })
 const Program = new Entity({
@@ -13,7 +13,7 @@ const Program = new Entity({
     workspaceId: {
       partitionKey: true,
     },
-    id: {
+    programId: {
       sortKey: true,
     },
     name: 'string',

@@ -1,22 +1,23 @@
-import React, { useState, useEffect } from 'react';
-import { useRouter } from 'next/router';
-import { Layout, Table, Collapse, Badge } from 'antd';
-import axios from 'axios';
-import { MainSection, TaskSection } from 'components/Pages/Program';
-import Navbar from 'components/AppLayout/Navbar';
-import { AppLayout } from 'components/AppLayout';
-import records from 'fixtures/dashboard.json';
-import { TASK_TABLE_HEADINGS } from 'constants/tableHeaders';
-import styles from 'styles/program.module.css';
-import { Button } from 'antd';
-import { useProgramsContext } from 'context/programs';
+import React, { useState, useEffect } from "react";
+import { useRouter } from "next/router";
+import { Layout, Table, Badge, notification, Spin } from "antd";
+import { MainSection } from "components/Pages/Program";
+import Navbar from "components/AppLayout/Navbar";
+import { AppLayout } from "components/AppLayout";
+import { TASK_TABLE_HEADINGS } from "constants/tableHeaders";
+import styles from "styles/program.module.css";
+import PrivateRoute from "../components/PrivateRoute";
+import { useQuery } from "react-query";
+import axios from "axios";
+import { WorkspaceContext } from "../context/workspace";
+import { Workspace } from "../types";
 
 export const TASK_SUB_TABLE_HEADINGS = [
   {
     title: 'TaskName',
     dataIndex: 'taskname',
     key: 'taskname',
-    width: '40%',
+    width: '40%'
   },
   {
     title: 'Status',
@@ -29,10 +30,10 @@ export const TASK_SUB_TABLE_HEADINGS = [
             count={text}
             style={{ backgroundColor: '#52c41a', borderRadius: 0 }}
           />
-        );
+        )
       }
-      return text;
-    },
+      return text
+    }
   },
   {
     title: 'Owner',
@@ -53,18 +54,18 @@ export const TASK_SUB_TABLE_HEADINGS = [
     title: 'End Date',
     dataIndex: 'end_date',
     key: 'end_dates',
-  },
+  }
 ];
 const USER_NAME = 'Ramya';
-
 const Home = () => {
+  const { data } = useQuery("workspaces", () => axios.get<Workspace[]>("workspaces"));
+  const workspaces = data?.data;
+  workspaces?.[0].programs
   const router = useRouter();
-  const programsContext = useProgramsContext();
-  const isFirstTimeVisitor = !programsContext.programs.length;
-
+  const isFirstTimeVisitor = !(workspaces?.[0].programs.length)
   useEffect(() => {
     if (isFirstTimeVisitor) {
-      router.push('/workspace/stepform');
+      router.push("/workspace/stepform");
     }
   }, []);
 
@@ -86,36 +87,33 @@ const Home = () => {
 
   function expandedRowRender() {
     return (
-      <Table
-        columns={TASK_SUB_TABLE_HEADINGS}
-        pagination={false}
-        bordered
-        dataSource={[
-          {
-            taskname:
-              'Consult with an expert to identify gaps and create a plan',
+      <WorkspaceContext.Provider value={{ workspaces: workspaces || [] }}>
+        <Table
+          columns={TASK_SUB_TABLE_HEADINGS}
+          pagination={false}
+          bordered
+          dataSource={[
+            {
+            taskname: 'Consult with an expert to identify gaps and create a plan',
             status: 'COMPLETE',
             owner: 'Rachel',
             budget: '0',
             start_date: '12/5/2021',
             end_date: '12/23/2021',
-          },
-        ]}
-        components={{
-          header: {
-            row: (props) => null,
-          },
-        }}
-      />
+            }
+          ]}
+          components={{
+            header: {
+              row: (props) => null
+            }
+          }}
+        /></WorkspaceContext.Provider>
     );
   }
 
   return (
     <AppLayout>
-      <Layout.Header
-        className={styles['site-layout-background']}
-        style={{ padding: 0 }}
-      >
+      <Layout.Header className={styles['site-layout-background']} style={{ padding: 0 }}>
         <Navbar
           setEditProgramModalOpen={setEditProgramModalOpen}
           setAccountSettingModalOpen={setAccountSettingModalOpen}
@@ -131,7 +129,7 @@ const Home = () => {
           className="site-layout-background"
           style={{ padding: 24, minHeight: 360 }}
         >
-          <MainSection
+      <MainSection
             setEditProgramModalOpen={setEditProgramModalOpen}
             isEditProgramModalOpen={isEditProgramModalOpen}
             setAccountSettingModalOpen={setAccountSettingModalOpen}
@@ -143,6 +141,11 @@ const Home = () => {
               {HOME_TABLE_HEADINGS.map((heading) => (
                 <th key={heading}>{heading}</th>
               ))}
+            </tr>
+          </thead>
+          {records.map((record) => (
+            <TaskSection record={record} key={record.title} />
+          ))}
 
           <tr>
             <td colSpan={6}>
@@ -167,7 +170,7 @@ const Home = () => {
                   budget: '',
                   start_date: '',
                   end_date: '',
-                  key: '1',
+                  key: "1"
                 },
                 {
                   taskname: 'ADD_TASK',
@@ -176,7 +179,7 @@ const Home = () => {
                   budget: '',
                   start_date: '',
                   end_date: '',
-                  key: '2',
+                  key: "2"
                 },
               ]}
               expandable={{ expandedRowRender }}
@@ -189,4 +192,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default PrivateRoute(Home);

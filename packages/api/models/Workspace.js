@@ -4,7 +4,7 @@ import { dynamoDbDocumentClient } from '../dynamodb-init'
 const WorkspaceTable = new Table({
   name: process.env.WORKSPACE_TABLE,
   partitionKey: 'userId',
-  sortKey: 'id',
+  sortKey: 'workspaceId',
   DocumentClient: dynamoDbDocumentClient,
 })
 
@@ -14,7 +14,7 @@ const Workspace = new Entity({
     userId: {
       partitionKey: true,
     },
-    id: {
+    workspaceId: {
       sortKey: true,
     },
     diseaseId: 'string',

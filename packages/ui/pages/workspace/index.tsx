@@ -5,10 +5,10 @@ import {
   MultipleProgram,
   WorkspaceHeader,
 } from 'components/Pages/Workspace';
+import PrivateRoute from "../../components/PrivateRoute";
 
-function Workspace() {
+function Workspace(props) {
   const isFirstTimeVisitor = true
-
   return (
     <AppLayout>
       <div style={{backgroundColor:"lightgray",height:'100vh',display:"flex",flexDirection:"column"}} className="bg-gray-300 h-screen flex flex-col">
@@ -46,4 +46,4 @@ function Workspace() {
   );
 }
 
-export default Workspace;
+export default PrivateRoute(Workspace);
