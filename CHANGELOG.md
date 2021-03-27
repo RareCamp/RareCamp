@@ -1,3 +1,46 @@
+## [1.0.2](https://github.com/RareCamp/RareCamp/compare/v1.0.1...v1.0.2) (2021-03-26)
+
+
+### Bug Fixes
+
+* update package-lock.json ([31de169](https://github.com/RareCamp/RareCamp/commit/31de1696d29343b35785cfdf811f9305f81d4157))
+
+## [1.0.1](https://github.com/RareCamp/RareCamp/compare/v1.0.0...v1.0.1) (2021-03-26)
+
+
+### Bug Fixes
+
+* package templates in release ([56e17b0](https://github.com/RareCamp/RareCamp/commit/56e17b0ddc87f32eea6c56ce090020917b43e752))
+
+# 1.0.0 (2021-03-26)
+
+
+### Bug Fixes
+
+* fix deploy ([#26](https://github.com/RareCamp/RareCamp/issues/26)) ([1c426ec](https://github.com/RareCamp/RareCamp/commit/1c426ece6521b6fc41b03c65debc4be85bedd123))
+* fix ui ([62c824c](https://github.com/RareCamp/RareCamp/commit/62c824c3b16688542be6b120551a58afd77ec1f1))
+* replace AWS_PROFILE with hardcoded rarecamp_dev ([#53](https://github.com/RareCamp/RareCamp/issues/53)) ([dab2649](https://github.com/RareCamp/RareCamp/commit/dab26491fe1323fb35288080dd67d3b3875da67f))
+* update node-fetch version to comply with security findings ([#22](https://github.com/RareCamp/RareCamp/issues/22)) ([5835f91](https://github.com/RareCamp/RareCamp/commit/5835f9190d46ea43edcbff4903e82c300d2dc720))
+
+
+### Features
+
+* default new program with project and Tasks ([#54](https://github.com/RareCamp/RareCamp/issues/54)) ([6f9f144](https://github.com/RareCamp/RareCamp/commit/6f9f144fefc23ae4e9337716555ec7b37939f2d8))
+* **api/task:** add task API; fix cross-user resource fetching ([#47](https://github.com/RareCamp/RareCamp/issues/47)) ([19758af](https://github.com/RareCamp/RareCamp/commit/19758af57e9c43069200418e55a7c986174c8c6c))
+* **less:** Setup less support, so could theme antd ([#45](https://github.com/RareCamp/RareCamp/issues/45)) ([0b3e8f0](https://github.com/RareCamp/RareCamp/commit/0b3e8f058f6654bee06e27589dc18444c8f43ce3))
+* **program:** ant design program page ([#42](https://github.com/RareCamp/RareCamp/issues/42)) ([fc05379](https://github.com/RareCamp/RareCamp/commit/fc053792681a3a2b6c89f48a97ee3836c6abe0b2))
+* **ui:** add ant ui components ([#39](https://github.com/RareCamp/RareCamp/issues/39)) ([5aab7f2](https://github.com/RareCamp/RareCamp/commit/5aab7f2f0fad29ee04fa1f24dffdeadffeecc217))
+* **ui:** add sign up and sign in functionalities. ([#51](https://github.com/RareCamp/RareCamp/issues/51)) ([c269dc6](https://github.com/RareCamp/RareCamp/commit/c269dc68f154babf0d1f0c4de318383db3b89ddd))
+* **ui:** redo questionnaire in antd and taskdetail page ([#44](https://github.com/RareCamp/RareCamp/issues/44)) ([2cc65e5](https://github.com/RareCamp/RareCamp/commit/2cc65e5e99bf35f501988fe5b044e0d66ec261ed))
+* add AppSync API ([#15](https://github.com/RareCamp/RareCamp/issues/15)) ([4000565](https://github.com/RareCamp/RareCamp/commit/4000565078a557372c3f465186589b9dd787cada))
+* add basic cognito flow and add Project API ([#41](https://github.com/RareCamp/RareCamp/issues/41)) ([c2ce137](https://github.com/RareCamp/RareCamp/commit/c2ce137b968435d2ce5566e80fb3e1297868b0ef))
+* add Fetch/Create workspace APIs ([#50](https://github.com/RareCamp/RareCamp/issues/50)) ([d5e9e64](https://github.com/RareCamp/RareCamp/commit/d5e9e646720c4247088580062f10231089c08ee7))
+* add program API and Table ([#46](https://github.com/RareCamp/RareCamp/issues/46)) ([13a3597](https://github.com/RareCamp/RareCamp/commit/13a35976b02aa3e359b7b6dd8a86df9dec5c362b))
+* init ([227c55f](https://github.com/RareCamp/RareCamp/commit/227c55fc2f0ab9580ee63c0a04a6afd865b9aaa3))
+* swap AppSync with API Gateway + Lambda + Serverless Express ([#40](https://github.com/RareCamp/RareCamp/issues/40)) ([7818992](https://github.com/RareCamp/RareCamp/commit/781899249c7067b74bfc2bbf1758f425e6ae0998))
+* **ui:** add/update Workspace, Program, Auth pages ([#25](https://github.com/RareCamp/RareCamp/issues/25)) ([0637220](https://github.com/RareCamp/RareCamp/commit/0637220e4c83e6ab0cc45e92cb58ca8bd4b62b75))
+* Add workspace, signup, signin pages ([#16](https://github.com/RareCamp/RareCamp/issues/16)) ([40f7748](https://github.com/RareCamp/RareCamp/commit/40f77487c785117369af21cab3b41ea59e570e6b))
+
 # [1.3.0](https://github.com/wizeline/serverless-fullstack/compare/v1.2.2...v1.3.0) (2020-06-26)
 
 

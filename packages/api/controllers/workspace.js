@@ -3,7 +3,12 @@ import { generateId } from '../utils/id'
 import { log } from '../utils/logger'
 import { validateUuid } from '../validations/common'
 import { validateWorkspaceDto } from '../validations/workspace'
-import { createDisease } from './disease'
+
+export async function getDefaultWorkspace({ userId }) {
+  const workspaces = await getWorkspaces({ userId })
+  if (workspaces) return workspaces.Items.find(({ isDefault }) => isDefault)
+  return null
+}
 
 export async function createWorkspace({
   userId,
@@ -14,17 +19,17 @@ export async function createWorkspace({
   const {
     name,
     description,
-    disease,
   } = workspace
 
   const id = generateId()
-  const { id: diseaseId } = await createDisease({ disease })
+  const defaultWorkspace = await getDefaultWorkspace({ userId })
+  const doesDefaultWorkspaceExist = Boolean(defaultWorkspace)
   const workspaceItem = await Workspace.update({
     userId,
     id,
-    diseaseId,
     name,
     description,
+    isDefault: !doesDefaultWorkspaceExist,
   }, { returnValues: 'ALL_NEW' })
 
   log.info('workspace_CONTROLLER:workspace_CREATED', { workspaceItem })
@@ -41,4 +46,11 @@ export async function getWorkspaces({
   log.info('workspace_CONTROLLER:workspaces_FETCHED', { workspaces: workspaces.Items })
 
   return workspaces.Items
+}
+
+export async function getWorkspaceByIdAndUserId({
+  id,
+  userId,
+}) {
+  return Workspace.get({ id, userId })
 }

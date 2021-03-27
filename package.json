@@ -1,12 +1,12 @@
 {
   "name": "rarecamp",
-  "version": "1.3.0",
+  "version": "1.0.2",
   "private": true,
   "description": "",
   "main": "handler.js",
   "scripts": {
     "test": "(cd packages/ui && npm test) & (cd packages/api && npm test)",
-    "init": "npm i && cd packages/ui && npm i && cd packages/api && npm i",
+    "postinstall": "npm i --prefix ./packages/ui  && npm i --prefix ./packages/api",
     "start:ui": "cd packages/ui && npm run dev",
     "start:ui:offline": "cd packages/ui && npm run dev:offline",
     "start:api": "LAMBDA_RUNTIME=nodejs12.x sls offline cloudside --cloudStage=development",
@@ -22,7 +22,7 @@
     "deploy-prepack:prod": "NODE_ENV=production sls deploy --package .serverless --stage production",
     "deploy:prod": "NODE_ENV=production sls deploy --stage production",
     "remove-stack:dev": "sls remove --stage development",
-    "zip-release": "zip -r release.zip .serverless serverless.yaml package.json package-lock.json",
+    "zip-release": "zip -r release.zip .serverless templates serverless.yaml package.json package-lock.json",
     "lint": "eslint ./packages/api",
     "lint:fix": "npm run lint -- --fix"
   },

@@ -3,8 +3,7 @@ import { dynamoDbDocumentClient } from '../dynamodb-init'
 
 const TaskTable = new Table({
   name: process.env.TASK_TABLE,
-  // NOTE: partitionKey format is userId#projectId
-  partitionKey: 'projectKey',
+  partitionKey: 'projectId',
   sortKey: 'id',
   DocumentClient: dynamoDbDocumentClient,
 })
@@ -12,7 +11,7 @@ const TaskTable = new Table({
 const Task = new Entity({
   name: 'Task',
   attributes: {
-    projectKey: {
+    projectId: {
       partitionKey: true,
     },
     id: {
@@ -21,14 +20,14 @@ const Task = new Entity({
     name: 'string',
     description: 'string',
     status: 'string',
-    assignee: 'string',
-    budget: 'string',
+    assignees: 'list',
+    budget: 'map',
     duration: 'string',
     estimatedStartDate: 'string',
     estimatedEndDate: 'string',
     actualStartDate: 'string',
     actualEndDate: 'string',
-    notes: 'string',
+    notes: 'list',
     guide: 'string',
     serviceProviders: 'list',
   },
