@@ -12,6 +12,7 @@ export default function PrivateRoute(Component: React.FunctionComponent<any>) {
         setIsLoggedIn(true);
       }).catch(() => router.push("/auth/login"));
     });
+    //TODO: LogoutButton to be removed once implemented on the AppLayout
     return isLoggedIn ? <>
       <LogoutButton />
       <Component {...props} />
