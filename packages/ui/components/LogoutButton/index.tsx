@@ -20,9 +20,7 @@ export default function Logout(){
       await Auth.signOut({ global: true });
       router.reload()
     } catch (e) {
-      debugger;
       notification.error({
-
         message: "Can not logout",
         description: e.message,
         placement: "topRight",

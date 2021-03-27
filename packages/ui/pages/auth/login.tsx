@@ -7,38 +7,28 @@ import Link from "next/link";
 const { Title } = Typography;
 
 import { useRouter } from "next/router";
+import { useMutation } from "react-query";
+import { LoginPayload } from "../../types";
 
 export default function App() {
-  const [isLoading, setIsLoading] = React.useState<boolean>(false);
-  const onFinishFailed = (errorInfo: any) => {
-    console.log("Failed:", errorInfo);
-  };
   const router = useRouter();
 
-  async function onFinish(values) {
-    if (isLoading) return;
-    setIsLoading(true);
-    const { password, username } = values;
-    try {
-      await Auth.signIn(username, password);
-      notification.success({
-        message: "Successfully logged in!",
-        description: "Logged in successfully, Redirecting you in a few!",
-        placement: "topRight",
-        duration: 1.5
-      });
-      await router.push("/");
-    } catch (err) {
+  const mutation = useMutation(({ username, password }: LoginPayload) => Auth.signIn(username, password), {
+    onSuccess: () => notification.success({
+      message: "Successfully logged in!",
+      description: "Logged in successfully, Redirecting you in a few!",
+      placement: "topRight",
+      duration: 1.5
+    }),
+    onError: async (err: Error) => {
       notification.error({
-        message: "Error",
+        message: "Login failed",
         description: err.message,
         placement: "topRight"
       });
-    } finally {
-      setIsLoading(false);
+      await router.push("/");
     }
-
-  }
+  });
 
   return <AuthLayout>
     <div>
@@ -49,8 +39,7 @@ export default function App() {
       layout="vertical"
       name="login_form"
       initialValues={{ remember: true }}
-      onFinish={onFinish}
-      onFinishFailed={onFinishFailed}
+      onFinish={mutation.mutate}
     >
       <Form.Item
         label={<span style={{ fontWeight: 500 }}>Email</span>}
@@ -73,7 +62,7 @@ export default function App() {
         <Form.Item name="remember" valuePropName="checked" noStyle>
           <Checkbox>Remember me</Checkbox>
         </Form.Item>
-        <Button loading={isLoading} style={{ float: "right" }} type="primary" htmlType="submit">
+        <Button loading={mutation.isLoading} style={{ float: "right" }} type="primary" htmlType="submit">
           Sign in
         </Button>
       </Form.Item>
