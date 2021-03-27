@@ -4,28 +4,8 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import "styles/antd.less";
 import "styles/example.less";
-import "@aws-amplify/ui/dist/style.css";
 import Amplify, { Auth } from "aws-amplify";
 import axios from "axios";
-
-// Set Authorization header on all requests if user is signed in
-// export async function getServerSideProps(context) {
-//   const { Auth } = withSSRContext(context);
-//   try {
-//
-//     console.log("user: ", user);
-//     return {
-//       props: { user }
-//     };
-//   } catch (err) {
-//     return {
-//       redirect: {
-//         permanent: false,
-//         destination: "/auth/login"
-//       }
-//     };
-//   }
-// }
 
 axios.interceptors.request.use(async function(config) {
   try {
