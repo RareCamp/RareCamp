@@ -2,7 +2,7 @@ import { Button, notification } from "antd";
 import { useRouter } from "next/router";
 import { Auth } from "aws-amplify";
 import styled from "styled-components";
-import { useState } from "react";
+import { useMutation } from "react-query";
 
 const LogoutButton = styled(Button)`
   // when button is in loading state it override position attribute 
@@ -13,22 +13,15 @@ const LogoutButton = styled(Button)`
 `
 export default function Logout(){
   const router = useRouter();
-  const [isLoading, setIsLoading] = useState(false)
-  let handleLogout = async () => {
-    setIsLoading(true)
-    try {
-      await Auth.signOut({ global: true });
-      router.reload()
-    } catch (e) {
-      notification.error({
+  const mutation = useMutation(() => Auth.signOut({ global: true }), {
+    onSuccess: router.reload,
+    onError: (err: Error) =>
+       notification.error({
         message: "Can not logout",
-        description: e.message,
+        description: err.message,
         placement: "topRight",
         duration: 1.5
-      });
-    } finally {
-      setIsLoading(false)
-    }
-  };
-  return  <LogoutButton loading={isLoading} type="primary" onClick={handleLogout}>Logout</LogoutButton>
+      })
+  })
+  return  <LogoutButton loading={mutation.isLoading} type="primary" onClick={mutation.mutate}>Logout</LogoutButton>
 }

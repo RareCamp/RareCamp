@@ -19,6 +19,13 @@ export interface Workspace {
   description: string;
   id: string,
   name: string,
+  programs: Program[]
+}
+
+export interface Program {
+  description: string;
+  id: string,
+  name: string,
 }
 
 export interface LoginPayload {

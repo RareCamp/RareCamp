@@ -9,7 +9,8 @@ import styles from "styles/program.module.css";
 import PrivateRoute from "../components/PrivateRoute";
 import { useQuery } from "react-query";
 import axios from "axios";
-import { useWorkspaceContext, WorkspaceContext } from "../context/workspace";
+import { WorkspaceContext } from "../context/workspace";
+import { Workspace } from "../types";
 
 export const TASK_SUB_TABLE_HEADINGS = [
   {
@@ -57,14 +58,11 @@ export const TASK_SUB_TABLE_HEADINGS = [
 ];
 const USER_NAME = 'Ramya';
 const Home = () => {
-  const { isLoading, data } = useQuery("workspaces", () => axios.get("workspaces"));
-  // if (!isLoading) return null;
-  let workspaces = data?.data;
-  console.log(workspaces);
+  const { data } = useQuery("workspaces", () => axios.get<Workspace[]>("workspaces"));
+  const workspaces = data?.data;
+  workspaces?.[0].programs
   const router = useRouter();
-  const workspaceContext = useWorkspaceContext();
-  // const isFirstTimeVisitor = !workspaces?[0].programs.length;
-  const isFirstTimeVisitor = true;
+  const isFirstTimeVisitor = !(workspaces?.[0].programs.length)
   useEffect(() => {
     if (isFirstTimeVisitor) {
       router.push("/workspace/stepform");
@@ -89,7 +87,7 @@ const Home = () => {
 
   function expandedRowRender() {
     return (
-      <WorkspaceContext.Provider value={workspaces}>
+      <WorkspaceContext.Provider value={workspaces || []}>
         <Table
           columns={TASK_SUB_TABLE_HEADINGS}
           pagination={false}
