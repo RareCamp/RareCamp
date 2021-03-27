@@ -12,7 +12,7 @@ const projectRouter = express.Router({ mergeParams: true })
 
 projectRouter.post('/', wrapAsync(async (req, res) => {
   const { project } = req.body
-  const userId = req.cognitoUser.id
+  const { userId } = req.cognitoUser
   const { programId } = req.params
   const projectItem = await createProject({ programId, project, userId })
 
@@ -20,7 +20,7 @@ projectRouter.post('/', wrapAsync(async (req, res) => {
 }))
 
 projectRouter.put('/:projectId', wrapAsync(async (req, res) => {
-  const userId = req.cognitoUser.id
+  const { userId } = req.cognitoUser
   const { projectId, programId } = req.params
   const { project } = req.body
   const projectItem = await updateProject({
@@ -31,14 +31,14 @@ projectRouter.put('/:projectId', wrapAsync(async (req, res) => {
 }))
 
 projectRouter.get('/', wrapAsync(async (req, res) => {
-  const userId = req.cognitoUser.id
+  const { userId } = req.cognitoUser
   const { programId } = req.params
   const projects = await getProjects({ userId, programId })
   res.json({ projects })
 }))
 
 projectRouter.get('/:projectId', wrapAsync(async (req, res) => {
-  const userId = req.cognitoUser.id
+  const { userId } = req.cognitoUser
   const { projectId, programId } = req.params
   const project = await getProject({ userId, programId, projectId })
 

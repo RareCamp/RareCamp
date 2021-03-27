@@ -21,12 +21,12 @@ export async function createWorkspace({
     description,
   } = workspace
 
-  const id = generateId()
+  const workspaceId = generateId()
   const defaultWorkspace = await getDefaultWorkspace({ userId })
   const doesDefaultWorkspaceExist = Boolean(defaultWorkspace)
   const workspaceItem = await Workspace.update({
     userId,
-    id,
+    workspaceId,
     name,
     description,
     isDefault: !doesDefaultWorkspaceExist,
@@ -49,8 +49,8 @@ export async function getWorkspaces({
 }
 
 export async function getWorkspaceByIdAndUserId({
-  id,
+  workspaceId,
   userId,
 }) {
-  return Workspace.get({ id, userId })
+  return Workspace.get({ workspaceId, userId })
 }

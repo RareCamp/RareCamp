@@ -2,27 +2,27 @@ import User from '../models/User'
 import { generateId } from '../utils/id'
 
 export function createUser({
-  id = generateId(),
+  userId = generateId(),
   name,
 }) {
   if (!name) throw new Error('name is required')
 
   return User.put({
-    id,
+    userId,
     name,
   })
 }
 
-export function getUser({ id }) {
-  if (!id) throw new Error('id is required')
+export function getUser({ userId }) {
+  if (!userId) throw new Error('userId is required')
 
-  return User.get({ id })
+  return User.get({ userId })
 }
 
 export function getCurrentUser(req) {
   if (!req) throw new Error('req is required')
 
   return getUser({
-    id: req.cognitoUser.id,
+    userId: req.cognitoUser.userId,
   })
 }

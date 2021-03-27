@@ -5,7 +5,7 @@ import { ReactQueryDevtools } from "react-query/devtools";
 import "styles/antd.less";
 import "styles/example.less";
 import "@aws-amplify/ui/dist/style.css";
-import Amplify, { Auth, Hub, withSSRContext } from "aws-amplify";
+import Amplify, { Auth } from "aws-amplify";
 import axios from "axios";
 
 // Set Authorization header on all requests if user is signed in

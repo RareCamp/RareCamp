@@ -4,8 +4,8 @@ import { getUser } from '../../../controllers/user'
 
 const profileRouter = express.Router()
 profileRouter.get('/', wrapAsync(async (req, res) => {
-  const { id } = req.cognitoUser
-  const { Item } = await getUser({ id })
+  const { userId } = req.cognitoUser
+  const { Item } = await getUser({ userId })
   res.json({ profile: Item })
 }))
 

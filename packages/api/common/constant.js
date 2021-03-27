@@ -19,7 +19,7 @@ export const DEFAULT_TASKS = [{
     + 'Please work with an expert to determine if this is the right model for you.',
   status: TASK_STATUSES.IN_PROGRESS,
   // TODO: assignee to be defaulted to the current user
-  assignee: [],
+  assignees: [],
   budget: {
     currency: '$',
     amount: 100,
@@ -30,7 +30,7 @@ export const DEFAULT_TASKS = [{
     + ' to design the mouse model and then work with a lab to generate the model.Use this space to'
     + ' document your conversations, thoughts and bookmark links you can later refer back to.ContactsTo do</div>'],
   guide: {
-    id: generateId(),
+    guideId: generateId(),
     detailsUrl: 'https://en.wikipedia.org/wiki/Gene_knock-in>',
     title: 'About Knock-in mouse models',
     imageUrl: 'https://proserve-bucket.s3-us-west-2.amazonaws.com/Screen+Shot+2021-03-19+at+4.38.39+AM.png',
@@ -40,7 +40,7 @@ export const DEFAULT_TASKS = [{
   // TODO: to be fill by @sanathkr
   serviceProviders: [
     {
-      id: '<uuid>',
+      serviceProviderId: '<uuid>',
       name: '<string>',
       type: '<string>',
       shortDescription: '<string>',

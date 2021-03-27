@@ -48,7 +48,7 @@ describe('api: happy paths ', () => {
     )
     const response = await handler(event, context)
     expect(response).toEqual({
-      body: JSON.stringify({ disease: { id: 'existing-disease', name: 'Existing disease' } }),
+      body: JSON.stringify({ disease: { diseaseId: 'existing-disease', name: 'Existing disease' } }),
       isBase64Encoded: false,
       multiValueHeaders: {
         'access-control-allow-origin': ['*'],

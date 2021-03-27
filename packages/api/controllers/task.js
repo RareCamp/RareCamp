@@ -16,7 +16,7 @@ export async function createTask({
   const item = {
     ...task,
     projectId,
-    id: taskId,
+    taskId,
   }
   const taskItem = await Task.update(item, { returnValues: 'ALL_NEW' })
 
@@ -39,7 +39,7 @@ export async function updateTask({
   const taskItem = await Task.update({
     ...task,
     projectId,
-    id: taskId,
+    taskId,
   }, { returnValues: 'ALL_NEW' })
 
   log.info('TASK_CONTROLLER:TASK_UPDATED', { taskItem })
@@ -52,7 +52,7 @@ export async function getTask({ userId, projectId, taskId }) {
   if (!projectId) throw new Error('projectId is required')
   if (!taskId) throw new Error('taskId is required')
 
-  const taskItem = await Task.get({ projectId, id: taskId })
+  const taskItem = await Task.get({ projectId, taskId })
 
   if (!taskItem) {
     return null

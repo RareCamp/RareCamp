@@ -11,6 +11,7 @@ import { log } from '../../utils/logger'
 import profileRouter from './routes/profile'
 import BadRequestError from '../../errors/BadRequestError'
 import taskRouter from './routes/task'
+import projectRouter from "./routes/project";
 
 const IS_DEVELOPMENT = process.env.NODE_ENV === 'development'
 
@@ -24,10 +25,10 @@ router.use((req, res, next) => {
   const { event } = getCurrentInvoke()
   const { claims } = event.requestContext.authorizer
   if (!claims || !claims.sub) throw new UnAuthorizedError()
-  const { sub: id, email } = claims
+  const { sub: userId, email } = claims
   const groups = claims['cognito:groups']
   req.cognitoUser = {
-    id,
+    userId,
     email,
     groups,
   }
@@ -38,6 +39,7 @@ app.use('/', router)
 app.use('/me', profileRouter)
 app.use('/diseases', diseaseRouter)
 app.use('/projects/:projectId/tasks', taskRouter)
+app.use('/programs/:programId/projects', projectRouter)
 app.use('/workspaces/:workspaceId/programs', programRouter)
 app.use('/workspaces', workspaceRouter)
 

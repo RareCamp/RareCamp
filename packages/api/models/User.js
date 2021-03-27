@@ -3,14 +3,14 @@ import { dynamoDbDocumentClient } from '../dynamodb-init'
 
 const UserTable = new Table({
   name: process.env.USER_TABLE,
-  partitionKey: 'id',
+  partitionKey: 'userId',
   DocumentClient: dynamoDbDocumentClient,
 })
 
 const User = new Entity({
   name: 'User',
   attributes: {
-    id: { partitionKey: true },
+    userId: { partitionKey: true },
     name: 'string',
     firstName: 'string',
     familyName: 'string',

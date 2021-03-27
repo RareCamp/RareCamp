@@ -12,7 +12,7 @@ const taskRouter = express.Router({ mergeParams: true })
 taskRouter.post('/', wrapAsync(async (req, res) => {
   const { task } = req.body
   const { projectId } = req.params
-  const userId = req.cognitoUser.id
+  const { userId } = req.cognitoUser
   const taskItem = await createTask({ userId, projectId, task })
 
   res.json({ task: taskItem })
@@ -20,7 +20,7 @@ taskRouter.post('/', wrapAsync(async (req, res) => {
 
 taskRouter.put('/:taskId', wrapAsync(async (req, res) => {
   const { projectId, taskId } = req.params
-  const userId = req.cognitoUser.id
+  const { userId } = req.cognitoUser
   const { task } = req.body
   const taskItem = await updateTask({
     userId, projectId, taskId, task,
@@ -32,14 +32,14 @@ taskRouter.put('/:taskId', wrapAsync(async (req, res) => {
 // Get all Tasks for a given Projectt
 taskRouter.get('/', wrapAsync(async (req, res) => {
   const { projectId } = req.params
-  const userId = req.cognitoUser.id
+  const { userId } = req.cognitoUser
   const tasks = await getTasks({ userId, projectId })
   res.json({ tasks })
 }))
 
 taskRouter.get('/:taskId', wrapAsync(async (req, res) => {
   const { projectId, taskId } = req.params
-  const userId = req.cognitoUser.id
+  const { userId } = req.cognitoUser
   const task = await getTask({ userId, projectId, taskId })
 
   if (!task) {
