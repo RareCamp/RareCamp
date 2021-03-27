@@ -26,9 +26,9 @@ axios.defaults.baseURL = process.env.NEXT_PUBLIC_ApiEndpoint;
 Amplify.configure({
   Auth: {
     // region: process.env.NEXT_PUBLIC_region,
-    identityPoolId: "us-west-2:dd3bb405-f76e-4bd2-a2d0-f571e8293c01",
-    userPoolId: "us-west-2_wGOZ73uUe",
-    userPoolWebClientId: "2og4jjqcv8jm4v8faccvh1omc2"
+    identityPoolId: process.env.NEXT_PUBLIC_CognitoIdentityPoolId,
+    userPoolId: process.env.NEXT_PUBLIC_CognitoUserPoolId,
+    userPoolWebClientId: process.env.NEXT_PUBLIC_CognitoUserPoolClientId,
   },
   ssr: true
 });
