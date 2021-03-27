@@ -1,24 +1,24 @@
-import { useEffect, useState } from 'react';
-import { Layout, Menu, Breadcrumb } from 'antd';
-import { FileOutlined } from '@ant-design/icons';
-import { useRouter } from 'next/router';
-import { ChildrenProps } from 'types';
-import styles from './AppLayout.module.css';
+import { useEffect, useState } from 'react'
+import { Layout, Menu, Breadcrumb } from 'antd'
+import { FileOutlined } from '@ant-design/icons'
+import { useRouter } from 'next/router'
+import { ChildrenProps } from 'types'
+import styles from './AppLayout.module.css'
 
-const { Footer, Sider } = Layout;
+const { Footer, Sider } = Layout
 
 const AppLayout = ({ children }: ChildrenProps) => {
-  const router = useRouter();
-  const [collapsed, setCollapsed] = useState(false);
+  const router = useRouter()
+  const [collapsed, setCollapsed] = useState(false)
   const onCollapse = () => {
-    setCollapsed(!collapsed);
-  };
+    setCollapsed(!collapsed)
+  }
 
   useEffect(() => {
-    const isAuthenticated = true;
+    const isAuthenticated = true
     // if unauthenicated redirect to signin page
-    if (!isAuthenticated) router.push('/signin');
-  }, []);
+    if (!isAuthenticated) router.push('/signin')
+  }, [])
 
   return (
     <Layout style={{ minHeight: '100vh' }}>
@@ -42,7 +42,7 @@ const AppLayout = ({ children }: ChildrenProps) => {
         </Footer>
       </Layout>
     </Layout>
-  );
-};
+  )
+}
 
-export default AppLayout;
+export default AppLayout

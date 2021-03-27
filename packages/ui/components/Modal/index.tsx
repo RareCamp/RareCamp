@@ -1,4 +1,4 @@
-import Modal from './Modal';
-import ModalHeader from './ModalHeader';
+import Modal from './Modal'
+import ModalHeader from './ModalHeader'
 
-export { Modal, ModalHeader };
+export { Modal, ModalHeader }

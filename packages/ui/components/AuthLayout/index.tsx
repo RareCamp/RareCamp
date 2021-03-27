@@ -1,6 +1,6 @@
-import React from "react";
-import { Col, Layout, Row } from "antd";
-import styled from "styled-components";
+import React from 'react'
+import { Col, Layout, Row } from 'antd'
+import styled from 'styled-components'
 
 const StyledLayout = styled(Layout)`
   display: flex;
@@ -26,7 +26,7 @@ const StyledLayout = styled(Layout)`
         width: 327px;
         display: flex;
         flex-direction: column;
-        justify-content: space-between
+        justify-content: space-between;
       }
     }
 
@@ -45,21 +45,28 @@ const StyledLayout = styled(Layout)`
       }
     }
   }
-`;
+`
 
 export default function AuthLayout(props) {
-  return <StyledLayout className="layout-container">
-    <Row className="content-row">
-      <Col span={12} className="form-column">
-        <div className="auth-form">
-          <img src="/openGT_LOGO.png" width="207px" alt="infoImage" />
-          {props.children}
-        </div>
-      </Col>
-      <Col span={12} className="illustration-column">
-        <span className="headline">Own the roadmap to your future</span>
-      </Col>
-    </Row>
-  </StyledLayout>;
+  return (
+    <StyledLayout className="layout-container">
+      <Row className="content-row">
+        <Col span={12} className="form-column">
+          <div className="auth-form">
+            <img
+              src="/openGT_LOGO.png"
+              width="207px"
+              alt="infoImage"
+            />
+            {props.children}
+          </div>
+        </Col>
+        <Col span={12} className="illustration-column">
+          <span className="headline">
+            Own the roadmap to your future
+          </span>
+        </Col>
+      </Row>
+    </StyledLayout>
+  )
 }
-

@@ -1,62 +1,58 @@
-import React from 'react';
-import { Card } from 'components/Card';
-import { LetterPic } from 'components/LetterPic';
-import { Button } from 'antd';
-import { CaretDownOutlined, PlusOutlined } from '@ant-design/icons';
-import styles from 'styles/multipleprogram.module.css';
-import programs from 'fixtures/programs.json';
-import selectedprograms from 'fixtures/selectedprograms.json';
+import React from 'react'
+import { Card } from 'components/Card'
+import { LetterPic } from 'components/LetterPic'
+import { Button } from 'antd'
+import { CaretDownOutlined, PlusOutlined } from '@ant-design/icons'
+import styles from 'styles/multipleprogram.module.css'
+import programs from 'fixtures/programs.json'
+import selectedprograms from 'fixtures/selectedprograms.json'
 
 function MultipleProgram() {
   const avatarStyle =
-    'inline-block h-6 w-6 rounded-full ring-2 ring-white text-sm';
+    'inline-block h-6 w-6 rounded-full ring-2 ring-white text-sm'
   return (
     <>
       <div className="flex px-4">
-        {programs.map((p) => {
-          return (
-            <Card
-              key={p.title}
-              className={p.className}
-              title={p.title}
-              description={p.description}
-              icon={
-                <div className="flex -space-x-1 overflow-hidden">
+        {programs.map((p) => (
+          <Card
+            key={p.title}
+            className={p.className}
+            title={p.title}
+            description={p.description}
+            icon={
+              <div className="flex -space-x-1 overflow-hidden">
+                <LetterPic
+                  letter="F"
+                  size="sm"
+                  color="primary"
+                  className={` text-gray-600 ${avatarStyle}`}
+                />
+                {p.icons.map((item): any => (
                   <LetterPic
-                    letter="F"
-                    size="sm"
-                    color="primary"
-                    className={` text-gray-600 ${avatarStyle}`}
-                  />
-                  {p.icons.map((item): any => {
-                    return (
-                      <LetterPic
-                        letter={
-                          <img
-                            className="inline-block h-6 w-6 rounded-full ring-transparent"
-                            src={item.src}
-                            alt=""
-                          />
-                        }
-                        size="sm"
-                        color={item.color}
-                        className={`${avatarStyle}`}
-                        textColor="blue"
+                    letter={
+                      <img
+                        className="inline-block h-6 w-6 rounded-full ring-transparent"
+                        src={item.src}
+                        alt=""
                       />
-                    );
-                  })}
-                  <LetterPic
-                    letter="+3"
+                    }
                     size="sm"
-                    color="secondary"
-                    className={` mr-2 ${avatarStyle}`}
-                    textColor="purple"
+                    color={item.color}
+                    className={`${avatarStyle}`}
+                    textColor="blue"
                   />
-                </div>
-              }
-            />
-          );
-        })}
+                ))}
+                <LetterPic
+                  letter="+3"
+                  size="sm"
+                  color="secondary"
+                  className={` mr-2 ${avatarStyle}`}
+                  textColor="purple"
+                />
+              </div>
+            }
+          />
+        ))}
         <div className="bg-white h-44 w-1/4 px-4 py-2 mr-4 mt-4 rounded flex flex-col justify-center items-center">
           {/* <Button
             color="tertiary"
@@ -105,7 +101,7 @@ function MultipleProgram() {
         </div>
       </div>
     </>
-  );
+  )
 }
 
-export default MultipleProgram;
+export default MultipleProgram

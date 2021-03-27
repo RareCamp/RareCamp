@@ -1,31 +1,31 @@
-import React, { useState } from 'react';
-import { LetterPic } from 'components/LetterPic';
-import { Button as AntButton } from 'antd';
-import { DropDown } from 'components/DropDown';
-import { UserAddOutlined, MoreOutlined } from '@ant-design/icons';
-import OWNER_DATA from 'fixtures/dropdown.json';
-import styles from 'styles/layout.module.css';
-import avatars from 'fixtures/avatar.json';
+import React, { useState } from 'react'
+import { LetterPic } from 'components/LetterPic'
+import { Button as AntButton } from 'antd'
+import { DropDown } from 'components/DropDown'
+import { UserAddOutlined, MoreOutlined } from '@ant-design/icons'
+import OWNER_DATA from 'fixtures/dropdown.json'
+import styles from 'styles/layout.module.css'
+import avatars from 'fixtures/avatar.json'
 
 const Navbar = ({
   username,
   setEditProgramModalOpen,
   setAccountSettingModalOpen,
 }: {
-  username: string;
-  setEditProgramModalOpen: Function;
-  setAccountSettingModalOpen: Function;
+  username: string
+  setEditProgramModalOpen: Function
+  setAccountSettingModalOpen: Function
 }) => {
-  const [open, setOpenDropDown] = useState(false);
-  const [isAccountDropDownOpen, setAccountDropDown] = useState(false);
-  const [isUserDropDownOpen, setUserDropDown] = useState(false);
-  const [hover, setHover] = useState(false);
+  const [open, setOpenDropDown] = useState(false)
+  const [isAccountDropDownOpen, setAccountDropDown] = useState(false)
+  const [isUserDropDownOpen, setUserDropDown] = useState(false)
+  const [hover, setHover] = useState(false)
 
   const tooltipStyle = {
     display: hover ? 'block' : 'none',
-  };
+  }
   const avatarStyle =
-    'inline-block h-6 w-6 rounded-full ring-2 ring-white text-sm';
+    'inline-block h-6 w-6 rounded-full ring-2 ring-white text-sm'
   return (
     <nav className={`${styles['nav-bar']}`}>
       <ul className={styles['ul-One']}>
@@ -65,7 +65,7 @@ const Navbar = ({
             i
           </span>
         </span>
-        <span style={tooltipStyle} className={styles['tooltip']}>
+        <span style={tooltipStyle} className={styles.tooltip}>
           This program captures essential steps in the SSMD gene
           therapy roadmap.
         </span>
@@ -83,7 +83,7 @@ const Navbar = ({
         /> */}
         <AntButton
           onClick={() => {
-            setOpenDropDown(!open);
+            setOpenDropDown(!open)
           }}
           icon={<MoreOutlined />}
         />
@@ -91,17 +91,15 @@ const Navbar = ({
           <DropDown
             className="w-48 text-sm"
             data={['Edit Program Details', 'Delete Program']}
-            render={(item) => {
-              return (
-                <li
-                  onClick={() => setEditProgramModalOpen(true)}
-                  className="text-black text-sm py-2 px-2 block  border border-gray-100 hover:border-blue-400"
-                  role="presentation"
-                >
-                  {item}
-                </li>
-              );
-            }}
+            render={(item) => (
+              <li
+                onClick={() => setEditProgramModalOpen(true)}
+                className="text-black text-sm py-2 px-2 block  border border-gray-100 hover:border-blue-400"
+                role="presentation"
+              >
+                {item}
+              </li>
+            )}
           />
         )}
       </ul>
@@ -110,7 +108,7 @@ const Navbar = ({
           className="flex cursor-pointer mr-4"
           role="presentation"
           onClick={() => {
-            setUserDropDown(!isUserDropDownOpen);
+            setUserDropDown(!isUserDropDownOpen)
           }}
         >
           <div className="flex -space-x-1 overflow-hidden">
@@ -120,24 +118,22 @@ const Navbar = ({
               color="primary"
               className={`text-gray-600 ${avatarStyle}`}
             />
-            {avatars.map((avatar): any => {
-              return (
-                <LetterPic
-                  key={avatar.id}
-                  letter={
-                    <img
-                      className="inline-block h-6 w-6 rounded-full ring-transparent"
-                      src={avatar.src}
-                      alt=""
-                    />
-                  }
-                  size="sm"
-                  color={avatar.color}
-                  className={`${avatarStyle}`}
-                  textColor="blue"
-                />
-              );
-            })}
+            {avatars.map((avatar): any => (
+              <LetterPic
+                key={avatar.id}
+                letter={
+                  <img
+                    className="inline-block h-6 w-6 rounded-full ring-transparent"
+                    src={avatar.src}
+                    alt=""
+                  />
+                }
+                size="sm"
+                color={avatar.color}
+                className={`${avatarStyle}`}
+                textColor="blue"
+              />
+            ))}
 
             <LetterPic
               letter="+3"
@@ -152,30 +148,28 @@ const Navbar = ({
           <DropDown
             data={OWNER_DATA}
             className="w-80 right-80 top-12 pt-2"
-            render={(item) => {
-              return (
-                <div
-                  key={item.ownerName}
-                  className="flex items-center px-2 py-4 border-b border-gray-300 border hover:border-blue-400"
-                >
-                  <LetterPic
-                    letter={item.letter}
-                    color={item.bgColor}
-                    className=""
-                    size="md"
-                    textColor={item.letterColor}
-                  />
-                  <div className="flex flex-col justify-between h-12 px-2 ml-2 cursor-pointer">
-                    <span className="text-gray-500 text-base font-light block">
-                      {item.ownerName}
-                    </span>
-                    <span className="text-gray-400 font-light text-sm block">
-                      {item.ownerEmail}
-                    </span>
-                  </div>
+            render={(item) => (
+              <div
+                key={item.ownerName}
+                className="flex items-center px-2 py-4 border-b border-gray-300 border hover:border-blue-400"
+              >
+                <LetterPic
+                  letter={item.letter}
+                  color={item.bgColor}
+                  className=""
+                  size="md"
+                  textColor={item.letterColor}
+                />
+                <div className="flex flex-col justify-between h-12 px-2 ml-2 cursor-pointer">
+                  <span className="text-gray-500 text-base font-light block">
+                    {item.ownerName}
+                  </span>
+                  <span className="text-gray-400 font-light text-sm block">
+                    {item.ownerEmail}
+                  </span>
                 </div>
-              );
-            }}
+              </div>
+            )}
           />
         )}
 
@@ -199,7 +193,7 @@ const Navbar = ({
           role="presentation"
           data-testid="123"
           onClick={() => {
-            setAccountDropDown(!isAccountDropDownOpen);
+            setAccountDropDown(!isAccountDropDownOpen)
           }}
         >
           <li>
@@ -224,22 +218,20 @@ const Navbar = ({
               'Update Password',
               'Logout',
             ]}
-            render={(item) => {
-              return (
-                <li
-                  className="border border-gray-100 hover:border-blue-400"
-                  key={item}
-                  role="presentation"
-                  onClick={() => setAccountSettingModalOpen(true)}
-                >
-                  {item}
-                </li>
-              );
-            }}
+            render={(item) => (
+              <li
+                className="border border-gray-100 hover:border-blue-400"
+                key={item}
+                role="presentation"
+                onClick={() => setAccountSettingModalOpen(true)}
+              >
+                {item}
+              </li>
+            )}
           />
         )}
       </ul>
     </nav>
-  );
-};
-export default Navbar;
+  )
+}
+export default Navbar

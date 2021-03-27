@@ -1,30 +1,30 @@
-import React, { useState } from 'react';
-import { AppLayout } from 'components/AppLayout';
-import { Icon } from 'components/Icon';
-import Link from 'next/link';
-import { BasicInfoForm } from 'components/BasicInfoForm';
-import { EligibleSection } from 'components/EligibleSection';
-import { NotEligibleSection } from 'components/NotEligibleSection';
-import styles from 'styles/stepform.module.css';
-import { MutationForm } from 'components/MutationForm';
-import { ProteinForm } from 'components/ProteinForm';
+import React, { useState } from 'react'
+import { AppLayout } from 'components/AppLayout'
+import { Icon } from 'components/Icon'
+import Link from 'next/link'
+import { BasicInfoForm } from 'components/BasicInfoForm'
+import { EligibleSection } from 'components/EligibleSection'
+import { NotEligibleSection } from 'components/NotEligibleSection'
+import styles from 'styles/stepform.module.css'
+import { MutationForm } from 'components/MutationForm'
+import { ProteinForm } from 'components/ProteinForm'
 
-import { Steps } from 'antd';
-import PrivateRoute from "../../components/PrivateRoute";
+import { Steps } from 'antd'
+import PrivateRoute from 'components/PrivateRoute'
 
-const { Step } = Steps;
-const stepform = (props) => {
-  const [showBasicInfoForm, setBasicInfo] = useState(true);
-  const [showMutationForm, setShowMutationForm] = useState(false);
-  const [showProteinForm, setShowProteinForm] = useState(false);
+const { Step } = Steps
+const stepform = () => {
+  const [showBasicInfoForm, setBasicInfo] = useState(true)
+  const [showMutationForm, setShowMutationForm] = useState(false)
+  const [showProteinForm, setShowProteinForm] = useState(false)
   const [isShowEligibleSection, setShowEligibleSection] = useState(
     false,
-  );
-  const [current, setCurrent] = useState(0);
+  )
+  const [current, setCurrent] = useState(0)
 
   return (
     <AppLayout>
-      <div className={styles['stepform']}>
+      <div className={styles.stepform}>
         <div className={styles['stepform-divOne']}>
           <h1 style={{ fontWeight: 'bold' }}>WorkSpace</h1>
         </div>
@@ -201,7 +201,7 @@ const stepform = (props) => {
         </div>
       </div>
     </AppLayout>
-  );
-};
+  )
+}
 
-export default PrivateRoute(stepform);
+export default PrivateRoute(stepform)

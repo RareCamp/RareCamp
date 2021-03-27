@@ -1,4 +1,4 @@
-import { EncodeIntoResult } from 'util';
-import Editor from './Editor';
+import { EncodeIntoResult } from 'util'
+import Editor from './Editor'
 
-export { Editor as default };
+export { Editor as default }

@@ -1,15 +1,16 @@
-import React, { useRef } from 'react';
-import styles from 'styles/workspace.module.css';
-import formstyles from './basicform.module.css';
-import { Button, Input } from 'antd';
+import React, { useRef } from 'react'
+import styles from 'styles/workspace.module.css'
+import { Button, Input } from 'antd'
+import formstyles from './basicform.module.css'
+
 const BasicInfoForm = ({
   setShowMutationForm,
   setShowProteinForm,
   setBasicInfo,
   showBasicInfoForm,
-  setCurrent
+  setCurrent,
 }: any) => {
-  const inputRef = useRef(null);
+  const inputRef = useRef(null)
   return (
     <div className={formstyles['basic-form']}>
       <div style={{ width: '60%' }}>
@@ -25,9 +26,9 @@ const BasicInfoForm = ({
             type="primary"
             style={{ marginTop: '20px' }}
             onClick={() => {
-              setShowMutationForm(true);
-              setShowProteinForm(false);
-              setBasicInfo(false);
+              setShowMutationForm(true)
+              setShowProteinForm(false)
+              setBasicInfo(false)
               setCurrent(1)
             }}
           >
@@ -52,7 +53,7 @@ const BasicInfoForm = ({
         </p>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default BasicInfoForm;
+export default BasicInfoForm

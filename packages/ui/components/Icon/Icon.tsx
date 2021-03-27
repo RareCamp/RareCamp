@@ -1,4 +1,4 @@
-import * as Icons from './Icons';
+import * as Icons from './Icons'
 
 const components = {
   'chevron-down': Icons.ChevronDown,
@@ -12,22 +12,22 @@ const components = {
   arrowleft: Icons.ArrowLeft,
   'add-circled': Icons.AddCircle,
   'chevron-left': Icons.ChevronLeft,
-};
+}
 
-export type IconNameType = keyof typeof components;
+export type IconNameType = keyof typeof components
 
 type Props = {
-  name: IconNameType;
-  className?: string;
-};
+  name: IconNameType
+  className?: string
+}
 
 const Icon = ({ name, className }: Props) => {
-  const IconComponent = components[name];
+  const IconComponent = components[name]
   return (
     <div data-testid="Icon">
       <IconComponent className={className} />
     </div>
-  );
-};
+  )
+}
 
-export default Icon;
+export default Icon

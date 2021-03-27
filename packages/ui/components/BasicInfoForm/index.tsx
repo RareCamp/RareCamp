@@ -1,1 +1,1 @@
-export { default as BasicInfoForm } from './BasicInfoForm';
+export { default as BasicInfoForm } from './BasicInfoForm'

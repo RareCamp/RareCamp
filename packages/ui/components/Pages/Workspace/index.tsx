@@ -1,4 +1,4 @@
-import WorkspaceHeader from './Workspaceheader';
-import MultipleProgram from './Multipleprogram';
+import WorkspaceHeader from './Workspaceheader'
+import MultipleProgram from './Multipleprogram'
 
-export { WorkspaceHeader, MultipleProgram };
+export { WorkspaceHeader, MultipleProgram }

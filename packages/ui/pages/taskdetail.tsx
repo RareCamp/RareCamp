@@ -1,46 +1,46 @@
-import { AppLayout } from 'components/AppLayout';
-import React, { useState, useRef } from 'react';
-import { MoreOutlined } from '@ant-design/icons';
-import { Button as AntButton, Button, Dropdown } from 'antd';
-import taskstyles from 'styles/taskdetail.module.css';
-import dynamic from 'next/dynamic';
-import { LetterPic } from 'components/LetterPic';
-import { DropDown } from 'components/DropDown';
-import OWNER_DATA from 'fixtures/dropdown.json';
+import { AppLayout } from 'components/AppLayout'
+import React, { useState, useRef } from 'react'
+import { MoreOutlined } from '@ant-design/icons'
+import { Button as AntButton, Button, Dropdown } from 'antd'
+import taskstyles from 'styles/taskdetail.module.css'
+import dynamic from 'next/dynamic'
+import { LetterPic } from 'components/LetterPic'
+import { DropDown } from 'components/DropDown'
+import OWNER_DATA from 'fixtures/dropdown.json'
 
 const DynamicComponent = dynamic(
   () => import('../components/Editor'),
   { ssr: false },
-);
-const USER_NAME = 'Ramya';
+)
+const USER_NAME = 'Ramya'
 
 const Taskdetail = () => {
   const [isEditProgramModalOpen, setEditProgramModalOpen] = useState(
     false,
-  );
+  )
   const [
     isAccountSettingModalOpen,
     setAccountSettingModalOpen,
-  ] = useState(false);
+  ] = useState(false)
 
-  const [open, setOpenDropDown] = useState(false);
-  const [isUserDropDownOpen, setUserDropDown] = useState(false);
-  const [file, selectedFile] = useState('');
+  const [open, setOpenDropDown] = useState(false)
+  const [isUserDropDownOpen, setUserDropDown] = useState(false)
+  const [file, selectedFile] = useState('')
   // Create a reference to the hidden file input element
-  const hiddenFileInput: any = useRef(null);
+  const hiddenFileInput: any = useRef(null)
 
   // Programatically click the hidden file input element
   // when the Button component is clicked
   const handleClick = (event) => {
-    hiddenFileInput.current.click();
-  };
+    hiddenFileInput.current.click()
+  }
   // Call a function (passed as a prop from the parent component)
   // to handle the user-selected file
   const handleChange = (event) => {
-    const fileUploaded = event.target.files[0];
-    console.log(fileUploaded, 'si');
-    selectedFile(fileUploaded);
-  };
+    const fileUploaded = event.target.files[0]
+    console.log(fileUploaded, 'si')
+    selectedFile(fileUploaded)
+  }
   return (
     <AppLayout>
       <section className={taskstyles['taskdetail--wrapper']}>
@@ -122,43 +122,41 @@ const Taskdetail = () => {
               {isUserDropDownOpen && (
                 <DropDown
                   data={OWNER_DATA}
-                  render={(item) => {
-                    return (
-                      <li key={item.ownerName}>
-                        <LetterPic
-                          letter={item.letter}
-                          color={item.bgColor}
-                          className=""
-                          size="md"
-                          textColor={item.letterColor}
-                        />
-                        <div
+                  render={(item) => (
+                    <li key={item.ownerName}>
+                      <LetterPic
+                        letter={item.letter}
+                        color={item.bgColor}
+                        className=""
+                        size="md"
+                        textColor={item.letterColor}
+                      />
+                      <div
+                        className={
+                          taskstyles['taskdetail--wrapper--divSix']
+                        }
+                      >
+                        <span
                           className={
-                            taskstyles['taskdetail--wrapper--divSix']
+                            taskstyles[
+                              'taskdetail--wrapper--spanThree'
+                            ]
                           }
                         >
-                          <span
-                            className={
-                              taskstyles[
-                                'taskdetail--wrapper--spanThree'
-                              ]
-                            }
-                          >
-                            {item.ownerName}
-                          </span>
-                          <span
-                            className={
-                              taskstyles[
-                                'taskdetail--wrapper--spanFour'
-                              ]
-                            }
-                          >
-                            {item.ownerEmail}
-                          </span>
-                        </div>
-                      </li>
-                    );
-                  }}
+                          {item.ownerName}
+                        </span>
+                        <span
+                          className={
+                            taskstyles[
+                              'taskdetail--wrapper--spanFour'
+                            ]
+                          }
+                        >
+                          {item.ownerEmail}
+                        </span>
+                      </div>
+                    </li>
+                  )}
                 />
               )}
             </div>
@@ -300,7 +298,7 @@ const Taskdetail = () => {
         </div>
       </section>
     </AppLayout>
-  );
-};
+  )
+}
 
-export default Taskdetail;
+export default Taskdetail

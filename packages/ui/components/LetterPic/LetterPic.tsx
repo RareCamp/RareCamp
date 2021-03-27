@@ -1,18 +1,18 @@
-import React from 'react';
-import styles from 'styles/letterpic.module.css';
+import React from 'react'
+import styles from 'styles/letterpic.module.css'
 
 // three different buttons, default is `primary`
-type Color = 'primary' | 'secondary' | 'tertiary' | 'custom';
+type Color = 'primary' | 'secondary' | 'tertiary' | 'custom'
 // three different sizes, default is `md`
-type Size = 'sm' | 'md' | 'lg' | 'xs' | 'custom';
-type TextColor = 'purple' | 'blue' | null;
+type Size = 'sm' | 'md' | 'lg' | 'xs' | 'custom'
+type TextColor = 'purple' | 'blue' | null
 type LetterPicProps = {
-  letter: any;
-  className?: string | null;
-  color?: string | Color;
-  size: Size;
-  textColor?: TextColor;
-};
+  letter: any
+  className?: string | null
+  color?: string | Color
+  size: Size
+  textColor?: TextColor
+}
 
 const LetterPic = ({
   letter,
@@ -21,9 +21,9 @@ const LetterPic = ({
   size = 'md',
   textColor = 'purple',
 }: LetterPicProps) => {
-  const btnClassses = `${styles['lp']} ${className} ${
+  const btnClassses = `${styles.lp} ${className} ${
     color === 'custom' ? null : styles[`letterpic-${color}`]
-  } ${size === 'custom' ? null : styles[`letterpic-${size}`]}`;
+  } ${size === 'custom' ? null : styles[`letterpic-${size}`]}`
 
   return (
     <li className={btnClassses}>
@@ -34,6 +34,6 @@ const LetterPic = ({
         {letter}
       </span>
     </li>
-  );
-};
-export default LetterPic;
+  )
+}
+export default LetterPic

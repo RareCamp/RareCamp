@@ -1,6 +1,6 @@
 type ClassNameProps = {
-  className?: string;
-};
+  className?: string
+}
 export const ChevronDown = ({ className }: ClassNameProps) => (
   <svg
     className={className}
@@ -14,7 +14,7 @@ export const ChevronDown = ({ className }: ClassNameProps) => (
       clipRule="evenodd"
     />
   </svg>
-);
+)
 
 export const ChevronRight = ({ className }: ClassNameProps) => (
   <svg
@@ -31,7 +31,7 @@ export const ChevronRight = ({ className }: ClassNameProps) => (
       d="M9 5l7 7-7 7"
     />
   </svg>
-);
+)
 export const Dashboard = ({ className }: ClassNameProps) => (
   <svg
     className={className}
@@ -45,7 +45,7 @@ export const Dashboard = ({ className }: ClassNameProps) => (
       clipRule="evenodd"
     />
   </svg>
-);
+)
 
 export const List = ({ className }: ClassNameProps) => (
   <svg
@@ -60,7 +60,7 @@ export const List = ({ className }: ClassNameProps) => (
       clipRule="evenodd"
     />
   </svg>
-);
+)
 export const Bell = ({ className }: ClassNameProps) => (
   <svg
     className={className}
@@ -76,7 +76,7 @@ export const Bell = ({ className }: ClassNameProps) => (
       d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"
     />
   </svg>
-);
+)
 
 export const DotImage = ({ className }: ClassNameProps) => (
   <svg
@@ -93,7 +93,7 @@ export const DotImage = ({ className }: ClassNameProps) => (
       d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"
     />
   </svg>
-);
+)
 
 export const Users = ({ className }: ClassNameProps) => (
   <svg
@@ -110,7 +110,7 @@ export const Users = ({ className }: ClassNameProps) => (
       d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
     />
   </svg>
-);
+)
 
 export const Close = ({ className }: ClassNameProps) => (
   <svg
@@ -127,7 +127,7 @@ export const Close = ({ className }: ClassNameProps) => (
       d="M6 18L18 6M6 6l12 12"
     />
   </svg>
-);
+)
 
 export const ArrowLeft = ({ className }: ClassNameProps) => (
   <svg
@@ -144,7 +144,7 @@ export const ArrowLeft = ({ className }: ClassNameProps) => (
       d="M7 16l-4-4m0 0l4-4m-4 4h18"
     />
   </svg>
-);
+)
 
 export const AddCircle = ({ className }: ClassNameProps) => (
   <svg
@@ -161,7 +161,7 @@ export const AddCircle = ({ className }: ClassNameProps) => (
       d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
     />
   </svg>
-);
+)
 
 export const ChevronLeft = ({ className }: ClassNameProps) => (
   <svg
@@ -178,4 +178,4 @@ export const ChevronLeft = ({ className }: ClassNameProps) => (
       d="M15 19l-7-7 7-7"
     />
   </svg>
-);
+)
