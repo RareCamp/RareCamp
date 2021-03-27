@@ -6,7 +6,7 @@ import { validateWorkspaceDto } from '../validations/workspace'
 
 export async function getDefaultWorkspace({ userId }) {
   const workspaces = await getWorkspaces({ userId })
-  if (workspaces) return workspaces.Items.find(({ isDefault }) => isDefault)
+  if (workspaces) return workspaces.find(({ isDefault }) => isDefault)
   return null
 }
 

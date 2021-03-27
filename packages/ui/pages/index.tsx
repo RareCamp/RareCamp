@@ -1,124 +1,125 @@
-import React, { useState, useEffect } from 'react';
-import { useRouter } from 'next/router';
-import { Layout, Table, Badge } from 'antd';
-import { MainSection } from 'components/Pages/Program';
-import Navbar from 'components/AppLayout/Navbar';
-import { AppLayout } from 'components/AppLayout';
-import { TASK_TABLE_HEADINGS } from 'constants/tableHeaders';
-import styles from 'styles/program.module.css';
-import { useProgramsContext } from 'context/programs';
+import React, { useState, useEffect } from "react";
+import { useRouter } from "next/router";
+import { Layout, Table, Badge, notification, Spin } from "antd";
+import { MainSection } from "components/Pages/Program";
+import Navbar from "components/AppLayout/Navbar";
+import { AppLayout } from "components/AppLayout";
+import { TASK_TABLE_HEADINGS } from "constants/tableHeaders";
+import styles from "styles/program.module.css";
+import { useProgramsContext } from "context/programs";
 import PrivateRoute from "../components/PrivateRoute";
 import { useQuery } from "react-query";
 import axios from "axios";
-import { useWorkspaceContext } from "../context/workspace";
+import { useWorkspaceContext, WorkspaceContext } from "../context/workspace";
 
 export const TASK_SUB_TABLE_HEADINGS = [
   {
-    title: 'TaskName',
-    dataIndex: 'taskname',
-    key: 'taskname',
-    width: '40%',
+    title: "TaskName",
+    dataIndex: "taskname",
+    key: "taskname",
+    width: "40%"
   },
   {
-    title: 'Status',
-    dataIndex: 'status',
-    key: 'status',
+    title: "Status",
+    dataIndex: "status",
+    key: "status",
     render: (text, value, index) => {
-      if (text === 'COMPLETE') {
+      if (text === "COMPLETE") {
         return (
           <Badge
             count={text}
-            style={{ backgroundColor: '#52c41a', borderRadius: 0 }}
+            style={{ backgroundColor: "#52c41a", borderRadius: 0 }}
           />
         );
       }
       return text;
-    },
+    }
   },
   {
-    title: 'Owner',
-    dataIndex: 'owner',
-    key: 'owner',
+    title: "Owner",
+    dataIndex: "owner",
+    key: "owner"
   },
   {
-    title: 'Budget',
-    dataIndex: 'budget',
-    key: 'budget',
+    title: "Budget",
+    dataIndex: "budget",
+    key: "budget"
   },
   {
-    title: 'Start Date',
-    dataIndex: 'start_date',
-    key: 'start_date',
+    title: "Start Date",
+    dataIndex: "start_date",
+    key: "start_date"
   },
   {
-    title: 'End Date',
-    dataIndex: 'end_date',
-    key: 'end_dates',
-  },
+    title: "End Date",
+    dataIndex: "end_date",
+    key: "end_dates"
+  }
 ];
-const USER_NAME = 'Ramya';
+const USER_NAME = "Ramya";
 
 const Home = () => {
-  const { isLoading, data, error, isError } = useQuery('workspaces', () => axios.get('workspaces'))
-
-  if (!isLoading) return null
+  const { isLoading, data } = useQuery("workspaces", () => axios.get("workspaces"));
+  // if (!isLoading) return null;
   let workspaces = data?.data;
+  console.log(workspaces);
   const router = useRouter();
   const workspaceContext = useWorkspaceContext();
-  const isFirstTimeVisitor = !workspaceContext.programs.length;
-
+  // const isFirstTimeVisitor = !workspaces?[0].programs.length;
+  const isFirstTimeVisitor = true;
   useEffect(() => {
     if (isFirstTimeVisitor) {
-      router.push('/workspace/stepform');
+      router.push("/workspace/stepform");
     }
   }, []);
 
   const [isEditProgramModalOpen, setEditProgramModalOpen] = useState(
-    false,
+    false
   );
   const [
     isAccountSettingModalOpen,
-    setAccountSettingModalOpen,
+    setAccountSettingModalOpen
   ] = useState(false);
 
   useEffect(() => {
     if (isEditProgramModalOpen || isAccountSettingModalOpen) {
-      document.body.style.overflow = 'hidden';
+      document.body.style.overflow = "hidden";
     } else {
-      document.body.style.overflow = '';
+      document.body.style.overflow = "";
     }
   }, [isAccountSettingModalOpen, isEditProgramModalOpen]);
 
   function expandedRowRender() {
     return (
-      <Table
-        columns={TASK_SUB_TABLE_HEADINGS}
-        pagination={false}
-        bordered
-        dataSource={[
-          {
-            taskname:
-              'Consult with an expert to identify gaps and create a plan',
-            status: 'COMPLETE',
-            owner: 'Rachel',
-            budget: '0',
-            start_date: '12/5/2021',
-            end_date: '12/23/2021',
-          },
-        ]}
-        components={{
-          header: {
-            row: (props) => null,
-          },
-        }}
-      />
+      <WorkspaceContext.Provider value={workspaces}>
+        <Table
+          columns={TASK_SUB_TABLE_HEADINGS}
+          pagination={false}
+          bordered
+          dataSource={[
+            {
+              taskname:
+                "Consult with an expert to identify gaps and create a plan",
+              status: "COMPLETE",
+              owner: "Rachel",
+              budget: "0",
+              start_date: "12/5/2021",
+              end_date: "12/23/2021"
+            }
+          ]}
+          components={{
+            header: {
+              row: (props) => null
+            }
+          }}
+        /></WorkspaceContext.Provider>
     );
   }
 
   return (
     <AppLayout>
       <Layout.Header
-        className={styles['site-layout-background']}
+        className={styles["site-layout-background"]}
         style={{ padding: 0 }}
       >
         <Navbar
@@ -127,7 +128,7 @@ const Home = () => {
           username={USER_NAME}
         />
       </Layout.Header>
-      <Layout.Content style={{ margin: '0 16px' }}>
+      <Layout.Content style={{ margin: "0 16px" }}>
         {/* <Layout.Breadcrumb style={{ margin: '16px 0' }}>
           <Layout.Breadcrumb.Item>User</Layout.Breadcrumb.Item>
           <Layout.Breadcrumb.Item>Bill</Layout.Breadcrumb.Item>
@@ -136,7 +137,7 @@ const Home = () => {
           className="site-layout-background"
           style={{ padding: 24, minHeight: 360 }}
         >
-          <MainSection
+          {isLoading ? <Spin /> :<MainSection
             setEditProgramModalOpen={setEditProgramModalOpen}
             isEditProgramModalOpen={isEditProgramModalOpen}
             setAccountSettingModalOpen={setAccountSettingModalOpen}
@@ -166,29 +167,29 @@ const Home = () => {
             <Table
               dataSource={[
                 {
-                  taskname: 'Initial Planning',
-                  status: '',
-                  owner: '',
-                  budget: '',
-                  start_date: '',
-                  end_date: '',
-                  key: '1',
+                  taskname: "Initial Planning",
+                  status: "",
+                  owner: "",
+                  budget: "",
+                  start_date: "",
+                  end_date: "",
+                  key: "1"
                 },
                 {
-                  taskname: 'ADD_TASK',
-                  status: '',
-                  owner: '',
-                  budget: '',
-                  start_date: '',
-                  end_date: '',
-                  key: '2',
-                },
+                  taskname: "ADD_TASK",
+                  status: "",
+                  owner: "",
+                  budget: "",
+                  start_date: "",
+                  end_date: "",
+                  key: "2"
+                }
               ]}
               expandable={{ expandedRowRender }}
               columns={TASK_TABLE_HEADINGS}
             />
           </MainSection>
-        </div>
+          }        </div>
       </Layout.Content>
     </AppLayout>
   );

@@ -1,16 +1,12 @@
 import type { AppProps } from "next/app";
-import { useEffect, useState } from "react";
-import { useQueryClient, useQuery, QueryClient, QueryClientProvider } from "react-query";
- import { ReactQueryDevtools } from 'react-query/devtools'
+import { useEffect } from "react";
+import { QueryClient, QueryClientProvider } from "react-query";
+import { ReactQueryDevtools } from "react-query/devtools";
 import "styles/antd.less";
 import "styles/example.less";
 import "@aws-amplify/ui/dist/style.css";
 import Amplify, { Auth, Hub, withSSRContext } from "aws-amplify";
 import axios from "axios";
-import LogoutButton from "../components/LogoutButton";
-import { ProgramsContext } from "context/programs";
-import { Button, notification } from "antd";
-import { useRouter } from "next/router";
 
 // Set Authorization header on all requests if user is signed in
 // export async function getServerSideProps(context) {
@@ -68,10 +64,10 @@ function MyAppWrapper(props: AppProps) {
 
 function MyApp({ Component, pageProps }: AppProps) {
 
-  return <ProgramsContext.Provider value={{programs: workspaces?.[0]?.programs || []}}>
+  return <>
     <ReactQueryDevtools initialIsOpen={false} />
     <Component {...pageProps} />
-  </ProgramsContext.Provider>
+  </>;
 }
 
 // HACK: Skip ConfirmSignUp view since e're auto-confirming via the Lambda Function

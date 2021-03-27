@@ -1,4 +1,4 @@
-import type { ReactNode } from 'react';
+import type { ReactNode } from "react";
 
 export interface ChildrenProps {
   children: ReactNode;
@@ -15,5 +15,8 @@ export type Task = {
 };
 
 export interface Workspace {
-
+  isDefault: boolean;
+  description: string;
+  id: string,
+  name: string,
 }
