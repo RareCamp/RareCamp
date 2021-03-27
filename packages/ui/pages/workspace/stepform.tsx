@@ -13,22 +13,6 @@ import { Steps } from 'antd';
 import PrivateRoute from "../../components/PrivateRoute";
 
 const { Step } = Steps;
-// export async function getServerSideProps(context) {
-//   const { Auth } = withSSRContext(context);
-//   try {
-//     const user = await Auth.currentAuthenticatedUser();
-//     return {
-//       props: { username: user.username }
-//     };
-//   } catch (err) {
-//     return {
-//       redirect: {
-//         permanent: false,
-//         destination: "/auth/login"
-//       }
-//     };
-//   }
-// }
 const stepform = (props) => {
   const [showBasicInfoForm, setBasicInfo] = useState(true);
   const [showMutationForm, setShowMutationForm] = useState(false);
