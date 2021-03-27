@@ -50,7 +50,7 @@ module.exports = {
     {
       TableName: process.env.TASK_TABLE,
       KeySchema: [{ AttributeName: 'projectId', KeyType: 'HASH' }, { AttributeName: 'taskId', KeyType: 'RANGE' }],
-      AttributeDefinitions: [{ AttributeName: 'projectId', AttributeType: 'S' }, { AttributeName: 'TaskId', AttributeType: 'S' }],
+      AttributeDefinitions: [{ AttributeName: 'projectId', AttributeType: 'S' }, { AttributeName: 'taskId', AttributeType: 'S' }],
       ProvisionedThroughput: {
         ReadCapacityUnits: 1,
         WriteCapacityUnits: 1,
@@ -80,8 +80,8 @@ module.exports = {
     },
     {
       TableName: process.env.WORKSPACE_TABLE,
-      KeySchema: [{ AttributeName: 'workspaceId', KeyType: 'RANGE' }, { AttributeName: 'userId', KeyType: 'HASH' }],
-      AttributeDefinitions: [{ AttributeName: 'workspaceId', AttributeType: 'S' }, { AttributeName: 'userId', AttributeType: 'S' }],
+      KeySchema: [{ AttributeName: 'userId', KeyType: 'HASH' }, { AttributeName: 'workspaceId', KeyType: 'RANGE' }],
+      AttributeDefinitions: [{ AttributeName: 'userId', AttributeType: 'S' }, { AttributeName: 'workspaceId', AttributeType: 'S' }],
       ProvisionedThroughput: {
         ReadCapacityUnits: 1,
         WriteCapacityUnits: 1,

@@ -87,7 +87,7 @@ const Home = () => {
 
   function expandedRowRender() {
     return (
-      <WorkspaceContext.Provider value={workspaces || []}>
+      <WorkspaceContext.Provider value={{ workspaces: workspaces || [] }}>
         <Table
           columns={TASK_SUB_TABLE_HEADINGS}
           pagination={false}
