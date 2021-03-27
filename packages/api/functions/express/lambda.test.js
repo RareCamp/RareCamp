@@ -47,7 +47,7 @@ describe('api: happy paths ', () => {
       },
     )
     const response = await handler(event, context)
-    expect(response).toMatch({
+    expect(response).toMatchObject({
       body: JSON.stringify({ disease: { diseaseId: 'existing-disease', name: 'Existing disease' } }),
       isBase64Encoded: false,
       multiValueHeaders: {
