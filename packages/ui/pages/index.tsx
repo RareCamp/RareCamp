@@ -6,7 +6,6 @@ import Navbar from "components/AppLayout/Navbar";
 import { AppLayout } from "components/AppLayout";
 import { TASK_TABLE_HEADINGS } from "constants/tableHeaders";
 import styles from "styles/program.module.css";
-import { useProgramsContext } from "context/programs";
 import PrivateRoute from "../components/PrivateRoute";
 import { useQuery } from "react-query";
 import axios from "axios";
@@ -14,50 +13,49 @@ import { useWorkspaceContext, WorkspaceContext } from "../context/workspace";
 
 export const TASK_SUB_TABLE_HEADINGS = [
   {
-    title: "TaskName",
-    dataIndex: "taskname",
-    key: "taskname",
-    width: "40%"
+    title: 'TaskName',
+    dataIndex: 'taskname',
+    key: 'taskname',
+    width: '40%'
   },
   {
-    title: "Status",
-    dataIndex: "status",
-    key: "status",
+    title: 'Status',
+    dataIndex: 'status',
+    key: 'status',
     render: (text, value, index) => {
-      if (text === "COMPLETE") {
+      if (text === 'COMPLETE') {
         return (
           <Badge
             count={text}
-            style={{ backgroundColor: "#52c41a", borderRadius: 0 }}
+            style={{ backgroundColor: '#52c41a', borderRadius: 0 }}
           />
-        );
+        )
       }
-      return text;
+      return text
     }
   },
   {
-    title: "Owner",
-    dataIndex: "owner",
-    key: "owner"
+    title: 'Owner',
+    dataIndex: 'owner',
+    key: 'owner',
   },
   {
-    title: "Budget",
-    dataIndex: "budget",
-    key: "budget"
+    title: 'Budget',
+    dataIndex: 'budget',
+    key: 'budget',
   },
   {
-    title: "Start Date",
-    dataIndex: "start_date",
-    key: "start_date"
+    title: 'Start Date',
+    dataIndex: 'start_date',
+    key: 'start_date',
   },
   {
-    title: "End Date",
-    dataIndex: "end_date",
-    key: "end_dates"
+    title: 'End Date',
+    dataIndex: 'end_date',
+    key: 'end_dates',
   }
 ];
-const USER_NAME = "Ramya";
-
+const USER_NAME = 'Ramya';
 const Home = () => {
   const { isLoading, data } = useQuery("workspaces", () => axios.get("workspaces"));
   // if (!isLoading) return null;
@@ -74,18 +72,18 @@ const Home = () => {
   }, []);
 
   const [isEditProgramModalOpen, setEditProgramModalOpen] = useState(
-    false
+    false,
   );
   const [
     isAccountSettingModalOpen,
-    setAccountSettingModalOpen
+    setAccountSettingModalOpen,
   ] = useState(false);
 
   useEffect(() => {
     if (isEditProgramModalOpen || isAccountSettingModalOpen) {
-      document.body.style.overflow = "hidden";
+      document.body.style.overflow = 'hidden';
     } else {
-      document.body.style.overflow = "";
+      document.body.style.overflow = '';
     }
   }, [isAccountSettingModalOpen, isEditProgramModalOpen]);
 
@@ -98,13 +96,12 @@ const Home = () => {
           bordered
           dataSource={[
             {
-              taskname:
-                "Consult with an expert to identify gaps and create a plan",
-              status: "COMPLETE",
-              owner: "Rachel",
-              budget: "0",
-              start_date: "12/5/2021",
-              end_date: "12/23/2021"
+            taskname: 'Consult with an expert to identify gaps and create a plan',
+            status: 'COMPLETE',
+            owner: 'Rachel',
+            budget: '0',
+            start_date: '12/5/2021',
+            end_date: '12/23/2021',
             }
           ]}
           components={{
@@ -118,17 +115,14 @@ const Home = () => {
 
   return (
     <AppLayout>
-      <Layout.Header
-        className={styles["site-layout-background"]}
-        style={{ padding: 0 }}
-      >
+      <Layout.Header className={styles['site-layout-background']} style={{ padding: 0 }}>
         <Navbar
           setEditProgramModalOpen={setEditProgramModalOpen}
           setAccountSettingModalOpen={setAccountSettingModalOpen}
           username={USER_NAME}
         />
       </Layout.Header>
-      <Layout.Content style={{ margin: "0 16px" }}>
+      <Layout.Content style={{ margin: '0 16px' }}>
         {/* <Layout.Breadcrumb style={{ margin: '16px 0' }}>
           <Layout.Breadcrumb.Item>User</Layout.Breadcrumb.Item>
           <Layout.Breadcrumb.Item>Bill</Layout.Breadcrumb.Item>
@@ -137,7 +131,7 @@ const Home = () => {
           className="site-layout-background"
           style={{ padding: 24, minHeight: 360 }}
         >
-          {isLoading ? <Spin /> :<MainSection
+      <MainSection
             setEditProgramModalOpen={setEditProgramModalOpen}
             isEditProgramModalOpen={isEditProgramModalOpen}
             setAccountSettingModalOpen={setAccountSettingModalOpen}
@@ -149,6 +143,11 @@ const Home = () => {
               {HOME_TABLE_HEADINGS.map((heading) => (
                 <th key={heading}>{heading}</th>
               ))}
+            </tr>
+          </thead>
+          {records.map((record) => (
+            <TaskSection record={record} key={record.title} />
+          ))}
 
           <tr>
             <td colSpan={6}>
@@ -167,29 +166,29 @@ const Home = () => {
             <Table
               dataSource={[
                 {
-                  taskname: "Initial Planning",
-                  status: "",
-                  owner: "",
-                  budget: "",
-                  start_date: "",
-                  end_date: "",
+                  taskname: 'Initial Planning',
+                  status: '',
+                  owner: '',
+                  budget: '',
+                  start_date: '',
+                  end_date: '',
                   key: "1"
                 },
                 {
-                  taskname: "ADD_TASK",
-                  status: "",
-                  owner: "",
-                  budget: "",
-                  start_date: "",
-                  end_date: "",
+                  taskname: 'ADD_TASK',
+                  status: '',
+                  owner: '',
+                  budget: '',
+                  start_date: '',
+                  end_date: '',
                   key: "2"
-                }
+                },
               ]}
               expandable={{ expandedRowRender }}
               columns={TASK_TABLE_HEADINGS}
             />
           </MainSection>
-          }        </div>
+        </div>
       </Layout.Content>
     </AppLayout>
   );
