@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
-import { Layout, Table, Collapse, Badge } from 'antd';
-import axios from 'axios';
-import { MainSection, TaskSection } from 'components/Pages/Program';
+import { Layout, Table, Badge } from 'antd';
+import { MainSection } from 'components/Pages/Program';
 import Navbar from 'components/AppLayout/Navbar';
 import { AppLayout } from 'components/AppLayout';
-import records from 'fixtures/dashboard.json';
 import { TASK_TABLE_HEADINGS } from 'constants/tableHeaders';
 import styles from 'styles/program.module.css';
-import { Button } from 'antd';
 import { useProgramsContext } from 'context/programs';
+import PrivateRoute from "../components/PrivateRoute";
+import { useQuery } from "react-query";
+import axios from "axios";
+import { useWorkspaceContext } from "../context/workspace";
 
 export const TASK_SUB_TABLE_HEADINGS = [
   {
@@ -58,9 +59,13 @@ export const TASK_SUB_TABLE_HEADINGS = [
 const USER_NAME = 'Ramya';
 
 const Home = () => {
+  const { isLoading, data, error, isError } = useQuery('workspaces', () => axios.get('workspaces'))
+
+  if (!isLoading) return null
+  let workspaces = data?.data;
   const router = useRouter();
-  const programsContext = useProgramsContext();
-  const isFirstTimeVisitor = !programsContext.programs.length;
+  const workspaceContext = useWorkspaceContext();
+  const isFirstTimeVisitor = !workspaceContext.programs.length;
 
   useEffect(() => {
     if (isFirstTimeVisitor) {
@@ -189,4 +194,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default PrivateRoute(Home);

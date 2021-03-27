@@ -1,16 +1,37 @@
-import { useState } from 'react';
-import type { AppProps } from 'next/app';
-import { useEffect } from 'react';
-import { useQueryClient, useQuery, QueryClient, QueryClientProvider } from 'react-query'
-import 'styles/antd.less';
-import 'styles/example.less';
-import '@aws-amplify/ui/dist/style.css';
-import Amplify, { Auth } from 'aws-amplify';
-import axios from 'axios';
-import { ProgramsContext } from 'context/programs';
+import type { AppProps } from "next/app";
+import { useEffect, useState } from "react";
+import { useQueryClient, useQuery, QueryClient, QueryClientProvider } from "react-query";
+ import { ReactQueryDevtools } from 'react-query/devtools'
+import "styles/antd.less";
+import "styles/example.less";
+import "@aws-amplify/ui/dist/style.css";
+import Amplify, { Auth, Hub, withSSRContext } from "aws-amplify";
+import axios from "axios";
+import LogoutButton from "../components/LogoutButton";
+import { ProgramsContext } from "context/programs";
+import { Button, notification } from "antd";
+import { useRouter } from "next/router";
 
 // Set Authorization header on all requests if user is signed in
-axios.interceptors.request.use(async function (config) {
+// export async function getServerSideProps(context) {
+//   const { Auth } = withSSRContext(context);
+//   try {
+//
+//     console.log("user: ", user);
+//     return {
+//       props: { user }
+//     };
+//   } catch (err) {
+//     return {
+//       redirect: {
+//         permanent: false,
+//         destination: "/auth/login"
+//       }
+//     };
+//   }
+// }
+
+axios.interceptors.request.use(async function(config) {
   try {
     const currentUserSession = await Auth.currentSession();
     const Authorization = currentUserSession
@@ -29,27 +50,26 @@ axios.defaults.baseURL = process.env.NEXT_PUBLIC_ApiEndpoint;
 Amplify.configure({
   Auth: {
     // region: process.env.NEXT_PUBLIC_region,
-    identityPoolId: process.env.NEXT_PUBLIC_CognitoIdentityPoolId,
-    userPoolId: process.env.NEXT_PUBLIC_CognitoUserPoolId,
-    userPoolWebClientId: process.env.NEXT_PUBLIC_CognitoUserPoolClientId,
+    identityPoolId: "us-west-2:dd3bb405-f76e-4bd2-a2d0-f571e8293c01",
+    userPoolId: "us-west-2_wGOZ73uUe",
+    userPoolWebClientId: "2og4jjqcv8jm4v8faccvh1omc2"
   },
+  ssr: true
 });
-const queryClient = new QueryClient()
+const queryClient = new QueryClient();
 
 function MyAppWrapper(props: AppProps) {
-  /* eslint-disable react/jsx-props-no-spreading */
   return (
     <QueryClientProvider client={queryClient}>
       <MyApp {...props} />
     </QueryClientProvider>
-  )
+  );
 }
 
 function MyApp({ Component, pageProps }: AppProps) {
-  const programsQuery = useQuery('programs', () => axios.get('/programs'))
-  if (!programsQuery.isFetched) return null
 
-  return <ProgramsContext.Provider value={{programs: programsQuery?.data?.data?.programs}}>
+  return <ProgramsContext.Provider value={{programs: workspaces?.[0]?.programs || []}}>
+    <ReactQueryDevtools initialIsOpen={false} />
     <Component {...pageProps} />
   </ProgramsContext.Provider>
 }
@@ -57,21 +77,11 @@ function MyApp({ Component, pageProps }: AppProps) {
 // HACK: Skip ConfirmSignUp view since e're auto-confirming via the Lambda Function
 function ConfirmSignUpRedirectToSignIn({ authState, onStateChange }) {
   useEffect(() => {
-    if (authState === 'confirmSignUp') onStateChange('signIn', {});
+    if (authState === "confirmSignUp") onStateChange("signIn", {});
   }, [authState, onStateChange]);
 
   return null;
 }
 
-// const signUpConfig = {
-//   hideAllDefaults: true,
-//   hiddenDefaults: ['phone_number'],
-// };
 
-// const federated = {
-//   // google_client_id: 'abc123abc123abc123abc123',
-//   // facebook_app_id: 'abc123abc123abc123abc123',
-//   // amazon_client_id: 'abc123abc123abc123abc123',
-// };
-
-export default MyApp;
+export default MyAppWrapper;

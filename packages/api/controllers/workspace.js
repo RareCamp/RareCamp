@@ -38,7 +38,7 @@ export async function getWorkspaces({
   validateUuid(userId)
   const workspaces = await Workspace.query(userId)
 
-  log.info('workspace_CONTROLLER:workspaces_FETCHED', { workspaces })
+  log.info('workspace_CONTROLLER:workspaces_FETCHED', { workspaces: workspaces.Items })
 
-  return workspaces
+  return workspaces.Items
 }

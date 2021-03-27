@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { AppLayout } from 'components/AppLayout';
 import { Icon } from 'components/Icon';
-import { LetterPic } from 'components/LetterPic';
 import Link from 'next/link';
 import { BasicInfoForm } from 'components/BasicInfoForm';
 import { EligibleSection } from 'components/EligibleSection';
@@ -11,10 +10,26 @@ import { MutationForm } from 'components/MutationForm';
 import { ProteinForm } from 'components/ProteinForm';
 
 import { Steps } from 'antd';
+import PrivateRoute from "../../components/PrivateRoute";
 
 const { Step } = Steps;
-
-const stepform = () => {
+// export async function getServerSideProps(context) {
+//   const { Auth } = withSSRContext(context);
+//   try {
+//     const user = await Auth.currentAuthenticatedUser();
+//     return {
+//       props: { username: user.username }
+//     };
+//   } catch (err) {
+//     return {
+//       redirect: {
+//         permanent: false,
+//         destination: "/auth/login"
+//       }
+//     };
+//   }
+// }
+const stepform = (props) => {
   const [showBasicInfoForm, setBasicInfo] = useState(true);
   const [showMutationForm, setShowMutationForm] = useState(false);
   const [showProteinForm, setShowProteinForm] = useState(false);
@@ -205,4 +220,4 @@ const stepform = () => {
   );
 };
 
-export default stepform;
+export default PrivateRoute(stepform);

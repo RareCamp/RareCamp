@@ -13,3 +13,7 @@ export type Task = {
   startDate: string;
   endDate: string;
 };
+
+export interface Workspace {
+
+}

@@ -11,6 +11,7 @@ const User = new Entity({
   name: 'User',
   attributes: {
     id: { partitionKey: true },
+    name: 'string',
     firstName: 'string',
     familyName: 'string',
     organization: 'string',
