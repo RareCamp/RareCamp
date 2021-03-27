@@ -34,6 +34,4 @@ jobs:
         (cd packages/api && npm ci)
 
     - name: Test packages
-      run: |
-        (cd packages/ui && npm test) & \
-        (cd packages/api && npm test)
+      run: npm test
