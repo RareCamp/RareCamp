@@ -3,26 +3,23 @@ import { Button, Typography, Form, Input, notification } from "antd";
 import AuthLayout from "../../components/AuthLayout";
 import { useRouter } from "next/router";
 import { Auth } from "aws-amplify";
+import { useMutation } from "react-query";
+import { RestPasswordPayload } from "../../types";
 
 const { Link, Title } = Typography;
 
 
 export default function RestPassword() {
-  const [isLoading, setIsLoading] = React.useState(false);
   const [form] = Form.useForm();
-
   const router = useRouter();
   useEffect(() => {
     form.setFieldsValue({
       username: router.query.username
     });
   });
-  const onFinish = async (values: any) => {
-    if (isLoading) return;
-    setIsLoading(true);
-    const { username, code, password } = values;
-    try {
-      await Auth.forgotPasswordSubmit(username.trim(), code.trim(), password.trim());
+  const mutation = useMutation(({ username, code, password }: RestPasswordPayload) =>
+    Auth.forgotPasswordSubmit(username.trim(), code.trim(), password.trim()), {
+    onSuccess: async () => {
       notification.success({
         message: "Success!",
         description: "Password reset successful, Redirecting you in a few!",
@@ -30,21 +27,14 @@ export default function RestPassword() {
         duration: 1.5
       });
       await router.push("/auth/login");
-    } catch (err) {
-      notification.error({
-        message: "Error reseting password",
-        description: err.message,
-        placement: "topRight",
-        duration: 3
-      });
-    }finally {
-      setIsLoading(false)
-    }
-  };
-
-  const onFinishFailed = (errorInfo: any) => {
-    console.log("Failed:", errorInfo);
-  };
+    },
+    onError: async (err: Error) => notification.error({
+      message: "Error reseting password",
+      description: err.message,
+      placement: "topRight",
+      duration: 3
+    })
+  });
 
   return <AuthLayout>
     <div>
@@ -57,8 +47,7 @@ export default function RestPassword() {
       layout="vertical"
       name="reset_password_form"
       form={form}
-      onFinish={onFinish}
-      onFinishFailed={onFinishFailed}
+      onFinish={mutation.mutate}
     >
       <Form.Item
         label={<span style={{ fontWeight: 500 }}>Email</span>}
@@ -88,7 +77,7 @@ export default function RestPassword() {
       </Form.Item>
 
       <Form.Item>
-        <Button loading={isLoading} type="primary" htmlType="submit" block className="login-form-button">
+        <Button loading={mutation.isLoading} type="primary" htmlType="submit" block className="login-form-button">
           Reset Password
         </Button>
       </Form.Item>

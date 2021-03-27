@@ -7,50 +7,43 @@ import AuthLayout from "../../components/AuthLayout";
 const { Title, Link } = Typography;
 
 import { useRouter } from "next/router";
+import { useMutation } from "react-query";
+import { SignupPayload } from "../../types";
 
 export default function App() {
-  const [isLoading, setIsLoading] = React.useState<boolean>(false);
-  const router = useRouter()
-  const onFinish = async (values: any) => {
-    if (isLoading) return;
-    const { name, password, username } = values;
-    setIsLoading(true);
-    try {
-      await Auth.signUp({
-        username,
-        password,
-        attributes: { email: username, name }
-      });
+  const router = useRouter();
+  const mutation = useMutation(({ name, password, username }: SignupPayload) => Auth.signUp({
+    username,
+    password,
+    attributes: { email: username, name }
+  }), {
+    onSuccess: async (_, { username, password }) => {
       notification.success({
         message: "Successfully signed up user!",
         description: "Account created successfully, Redirecting you in a few!",
         placement: "topRight",
-        duration: 1.5,
-        onClose: () => setIsLoading(false)
-      });
-      await Auth.signIn(username, password);
-      await router.push('/')
-    } catch (e) {
-      console.error(e)
-      notification.error({
-        message: "Error",
-        description: e.message,
-        placement: "topRight",
         duration: 1.5
       });
-      setIsLoading(false);
-    }
-  };
+      await Auth.signIn(username, password);
+      await router.push("/");
+    },
+    onError: async (err: Error) => notification.error({
+      message: "Error",
+      description: err.message,
+      placement: "topRight",
+      duration: 1.5
+    })
+  });
 
   return <AuthLayout>
     <div>
       <Title level={3}>Sign up for an account</Title>
-      <p>or <Link onClick={() => router.push('/auth/login')}>log in to your account</Link></p>
+      <p>or <Link onClick={() => router.push("/auth/login")}>log in to your account</Link></p>
     </div>
     <Form
       layout="vertical"
       name="register_form"
-      onFinish={onFinish}
+      onFinish={mutation.mutate}
     >
       <Form.Item
         label={<span style={{ fontWeight: 500 }}>Email</span>}
@@ -79,7 +72,8 @@ export default function App() {
       </Form.Item>
       <>
         <Form.Item>
-          <Button type="primary"  disabled={isLoading} loading={isLoading} htmlType="submit" block className="login-form-button">
+          <Button type="primary" disabled={mutation.isLoading} loading={mutation.isLoading} htmlType="submit" block
+                  className="login-form-button">
             Sign up
           </Button>
         </Form.Item>

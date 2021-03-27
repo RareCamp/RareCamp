@@ -24,4 +24,14 @@ export interface Workspace {
 export interface LoginPayload {
   username: string;
   password: string;
-};
+}
+
+export interface SignupPayload extends LoginPayload{
+  name: string;
+}
+
+export interface RestPasswordPayload extends LoginPayload{
+  code: string;
+}
+
+
