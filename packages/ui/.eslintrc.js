@@ -1,11 +1,10 @@
 module.exports = {
   parser: '@typescript-eslint/parser',
   extends: [
-    'airbnb-typescript',
+    // 'airbnb-typescript',
     'plugin:testing-library/recommended',
     'plugin:testing-library/react',
     'prettier',
-    'prettier/react',
   ],
   plugins: ['testing-library', 'prettier'],
   parserOptions: {
@@ -17,9 +16,7 @@ module.exports = {
     'import/prefer-default-export': 'off',
     'react/prop-types': 'off',
     'react/require-default-props': 'off',
-    'semi': [
-      'error',
-      'never'
-    ],
+    semi: ['error', 'never'],
+    'import/no-unresolved': 'off',
   },
-};
+}
