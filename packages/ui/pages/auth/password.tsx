@@ -3,43 +3,32 @@ import { Button, Typography, Form, Input, notification } from "antd";
 import AuthLayout from "../../components/AuthLayout";
 import { useRouter } from "next/router";
 import { Auth } from "aws-amplify";
+import { useMutation } from "react-query";
 
 const { Link, Title } = Typography;
 
 
 export default function App() {
-  const [isLoading, setIsLoading] = React.useState<boolean>(false);
   const router = useRouter();
-  console.log(router.query.username);
-  const onFinish = async (values: any) => {
-    if (isLoading) return;
-    setIsLoading(true)
-    const { username } = values;
-    try {
-      await Auth.forgotPassword(username);
+  const mutation = useMutation(({ username }: { username: string }) => Auth.forgotPassword(username), {
+    onSuccess: async (_, variables) => {
       notification.success({
         message: "Instructions Sent to your emails",
         description: "Account confirmed successfully!",
         placement: "topRight",
         duration: 1.5
       });
-      await router.push(`/auth/resetpassword?username=${username}`)
-    } catch (err) {
+      await router.push(`/auth/resetpassword?username=${variables.username}`);
+    },
+    onError: async (err: Error) => {
       notification.error({
-          message: "User confirmation failed",
-          description: err.message,
-          placement: "topRight",
-          duration: 3
-        });
-    } finally {
-      setIsLoading(false)
+        message: "User confirmation failed",
+        description: err.message,
+        placement: "topRight",
+        duration: 3
+      });
     }
-
-  };
-
-  const onFinishFailed = (errorInfo: any) => {
-    console.log("Failed:", errorInfo);
-  };
+  });
 
   return <AuthLayout>
     <div>
@@ -50,8 +39,7 @@ export default function App() {
     <Form
       layout="vertical"
       name="forgot_password_form"
-      onFinish={onFinish}
-      onFinishFailed={onFinishFailed}
+      onFinish={mutation.mutate}
     >
       <Form.Item
         label={<span style={{ fontWeight: 500 }}>Email</span>}
@@ -62,7 +50,7 @@ export default function App() {
         <Input placeholder="email@example.com" />
       </Form.Item>
       <Form.Item>
-        <Button loading={isLoading} type="primary" htmlType="submit" block className="login-form-button">
+        <Button loading={mutation.isLoading} type="primary" htmlType="submit" block className="login-form-button">
           Reset Password
         </Button>
       </Form.Item>

@@ -14,19 +14,21 @@ export default function App() {
   const router = useRouter();
 
   const mutation = useMutation(({ username, password }: LoginPayload) => Auth.signIn(username, password), {
-    onSuccess: () => notification.success({
-      message: "Successfully logged in!",
-      description: "Logged in successfully, Redirecting you in a few!",
-      placement: "topRight",
-      duration: 1.5
-    }),
-    onError: async (err: Error) => {
+    onSuccess: async () => {
+      notification.success({
+        message: "Successfully logged in!",
+        description: "Logged in successfully, Redirecting you in a few!",
+        placement: "topRight",
+        duration: 1.5
+      });
+      await router.push("/");
+    },
+    onError: (err: Error) => {
       notification.error({
         message: "Login failed",
         description: err.message,
         placement: "topRight"
       });
-      await router.push("/");
     }
   });
 
