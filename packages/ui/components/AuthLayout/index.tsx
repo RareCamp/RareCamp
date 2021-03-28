@@ -68,4 +68,5 @@ export default function AuthLayout(props) {
         </Col>
       </Row>
          </StyledLayout>
+  )
 }

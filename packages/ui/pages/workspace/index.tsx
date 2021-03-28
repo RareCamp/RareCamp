@@ -4,7 +4,7 @@ import Link from 'next/link'
 import {
   MultipleProgram,
   WorkspaceHeader,
-} from 'components/Pages/Workspace';
+} from 'components/Pages/Workspace'
 
 function Workspace() {
   const isFirstTimeVisitor = true
@@ -55,4 +55,4 @@ function Workspace() {
   )
 }
 
-export default Workspace;
+export default Workspace

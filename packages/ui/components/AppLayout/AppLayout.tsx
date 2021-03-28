@@ -1,16 +1,16 @@
-import { useState } from 'react';
-import { Layout, Menu } from 'antd';
-import { FileOutlined } from '@ant-design/icons';
-import { ChildrenProps } from 'types';
-import styles from './AppLayout.module.css';
+import { useState } from 'react'
+import { Layout, Menu } from 'antd'
+import { FileOutlined } from '@ant-design/icons'
+import { ChildrenProps } from 'types'
+import styles from './AppLayout.module.css'
 import PrivateRoute from '../PrivateRoute'
 
 const { Footer, Sider } = Layout
 
 const AppLayout = ({ children }: ChildrenProps) => {
-  const [collapsed, setCollapsed] = useState(false);
+  const [collapsed, setCollapsed] = useState(false)
   const onCollapse = () => {
-    setCollapsed(!collapsed);
+    setCollapsed(!collapsed)
   }
 
   return (
@@ -35,7 +35,7 @@ const AppLayout = ({ children }: ChildrenProps) => {
         </Footer>
       </Layout>
     </Layout>
-  );
+  )
 }
 
-export default PrivateRoute(AppLayout);
+export default PrivateRoute(AppLayout)
