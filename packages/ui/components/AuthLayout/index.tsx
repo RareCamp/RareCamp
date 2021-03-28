@@ -49,17 +49,22 @@ const StyledLayout = styled(Layout)`
 
 export default function AuthLayout(props) {
   return <StyledLayout className="layout-container">
-    <Row className="content-row">
-      <Col span={12} className="form-column">
-        <div className="auth-form">
-          <img src="/openGT_LOGO.png" width="207px" alt="infoImage" />
-          {props.children}
-        </div>
-      </Col>
-      <Col span={12} className="illustration-column">
-        <span className="headline">Own the roadmap to your future</span>
-      </Col>
-    </Row>
+      <Row className="content-row">
+        <Col span={12} className="form-column">
+          <div className="auth-form">
+            <img
+              src="/openGT_LOGO.png"
+              width="207px"
+              alt="infoImage"
+            />
+            {props.children}
+          </div>
+        </Col>
+        <Col span={12} className="illustration-column">
+          <span className="headline">
+            Own the roadmap to your future
+          </span>
+        </Col>
+      </Row>
   </StyledLayout>;
 }
-
