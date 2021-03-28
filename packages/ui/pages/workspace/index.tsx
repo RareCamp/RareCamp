@@ -1,13 +1,12 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { AppLayout } from 'components/AppLayout'
 import Link from 'next/link'
 import {
   MultipleProgram,
   WorkspaceHeader,
-} from 'components/Pages/Workspace'
-import PrivateRoute from '../../components/PrivateRoute'
+} from 'components/Pages/Workspace';
 
-function Workspace(props) {
+function Workspace() {
   const isFirstTimeVisitor = true
   return (
     <AppLayout>
@@ -56,4 +55,4 @@ function Workspace(props) {
   )
 }
 
-export default PrivateRoute(Workspace)
+export default Workspace;

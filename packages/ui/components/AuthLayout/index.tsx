@@ -69,4 +69,3 @@ export default function AuthLayout(props) {
       </Row>
          </StyledLayout>
 }
-}

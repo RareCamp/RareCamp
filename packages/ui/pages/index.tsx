@@ -1,16 +1,15 @@
-import React, { useState, useEffect } from 'react'
-import { useRouter } from 'next/router'
-import { Layout, Table, Badge, notification, Spin } from 'antd'
-import { MainSection } from 'components/Pages/Program'
-import Navbar from 'components/AppLayout/Navbar'
-import { AppLayout } from 'components/AppLayout'
-import { TASK_TABLE_HEADINGS } from 'constants/tableHeaders'
-import styles from 'styles/program.module.css'
-import { useQuery } from 'react-query'
-import axios from 'axios'
-import PrivateRoute from '../components/PrivateRoute'
-import { WorkspaceContext } from '../context/workspace'
-import { Workspace } from '../types'
+import React, { useState, useEffect } from "react";
+import { useRouter } from "next/router";
+import { Layout, Table, Badge, notification, Spin } from "antd";
+import { MainSection } from "components/Pages/Program";
+import Navbar from "components/AppLayout/Navbar";
+import { AppLayout } from "components/AppLayout";
+import { TASK_TABLE_HEADINGS } from "constants/tableHeaders";
+import styles from "styles/program.module.css";
+import PrivateRoute from "../components/PrivateRoute";
+import { useQuery } from "react-query";
+import axios from "axios";
+import { WorkspaceContext } from "../context/workspace";
 
 export const TASK_SUB_TABLE_HEADINGS = [
   {
@@ -58,18 +57,14 @@ export const TASK_SUB_TABLE_HEADINGS = [
 ]
 const USER_NAME = 'Ramya'
 const Home = () => {
-  const { data } = useQuery('workspaces', () =>
-    axios.get<Workspace[]>('workspaces'),
-  )
-  const workspaces = data?.data
-  workspaces?.[0].programs
-  const router = useRouter()
-  const isFirstTimeVisitor = !workspaces?.[0].programs.length
+  const { data, isLoading } = useQuery("defaultWorkspace", () => axios.get("workspaces/default"));
+  const router = useRouter();
+
   useEffect(() => {
-    if (isFirstTimeVisitor) {
-      router.push('/workspace/stepform')
+    if (!(data?.data?.workspace?.programs?.length) && !isLoading) {
+      router.push("/workspace/stepform");
     }
-  }, [])
+  }, [isLoading]);
 
   const [isEditProgramModalOpen, setEditProgramModalOpen] = useState(
     false,
@@ -89,9 +84,7 @@ const Home = () => {
 
   function expandedRowRender() {
     return (
-      <WorkspaceContext.Provider
-        value={{ workspaces: workspaces || [] }}
-      >
+      <WorkspaceContext.Provider value={{ workspace: data?.data?.workspace }}>
         <Table
           columns={TASK_SUB_TABLE_HEADINGS}
           pagination={false}
