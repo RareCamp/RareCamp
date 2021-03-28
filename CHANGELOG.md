@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/RareCamp/RareCamp/compare/v1.0.2...v1.1.0) (2021-03-27)
+
+
+### Features
+
+* **ui:** add Auth screens. ([#55](https://github.com/RareCamp/RareCamp/issues/55)) ([6fe705c](https://github.com/RareCamp/RareCamp/commit/6fe705cdf0039764e5e5d1b5b636111dbb464672))
+
 ## [1.0.2](https://github.com/RareCamp/RareCamp/compare/v1.0.1...v1.0.2) (2021-03-26)
 
 
