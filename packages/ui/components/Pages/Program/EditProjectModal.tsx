@@ -1,37 +1,37 @@
-import React, { useRef } from 'react';
-import { ModalHeader } from 'components/Modal';
-import { Form, Input, Button } from 'antd';
+import React, { useRef } from 'react'
+import { ModalHeader } from 'components/Modal'
+import { Form, Input, Button } from 'antd'
 
 const EditProjectModal = ({
   setProjectModalOpen,
 }: {
-  setProjectModalOpen: Function;
+  setProjectModalOpen: Function
 }) => {
-  const inputRef = useRef(null);
+  const inputRef = useRef(null)
   const layout = {
     labelCol: { span: 8 },
     wrapperCol: { span: 16 },
-  };
+  }
   const tailLayout = {
     wrapperCol: { offset: 8, span: 16 },
-  };
+  }
 
   const Demo = () => {
     const onFinish = (values: any) => {
-      console.log('Success:', values);
-    };
-  };
+      console.log('Success:', values)
+    }
+  }
 
   const onFinishFailed = (errorInfo: any) => {
-    console.log('Failed:', errorInfo);
-  };
+    console.log('Failed:', errorInfo)
+  }
 
   return (
     <>
       <ModalHeader
         modalName="Edit Project Details"
         onClick={() => {
-          setProjectModalOpen(false);
+          setProjectModalOpen(false)
         }}
       />
 
@@ -63,7 +63,7 @@ const EditProjectModal = ({
         </div>
       </Form>
     </>
-  );
-};
+  )
+}
 
-export default EditProjectModal;
+export default EditProjectModal

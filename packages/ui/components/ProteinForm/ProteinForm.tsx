@@ -1,7 +1,7 @@
-import { Icon } from 'components/Icon';
-import React from 'react';
-import styles from './proteinform.module.css';
-import { Form, Input, Button } from 'antd';
+import { Icon } from 'components/Icon'
+import React from 'react'
+import { Form, Input, Button } from 'antd'
+import styles from './proteinform.module.css'
 
 const ProteinForm = ({
   setBasicInfo,
@@ -14,20 +14,20 @@ const ProteinForm = ({
   const layout = {
     labelCol: { span: 8 },
     wrapperCol: { span: 16 },
-  };
+  }
   const tailLayout = {
     wrapperCol: { offset: 8, span: 16 },
-  };
+  }
 
   const Demo = () => {
     const onFinish = (values: any) => {
-      console.log('Success:', values);
-    };
-  };
+      console.log('Success:', values)
+    }
+  }
 
   const onFinishFailed = (errorInfo: any) => {
-    console.log('Failed:', errorInfo);
-  };
+    console.log('Failed:', errorInfo)
+  }
   return (
     <div className={styles['protein-form']}>
       <div style={{ width: '60%' }}>
@@ -96,10 +96,10 @@ const ProteinForm = ({
           <Form.Item style={{ display: 'flex', marginTop: '1rem' }}>
             <Button
               onClick={() => {
-                setShowProteinForm(false);
-                setBasicInfo(false);
-                setShowMutationForm(true);
-                setCurrent(1);
+                setShowProteinForm(false)
+                setBasicInfo(false)
+                setShowMutationForm(true)
+                setCurrent(1)
               }}
             >
               Back
@@ -107,10 +107,10 @@ const ProteinForm = ({
 
             <Button
               onClick={() => {
-                setBasicInfo(false);
-                setShowMutationForm(false);
-                setShowProteinForm(false);
-                setShowEligibleSection(true);
+                setBasicInfo(false)
+                setShowMutationForm(false)
+                setShowProteinForm(false)
+                setShowEligibleSection(true)
               }}
               style={{ marginLeft: '0.25rem' }}
             >
@@ -140,7 +140,7 @@ const ProteinForm = ({
         </p>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default ProteinForm;
+export default ProteinForm

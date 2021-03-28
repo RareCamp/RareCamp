@@ -1,1 +1,1 @@
-export { default as LetterPic } from './LetterPic';
+export { default as LetterPic } from './LetterPic'

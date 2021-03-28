@@ -1,1 +1,1 @@
-export { default as ProteinForm } from './ProteinForm';
+export { default as ProteinForm } from './ProteinForm'

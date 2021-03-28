@@ -1,4 +1,4 @@
-import styles from 'styles/dropdown.module.css';
+import styles from 'styles/dropdown.module.css'
 
 const DropDown = ({ data, render, className }: any) => (
   <div>
@@ -6,6 +6,6 @@ const DropDown = ({ data, render, className }: any) => (
       {data.map((d) => render(d))}
     </ul>
   </div>
-);
+)
 
-export default DropDown;
+export default DropDown

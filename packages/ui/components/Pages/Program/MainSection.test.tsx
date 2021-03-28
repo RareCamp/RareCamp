@@ -1,5 +1,5 @@
-import { render, screen } from '@testing-library/react';
-import { MainSection } from './index';
+import { render, screen } from '@testing-library/react'
+import { MainSection } from './index'
 
 describe('IndexPage#MainSection', () => {
   test('shows the children passed', () => {
@@ -12,13 +12,13 @@ describe('IndexPage#MainSection', () => {
       >
         <h1>Hii</h1>
       </MainSection>,
-    );
+    )
     const text = screen.getByRole('heading', {
       name: /Hii/i,
-    });
-    expect(text).toBeInTheDocument();
-  });
-});
+    })
+    expect(text).toBeInTheDocument()
+  })
+})
 describe('MainSection', () => {
   test('renders MainSection component', () => {
     render(
@@ -30,8 +30,8 @@ describe('MainSection', () => {
       >
         <>Mainsection</>
       </MainSection>,
-    );
+    )
 
-    expect(screen.getByText(/Mainsection/)).toBeInTheDocument();
-  });
-});
+    expect(screen.getByText(/Mainsection/)).toBeInTheDocument()
+  })
+})

@@ -1,35 +1,35 @@
-import { useState } from 'react';
-import Link from 'next/link';
-import { useRouter } from 'next/router';
-import { Auth } from 'aws-amplify';
-import { Button, Form, Input } from 'antd';
-import { Logo } from 'components/Logo';
+import { useState } from 'react'
+import Link from 'next/link'
+import { useRouter } from 'next/router'
+import { Auth } from 'aws-amplify'
+import { Button, Form, Input } from 'antd'
+import { Logo } from 'components/Logo'
 
 const SignUp = () => {
-  const router = useRouter();
+  const router = useRouter()
 
-  const [isOtp, setIsOtp] = useState(false);
-  const [email, setEmail] = useState('');
-  const [otp, setOtp] = useState('');
+  const [isOtp, setIsOtp] = useState(false)
+  const [email, setEmail] = useState('')
+  const [otp, setOtp] = useState('')
 
   const onSubmit = (data) => {
-    console.log(data);
-    setEmail(data.email);
+    console.log(data)
+    setEmail(data.email)
     Auth.signUp(data.email, data.password)
       .then(() => {
-        setIsOtp(true);
+        setIsOtp(true)
       })
       .catch((err) => {
-        console.log(err);
-      });
-  };
+        console.log(err)
+      })
+  }
 
   const validateOtp = (data) => {
-    console.log(data.otp, console.log('email'));
+    console.log(data.otp, console.log('email'))
     Auth.confirmSignUp(email, `${data.otp}`).then((data) => {
-      router.push('/');
-    });
-  };
+      router.push('/')
+    })
+  }
 
   return (
     <section className="px-4">
@@ -46,26 +46,16 @@ const SignUp = () => {
             </Link>
           </span>
           {!isOtp ? (
-            <Form
-              className="flex flex-col mt-5"
-              onFinish={onSubmit}
-            >
-            <Form.Item
-            label='Email'
-            name='email'
-          >
-            <Input type="email" />
-          </Form.Item>
-              <Form.Item
-              label='Password'
-              name='password'
-            >
-              <Input type="password" />
-            </Form.Item>
-              <Button
-                htmlType="submit"
-                type="primary"
-              >Sign up</Button>
+            <Form className="flex flex-col mt-5" onFinish={onSubmit}>
+              <Form.Item label="Email" name="email">
+                <Input type="email" />
+              </Form.Item>
+              <Form.Item label="Password" name="password">
+                <Input type="password" />
+              </Form.Item>
+              <Button htmlType="submit" type="primary">
+                Sign up
+              </Button>
 
               <p className="text-xs mt-4 flex flex-col justify-between h-9">
                 <span className="text-gray-400 text-extralight">
@@ -88,16 +78,12 @@ const SignUp = () => {
               className="flex flex-col mt-5"
               onFinish={validateOtp}
             >
-                <Form.Item
-                label='Enter One-Time Password'
-                name='otp'
-              >
+              <Form.Item label="Enter One-Time Password" name="otp">
                 <Input type="number" />
               </Form.Item>
-              <Button
-                htmlType="submit"
-                type="primary"
-              >OTP</Button>
+              <Button htmlType="submit" type="primary">
+                OTP
+              </Button>
 
               <p className="text-xs mt-4 flex flex-col justify-between h-9">
                 <span className="text-gray-400 text-extralight">
@@ -133,7 +119,7 @@ const SignUp = () => {
         </div>
       </div>
     </section>
-  );
-};
+  )
+}
 
-export default SignUp;
+export default SignUp

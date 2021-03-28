@@ -1,6 +1,6 @@
-import React from 'react';
-import styles from './mutation.module.css';
-import { Form, Input, Button } from 'antd';
+import React from 'react'
+import { Form, Input, Button } from 'antd'
+import styles from './mutation.module.css'
 
 const MutationForm = ({
   setShowProteinForm,
@@ -12,20 +12,20 @@ const MutationForm = ({
   const layout = {
     labelCol: { span: 8 },
     wrapperCol: { span: 16 },
-  };
+  }
   const tailLayout = {
     wrapperCol: { offset: 8, span: 16 },
-  };
+  }
 
   const Demo = () => {
     const onFinish = (values: any) => {
-      console.log('Success:', values);
-    };
-  };
+      console.log('Success:', values)
+    }
+  }
 
   const onFinishFailed = (errorInfo: any) => {
-    console.log('Failed:', errorInfo);
-  };
+    console.log('Failed:', errorInfo)
+  }
   return (
     <div className={styles['mutation-form']}>
       <div style={{ width: '60%' }}>
@@ -101,10 +101,10 @@ const MutationForm = ({
               size="small"
               // className="block text-xs text-gray-400 focus:outline-none"
               onClick={() => {
-                setShowProteinForm(false);
-                setBasicInfo(true);
-                setShowMutationForm(false);
-                setCurrent(0);
+                setShowProteinForm(false)
+                setBasicInfo(true)
+                setShowMutationForm(false)
+                setCurrent(0)
               }}
             >
               Back
@@ -116,10 +116,10 @@ const MutationForm = ({
               style={{ marginLeft: '0.25rem' }}
               // className="block text-xs text-white focus:outline-none ml-1"
               onClick={() => {
-                setShowProteinForm(true);
-                setBasicInfo(false);
-                setShowMutationForm(false);
-                setCurrent(2);
+                setShowProteinForm(true)
+                setBasicInfo(false)
+                setShowMutationForm(false)
+                setCurrent(2)
               }}
             >
               Next
@@ -148,7 +148,7 @@ const MutationForm = ({
         </p>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default MutationForm;
+export default MutationForm

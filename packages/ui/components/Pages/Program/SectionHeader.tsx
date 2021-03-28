@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
-import { Icon } from 'components/Icon';
-import { Modal } from 'components/Modal';
-import EditProjectModal from './EditProjectModal';
+import React, { useState } from 'react'
+import { Icon } from 'components/Icon'
+import { Modal } from 'components/Modal'
+import EditProjectModal from './EditProjectModal'
 
 type SectionHeaderProps = {
-  title: string;
-  description: string;
-  setShowTable: Function;
-  showTable: boolean;
-};
+  title: string
+  description: string
+  setShowTable: Function
+  showTable: boolean
+}
 
 const SectionHeader = ({
   title,
@@ -16,13 +16,13 @@ const SectionHeader = ({
   description,
   showTable,
 }: SectionHeaderProps) => {
-  const [hover, setHover] = useState(false);
+  const [hover, setHover] = useState(false)
   const [isEditProjectModalOpen, setProjectModalOpen] = useState(
     false,
-  );
+  )
   const tooltipStyle = {
     display: hover ? 'block' : 'none',
-  };
+  }
   return (
     <>
       <tr className="justify-between border border-gray-300 hover:border-blue-400">
@@ -78,7 +78,7 @@ const SectionHeader = ({
         </Modal>
       )}
     </>
-  );
-};
+  )
+}
 
-export default SectionHeader;
+export default SectionHeader
