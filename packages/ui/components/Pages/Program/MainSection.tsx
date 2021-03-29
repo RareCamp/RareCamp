@@ -1,16 +1,16 @@
-import React, { useState } from 'react';
-import { Dropdown, Button, Menu } from 'antd';
-import { CaretDownOutlined, PlusOutlined } from '@ant-design/icons';
-import { ChildrenProps } from 'types';
-import { Modal } from 'components/Modal';
-import EditProgramModal from './EditProgramModal';
-import AccountSettingModal from './AccountSettingModal';
+import React, { useState } from 'react'
+import { Dropdown, Button, Menu } from 'antd'
+import { CaretDownOutlined, PlusOutlined } from '@ant-design/icons'
+import { ChildrenProps } from 'types'
+import { Modal } from 'components/Modal'
+import EditProgramModal from './EditProgramModal'
+import AccountSettingModal from './AccountSettingModal'
 
 const menu = (
   <Menu>
     <Menu.Item key="1">1st menu item</Menu.Item>
   </Menu>
-);
+)
 
 const MainSection = ({
   children,
@@ -19,13 +19,13 @@ const MainSection = ({
   isAccountSettingModalOpen,
   setAccountSettingModalOpen,
 }: {
-  children: ChildrenProps | any;
-  isEditProgramModalOpen: boolean;
-  setEditProgramModalOpen: Function;
-  isAccountSettingModalOpen: boolean;
-  setAccountSettingModalOpen: Function;
+  children: ChildrenProps | any
+  isEditProgramModalOpen: boolean
+  setEditProgramModalOpen: Function
+  isAccountSettingModalOpen: boolean
+  setAccountSettingModalOpen: Function
 }) => {
-  const [isAddSectionOpen, setAddSectionOpen] = useState(false);
+  const [isAddSectionOpen, setAddSectionOpen] = useState(false)
   return (
     <main className="bg-primary">
       <div className="py-6 px-6 flex flex-col mb-4">
@@ -63,6 +63,6 @@ const MainSection = ({
         </Modal>
       )}
     </main>
-  );
-};
-export default MainSection;
+  )
+}
+export default MainSection

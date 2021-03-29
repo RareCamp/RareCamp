@@ -1,1 +1,1 @@
-export { default as NotEligibleSection } from './NotEligibleSection';
+export { default as NotEligibleSection } from './NotEligibleSection'

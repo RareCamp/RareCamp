@@ -1,17 +1,17 @@
 /*  Any array of items including navlinks, options in selectbox */
-import { Collapse } from 'antd';
-import { IconNameType } from 'components/Icon/Icon';
-import type { Task } from 'types';
+import { Collapse } from 'antd'
+import { IconNameType } from 'components/Icon/Icon'
+import type { Task } from 'types'
 
 type SidebarLinkType = {
-  name: string;
-  icon: IconNameType;
-  link: string;
-};
+  name: string
+  icon: IconNameType
+  link: string
+}
 export const SIDEBAR_LINKS: SidebarLinkType[] = [
   { name: 'Workspace', icon: 'list', link: 'workspace' },
   // { name: 'SSMD Gene Therapy', icon: 'dot', link: '' },
-];
+]
 
 export const HOME_TABLE_HEADINGS = [
   'TaskName',
@@ -20,14 +20,13 @@ export const HOME_TABLE_HEADINGS = [
   'Budget',
   'Start Date',
   'End Date',
-];
-
+]
 
 export const STATUS_TYPES = [
   { label: 'Completed', id: 'completed' },
   { label: 'In Progress', id: 'in-progress' },
   { label: 'Not Started', id: 'not-started' },
-];
+]
 
 export const INITIAL_TASK_VALUE: Task = {
   name: '',
@@ -37,4 +36,4 @@ export const INITIAL_TASK_VALUE: Task = {
   duration: '',
   startDate: '',
   endDate: '',
-};
+}

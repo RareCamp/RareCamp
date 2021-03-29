@@ -1,36 +1,36 @@
-import React, { useRef } from 'react';
-import { ModalHeader } from 'components/Modal';
-import { Form, Input, Button } from 'antd';
+import React, { useRef } from 'react'
+import { ModalHeader } from 'components/Modal'
+import { Form, Input, Button } from 'antd'
 
 const EditProgramModal = ({
   setEditProgramModalOpen,
 }: {
-  setEditProgramModalOpen: Function;
+  setEditProgramModalOpen: Function
 }) => {
   const layout = {
     labelCol: { span: 8 },
     wrapperCol: { span: 16 },
-  };
+  }
   const tailLayout = {
     wrapperCol: { offset: 8, span: 16 },
-  };
+  }
 
   const Demo = () => {
     const onFinish = (values: any) => {
-      console.log('Success:', values);
-    };
-  };
+      console.log('Success:', values)
+    }
+  }
 
   const onFinishFailed = (errorInfo: any) => {
-    console.log('Failed:', errorInfo);
-  };
+    console.log('Failed:', errorInfo)
+  }
 
   return (
     <>
       <ModalHeader
         modalName="Edit Program Details"
         onClick={() => {
-          setEditProgramModalOpen(false);
+          setEditProgramModalOpen(false)
         }}
       />
       <Form
@@ -68,7 +68,7 @@ const EditProgramModal = ({
         </div>
       </Form>
     </>
-  );
-};
+  )
+}
 
-export default EditProgramModal;
+export default EditProgramModal

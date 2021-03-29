@@ -1,5 +1,5 @@
-import { render, screen } from '@testing-library/react';
-import AppLayout from './AppLayout';
+import { render, screen } from '@testing-library/react'
+import AppLayout from './AppLayout'
 
 describe('AppLayout', () => {
   test('renders Applayout component', () => {
@@ -7,8 +7,8 @@ describe('AppLayout', () => {
       <AppLayout>
         <>Layout</>
       </AppLayout>,
-    );
+    )
 
-    expect(screen.getByTestId('AppLayout-logo')).toHaveClass('logo');
-  });
-});
+    expect(screen.getByTestId('AppLayout-logo')).toHaveClass('logo')
+  })
+})

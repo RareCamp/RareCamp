@@ -1,5 +1,5 @@
-import { render, screen } from '@testing-library/react';
-import Navbar from './Navbar';
+import { render, screen } from '@testing-library/react'
+import Navbar from './Navbar'
 
 describe('NavBar', () => {
   test('renders Navbar component', () => {
@@ -9,10 +9,10 @@ describe('NavBar', () => {
         setEditProgramModalOpen={() => {}}
         setAccountSettingModalOpen={() => {}}
       />,
-    );
+    )
 
-    expect(screen.getByText(/Invite/));
-  });
+    expect(screen.getByText(/Invite/))
+  })
 
   test('clicks button in Navbar ', () => {
     render(
@@ -21,9 +21,9 @@ describe('NavBar', () => {
         setEditProgramModalOpen={() => {}}
         setAccountSettingModalOpen={() => {}}
       />,
-    );
+    )
     // expect();
-    const liItem = screen.getByTestId('123');
-    expect(liItem).toHaveClass('flex');
-  });
-});
+    const liItem = screen.getByTestId('123')
+    expect(liItem).toHaveClass('flex')
+  })
+})

@@ -1,39 +1,39 @@
-import React, { useState } from 'react';
-import { LetterPic } from 'components/LetterPic';
-import { STATUS_TYPES } from 'constants/lists';
-import styles from 'styles/program.module.css';
-import { DropDown } from 'components/DropDown';
-import type { Task } from 'types';
-import { Icon } from 'components/Icon';
+import React, { useState } from 'react'
+import { LetterPic } from 'components/LetterPic'
+import { STATUS_TYPES } from 'constants/lists'
+import styles from 'styles/program.module.css'
+import { DropDown } from 'components/DropDown'
+import type { Task } from 'types'
+import { Icon } from 'components/Icon'
 
 type TableRowProps = {
-  item: Task;
-};
+  item: Task
+}
 
 const TableRow = ({ item }: TableRowProps) => {
-  const [task, setTask] = useState(item.name);
-  const [budget, setBudget] = useState(item.budget);
-  const [showDropdown, setshowDropdown] = useState(false);
-  const [selectedStatus, setStatus] = useState(item.status);
+  const [task, setTask] = useState(item.name)
+  const [budget, setBudget] = useState(item.budget)
+  const [showDropdown, setshowDropdown] = useState(false)
+  const [selectedStatus, setStatus] = useState(item.status)
   const [isOwnerDetailsVisible, setOwnerDetailsVisible] = useState(
     false,
-  );
-  const [startDate, setStartDate] = useState(item.startDate);
-  const [endDate, setEndDate] = useState(item.endDate);
-  const [hover, setHover] = useState(false);
+  )
+  const [startDate, setStartDate] = useState(item.startDate)
+  const [endDate, setEndDate] = useState(item.endDate)
+  const [hover, setHover] = useState(false)
 
-  let statusClass = 'not-started';
+  let statusClass = 'not-started'
   if (selectedStatus === 'completed') {
-    statusClass = 'completed';
+    statusClass = 'completed'
   }
 
   if (selectedStatus === 'in-progress') {
-    statusClass = 'in-progress';
+    statusClass = 'in-progress'
   }
   if (selectedStatus === 'not-started') {
-    statusClass = 'not-started';
+    statusClass = 'not-started'
   }
-  const tooltipStyle = hover ? 'block' : 'hidden';
+  const tooltipStyle = hover ? 'block' : 'hidden'
 
   return (
     <tr key={item.name} className={styles['table-item']}>
@@ -64,21 +64,19 @@ const TableRow = ({ item }: TableRowProps) => {
           <DropDown
             className="text-sm w-36"
             data={STATUS_TYPES}
-            render={(status) => {
-              return (
-                <li
-                  className="border border-gray-300 hover:border-blue-400"
-                  key={status.id}
-                  role="presentation"
-                  onClick={() => {
-                    setStatus(status.id);
-                    setshowDropdown(false);
-                  }}
-                >
-                  {status.label}
-                </li>
-              );
-            }}
+            render={(status) => (
+              <li
+                className="border border-gray-300 hover:border-blue-400"
+                key={status.id}
+                role="presentation"
+                onClick={() => {
+                  setStatus(status.id)
+                  setshowDropdown(false)
+                }}
+              >
+                {status.label}
+              </li>
+            )}
           />
         )}
       </td>
@@ -86,7 +84,7 @@ const TableRow = ({ item }: TableRowProps) => {
       {item.owner !== '' ? (
         <td
           onClick={() => {
-            setOwnerDetailsVisible(!isOwnerDetailsVisible);
+            setOwnerDetailsVisible(!isOwnerDetailsVisible)
           }}
           role="presentation"
           className="flex items-center"
@@ -110,27 +108,25 @@ const TableRow = ({ item }: TableRowProps) => {
               ownerEmail: 'ramyaramaswamy89@gmail.com',
             },
           ]}
-          render={(i) => {
-            return (
-              <div className="flex items-center px-2 py-2 hover:bg-gray-200 cursor-pointer">
-                <LetterPic
-                  letter="R"
-                  color="primary"
-                  className=""
-                  size="md"
-                  textColor="purple"
-                />
-                <span className="flex flex-col justify-between h-12 px-2 ml-2">
-                  <span className="text-gray-500 text-base font-light block">
-                    {i.ownerName}
-                  </span>
-                  <span className="text-gray-400 font-light text-sm block">
-                    {i.ownerEmail}
-                  </span>
+          render={(i) => (
+            <div className="flex items-center px-2 py-2 hover:bg-gray-200 cursor-pointer">
+              <LetterPic
+                letter="R"
+                color="primary"
+                className=""
+                size="md"
+                textColor="purple"
+              />
+              <span className="flex flex-col justify-between h-12 px-2 ml-2">
+                <span className="text-gray-500 text-base font-light block">
+                  {i.ownerName}
                 </span>
-              </div>
-            );
-          }}
+                <span className="text-gray-400 font-light text-sm block">
+                  {i.ownerEmail}
+                </span>
+              </span>
+            </div>
+          )}
         />
       )}
       <td>
@@ -156,7 +152,7 @@ const TableRow = ({ item }: TableRowProps) => {
         />
       </td>
     </tr>
-  );
-};
+  )
+}
 
-export default TableRow;
+export default TableRow

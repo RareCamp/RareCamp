@@ -1,30 +1,30 @@
-import React, { useRef } from 'react';
-import { LetterPic } from 'components/LetterPic';
-import { ModalHeader } from 'components/Modal';
-import { Form, Input, Button } from 'antd';
+import React, { useRef } from 'react'
+import { LetterPic } from 'components/LetterPic'
+import { ModalHeader } from 'components/Modal'
+import { Form, Input, Button } from 'antd'
 
 const AccountSettingModal = ({
   setAccountSettingModalOpen,
 }: {
-  setAccountSettingModalOpen: Function;
+  setAccountSettingModalOpen: Function
 }) => {
   const layout = {
     labelCol: { span: 8 },
     wrapperCol: { span: 16 },
-  };
+  }
   const tailLayout = {
     wrapperCol: { offset: 8, span: 16 },
-  };
+  }
 
   const Demo = () => {
     const onFinish = (values: any) => {
-      console.log('Success:', values);
-    };
-  };
+      console.log('Success:', values)
+    }
+  }
 
   const onFinishFailed = (errorInfo: any) => {
-    console.log('Failed:', errorInfo);
-  };
+    console.log('Failed:', errorInfo)
+  }
 
   return (
     <>
@@ -71,7 +71,7 @@ const AccountSettingModal = ({
         </Form>
       </div>
     </>
-  );
-};
+  )
+}
 
-export default AccountSettingModal;
+export default AccountSettingModal

@@ -1,7 +1,7 @@
-import React from 'react';
-import Link from 'next/link';
-import { Button } from 'antd';
-import styles from './noteligible.module.css';
+import React from 'react'
+import Link from 'next/link'
+import { Button } from 'antd'
+import styles from './noteligible.module.css'
 
 function NotEligibleSection({ isShowEligibleSection }: any) {
   return (
@@ -62,7 +62,7 @@ function NotEligibleSection({ isShowEligibleSection }: any) {
         </p>
       </div>
     </div>
-  );
+  )
 }
 
-export default NotEligibleSection;
+export default NotEligibleSection

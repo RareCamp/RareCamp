@@ -1,10 +1,10 @@
-import { Button, Input } from 'antd';
-import { useForm } from 'react-hook-form';
-import { Logo } from 'components/Logo';
+import { Button, Input } from 'antd'
+import { useForm } from 'react-hook-form'
+import { Logo } from 'components/Logo'
 
 const Password = () => {
-  const { register, handleSubmit, errors } = useForm();
-  const onSubmit = () => {};
+  const { register, handleSubmit, errors } = useForm()
+  const onSubmit = () => {}
   return (
     <section className="px-4">
       <div className="bg-secondary flex justify-between h-screen px-52 py-16">
@@ -41,7 +41,7 @@ const Password = () => {
         </div>
       </div>
     </section>
-  );
-};
+  )
+}
 
-export default Password;
+export default Password

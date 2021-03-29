@@ -1,9 +1,9 @@
-import MainSection from './MainSection';
-import SectionHeader from './SectionHeader';
-import TableRow from './TableRow';
-import TaskSection from './TaskSection';
-import EditProgramModal from './EditProgramModal';
-import EditProjectModal from './EditProjectModal';
+import MainSection from './MainSection'
+import SectionHeader from './SectionHeader'
+import TableRow from './TableRow'
+import TaskSection from './TaskSection'
+import EditProgramModal from './EditProgramModal'
+import EditProjectModal from './EditProjectModal'
 
 export {
   MainSection,
@@ -12,4 +12,4 @@ export {
   TaskSection,
   EditProgramModal,
   EditProjectModal,
-};
+}
