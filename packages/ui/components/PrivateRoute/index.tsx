@@ -17,12 +17,6 @@ export default function PrivateRoute(
         .catch(() => router.push('/auth/login'))
     })
     // TODO: LogoutButton to be removed once implemented on the AppLayout
-    return isLoggedIn ? (
-      <>
-        <LogoutButton />
-
-        <Component {...props} />
-      </>
-    ) : null
+    return isLoggedIn ? <Component {...props} /> : null
   }
 }

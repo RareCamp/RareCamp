@@ -1,14 +1,12 @@
-import React from "react";
-import Auth from "@aws-amplify/auth";
-import "../../styles/antd.less";
-import { Button, Typography, Form, Input, notification, Spin } from "antd";
-import AuthLayout from "../../components/AuthLayout";
+import React from 'react'
+import Auth from '@aws-amplify/auth'
+import { Button, Typography, Form, Input, notification } from 'antd'
+import AuthLayout from 'components/AuthLayout'
+import { useRouter } from 'next/router'
+import { useMutation } from 'react-query'
+import { SignupPayload } from 'types'
 
-import { useRouter } from "next/router";
-import { useMutation } from "react-query";
-import { SignupPayload } from "../../types";
-
-const { Title, Link } = Typography;
+const { Title, Link } = Typography
 
 export default function App() {
   const router = useRouter()
@@ -53,13 +51,13 @@ export default function App() {
         </p>
       </div>
       <Form
-        layout="vertical"
-        name="register_form"
+        layout='vertical'
+        name='register_form'
         onFinish={mutation.mutate}
       >
         <Form.Item
           label={<span style={{ fontWeight: 500 }}>Email</span>}
-          name="username"
+          name='username'
           required={false}
           rules={[
             {
@@ -69,22 +67,22 @@ export default function App() {
             },
           ]}
         >
-          <Input placeholder="email@example.com" />
+          <Input placeholder='email@example.com' />
         </Form.Item>
         <Form.Item
           label={<span style={{ fontWeight: 500 }}>Name</span>}
-          name="name"
+          name='name'
           required={false}
           rules={[
             { required: true, message: 'Please input your name!' },
           ]}
         >
-          <Input placeholder="Jhon Rick " />
+          <Input placeholder='Jhon Rick ' />
         </Form.Item>
         <Form.Item
           style={{ marginBottom: '10px' }}
           label={<span style={{ fontWeight: 500 }}>Password</span>}
-          name="password"
+          name='password'
           required={false}
           rules={[
             {
@@ -93,18 +91,18 @@ export default function App() {
             },
           ]}
         >
-          <Input.Password placeholder="Must be at least 8 characters" />
+          <Input.Password placeholder='Must be at least 8 characters' />
         </Form.Item>
         <>
           <Form.Item>
             <Button
-              type="primary"
+              type='primary'
               disabled={mutation.isLoading}
               loading={mutation.isLoading}
-              htmlType="submit"
+              htmlType='submit'
               block
-            className="login-form-button"
-          >
+              className='login-form-button'
+            >
               Sign up
             </Button>
           </Form.Item>
@@ -117,5 +115,6 @@ export default function App() {
           </Form.Item>
         </>
       </Form>
-         </AuthLayout>
+    </AuthLayout>
+  )
 }

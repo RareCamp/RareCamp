@@ -2,6 +2,7 @@ import express from 'express'
 import wrapAsync from '../wrap-async'
 import { createWorkspace, getDefaultWorkspace, getWorkspaceByIdAndUserId, getWorkspaces } from "../../../controllers/workspace";
 import { getPrograms } from '../../../controllers/program'
+import { NotFoundError } from '../../../errors'
 
 const workspaceRouter = express.Router()
 
@@ -23,8 +24,9 @@ workspaceRouter.get('/', wrapAsync(async (req, res) => {
 workspaceRouter.get('/default', wrapAsync(async (req, res) => {
   const { userId } = req.cognitoUser
   const workspace = await getDefaultWorkspace({ userId })
-  const programs = await getPrograms(workspace.workspaceId)
-  if (programs && programs.Items && programs.Items.length) workspace.programs = programs.Items
+  if (!workspace) throw new NotFoundError('Default workspace does not exist')
+    const programs = await getPrograms(workspace.workspaceId)
+    if (programs && programs.Items && programs.Items.length) workspace.programs = programs.Items
   res.json({ workspace })
 }))
 

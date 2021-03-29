@@ -18,5 +18,6 @@ module.exports = {
     'react/require-default-props': 'off',
     semi: ['error', 'never'],
     'import/no-unresolved': 'off',
+    'react/jsx-props-no-spreading': 'off',
   },
 }
