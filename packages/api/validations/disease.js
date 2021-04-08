@@ -7,4 +7,5 @@ export const diseaseSchema = yup.object({
   causalGene: yup.string(),
   mutationImpact: yup.string(),
   proteinSize: yup.number().positive().min(1),
+  organizationsWorkingOnDisease: yup.string(),
 })

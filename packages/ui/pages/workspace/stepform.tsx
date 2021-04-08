@@ -115,8 +115,8 @@ const stepform = (props) => {
                         />
                         <span style={{ marginLeft: '0.25rem' }}>
                           Mutation
-                        </span>
-                      </div>
+            </span>
+          </div>
                       <span
                         className={`${styles['span']} ${
                           showProteinForm
@@ -134,7 +134,7 @@ const stepform = (props) => {
                           display: 'flex',
                           alignItems: 'center',
                         }}
-                      >
+            >
                         <LetterPic
                           letter="3"
                           color="custom"
@@ -204,4 +204,4 @@ const stepform = (props) => {
   )
 }
 
-export default PrivateRoute(stepform)
+export default stepform

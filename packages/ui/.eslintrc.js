@@ -6,7 +6,7 @@ module.exports = {
     'plugin:testing-library/react',
     'prettier',
   ],
-  plugins: ['testing-library', 'prettier'],
+  plugins: ['@typescript-eslint', 'testing-library', 'prettier'],
   parserOptions: {
     project: './tsconfig.json',
   },
@@ -19,5 +19,6 @@ module.exports = {
     semi: ['error', 'never'],
     'import/no-unresolved': 'off',
     'react/jsx-props-no-spreading': 'off',
+    'import/extensions': 'off',
   },
 }

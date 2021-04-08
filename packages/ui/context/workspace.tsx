@@ -1,7 +1,3 @@
-import { createContext, useContext } from 'react'
+import { createContext } from 'react'
 
-export const WorkspaceContext = createContext<any>({ workspace: {} })
-
-export function useWorkspaceContext() {
-  return useContext(WorkspaceContext)
-}
+export const WorkspaceContext = createContext<any>(null)

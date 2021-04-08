@@ -14,7 +14,7 @@ express:
           authorizer:
             type: COGNITO_USER_POOLS
             authorizerId: !Ref ApiGatewayAuthorizer
-      - http: 
+      - http:
           method: ANY
           path: '{proxy+}'
           cors: true
@@ -50,5 +50,9 @@ postAuthN:
       Action:
         - dynamodb:GetItem
         - dynamodb:PutItem
+        - dynamodb:Query
+        - dynamodb:Scan
+        - dynamodb:UpdateItem
       Resource:
         - !GetAtt UserTable.Arn
+        - !GetAtt WorkspaceTable.Arn

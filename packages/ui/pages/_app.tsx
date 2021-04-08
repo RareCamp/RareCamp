@@ -1,5 +1,4 @@
 import type { AppProps } from 'next/app'
-import { useEffect } from 'react'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { ReactQueryDevtools } from 'react-query/devtools'
 import 'styles/antd.less'

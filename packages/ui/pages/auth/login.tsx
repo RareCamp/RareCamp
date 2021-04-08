@@ -1,14 +1,21 @@
-import React from "react";
-import Auth from "@aws-amplify/auth";
-import { Button, Typography, Checkbox, Form, Input, notification } from "antd";
-import AuthLayout from "../../components/AuthLayout";
-import Link from "next/link";
+import React from 'react'
+import Auth from '@aws-amplify/auth'
+import {
+  Button,
+  Typography,
+  Checkbox,
+  Form,
+  Input,
+  notification,
+} from 'antd'
+import Link from 'next/link'
 
-import { useRouter } from "next/router";
-import { useMutation } from "react-query";
-import { LoginPayload } from "../../types";
+import { useRouter } from 'next/router'
+import { useMutation } from 'react-query'
+import AuthLayout from 'components/AuthLayout'
+import { LoginPayload } from 'types'
 
-const { Title } = Typography;
+const { Title } = Typography
 
 export default function App() {
   const router = useRouter()
@@ -42,8 +49,8 @@ export default function App() {
       <div>
         <Title level={3}>Log in</Title>
         <p>
-          or Don't have an account yet?{' '}
-          <Link href="/auth/register">Signup</Link>
+          or Don't have an account yet?
+          <Link href="/auth/register"> Signup</Link>
         </p>
       </div>
       <Form
@@ -94,6 +101,6 @@ export default function App() {
           </Button>
         </Form.Item>
       </Form>
-         </AuthLayout>
+    </AuthLayout>
   )
 }

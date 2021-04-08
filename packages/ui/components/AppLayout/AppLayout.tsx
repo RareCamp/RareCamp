@@ -1,21 +1,25 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
 import {
   Avatar,
-  Breadcrumb,
   Button,
   Divider,
   Dropdown,
   Layout,
   Menu,
+  notification,
   Space,
+  Skeleton,
 } from 'antd'
 import Link from 'next/link'
 import { FileOutlined } from '@ant-design/icons'
-import { ChildrenProps } from 'types'
 import styled from 'styled-components'
-import PrivateRoute from 'components/PrivateRoute'
+import { useRouter } from 'next/router'
+import { useMutation, useQuery } from 'react-query'
+import { Auth } from 'aws-amplify'
+import axios from 'axios'
+import { WorkspaceContext } from '../../context/workspace'
 
-const { Footer, Sider, Content, Header } = Layout
+const { Sider, Content, Header } = Layout
 
 const OTLayout = styled(Layout)`
   font-family: roboto, sans-serif;
@@ -25,6 +29,7 @@ const OTLayout = styled(Layout)`
     margin-left: 4px;
     margin-bottom: 15px;
     width: 150px;
+    cursor: pointer;
   }
 
   .ant-menu-dark.ant-menu-dark:not(.ant-menu-horant-layout-headerizontal) {
@@ -60,91 +65,151 @@ const OTHeader = styled(Header)`
 
   .user-icon {
     background-color: #efdbff;
-    color: black;
+    color: #391085;
   }
   .ant-space {
     cursor: pointer;
   }
 `
+const OFMenu = styled(Menu)`
+  &.ant-menu-root.ant-menu-vertical {
+    border-radius: 2px;
+    box-shadow: 0 9px 28px 8px rgba(0, 0, 0, 0.05),
+      0 6px 16px 0 rgba(0, 0, 0, 0.08),
+      0 3px 6px -4px rgba(0, 0, 0, 0.12);
+    background-color: #ffffff;
+    margin-top: -15px;
+    li {
+      height: 32px;
+    }
+    a,
+    button {
+      font-family: Roboto;
+      font-size: 14px;
+      color: rgba(0, 0, 0, 0.85);
+    }
+    button {
+      padding: 0;
+      border: none;
+    }
+  }
+`
 
-const menu = (
-  <Menu>
-    <Menu.Item>
-      <Link href="/account/settings">My Account Settings</Link>
-    </Menu.Item>
-    <Menu.Item>
-      <Link href="/auth/password">Update Password</Link>
-    </Menu.Item>
-    <Menu.Item>
-      <Button type="text">Log Out</Button>
-    </Menu.Item>
-  </Menu>
-)
-
-const AppLayout = ({ children }: ChildrenProps) => {
-  const [title, setTitle] = useState('Programs')
+const AccountMenu = () => {
+  const router = useRouter()
+  const mutation = useMutation(() => Auth.signOut({ global: true }), {
+    onSuccess: router.reload,
+    onError: (err: Error) =>
+      notification.error({
+        message: 'Can not logout',
+        description: err.message,
+        placement: 'topRight',
+        duration: 1.5,
+      }),
+  })
   return (
-    <OTLayout style={{ minHeight: '100vh' }}>
-      <Sider>
-        <img
-          className="logo"
-          src="/opentreatments-logo.png"
-          alt="open treatments foundation logo"
-        />
-        <Menu
-          defaultSelectedKeys={['programs']}
-          mode="inline"
-          theme="dark"
+    <OFMenu>
+      <Menu.Item>
+        <Link href="/account/settings">My Account Settings</Link>
+      </Menu.Item>
+      <Menu.Item>
+        <Link href="/auth/password">Update Password</Link>
+      </Menu.Item>
+      <Menu.Item>
+        <Button
+          loading={mutation.isLoading}
+          onClick={() => mutation.mutate()}
         >
-          <Menu.Item
-            onSelect={() => setTitle('Programs')}
-            key="programs"
-            icon={<FileOutlined />}
-          >
-            Programs
-          </Menu.Item>
-          <OTDivider>
-            <Divider plain />
-          </OTDivider>
-          <Menu.Item
-            onSelect={() => setTitle('Disease Info')}
-            key="disease_info"
-            icon={<FileOutlined />}
-          >
-            Disease Info
-          </Menu.Item>
-        </Menu>
-      </Sider>
-      <Layout className="site-layout">
-        <OTHeader>
-          <span className="title">{title}</span>
-          <div>
-            <Dropdown overlay={menu} visible>
-              <Space>
-                <Avatar className="user-icon">R</Avatar>
-                <span>Ramya</span>
-              </Space>
-            </Dropdown>
-          </div>
-        </OTHeader>
-        <Content style={{ margin: '0 16px' }}>
-          <Breadcrumb style={{ margin: '16px 0' }}>
-            <Breadcrumb.Item>User</Breadcrumb.Item>
-            <Breadcrumb.Item>Bill</Breadcrumb.Item>
-          </Breadcrumb>
-          <div
-            className="site-layout-background"
-            style={{ padding: 24, minHeight: 360 }}
-          >
-            Bill is a cat.
-          </div>
-        </Content>
-        <Footer style={{ textAlign: 'center' }}>
-          Ant Design ©2018 Created by Ant UED
-        </Footer>
-      </Layout>
-    </OTLayout>
+          Logout
+        </Button>
+      </Menu.Item>
+    </OFMenu>
   )
 }
+const AppLayout = ({ children }) => {
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const router = useRouter()
+  const [title, setTitle] = useState('Programs')
+  const { data, isLoading } = useQuery(
+    'userInfo',
+    () => Auth.currentAuthenticatedUser(),
+    {
+      onSuccess: () => setIsLoggedIn(true),
+      onError: () => router.push('/auth/login'),
+    },
+  )
 
-export default PrivateRoute(AppLayout)
+  const defaultWorkspace = useQuery<any>(
+    'defaultWorkspace',
+    () => axios.get('/workspaces/default'),
+    { retry: false, enabled: isLoggedIn },
+  )
+
+  return isLoggedIn && data ? (
+    <WorkspaceContext.Provider value={{ workspace: { hello: true } }}>
+      <OTLayout style={{ minHeight: '100vh' }}>
+        <Sider>
+          <Link href="/">
+            <img
+              className="logo"
+              src="/opentreatments-logo.png"
+              alt="open treatments foundation logo"
+            />
+          </Link>
+          <Menu
+            defaultSelectedKeys={['programs']}
+            mode="inline"
+            theme="dark"
+          >
+            <Menu.Item
+              onSelect={() => setTitle('Programs')}
+              key="programs"
+              icon={<FileOutlined />}
+            >
+              Programs
+            </Menu.Item>
+            <OTDivider>
+              <Divider plain />
+            </OTDivider>
+            <Menu.Item
+              onSelect={() => setTitle('Disease Info')}
+              key="disease_info"
+              icon={<FileOutlined />}
+            >
+              Disease Info
+            </Menu.Item>
+          </Menu>
+        </Sider>
+        <Layout className="site-layout">
+          <OTHeader>
+            <span className="title">{title}</span>
+            <div>
+              <Dropdown
+                trigger={['click']}
+                overlay={() => <AccountMenu />}
+              >
+                {data?.attributes?.name ? (
+                  <Space>
+                    <Avatar className="user-icon">
+                      {data.attributes.name[0]}
+                    </Avatar>
+                    <span>{data.attributes.name}</span>
+                  </Space>
+                ) : null}
+              </Dropdown>
+            </div>
+          </OTHeader>
+          <Content>
+            {isLoading || defaultWorkspace.isLoading ? (
+              <Skeleton />
+            ) : (
+              <>{children}</>
+            )}
+          </Content>
+        </Layout>
+      </OTLayout>
+    </WorkspaceContext.Provider>
+  ) : null
+}
+
+export default AppLayout

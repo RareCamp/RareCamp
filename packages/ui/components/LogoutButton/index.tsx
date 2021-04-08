@@ -1,16 +1,8 @@
 import { Button, notification } from 'antd'
 import { useRouter } from 'next/router'
 import { Auth } from 'aws-amplify'
-import styled from 'styled-components'
 import { useMutation } from 'react-query'
 
-const LogoutButton = styled(Button)`
-  // when button is in loading state it override position attribute
-  position: absolute !important;
-  top: 20px;
-  right: 20px;
-  z-index: 9999;
-`
 export default function Logout() {
   const router = useRouter()
   const mutation = useMutation(() => Auth.signOut({ global: true }), {
@@ -24,12 +16,12 @@ export default function Logout() {
       }),
   })
   return (
-    <LogoutButton
+    <Button
       loading={mutation.isLoading}
-      type="primary"
-      onClick={mutation.mutate}
+      type="text"
+      onClick={() => mutation.mutate()}
     >
       Logout
-    </LogoutButton>
+    </Button>
   )
 }

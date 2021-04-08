@@ -1,13 +1,12 @@
 import React, { useEffect } from 'react'
 import { Button, Typography, Form, Input, notification } from 'antd'
-import { useRouter } from "next/router";
-import { Auth } from "aws-amplify";
-import { useMutation } from "react-query";
-import AuthLayout from "../../components/AuthLayout";
+import { useRouter } from 'next/router'
+import { Auth } from 'aws-amplify'
+import { useMutation } from 'react-query'
+import AuthLayout from '../../components/AuthLayout'
 import { RestPasswordPayload } from '../../types'
 
 const { Link, Title } = Typography
-
 
 export default function RestPassword() {
   const [form] = Form.useForm()
@@ -50,14 +49,16 @@ export default function RestPassword() {
       <div>
         <Title level={3}>Rest your password?</Title>
         <p>
-          Please enter you reset code and new password.{' '}
+          Please enter you reset code and new password.
+{' '}
           <p>
-            or{' '}
+            or
+{' '}
             <Link onClick={() => router.push('/auth/login')}>
               Login
             </Link>
-                                                       </p>
-      </p>
+          </p>
+        </p>
       </div>
       <Form
         layout="vertical"
@@ -123,5 +124,6 @@ export default function RestPassword() {
           </Button>
         </Form.Item>
       </Form>
-         </AuthLayout>
+    </AuthLayout>
+  )
 }
