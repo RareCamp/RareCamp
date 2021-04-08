@@ -1,11 +1,10 @@
 import React from 'react'
 import { AppLayout } from 'components/AppLayout'
 
-import { Avatar, Button, Space, Spin, Typography } from 'antd'
+import { Button, Space, Typography } from 'antd'
 import styled from 'styled-components'
-import { useQuery } from 'react-query'
-import { Auth } from 'aws-amplify'
 import Link from 'next/link'
+import UserHeader from 'components/UserHeader'
 
 const { Title } = Typography
 
@@ -29,40 +28,12 @@ const QuestionnaireIntro = styled('div')`
     height: 270px;
   }
 `
-const PageHeader = styled('div')`
-  padding: 24px 16px;
-  background-color: #ffffff;
-  display: flex;
-  align-items: center;
-  border: 1px solid #eee;
-
-  .ant-avatar {
-    background-color: #efdbff;
-    color: #391085;
-    margin-right: 30px;
-  }
-`
 
 const questionnaireIntro = () => {
-  const { data, isLoading: isUserLoading } = useQuery(
-    'userInfo',
-    () => Auth.currentAuthenticatedUser(),
-  )
   return (
     <AppLayout>
       <QuestionnaireLayout>
-        <PageHeader>
-          <Avatar size={72}>
-            {isUserLoading ? <Spin /> : data?.attributes.name[0]}
-          </Avatar>
-          <div>
-            <h3>{`Welcome ${data?.attributes?.name}, we are glad you are here!`}</h3>
-            <span>
-              Our goal today is to get you one step ahead in your gene
-              therapy treatment roadmap
-            </span>
-          </div>
-        </PageHeader>
+        <UserHeader />
         <QuestionnaireIntro>
           <Space
             direction="vertical"

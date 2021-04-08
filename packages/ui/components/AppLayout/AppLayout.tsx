@@ -126,6 +126,13 @@ const AccountMenu = () => {
     </OFMenu>
   )
 }
+
+class AppstoreOutlined extends React.Component {
+  render() {
+    return null
+  }
+}
+
 const AppLayout = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
   const router = useRouter()
@@ -161,13 +168,15 @@ const AppLayout = ({ children }) => {
             mode="inline"
             theme="dark"
           >
-            <Menu.Item
-              onSelect={() => setTitle('Programs')}
+            <Menu.SubMenu
+              // onSelect={() => setTitle('Programs')}
+              title="Programs"
               key="programs"
               icon={<FileOutlined />}
             >
-              Programs
-            </Menu.Item>
+              <Menu.Item key="5">Option 5</Menu.Item>
+              <Menu.Item key="6">Option 6</Menu.Item>
+            </Menu.SubMenu>
             <OTDivider>
               <Divider plain />
             </OTDivider>

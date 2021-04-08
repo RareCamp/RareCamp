@@ -8,6 +8,7 @@ import { TASK_TABLE_HEADINGS } from 'constants/tableHeaders'
 import styles from 'styles/program.module.css'
 import { useQuery, useQueryClient } from 'react-query'
 import axios from 'axios'
+import UserHeader from '../components/UserHeader'
 
 export const TASK_SUB_TABLE_HEADINGS = [
   {
@@ -55,57 +56,25 @@ export const TASK_SUB_TABLE_HEADINGS = [
 ]
 const USER_NAME = 'Ramya'
 const Home = () => {
-  const queryClient = useQueryClient()
-  const data = queryClient.getQueryData<any>('defaultWorkspace')
   const router = useRouter()
+  const { data, isLoading } = useQuery<any>(
+    'defaultWorkspace',
+    () => axios.get('/workspaces/default'),
+    { retry: false },
+  )
   useEffect(() => {
-    if (!data?.data?.workspace?.programs?.length)
+    if (!isLoading && !data?.data?.workspace?.programs?.length)
       router.push('/workspace/intro')
   }, [data])
 
-  const [isEditProgramModalOpen, setEditProgramModalOpen] = useState(
-    false,
-  )
-  const [
-    isAccountSettingModalOpen,
-    setAccountSettingModalOpen,
-  ] = useState(false)
-
-  useEffect(() => {
-    if (isEditProgramModalOpen || isAccountSettingModalOpen) {
-      document.body.style.overflow = 'hidden'
-    } else {
-      document.body.style.overflow = ''
-    }
-  }, [isAccountSettingModalOpen, isEditProgramModalOpen])
-
-  function expandedRowRender() {
-    return (
-      <Table
-        columns={TASK_SUB_TABLE_HEADINGS}
-        pagination={false}
-        bordered
-        dataSource={[
-          {
-            taskname:
-              'Consult with an expert to identify gaps and create a plan',
-            status: 'COMPLETE',
-            owner: 'Rachel',
-            budget: '0',
-            start_date: '12/5/2021',
-            end_date: '12/23/2021',
-          },
-        ]}
-        components={{
-          header: {
-            row: (props) => null,
-          },
-        }}
-      />
-    )
-  }
   return (
     <AppLayout>
+      <UserHeader
+        getContent={(userInfo) => ({
+          title: `Hello ${userInfo.name}, welcome back!`,
+          description: `Here's info about your programs`,
+        })}
+      />
       {!data?.data?.workspace?.programs?.length ? (
         <Skeleton />
       ) : (

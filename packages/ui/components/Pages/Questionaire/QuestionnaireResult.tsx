@@ -3,6 +3,7 @@ import { PlusCircleOutlined } from '@ant-design/icons'
 import { useMutation, useQueryClient } from 'react-query'
 import axios from 'axios'
 import { Questionnaire } from 'types'
+import { useRouter } from 'next/router'
 import { mutationsTypesMap } from '../../../constants/maps'
 
 const { Title } = Typography
@@ -20,7 +21,7 @@ async function createProgramFrom(
         causalGene: answers.causalGene,
         mutationImpact: mutationsTypesMap[answers.mutationType],
         proteinSize: 1100,
-        organizationsWorkingOnDisease: answers.foundation,
+        organizationsWorkingOnDisease: [answers.foundation],
       },
     },
   }
@@ -34,19 +35,23 @@ export default function QuestionnaireResult({
   answers: Questionnaire
 }) {
   const queryClient = useQueryClient()
+  const router = useRouter()
   const { data } = queryClient.getQueryData<any>('defaultWorkspace')
   const mutation = useMutation(
     () => createProgramFrom(answers, data.workspace.workspaceId),
     {
-      onSuccess: () =>
+      onSuccess: async () => {
         notification.success({
           duration: 2,
           message: 'Program created Successfully',
-        }),
+        })
+        await router.push('/')
+      },
       onError: (error: Error) =>
         notification.error({
           duration: 2,
-          message: error.message,
+          description: error.message,
+          message: 'Error occur while creating the program',
         }),
     },
   )
