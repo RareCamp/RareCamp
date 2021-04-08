@@ -118,4 +118,5 @@ export default function App() {
         </>
       </Form>
          </AuthLayout>
+  )
 }

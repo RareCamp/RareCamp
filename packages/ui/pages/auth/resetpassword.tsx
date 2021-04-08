@@ -124,4 +124,5 @@ export default function RestPassword() {
         </Form.Item>
       </Form>
          </AuthLayout>
+  )
 }

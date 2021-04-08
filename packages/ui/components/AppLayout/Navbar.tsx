@@ -196,7 +196,6 @@ const Navbar = ({
             setAccountDropDown(!isAccountDropDownOpen)
           }}
         >
-          <li>
             <LetterPic
               letter={username[0]}
               className="cursor-pointer"
@@ -204,7 +203,6 @@ const Navbar = ({
               size="sm"
               textColor="purple"
             />
-          </li>
 
           <li className="text-black font-light text-base ml-1">
             {username}

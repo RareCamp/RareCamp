@@ -45,10 +45,11 @@ function MyAppWrapper(props: AppProps) {
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <>
+    <div>
       <ReactQueryDevtools initialIsOpen={false} />
       <Component {...pageProps} />
-         </>
+         </div>
+  );
 }
 
 // HACK: Skip ConfirmSignUp view since e're auto-confirming via the Lambda Function
@@ -62,3 +63,4 @@ function ConfirmSignUpRedirectToSignIn({ authState, onStateChange }) {
 
 
 export default MyAppWrapper
+
