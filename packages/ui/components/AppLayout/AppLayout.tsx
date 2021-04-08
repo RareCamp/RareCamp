@@ -168,15 +168,13 @@ const AppLayout = ({ children }) => {
             mode="inline"
             theme="dark"
           >
-            <Menu.SubMenu
-              // onSelect={() => setTitle('Programs')}
-              title="Programs"
+            <Menu.Item
+              onSelect={() => setTitle('Programs')}
               key="programs"
               icon={<FileOutlined />}
             >
-              <Menu.Item key="5">Option 5</Menu.Item>
-              <Menu.Item key="6">Option 6</Menu.Item>
-            </Menu.SubMenu>
+              Programs
+            </Menu.Item>
             <OTDivider>
               <Divider plain />
             </OTDivider>
