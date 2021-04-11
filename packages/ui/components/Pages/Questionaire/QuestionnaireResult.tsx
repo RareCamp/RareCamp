@@ -45,6 +45,7 @@ export default function QuestionnaireResult({
           duration: 2,
           message: 'Program created Successfully',
         })
+        await queryClient.invalidateQueries('defaultWorkspace')
         await router.push('/')
       },
       onError: (error: Error) =>

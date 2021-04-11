@@ -75,7 +75,7 @@ const Home = () => {
           description: `Here's info about your programs`,
         })}
       />
-      {!data?.data?.workspace?.programs?.length ? (
+      {isLoading || !data?.data?.workspace?.programs?.length ? (
         <Skeleton />
       ) : (
         <>

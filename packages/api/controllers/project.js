@@ -47,7 +47,6 @@ export async function updateProject({
 }
 
 export async function getProject({ userId, programId, projectId }) {
-  if (!userId) throw new Error('userId is required')
   if (!programId) throw new Error('programId is required')
   if (!projectId) throw new Error('projectId is required')
 
@@ -60,8 +59,7 @@ export async function getProject({ userId, programId, projectId }) {
   return projectItem.Item
 }
 
-export async function getProjects({ userId, programId }) {
-  if (!userId) throw new Error('userId is required')
+export async function getProjects({ programId }) {
   if (!programId) throw new Error('programId is required')
 
   const projectItems = await Project.query(programId)

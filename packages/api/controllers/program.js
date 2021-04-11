@@ -4,10 +4,10 @@ import { log } from '../utils/logger'
 import { validateProgramDto } from '../validations/program'
 import { createDisease } from './disease'
 import { DEFAULT_PROJECT, DEFAULT_TASKS } from '../common/constant'
-import { createTask } from './task'
+import { createTask, getTasks } from './task'
 import NotFoundError from '../errors/NotFoundError'
 import { getWorkspaceByIdAndUserId } from './workspace'
-import { createProject } from './project'
+import { createProject, getProjects } from './project'
 import { getUser } from './user'
 
 export async function createProgram({
@@ -82,7 +82,12 @@ export async function getProgramWithWorkspace({ programId, userId, workspaceId }
   if (!program) throw new NotFoundError('Program Can not be found')
   const workspace = await getWorkspaceByIdAndUserId({ workspaceId: program.workspaceId, userId })
   if (!workspace) throw new NotFoundError('Program Can not be found')
-  return { ...program, workspace }
+  const projects = await getProjects({ programId })
+  const tasksList = await Promise.all(projects.map(({ projectId }) => getTasks({ projectId })))
+  for (let i = 0; i < tasksList.length; i++) {
+    projects[i].tasks = tasksList[i]
+  }
+  return { ...program, workspace, projects }
 }
 
 export function getPrograms(workspaceId) {

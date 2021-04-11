@@ -61,8 +61,7 @@ export async function getTask({ userId, projectId, taskId }) {
   return taskItem.Item
 }
 
-export async function getTasks({ userId, projectId }) {
-  if (!userId) throw new Error('userId is required')
+export async function getTasks({ projectId }) {
   if (!projectId) throw new Error('projectId is required')
 
   const taskItems = await Task.query(projectId)

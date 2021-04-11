@@ -41,6 +41,11 @@ express:
         Resource:
           - !GetAtt DiseaseTable.Arn
           - !GetAtt UserTable.Arn
+          - !GetAtt WorkspaceTable.Arn
+          - !GetAtt TaskTable.Arn
+          - !GetAtt ProjectTable.Arn
+          - !GetAtt ProgramTable.Arn
+          - !GetAtt OrganizationTable.Arn
 
 postAuthN:
   handler: packages/api/functions/cognito/post-authentication.handler
@@ -48,6 +53,7 @@ postAuthN:
   iamRoleStatements:
     - Effect: "Allow"
       Action:
+        - dynamodb:DeleteItem
         - dynamodb:GetItem
         - dynamodb:PutItem
         - dynamodb:Query
