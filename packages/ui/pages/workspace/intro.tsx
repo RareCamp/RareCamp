@@ -31,7 +31,7 @@ const QuestionnaireIntro = styled('div')`
 
 const questionnaireIntro = () => {
   return (
-    <AppLayout>
+    <AppLayout title="Programs">
       <QuestionnaireLayout>
         <UserHeader />
         <QuestionnaireIntro>

@@ -37,6 +37,8 @@ export const DEFAULT_TASKS = [{
     about: 'A knock-in mouse defines an animal model in which a gene sequence of interest is altered by one-for-one '
       + 'substitution with a transgene, or by adding gene sequences that are not found within the locus.',
   },
+  estimatedStartDate: new Date(),
+  estimatedEndDate: new Date((new Date()).getTime() + 3600 * 24 * 30 * 1000),
   // TODO: to be fill by @sanathkr
   serviceProviders: [
     {

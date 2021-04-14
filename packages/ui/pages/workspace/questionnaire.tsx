@@ -242,7 +242,7 @@ export default function questionnaire() {
   const nextStep = () =>
     form.validateFields().then(() => setCurrent(current + 1))
   return (
-    <AppLayout>
+    <AppLayout title="Programs">
       <PageHeader>
         <Link href="/workspace/intro">
           <ArrowLeftOutlined />

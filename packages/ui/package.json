@@ -28,6 +28,7 @@
     "aws-amplify": "^3.3.17",
     "aws-amplify-react": "^4.2.23",
     "babel-plugin-import": "^1.13.3",
+    "dayjs": "^1.10.4",
     "less": "^4.1.1",
     "next": "^10.0.9",
     "react": "17.0.1",

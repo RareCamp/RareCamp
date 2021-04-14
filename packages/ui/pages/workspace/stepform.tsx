@@ -23,7 +23,7 @@ const stepform = (props) => {
   const [current, setCurrent] = useState(0)
 
   return (
-    <AppLayout>
+    <AppLayout title="Programs">
       <div className={styles.stepform}>
         <div className={styles['stepform-divOne']}>
           <h1 style={{ fontWeight: 'bold' }}>WorkSpace</h1>

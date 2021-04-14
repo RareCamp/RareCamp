@@ -9,7 +9,7 @@ import {
 function Workspace() {
   const isFirstTimeVisitor = true
   return (
-    <AppLayout>
+    <AppLayout title="Programs">
       <div
         style={{
           backgroundColor: 'lightgray',

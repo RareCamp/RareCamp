@@ -42,7 +42,7 @@ const Taskdetail = () => {
     selectedFile(fileUploaded)
   }
   return (
-    <AppLayout>
+    <AppLayout title="Task Details">
       <section className={taskstyles['taskdetail--wrapper']}>
         <div className={taskstyles['taskdetail--wrapper--divOne']}>
           <h1>Understand knock-in mouse model</h1>

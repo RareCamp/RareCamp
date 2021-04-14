@@ -17,7 +17,6 @@ import { useRouter } from 'next/router'
 import { useMutation, useQuery } from 'react-query'
 import { Auth } from 'aws-amplify'
 import axios from 'axios'
-import { WorkspaceContext } from '../../context/workspace'
 
 const { Sider, Content, Header } = Layout
 
@@ -40,6 +39,9 @@ const OTLayout = styled(Layout)`
 
   .ant-layout-header {
     background-color: white;
+  }
+  .sub-menu {
+    padding-left: 40px !important;
   }
 `
 const OTDivider = styled('div')`
@@ -126,10 +128,9 @@ const AccountMenu = () => {
     </OFMenu>
   )
 }
-const AppLayout = ({ children }) => {
+const AppLayout = ({ children, title }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
   const router = useRouter()
-  const [title, setTitle] = useState('Programs')
   const { data, isLoading } = useQuery(
     'userInfo',
     () => Auth.currentAuthenticatedUser(),
@@ -145,70 +146,72 @@ const AppLayout = ({ children }) => {
     { retry: false, enabled: isLoggedIn },
   )
 
+  const programs =
+    defaultWorkspace?.data?.data?.workspace?.programs || []
   return isLoggedIn && data ? (
-    <WorkspaceContext.Provider value={{ workspace: { hello: true } }}>
-      <OTLayout style={{ minHeight: '100vh' }}>
-        <Sider>
-          <Link href="/">
-            <img
-              className="logo"
-              src="/opentreatments-logo.png"
-              alt="open treatments foundation logo"
-            />
-          </Link>
-          <Menu
-            defaultSelectedKeys={['programs']}
-            mode="inline"
-            theme="dark"
-          >
-            <Menu.Item
-              onSelect={() => setTitle('Programs')}
-              key="programs"
-              icon={<FileOutlined />}
-            >
-              Programs
-            </Menu.Item>
-            <OTDivider>
-              <Divider plain />
-            </OTDivider>
-            <Menu.Item
-              onSelect={() => setTitle('Disease Info')}
-              key="disease_info"
-              icon={<FileOutlined />}
-            >
-              Disease Info
-            </Menu.Item>
-          </Menu>
-        </Sider>
-        <Layout className="site-layout">
-          <OTHeader>
-            <span className="title">{title}</span>
-            <div>
-              <Dropdown
-                trigger={['click']}
-                overlay={() => <AccountMenu />}
+    <OTLayout style={{ minHeight: '100vh' }}>
+      <Sider>
+        <Link href="/">
+          <img
+            className="logo"
+            src="/opentreatments-logo.png"
+            alt="open treatments foundation logo"
+          />
+        </Link>
+        <Menu
+          defaultSelectedKeys={[title]}
+          mode="inline"
+          theme="dark"
+        >
+          <Menu.Item key="Programs" icon={<FileOutlined />}>
+            <Link href="/">Programs</Link>
+          </Menu.Item>
+          {programs?.map((program) => (
+            <Menu.Item key={program.name} className="sub-menu">
+              <Link
+                key={program.name}
+                href={`/programs/${program.workspaceId}/${program.programId}`}
               >
-                {data?.attributes?.name ? (
-                  <Space>
-                    <Avatar className="user-icon">
-                      {data.attributes.name[0]}
-                    </Avatar>
-                    <span>{data.attributes.name}</span>
-                  </Space>
-                ) : null}
-              </Dropdown>
-            </div>
-          </OTHeader>
-          <Content>
-            {isLoading || defaultWorkspace.isLoading ? (
-              <Skeleton />
-            ) : (
-              <>{children}</>
-            )}
-          </Content>
-        </Layout>
-      </OTLayout>
-    </WorkspaceContext.Provider>
+                {program.name}
+              </Link>
+            </Menu.Item>
+          ))}
+          <OTDivider>
+            <Divider plain />
+          </OTDivider>
+          <Menu.Item key="disease_info" icon={<FileOutlined />}>
+            Disease Info
+          </Menu.Item>
+        </Menu>
+      </Sider>
+      <Layout className="site-layout">
+        <OTHeader>
+          <span className="title">{title}</span>
+          <div>
+            <Dropdown
+              trigger={['click']}
+              overlay={() => <AccountMenu />}
+            >
+              {data?.attributes?.name ? (
+                <Space>
+                  <Avatar className="user-icon">
+                    {data.attributes.name[0]}
+                  </Avatar>
+                  <span>{data.attributes.name}</span>
+                </Space>
+              ) : null}
+            </Dropdown>
+          </div>
+        </OTHeader>
+        <Content>
+          {isLoading || defaultWorkspace.isLoading ? (
+            <Skeleton />
+          ) : (
+            <>{children}</>
+          )}
+        </Content>
+      </Layout>
+    </OTLayout>
   ) : null
 }
 

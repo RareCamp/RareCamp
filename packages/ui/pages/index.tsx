@@ -1,60 +1,19 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { useRouter } from 'next/router'
-import { Layout, Table, Badge, Skeleton } from 'antd'
-import { MainSection } from 'components/Pages/Program'
-import Navbar from 'components/AppLayout/Navbar'
+import { Typography, Skeleton, Card, Space } from 'antd'
 import { AppLayout } from 'components/AppLayout'
-import { TASK_TABLE_HEADINGS } from 'constants/tableHeaders'
-import styles from 'styles/program.module.css'
-import { useQuery, useQueryClient } from 'react-query'
+import { useQuery } from 'react-query'
 import axios from 'axios'
-import UserHeader from '../components/UserHeader'
+import UserHeader from 'components/UserHeader'
+import styled from 'styled-components'
+import Link from 'next/link'
 
-export const TASK_SUB_TABLE_HEADINGS = [
-  {
-    title: 'TaskName',
-    dataIndex: 'taskname',
-    key: 'taskname',
-    width: '40%',
-  },
-  {
-    title: 'Status',
-    dataIndex: 'status',
-    key: 'status',
-    render: (text, value, index) => {
-      if (text === 'COMPLETE') {
-        return (
-          <Badge
-            count={text}
-            style={{ backgroundColor: '#52c41a', borderRadius: 0 }}
-          />
-        )
-      }
-      return text
-    },
-  },
-  {
-    title: 'Owner',
-    dataIndex: 'owner',
-    key: 'owner',
-  },
-  {
-    title: 'Budget',
-    dataIndex: 'budget',
-    key: 'budget',
-  },
-  {
-    title: 'Start Date',
-    dataIndex: 'start_date',
-    key: 'start_date',
-  },
-  {
-    title: 'End Date',
-    dataIndex: 'end_date',
-    key: 'end_dates',
-  },
-]
-const USER_NAME = 'Ramya'
+const { Title } = Typography
+const ProgramCard = styled(Card)`
+  h4 {
+    cursor: pointer;
+  }
+`
 const Home = () => {
   const router = useRouter()
   const { data, isLoading } = useQuery<any>(
@@ -68,7 +27,7 @@ const Home = () => {
   }, [data])
 
   return (
-    <AppLayout>
+    <AppLayout title="Programs">
       <UserHeader
         getContent={(userInfo) => ({
           title: `Hello ${userInfo.name}, welcome back!`,
@@ -78,10 +37,18 @@ const Home = () => {
       {isLoading || !data?.data?.workspace?.programs?.length ? (
         <Skeleton />
       ) : (
-        <>
-          <h3>Workspace</h3>
-          <pre>{JSON.stringify(data?.data, null, 2)}</pre>
-        </>
+        <Space style={{ padding: '24px' }}>
+          {data?.data?.workspace?.programs.map((program) => (
+            <ProgramCard bordered style={{ width: 284 }}>
+              <Link
+                href={`/programs/${program.workspaceId}/${program.programId}`}
+              >
+                <Title level={4}>{program.name}</Title>
+              </Link>
+              <p>{program.description}</p>
+            </ProgramCard>
+          ))}
+        </Space>
       )}
     </AppLayout>
   )
