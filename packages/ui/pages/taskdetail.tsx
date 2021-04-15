@@ -1,7 +1,7 @@
 import { AppLayout } from 'components/AppLayout'
 import React, { useState, useRef } from 'react'
 import { MoreOutlined } from '@ant-design/icons'
-import { Button as AntButton, Button, Dropdown } from 'antd'
+import { Button as AntButton, Button } from 'antd'
 import taskstyles from 'styles/taskdetail.module.css'
 import dynamic from 'next/dynamic'
 import { LetterPic } from 'components/LetterPic'
@@ -12,18 +12,8 @@ const DynamicComponent = dynamic(
   () => import('../components/Editor'),
   { ssr: false },
 )
-const USER_NAME = 'Ramya'
 
 const Taskdetail = () => {
-  const [isEditProgramModalOpen, setEditProgramModalOpen] = useState(
-    false,
-  )
-  const [
-    isAccountSettingModalOpen,
-    setAccountSettingModalOpen,
-  ] = useState(false)
-
-  const [open, setOpenDropDown] = useState(false)
   const [isUserDropDownOpen, setUserDropDown] = useState(false)
   const [file, selectedFile] = useState('')
   // Create a reference to the hidden file input element
@@ -31,7 +21,7 @@ const Taskdetail = () => {
 
   // Programatically click the hidden file input element
   // when the Button component is clicked
-  const handleClick = (event) => {
+  const handleClick = () => {
     hiddenFileInput.current.click()
   }
   // Call a function (passed as a prop from the parent component)
@@ -41,8 +31,10 @@ const Taskdetail = () => {
     console.log(fileUploaded, 'si')
     selectedFile(fileUploaded)
   }
+  const toggleIsUserDropDownOpen = () =>
+    setUserDropDown(!isUserDropDownOpen)
   return (
-    <AppLayout>
+    <AppLayout title="Task Details">
       <section className={taskstyles['taskdetail--wrapper']}>
         <div className={taskstyles['taskdetail--wrapper--divOne']}>
           <h1>Understand knock-in mouse model</h1>
@@ -79,14 +71,12 @@ const Taskdetail = () => {
               <span
                 className={taskstyles['taskdetail-wrapper-spanTwo']}
               >
-                <LetterPic letter="R" size="sm" />{' '}
+                <LetterPic letter="R" size="sm" />
                 <span style={{ marginLeft: '4px' }}>Ramya</span>
                 <span>
                   {isUserDropDownOpen ? (
                     <svg
-                      onClick={() =>
-                        setUserDropDown(!isUserDropDownOpen)
-                      }
+                      onClick={toggleIsUserDropDownOpen}
                       style={{ width: '25px' }}
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 20 20"
@@ -100,9 +90,7 @@ const Taskdetail = () => {
                     </svg>
                   ) : (
                     <svg
-                      onClick={() =>
-                        setUserDropDown(!isUserDropDownOpen)
-                      }
+                      onClick={toggleIsUserDropDownOpen}
                       style={{ width: '25px' }}
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
@@ -214,6 +202,7 @@ const Taskdetail = () => {
               className={taskstyles['taskdetail--wrapper--divEight']}
             >
               <img
+                alt=""
                 src="/Group307@2x.png"
                 style={{ height: '300px' }}
               />
@@ -222,8 +211,8 @@ const Taskdetail = () => {
               A knock-in mouse defines an animal model in which a gene
               sequence of interest is altered by one-for-one
               substitution with a transgene, or by adding gene
-              sequences that are not found within the locus.{' '}
-              <a>Read more</a>
+              sequences that are not found within the locus.
+              <a href="/">Read more</a>
             </p>
           </div>
           <div className={taskstyles['taskdetail--wrapper--divNine']}>
@@ -235,7 +224,7 @@ const Taskdetail = () => {
                   justifyContent: 'space-around',
                 }}
               >
-                <img src="/image6@3x.png" width={100} />
+                <img src="/image6@3x.png" width={100} alt="" />
                 <div
                   className={
                     taskstyles['taskdetail--wrapper--divSeven']
@@ -256,7 +245,7 @@ const Taskdetail = () => {
                   justifyContent: 'space-around',
                 }}
               >
-                <img src="/image5@3x.png" width={100} />
+                <img src="/image5@3x.png" width={100} alt="" />
                 <div
                   className={
                     taskstyles['taskdetail--wrapper--divSeven']
@@ -278,7 +267,7 @@ const Taskdetail = () => {
                   justifyContent: 'space-around',
                 }}
               >
-                <img src="/image1@3x.png" width={100} />
+                <img src="/image1@3x.png" width={100} alt="" />
                 <div
                   className={
                     taskstyles['taskdetail--wrapper--divSeven']

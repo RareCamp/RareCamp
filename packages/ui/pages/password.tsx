@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form'
 import { Logo } from 'components/Logo'
 
 const Password = () => {
-  const { register, handleSubmit, errors } = useForm()
+  const { handleSubmit } = useForm()
   const onSubmit = () => {}
   return (
     <section className="px-4">

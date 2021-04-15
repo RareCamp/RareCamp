@@ -1,16 +1,15 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { AppLayout } from 'components/AppLayout'
 import Link from 'next/link'
 import {
   MultipleProgram,
   WorkspaceHeader,
 } from 'components/Pages/Workspace'
-import PrivateRoute from '../../components/PrivateRoute'
 
-function Workspace(props) {
+function Workspace() {
   const isFirstTimeVisitor = true
   return (
-    <AppLayout>
+    <AppLayout title="Programs">
       <div
         style={{
           backgroundColor: 'lightgray',
@@ -45,7 +44,7 @@ function Workspace(props) {
             style={{ backgroundColor: '#1890ff' }}
             className="text-sm text-white px-4 py-2 rounded focus:outline-none cursor-pointer mt-4"
           >
-            <Link href="/workspace/stepform">
+            <Link href="/workspace/intro">
               Determine Gene Therapy Feasibility
             </Link>
           </button>
@@ -56,4 +55,4 @@ function Workspace(props) {
   )
 }
 
-export default PrivateRoute(Workspace)
+export default Workspace

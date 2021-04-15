@@ -1,12 +1,3 @@
-import { createContext, useContext } from 'react'
-import { Workspace } from '../types'
+import { createContext } from 'react'
 
-export const WorkspaceContext = createContext<{
-  workspaces: Workspace[]
-}>({
-  workspaces: [],
-})
-
-export function useWorkspaceContext() {
-  return useContext(WorkspaceContext)
-}
+export const WorkspaceContext = createContext<any>(null)

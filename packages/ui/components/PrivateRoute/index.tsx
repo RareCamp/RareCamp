@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import { Auth } from 'aws-amplify'
-import LogoutButton from '../LogoutButton'
 
 export default function PrivateRoute(
   Component: React.FunctionComponent<any>,
@@ -16,12 +15,6 @@ export default function PrivateRoute(
         })
         .catch(() => router.push('/auth/login'))
     })
-    // TODO: LogoutButton to be removed once implemented on the AppLayout
-    return isLoggedIn ? (
-      <>
-        <LogoutButton />
-        <Component {...props} />
-      </>
-    ) : null
+    return isLoggedIn ? <Component {...props} /> : null
   }
 }

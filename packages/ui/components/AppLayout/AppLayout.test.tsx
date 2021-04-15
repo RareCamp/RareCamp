@@ -4,7 +4,7 @@ import AppLayout from './AppLayout'
 describe('AppLayout', () => {
   test('renders Applayout component', () => {
     render(
-      <AppLayout>
+      <AppLayout title="Programs">
         <>Layout</>
       </AppLayout>,
     )

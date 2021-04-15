@@ -3,7 +3,7 @@ import { AppLayout } from './index'
 
 describe('AppLayout#Sidebar', () => {
   test('shows the links', () => {
-    render(<AppLayout> </AppLayout>)
+    render(<AppLayout title="Programs"> </AppLayout>)
     const programsMenuItem = screen.getByRole('menuitem', {
       name: /Programs/i,
     })
@@ -14,7 +14,7 @@ describe('AppLayout#Sidebar', () => {
 describe('AppLayout', () => {
   test('displays the children passed', () => {
     render(
-      <AppLayout>
+      <AppLayout title="Programs">
         <h3>Layout</h3>
       </AppLayout>,
     )

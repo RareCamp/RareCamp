@@ -3,7 +3,7 @@ Conditions:
       !Equals
         - ${{self:custom.customDomain.enabled}}
         - true
-  
+
 Resources:
   AcmCertificate:
     Type: AWS::CertificateManager::Certificate
@@ -105,7 +105,7 @@ Resources:
       IdentityPoolId: !Ref CognitoIdentityPool
       Roles:
         authenticated: !GetAtt CognitoUserRole.Arn
-  
+
   # Due to a Serverless Framework bug, we need to create our own Authorizer, instead of
   # simply specifying `authorizer.arn: !GetAtt CognitoUserPool.Arn` in the function.
   # https://github.com/serverless/serverless/issues/3212#issuecomment-450574093
@@ -120,7 +120,7 @@ Resources:
       Type: COGNITO_USER_POOLS
       ProviderARNs:
         - !GetAtt CognitoUserPool.Arn
-    
+
   ExpressIamRoleLambdaExecution:
     Properties:
       ManagedPolicyArns:
@@ -173,6 +173,18 @@ Outputs:
 
   DiseaseTableName:
     Value: !Ref DiseaseTable
+
+  OrganizationTableName:
+    Value: !Ref OrganizationTable
+
+  ProgramTableName:
+    Value: !Ref ProgramTable
+
+  ProjectTableName:
+    Value: !Ref ProjectTable
+
+  TaskTableName:
+    Value: !Ref TaskTable
 
   ApiEndpoint:
     Value:

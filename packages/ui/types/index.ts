@@ -40,3 +40,24 @@ export interface SignupPayload extends LoginPayload {
 export interface RestPasswordPayload extends LoginPayload {
   code: string
 }
+
+export enum ProteinSize {
+  LESS_THAN_1100 = 'LESS_THAN_1100',
+  MORE_THAN_1100 = 'MORE_THAN_1100',
+  NOT_SURE = 'NOT_SURE',
+}
+
+export enum MutationType {
+  LEADS_TO_LOSS = 'LEADS_TO_LOSS',
+  LEADS_TO_GAIN = 'LEADS_TO_GAIN',
+  LEADS_TO_MORE = 'LEADS_TO_MORE',
+  NOT_SURE = 'NOT_SURE',
+}
+
+export interface Questionnaire {
+  causalGene: string
+  disease: string
+  mutationType: MutationType
+  foundation: string
+  proteinSize: ProteinSize
+}

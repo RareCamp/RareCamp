@@ -1,12 +1,11 @@
 import React from 'react'
 import { Button, Typography, Form, Input, notification } from 'antd'
-import { useRouter } from "next/router";
-import { Auth } from "aws-amplify";
-import { useMutation } from "react-query";
-import AuthLayout from "../../components/AuthLayout";
+import { useRouter } from 'next/router'
+import { Auth } from 'aws-amplify'
+import { useMutation } from 'react-query'
+import AuthLayout from 'components/AuthLayout'
 
-const { Link, Title } = Typography
-
+const { Title } = Typography
 
 export default function App() {
   const router = useRouter()
@@ -41,14 +40,17 @@ export default function App() {
       <div>
         <Title level={3}>Forgot your password?</Title>
         <p>
-          We'll send you an email with instructions.{' '}
+          We'll send you an email with instructions.
           <p>
-            or{' '}
-            <Link onClick={() => router.push('/auth/login')}>
+            or
+            <Button
+              type="link"
+              onClick={() => router.push('/auth/login')}
+            >
               Login
-            </Link>
-                                                    </p>
-      </p>
+            </Button>
+          </p>
+        </p>
       </div>
       <Form
         layout="vertical"
@@ -81,6 +83,6 @@ export default function App() {
           </Button>
         </Form.Item>
       </Form>
-         </AuthLayout>
-)
+    </AuthLayout>
+  )
 }

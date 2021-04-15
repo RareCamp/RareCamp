@@ -1,4 +1,3 @@
-import { Icon } from 'components/Icon'
 import React from 'react'
 import { Form, Input, Button } from 'antd'
 import styles from './proteinform.module.css'

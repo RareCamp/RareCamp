@@ -1,4 +1,5 @@
 import { getUser, createUser } from '../../controllers/user'
+import { createWorkspace } from '../../controllers/workspace'
 
 exports.handler = async (event) => {
   const {
@@ -17,6 +18,13 @@ exports.handler = async (event) => {
       email,
       name
     })
+    await createWorkspace({
+      userId,
+      workspace: {
+        name: 'Default Workspace',
+        description: 'Default user workspace',
+      },
+  })
   }
 
   return event

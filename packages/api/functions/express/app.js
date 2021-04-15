@@ -6,12 +6,12 @@ import { StatusCodes } from 'http-status-codes'
 import diseaseRouter from './routes/disease'
 import programRouter from './routes/program'
 import workspaceRouter from './routes/workspace'
-import { UnAuthorizedError, UserInputValidationError } from '../../errors'
+import { NotFoundError, UnAuthorizedError, UserInputValidationError } from '../../errors'
 import { log } from '../../utils/logger'
 import profileRouter from './routes/profile'
 import BadRequestError from '../../errors/BadRequestError'
 import taskRouter from './routes/task'
-import projectRouter from "./routes/project";
+import projectRouter from './routes/project'
 
 const IS_DEVELOPMENT = process.env.NODE_ENV === 'development'
 
@@ -66,6 +66,8 @@ app.use((err, req, res, next) => {
     res.status(StatusCodes.UNAUTHORIZED).json()
   } else if (err instanceof BadRequestError) {
     res.status(StatusCodes.BAD_REQUEST).json({ message: err.message })
+  } else if (err instanceof NotFoundError) {
+    res.status(StatusCodes.NOT_FOUND).json({ message: err.message })
   } else {
     res
       .status(statusCode)

@@ -10,10 +10,9 @@ import { MutationForm } from 'components/MutationForm'
 import { ProteinForm } from 'components/ProteinForm'
 
 import { Steps } from 'antd'
-import PrivateRoute from '../../components/PrivateRoute'
 
 const { Step } = Steps
-const stepform = (props) => {
+const stepform = () => {
   const [showBasicInfoForm, setBasicInfo] = useState(true)
   const [showMutationForm, setShowMutationForm] = useState(false)
   const [showProteinForm, setShowProteinForm] = useState(false)
@@ -23,7 +22,7 @@ const stepform = (props) => {
   const [current, setCurrent] = useState(0)
 
   return (
-    <AppLayout>
+    <AppLayout title="Programs">
       <div className={styles.stepform}>
         <div className={styles['stepform-divOne']}>
           <h1 style={{ fontWeight: 'bold' }}>WorkSpace</h1>
@@ -115,8 +114,8 @@ const stepform = (props) => {
                         />
                         <span style={{ marginLeft: '0.25rem' }}>
                           Mutation
-                        </span>
-                      </div>
+            </span>
+          </div>
                       <span
                         className={`${styles['span']} ${
                           showProteinForm
@@ -134,7 +133,7 @@ const stepform = (props) => {
                           display: 'flex',
                           alignItems: 'center',
                         }}
-                      >
+            >
                         <LetterPic
                           letter="3"
                           color="custom"
@@ -204,4 +203,4 @@ const stepform = (props) => {
   )
 }
 
-export default PrivateRoute(stepform)
+export default stepform

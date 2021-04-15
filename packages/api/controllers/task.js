@@ -2,6 +2,7 @@ import sanitizeHtml from 'sanitize-html'
 import Task from '../models/Task'
 import { generateId } from '../utils/id'
 import { log } from '../utils/logger'
+import { getUser } from './user'
 
 export async function createTask({
   userId,
@@ -61,15 +62,26 @@ export async function getTask({ userId, projectId, taskId }) {
   return taskItem.Item
 }
 
-export async function getTasks({ userId, projectId }) {
-  if (!userId) throw new Error('userId is required')
+async function populateAssigneeDetails(tasks) {
+  for (let i = 0; i < tasks.length; i++) {
+    const { assignees } = tasks[i]
+    for (let j = 0; j < assignees.length; j++) {
+      const { userId } = assignees[j]
+      // eslint-disable-next-line no-await-in-loop
+      const user = await getUser({ userId })
+      if (user) assignees[j] = { ...assignees[j], ...user.Item }
+    }
+  }
+}
+
+export async function getTasks({ projectId }) {
   if (!projectId) throw new Error('projectId is required')
 
   const taskItems = await Task.query(projectId)
-
   if (!taskItems) {
     return null
   }
-
-  return taskItems.Items
+  const tasks = taskItems.Items
+  await populateAssigneeDetails(tasks)
+  return tasks
 }

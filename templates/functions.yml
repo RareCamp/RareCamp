@@ -14,7 +14,7 @@ express:
           authorizer:
             type: COGNITO_USER_POOLS
             authorizerId: !Ref ApiGatewayAuthorizer
-      - http: 
+      - http:
           method: ANY
           path: '{proxy+}'
           cors: true
@@ -41,6 +41,11 @@ express:
         Resource:
           - !GetAtt DiseaseTable.Arn
           - !GetAtt UserTable.Arn
+          - !GetAtt WorkspaceTable.Arn
+          - !GetAtt TaskTable.Arn
+          - !GetAtt ProjectTable.Arn
+          - !GetAtt ProgramTable.Arn
+          - !GetAtt OrganizationTable.Arn
 
 postAuthN:
   handler: packages/api/functions/cognito/post-authentication.handler
@@ -48,7 +53,12 @@ postAuthN:
   iamRoleStatements:
     - Effect: "Allow"
       Action:
+        - dynamodb:DeleteItem
         - dynamodb:GetItem
         - dynamodb:PutItem
+        - dynamodb:Query
+        - dynamodb:Scan
+        - dynamodb:UpdateItem
       Resource:
         - !GetAtt UserTable.Arn
+        - !GetAtt WorkspaceTable.Arn
