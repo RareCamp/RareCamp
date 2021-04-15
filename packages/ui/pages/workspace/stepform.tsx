@@ -10,10 +10,9 @@ import { MutationForm } from 'components/MutationForm'
 import { ProteinForm } from 'components/ProteinForm'
 
 import { Steps } from 'antd'
-import PrivateRoute from '../../components/PrivateRoute'
 
 const { Step } = Steps
-const stepform = (props) => {
+const stepform = () => {
   const [showBasicInfoForm, setBasicInfo] = useState(true)
   const [showMutationForm, setShowMutationForm] = useState(false)
   const [showProteinForm, setShowProteinForm] = useState(false)

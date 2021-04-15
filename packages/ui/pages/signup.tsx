@@ -10,7 +10,6 @@ const SignUp = () => {
 
   const [isOtp, setIsOtp] = useState(false)
   const [email, setEmail] = useState('')
-  const [otp, setOtp] = useState('')
 
   const onSubmit = (data) => {
     console.log(data)
@@ -26,7 +25,7 @@ const SignUp = () => {
 
   const validateOtp = (data) => {
     console.log(data.otp, console.log('email'))
-    Auth.confirmSignUp(email, `${data.otp}`).then((data) => {
+    Auth.confirmSignUp(email, `${data.otp}`).then(() => {
       router.push('/')
     })
   }

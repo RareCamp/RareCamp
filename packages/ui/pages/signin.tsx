@@ -7,7 +7,7 @@ import { Auth } from 'aws-amplify'
 
 const SignIn = () => {
   const router = useRouter()
-  const { register, handleSubmit, errors } = useForm()
+  const { handleSubmit } = useForm()
   const onSubmit = (data) => {
     Auth.signIn(data.email, data.password)
       .then(() => {
