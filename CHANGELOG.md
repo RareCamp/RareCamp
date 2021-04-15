@@ -1,3 +1,10 @@
+## [1.1.1](https://github.com/RareCamp/RareCamp/compare/v1.1.0...v1.1.1) (2021-04-14)
+
+
+### Bug Fixes
+
+* **ui:** fix eslint config ([#58](https://github.com/RareCamp/RareCamp/issues/58)) ([c5220bd](https://github.com/RareCamp/RareCamp/commit/c5220bd95ad7f6d3e5e991a0716fb6596fb734ce))
+
 # [1.1.0](https://github.com/RareCamp/RareCamp/compare/v1.0.2...v1.1.0) (2021-03-27)
 
 
