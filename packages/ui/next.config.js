@@ -1,9 +1,9 @@
-const withLess = require('@zeit/next-less');
-const withCSS = require('@zeit/next-css');
+const withLess = require('@zeit/next-less')
+const withCSS = require('@zeit/next-css')
 
 // fix: prevents error when .less files are required by node
 if (typeof require !== 'undefined') {
-  require.extensions['.less'] = (file) => {};
+  require.extensions['.less'] = () => {}
 }
 
 module.exports = withCSS({
@@ -17,4 +17,4 @@ module.exports = withCSS({
       javascriptEnabled: true,
     },
   }),
-});
+})

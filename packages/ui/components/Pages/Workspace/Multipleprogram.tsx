@@ -29,13 +29,13 @@ function MultipleProgram() {
                 />
                 {p.icons.map((item): any => (
                   <LetterPic
-                    letter={
+                    letter={(
                       <img
                         className="inline-block h-6 w-6 rounded-full ring-transparent"
                         src={item.src}
                         alt=""
                       />
-                    }
+                    )}
                     size="sm"
                     color={item.color}
                     className={`${avatarStyle}`}
