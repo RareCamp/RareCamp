@@ -5,8 +5,8 @@ import {
   getProgramWithWorkspace,
   updateProgram,
   getPrograms,
+  deleteProgram,
 } from '../../../controllers/program'
-import projectRouter from './project'
 
 const programRouter = express.Router({ mergeParams: true })
 
@@ -49,7 +49,10 @@ programRouter.get('/:programId', wrapAsync(async (req, res) => {
   return res.json({ program })
 }))
 
-// project routes
-// programRouter.use('/:programId/projects', projectRouter)
+programRouter.delete('/:programId', wrapAsync(async (req, res) => {
+  const { programId, workspaceId } = req.params
+  await deleteProgram({ programId, workspaceId })
+  return res.json()
+}))
 
 export default programRouter

@@ -5,6 +5,7 @@ import { Button, Space, Typography } from 'antd'
 import styled from 'styled-components'
 import Link from 'next/link'
 import UserHeader from 'components/UserHeader'
+import PageTitle from 'components/PageTitle'
 
 const { Title } = Typography
 
@@ -31,7 +32,10 @@ const QuestionnaireIntro = styled('div')`
 
 const questionnaireIntro = () => {
   return (
-    <AppLayout title="Programs">
+    <AppLayout
+      title={<PageTitle title="programs" />}
+      selectedKey="programs"
+    >
       <QuestionnaireLayout>
         <UserHeader />
         <QuestionnaireIntro>

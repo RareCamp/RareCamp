@@ -4,7 +4,10 @@ import { useMutation, useQueryClient } from 'react-query'
 import axios from 'axios'
 import { Questionnaire } from 'types'
 import { useRouter } from 'next/router'
-import { mutationsTypesMap } from '../../../constants/maps'
+import {
+  mutationsTypesMap,
+  proteinSizeTypesMap,
+} from 'constants/maps'
 
 const { Title } = Typography
 async function createProgramFrom(
@@ -20,7 +23,7 @@ async function createProgramFrom(
         name: answers.disease,
         causalGene: answers.causalGene,
         mutationImpact: mutationsTypesMap[answers.mutationType],
-        proteinSize: 1100,
+        proteinSize: proteinSizeTypesMap[answers.proteinSize],
         organizationsWorkingOnDisease: [answers.foundation],
       },
     },
@@ -94,7 +97,11 @@ export default function QuestionnaireResult({
         </Button>
       ) : (
         <Space>
-          <Button type="primary">Talk to our science team</Button>
+          <Button type="primary">
+            <a href="mailTo:sanath@gpx4.org">
+              Talk to our science team
+            </a>
+          </Button>
           <Button
             icon={<PlusCircleOutlined />}
             onClick={() => mutation.mutate()}

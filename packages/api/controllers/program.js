@@ -8,7 +8,6 @@ import { createTask, getTasks } from './task'
 import NotFoundError from '../errors/NotFoundError'
 import { getWorkspaceByIdAndUserId } from './workspace'
 import { createProject, getProjects } from './project'
-import { getUser } from './user'
 
 export async function createProgram({
   userId,
@@ -34,20 +33,11 @@ export async function createProgram({
     programId: item.programId,
     project: DEFAULT_PROJECT,
   })
-  project.tasks = await Promise.all(DEFAULT_TASKS.map(async (task) => {
-    const { Item: user } = await getUser({ userId })
-    task.assignees = [{
-      userId: user.userId,
-      firstName: user.firstName,
-      lastname: user.lastName,
-      thumbnailColor: user.thumbnailColor || '#bbdefb',
-    }]
-    return createTask({
-      userId,
-      projectId: project.projectId,
-      task,
-    })
-  }))
+  project.tasks = await Promise.all(DEFAULT_TASKS.map(async (task) => createTask({
+    userId,
+    projectId: project.projectId,
+    task,
+  })))
   log.info('PROGRAM_CONTROLLER:PROGRAM_CREATED', { programItem })
 
   return {
@@ -92,4 +82,13 @@ export async function getProgramWithWorkspace({ programId, userId, workspaceId }
 
 export function getPrograms(workspaceId) {
   return Program.query(workspaceId)
+}
+
+export async function deleteProgram({
+  workspaceId,
+  programId,
+}) {
+  const program = await Program.get({ workspaceId, programId })
+  if (!program) throw NotFoundError('Program can not be found')
+  await Program.delete({ workspaceId, programId })
 }

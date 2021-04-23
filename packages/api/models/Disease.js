@@ -18,7 +18,7 @@ const Disease = new Entity({
     omimId: 'string',
     causalGene: 'string',
     mutationImpact: 'string',
-    proteinSize: 'number',
+    proteinSize: 'string',
     organizationsWorkingOnDisease: 'list',
   },
   table: DiseaseTable,

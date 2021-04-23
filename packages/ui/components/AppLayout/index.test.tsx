@@ -3,7 +3,11 @@ import { AppLayout } from './index'
 
 describe('AppLayout#Sidebar', () => {
   test('shows the links', () => {
-    render(<AppLayout title="Programs"> </AppLayout>)
+    render(
+      <AppLayout selectedKey="programs" title="test">
+        <span>Content</span>
+      </AppLayout>,
+    )
     const programsMenuItem = screen.getByRole('menuitem', {
       name: /Programs/i,
     })
@@ -14,7 +18,7 @@ describe('AppLayout#Sidebar', () => {
 describe('AppLayout', () => {
   test('displays the children passed', () => {
     render(
-      <AppLayout title="Programs">
+      <AppLayout selectedKey="programs" title="programs">
         <h3>Layout</h3>
       </AppLayout>,
     )

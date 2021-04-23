@@ -6,15 +6,15 @@ import {
   getProject,
   updateProject,
   getProjects,
+  deleteProject,
 } from '../../../controllers/project'
 
 const projectRouter = express.Router({ mergeParams: true })
 
 projectRouter.post('/', wrapAsync(async (req, res) => {
   const { project } = req.body
-  const { userId } = req.cognitoUser
   const { programId } = req.params
-  const projectItem = await createProject({ programId, project, userId })
+  const projectItem = await createProject({ programId, project })
 
   res.json({ project: projectItem })
 }))
@@ -38,9 +38,8 @@ projectRouter.get('/', wrapAsync(async (req, res) => {
 }))
 
 projectRouter.get('/:projectId', wrapAsync(async (req, res) => {
-  const { userId } = req.cognitoUser
   const { projectId, programId } = req.params
-  const project = await getProject({ userId, programId, projectId })
+  const project = await getProject({ programId, projectId })
 
   if (!project) {
     return res
@@ -49,6 +48,12 @@ projectRouter.get('/:projectId', wrapAsync(async (req, res) => {
   }
 
   return res.json({ project })
+}))
+
+projectRouter.delete('/:projectId', wrapAsync(async (req, res) => {
+  const { projectId, programId } = req.params
+  await deleteProject({ programId, projectId })
+  return res.json()
 }))
 
 // task routes

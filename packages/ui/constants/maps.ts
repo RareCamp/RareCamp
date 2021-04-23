@@ -19,9 +19,7 @@ export const mutationsTypesMap: Record<MutationType, string> = {
 }
 
 export const proteinSizeTypesMap: Record<ProteinSize, string> = {
-  [ProteinSize.LESS_THAN_1100]:
-    'Mutation leads to a LOSS of function or LOWER expression of gene or protein',
-  [ProteinSize.MORE_THAN_1100]:
-    'Mutation leads to a MORE protein to be produced',
+  [ProteinSize.LESS_THAN_1100]: '< 1100 amino acids ',
+  [ProteinSize.MORE_THAN_1100]: '> 1100 amino acids',
   [ProteinSize.NOT_SURE]: "I'm not sure",
 }

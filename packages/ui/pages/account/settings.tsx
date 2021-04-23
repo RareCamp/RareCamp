@@ -1,10 +1,15 @@
 import { AppLayout } from 'components/AppLayout'
 import { Result } from 'antd'
 import Link from 'next/link'
+import React from 'react'
+import PageTitle from 'components/PageTitle'
 
 export default function Settings() {
   return (
-    <AppLayout title="User Account Settings">
+    <AppLayout
+      title={<PageTitle title="User Account Settings" />}
+      selectedKey="settings"
+    >
       <Result
         status="404"
         title="Work in progress"

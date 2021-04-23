@@ -1,5 +1,4 @@
 /*  Any array of items including navlinks, options in selectbox */
-import { Collapse } from 'antd'
 import { IconNameType } from 'components/Icon/Icon'
 import type { Task } from 'types'
 

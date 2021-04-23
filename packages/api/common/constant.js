@@ -4,9 +4,11 @@ export const PROJECT_STATUSES = {
   ONGOING: 'Ongoing',
 }
 export const TASK_STATUSES = {
-  NOT_STARTED: 'Not Started',
-  IN_PROGRESS: 'In-Progress',
+  COMPLETED: 'completed',
+  IN_PROGRESS: 'in-progress',
+  NOT_STARTED: 'not-started',
 }
+
 export const DEFAULT_PROJECT = {
   name: 'Create a Knock-in mouse',
   description: 'Understand Knock-in mouse models and steps involved in generating it.',

@@ -6,6 +6,6 @@ export const diseaseSchema = yup.object({
   omimId: yup.string(),
   causalGene: yup.string(),
   mutationImpact: yup.string(),
-  proteinSize: yup.number().positive().min(1),
+  proteinSize: yup.string(),
   organizationsWorkingOnDisease: yup.array().of(yup.string()),
 })

@@ -61,3 +61,9 @@ export interface Questionnaire {
   foundation: string
   proteinSize: ProteinSize
 }
+
+export enum TaskStatus {
+  COMPLETED = 'completed',
+  IN_PROGRESS = 'in-progress',
+  NOT_STARTED = 'not-started',
+}
