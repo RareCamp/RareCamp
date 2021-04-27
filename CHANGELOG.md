@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/RareCamp/RareCamp/compare/v1.1.1...v1.2.0) (2021-04-27)
+
+
+### Features
+
+* **ui:** add porgram page ([#64](https://github.com/RareCamp/RareCamp/issues/64)) ([6d69f7b](https://github.com/RareCamp/RareCamp/commit/6d69f7bf61e9487bad62137d92177a7d2d324b21))
+
 ## [1.1.1](https://github.com/RareCamp/RareCamp/compare/v1.1.0...v1.1.1) (2021-04-14)
 
 
