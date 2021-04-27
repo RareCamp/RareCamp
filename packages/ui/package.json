@@ -9,7 +9,7 @@
     "build": "npm run export",
     "start": "next start",
     "export": "next build && next export",
-    "format": "prettier-eslint --write $PWD/'**/*.[jt]s?(x)' --ignore '**/.next/**' && eslint --fix .",
+    "format": "prettier-eslint --write $PWD/'**/*.[jt]s?(x)' && eslint --fix .",
     "lint": "eslint . --ext=.ts,.tsx",
     "test": "jest "
   },

@@ -26,7 +26,7 @@ const StyledLayout = styled(Layout)`
         width: 327px;
         display: flex;
         flex-direction: column;
-        justify-content: space-between
+        justify-content: space-between;
       }
     }
 
@@ -67,6 +67,6 @@ export default function AuthLayout(props) {
           </span>
         </Col>
       </Row>
-         </StyledLayout>
+    </StyledLayout>
   )
 }

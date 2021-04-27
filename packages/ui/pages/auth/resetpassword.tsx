@@ -49,11 +49,9 @@ export default function RestPassword() {
       <div>
         <Title level={3}>Rest your password?</Title>
         <p>
-          Please enter you reset code and new password.
-{' '}
+          Please enter you reset code and new password.{' '}
           <p>
-            or
-{' '}
+            or{' '}
             <Link onClick={() => router.push('/auth/login')}>
               Login
             </Link>
