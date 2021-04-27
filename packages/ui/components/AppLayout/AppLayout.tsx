@@ -17,6 +17,7 @@ import { useRouter } from 'next/router'
 import { useMutation, useQuery } from 'react-query'
 import { Auth } from 'aws-amplify'
 import axios from 'axios'
+import EditProgram from '../EditProgram'
 
 const { Sider, Content, Header } = Layout
 
@@ -128,7 +129,8 @@ const AccountMenu = () => {
     </OFMenu>
   )
 }
-const AppLayout = ({ children, title }) => {
+
+const AppLayout = ({ children, selectedKey, title }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
   const router = useRouter()
   const { data, isLoading } = useQuery(
@@ -159,20 +161,27 @@ const AppLayout = ({ children, title }) => {
           />
         </Link>
         <Menu
-          defaultSelectedKeys={[title]}
+          defaultSelectedKeys={[selectedKey || 'programs']}
+          selectedKeys={[selectedKey || 'programs']}
           mode="inline"
           theme="dark"
         >
-          <Menu.Item key="Programs" icon={<FileOutlined />}>
+          <Menu.Item key="programs" icon={<FileOutlined />}>
             <Link href="/">Programs</Link>
           </Menu.Item>
           {programs?.map((program) => (
-            <Menu.Item key={program.name} className="sub-menu">
+            <Menu.Item
+              key={`program_${program.programId}`}
+              className="sub-menu"
+            >
               <Link
                 key={program.name}
                 href={`/programs/${program.workspaceId}/${program.programId}`}
               >
-                {program.name}
+                <Space>
+                  <span>{program.name}</span>
+                  <EditProgram program={program} />
+                </Space>
               </Link>
             </Menu.Item>
           ))}
@@ -186,7 +195,7 @@ const AppLayout = ({ children, title }) => {
       </Sider>
       <Layout className="site-layout">
         <OTHeader>
-          <span className="title">{title}</span>
+          <div>{title}</div>
           <div>
             <Dropdown
               trigger={['click']}

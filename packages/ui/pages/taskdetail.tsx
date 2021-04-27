@@ -7,6 +7,7 @@ import dynamic from 'next/dynamic'
 import { LetterPic } from 'components/LetterPic'
 import { DropDown } from 'components/DropDown'
 import OWNER_DATA from 'fixtures/dropdown.json'
+import PageTitle from 'components/PageTitle'
 
 const DynamicComponent = dynamic(
   () => import('../components/Editor'),
@@ -34,7 +35,10 @@ const Taskdetail = () => {
   const toggleIsUserDropDownOpen = () =>
     setUserDropDown(!isUserDropDownOpen)
   return (
-    <AppLayout title="Task Details">
+    <AppLayout
+      title={<PageTitle title="programs" />}
+      selectedKey="programs"
+    >
       <section className={taskstyles['taskdetail--wrapper']}>
         <div className={taskstyles['taskdetail--wrapper--divOne']}>
           <h1>Understand knock-in mouse model</h1>

@@ -10,6 +10,7 @@ import { MutationForm } from 'components/MutationForm'
 import { ProteinForm } from 'components/ProteinForm'
 
 import { Steps } from 'antd'
+import PageTitle from 'components/PageTitle'
 
 const { Step } = Steps
 const stepform = () => {
@@ -22,7 +23,10 @@ const stepform = () => {
   const [current, setCurrent] = useState(0)
 
   return (
-    <AppLayout title="Programs">
+    <AppLayout
+      title={<PageTitle title="programs" />}
+      selectedKey="programs"
+    >
       <div className={styles.stepform}>
         <div className={styles['stepform-divOne']}>
           <h1 style={{ fontWeight: 'bold' }}>WorkSpace</h1>

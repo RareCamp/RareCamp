@@ -13,6 +13,7 @@ import {
   mutationsTypesMap,
   proteinSizeTypesMap,
 } from 'constants/maps'
+import PageTitle from 'components/PageTitle'
 
 const { Step } = Steps
 const OFForm = styled(Form)`
@@ -39,7 +40,7 @@ const DiseaseForm = () => {
       </Form.Item>
       <Form.Item
         label="Causal Gene Name"
-        name="mutationType"
+        name="causalGene"
         rules={[
           {
             required: true,
@@ -69,7 +70,7 @@ const MutationForm = () => {
     <>
       <Form.Item
         label="How do mutations in this gene cause the disease?"
-        name="diseaseCause"
+        name="mutationType"
         rules={[
           {
             required: true,
@@ -242,7 +243,10 @@ export default function questionnaire() {
   const nextStep = () =>
     form.validateFields().then(() => setCurrent(current + 1))
   return (
-    <AppLayout title="Programs">
+    <AppLayout
+      title={<PageTitle title="programs" />}
+      selectedKey="programs"
+    >
       <PageHeader>
         <Link href="/workspace/intro">
           <ArrowLeftOutlined />
@@ -277,7 +281,7 @@ export default function questionnaire() {
                 onFinish={handleFormSubmit}
                 initialValues={{
                   proteinSize: ProteinSize.LESS_THAN_1100,
-                  diseaseCause: MutationType.LEADS_TO_LOSS,
+                  mutationType: MutationType.LEADS_TO_LOSS,
                 }}
                 layout="vertical"
                 form={form}

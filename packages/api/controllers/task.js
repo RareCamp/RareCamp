@@ -3,6 +3,9 @@ import Task from '../models/Task'
 import { generateId } from '../utils/id'
 import { log } from '../utils/logger'
 import { getUser } from './user'
+import { TASK_STATUSES } from '../common/constant'
+import Program from '../models/Program'
+import NotFoundError from '../errors/NotFoundError'
 
 export async function createTask({
   userId,
@@ -18,6 +21,20 @@ export async function createTask({
     ...task,
     projectId,
     taskId,
+  }
+  const { Item: user } = await getUser({ userId })
+  item.assignees = [{
+    userId: user.userId,
+    firstName: user.firstName || user.name,
+    lastname: user.lastName,
+    thumbnailColor: user.thumbnailColor || '#bbdefb',
+  }]
+  if (!item.status) item.status = TASK_STATUSES.NOT_STARTED
+  if (!item.budget) {
+    item.budget = {
+      currency: '$',
+      amount: 0,
+    }
   }
   const taskItem = await Task.update(item, { returnValues: 'ALL_NEW' })
 
@@ -63,13 +80,17 @@ export async function getTask({ userId, projectId, taskId }) {
 }
 
 async function populateAssigneeDetails(tasks) {
-  for (let i = 0; i < tasks.length; i++) {
-    const { assignees } = tasks[i]
-    for (let j = 0; j < assignees.length; j++) {
-      const { userId } = assignees[j]
-      // eslint-disable-next-line no-await-in-loop
-      const user = await getUser({ userId })
-      if (user) assignees[j] = { ...assignees[j], ...user.Item }
+  if (tasks && tasks.length) {
+    for (let i = 0; i < tasks.length; i++) {
+      const { assignees } = tasks[i]
+      if (assignees && assignees.length) {
+        for (let j = 0; j < assignees.length; j++) {
+          const { userId } = assignees[j]
+          // eslint-disable-next-line no-await-in-loop
+          const user = await getUser({ userId })
+          if (user) assignees[j] = { ...assignees[j], ...user.Item }
+        }
+      }
     }
   }
 }
@@ -84,4 +105,12 @@ export async function getTasks({ projectId }) {
   const tasks = taskItems.Items
   await populateAssigneeDetails(tasks)
   return tasks
+}
+
+export async function deleteTask({ projectId, taskId }) {
+  if (!projectId) throw new Error('projectId is required')
+  if (!taskId) throw new Error('taskId is required')
+  const task = await Task.get({ projectId, taskId })
+  if (!task) throw NotFoundError('Program can not be found')
+  await Task.delete({ projectId, taskId })
 }

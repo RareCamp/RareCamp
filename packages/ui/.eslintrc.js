@@ -1,7 +1,6 @@
 module.exports = {
   parser: '@typescript-eslint/parser',
   extends: [
-    // 'airbnb-typescript',
     'plugin:testing-library/recommended',
     'plugin:testing-library/react',
     'prettier',
@@ -20,5 +19,6 @@ module.exports = {
     'import/no-unresolved': 'off',
     'react/jsx-props-no-spreading': 'off',
     'import/extensions': 'off',
+    'jsx-a11y/no-noninteractive-element-interactions': 'off',
   },
 }

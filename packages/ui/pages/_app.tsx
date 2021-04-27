@@ -6,6 +6,7 @@ import 'styles/example.less'
 import Amplify, { Auth } from 'aws-amplify'
 import axios from 'axios'
 import { useRouter } from 'next/router'
+import GlobalLoadingIndicator from 'components/GlobalLoadingIndicator'
 
 axios.defaults.baseURL = process.env.NEXT_PUBLIC_ApiEndpoint
 
@@ -47,6 +48,7 @@ function MyAppWrapper(props: AppProps) {
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
+      <GlobalLoadingIndicator />
       <ReactQueryDevtools initialIsOpen={false} />
       <Component {...pageProps} />
     </>

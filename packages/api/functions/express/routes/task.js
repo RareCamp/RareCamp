@@ -5,6 +5,7 @@ import {
   getTask,
   updateTask,
   getTasks,
+  deleteTask,
 } from '../../../controllers/task'
 
 const taskRouter = express.Router({ mergeParams: true })
@@ -49,6 +50,12 @@ taskRouter.get('/:taskId', wrapAsync(async (req, res) => {
   }
 
   return res.json({ task })
+}))
+
+taskRouter.delete('/:taskId', wrapAsync(async (req, res) => {
+  const { projectId, taskId } = req.params
+  await deleteTask({ projectId, taskId })
+  return res.json()
 }))
 
 export default taskRouter

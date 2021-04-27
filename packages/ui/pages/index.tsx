@@ -7,6 +7,7 @@ import axios from 'axios'
 import UserHeader from 'components/UserHeader'
 import styled from 'styled-components'
 import Link from 'next/link'
+import PageTitle from 'components/PageTitle'
 
 const { Title } = Typography
 const ProgramCard = styled(Card)`
@@ -27,7 +28,10 @@ const Home = () => {
   }, [data])
 
   return (
-    <AppLayout title="Programs">
+    <AppLayout
+      title={<PageTitle title="programs" />}
+      selectedKey="programs"
+    >
       <UserHeader
         getContent={(userInfo) => ({
           title: `Hello ${userInfo.name}, welcome back!`,
