@@ -4,7 +4,6 @@ import { generateId } from '../utils/id'
 import { log } from '../utils/logger'
 import { getUser } from './user'
 import { TASK_STATUSES } from '../common/constant'
-import Program from '../models/Program'
 import NotFoundError from '../errors/NotFoundError'
 
 export async function createTask({
@@ -15,7 +14,7 @@ export async function createTask({
   if (!userId) throw new Error('userId is required')
   if (!projectId) throw new Error('projectId is required')
   if (!task) throw new Error('task is required')
-  if (task.notes && task.notes.length) task.notes = task.notes.map(sanitizeHtml)
+  if (task.notes) task.notes = sanitizeHtml(task.notes)
   const taskId = generateId()
   const item = {
     ...task,
@@ -53,7 +52,7 @@ export async function updateTask({
   if (!projectId) throw new Error('projectId is required')
   if (!taskId) throw new Error('taskId is required')
   if (!task) throw new Error('task is required')
-  if (task.notes && task.notes.length) task.notes = task.notes.map(sanitizeHtml)
+  if (task.notes) task.notes = sanitizeHtml(task.notes)
   const taskItem = await Task.update({
     ...task,
     projectId,
@@ -65,8 +64,7 @@ export async function updateTask({
   return taskItem.Attributes
 }
 
-export async function getTask({ userId, projectId, taskId }) {
-  if (!userId) throw new Error('userId is required')
+export async function getTask({ projectId, taskId }) {
   if (!projectId) throw new Error('projectId is required')
   if (!taskId) throw new Error('taskId is required')
 
