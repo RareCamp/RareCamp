@@ -1,15 +1,15 @@
 import { useRouter } from 'next/router'
 import { useQuery } from 'react-query'
 import axios from 'axios'
-import { Button, Result, Skeleton, Space, Tooltip } from 'antd'
+import { Button, Result, Skeleton, Space } from 'antd'
 import Link from 'next/link'
 import { AppLayout } from 'components/AppLayout'
 import styled from 'styled-components'
-import { InfoCircleOutlined, PlusOutlined } from '@ant-design/icons'
+import { PlusOutlined } from '@ant-design/icons'
 import OTTable from 'components/TasksTable'
 import { useState } from 'react'
-import PageTitle from 'components/PageTitle'
 import EditProgram from 'components/EditProgram'
+import PageHeading from '../../components/PageHeading'
 
 function BackToHome() {
   return (
@@ -47,13 +47,11 @@ export default function ProgramDetails() {
   const hideAddProjectBtn = () => setIsAddProjectVisible(false)
   const program = programQuery?.data?.data?.program
   const ProgramTitle = (
-    <Space>
-      <PageTitle title={program?.name} />
-      <Tooltip placement="bottom" title={program?.description}>
-        <InfoCircleOutlined />
-      </Tooltip>
-      {program ? <EditProgram program={program} /> : null}
-    </Space>
+    <PageHeading
+      title={program?.name}
+      description={program?.description}
+      renderEdit={() => program && <EditProgram program={program} />}
+    />
   )
   return (
     <AppLayout

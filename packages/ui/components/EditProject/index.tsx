@@ -29,7 +29,13 @@ const EditProjectDropdown = styled('div')`
   }
 `
 
-export default function EditProject({ project }) {
+export default function EditProject({
+  project,
+  onDeleted,
+}: {
+  project: any
+  onDeleted?: any
+}) {
   const [isEditProjectVisible, setIsEditProjectVisible] = useState(
     false,
   )
@@ -77,6 +83,7 @@ export default function EditProject({ project }) {
           duration: 2,
           message: `Project ${project.name} has been deleted successfully`,
         })
+        onDeleted()
       },
       onError: (err: Error) =>
         notification.error({

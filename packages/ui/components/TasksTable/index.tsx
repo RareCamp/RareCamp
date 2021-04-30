@@ -167,12 +167,7 @@ export default function OTTable({
                       <Form.Item
                         name="name"
                         required={false}
-                        rules={[
-                          {
-                            required: true,
-                            message: '',
-                          },
-                        ]}
+                        rules={[{ required: true, message: '' }]}
                       >
                         <Input
                           prefix={

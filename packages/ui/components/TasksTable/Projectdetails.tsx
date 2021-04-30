@@ -116,12 +116,7 @@ export default function ProjectDetails({ project }) {
             <Form.Item
               name="name"
               required={false}
-              rules={[
-                {
-                  required: true,
-                  message: '',
-                },
-              ]}
+              rules={[{ required: true, message: '' }]}
             >
               <Input
                 prefix={

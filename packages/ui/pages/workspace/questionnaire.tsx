@@ -6,14 +6,13 @@ import {
   QuestionnaireIllustration,
   QuestionnaireResult,
 } from 'components/Pages/Questionaire'
-import Link from 'next/link'
-import { ArrowLeftOutlined } from '@ant-design/icons'
 import { MutationType, ProteinSize, Questionnaire } from 'types'
 import {
   mutationsTypesMap,
   proteinSizeTypesMap,
 } from 'constants/maps'
 import PageTitle from 'components/PageTitle'
+import SubHeader from '../../components/SubHeader'
 
 const { Step } = Steps
 const OFForm = styled(Form)`
@@ -167,19 +166,6 @@ const QuestionnaireContainer = styled('div')`
     flex: 1;
   }
 `
-const PageHeader = styled('div')`
-  padding: 24px;
-  background-color: #ffffff;
-  display: flex;
-  align-items: baseline;
-  border: 1px solid #eee;
-
-  .anticon.anticon-arrow-left {
-    margin-right: 17.5px;
-    font-size: 16px;
-    color: rgba(0, 0, 0, 0.85);
-  }
-`
 
 function isGeneTherapyFeasible(answers: Questionnaire): boolean {
   if (
@@ -242,23 +228,20 @@ export default function questionnaire() {
 
   const nextStep = () =>
     form.validateFields().then(() => setCurrent(current + 1))
+  const title = 'Determine eligibility for AAV-based gene therapy'
+  const subTitle =
+    'Complete this short questionnaire to help our team determine your eligibility.'
+  const backLink = '/workspace/intro'
   return (
     <AppLayout
       title={<PageTitle title="programs" />}
       selectedKey="programs"
     >
-      <PageHeader>
-        <Link href="/workspace/intro">
-          <ArrowLeftOutlined />
-        </Link>
-        <div>
-          <h3>Determine eligibility for AAV-based gene therapy</h3>
-          <span>
-            Complete this short questionnaire to help our team
-            determine your eligibility.
-          </span>
-        </div>
-      </PageHeader>
+      <SubHeader
+        title={<h3>{title}</h3>}
+        subTitle={subTitle}
+        backLink={backLink}
+      />
       <QuestionnaireContainer>
         <div className="questionnaire-form">
           {feasibility.assessmentFinished ? (
