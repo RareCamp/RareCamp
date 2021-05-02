@@ -1,7 +1,8 @@
-import Link from 'next/link'
 import { ArrowLeftOutlined } from '@ant-design/icons'
 import React from 'react'
 import styled from 'styled-components'
+import { useRouter } from 'next/router'
+import { Button } from 'antd'
 
 const PageHeader = styled('div')`
   padding: 24px;
@@ -21,12 +22,13 @@ const PageHeader = styled('div')`
   }
 `
 
-export default function SubHeader({ title, subTitle, backLink }) {
+export default function SubHeader({ title, subTitle }) {
+  const router = useRouter()
   return (
     <PageHeader>
-      <Link href={backLink}>
+      <Button type="link" onClick={() => router.back()}>
         <ArrowLeftOutlined />
-      </Link>
+      </Button>
       <div>
         {title}
         <div className="description">{subTitle}</div>

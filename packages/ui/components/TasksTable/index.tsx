@@ -3,8 +3,8 @@ import { LoadingOutlined } from '@ant-design/icons'
 import styled from 'styled-components'
 import { useMutation, useQueryClient } from 'react-query'
 import axios from 'axios'
-import Error from 'next/error'
-import ProjectDetails from './Projectdetails'
+import ProjectDetails from 'components/TasksTable/Projectdetails'
+import { sortByCreated } from 'helpers/utils'
 
 const CustomTable = styled('div')`
   .ant-table-container {
@@ -33,6 +33,11 @@ const CustomTable = styled('div')`
           input {
             height: 60px;
             padding-left: 60px;
+            border: none;
+            font-size: 20px;
+            font-weight: 500;
+            line-height: 1.4;
+            color: rgba(0, 0, 0, 0.85);
             &::placeholder {
               font-size: 20px;
               font-weight: 500;
@@ -51,6 +56,7 @@ const CustomTable = styled('div')`
           input {
             height: 60px;
             padding-left: 60px;
+            border: none;
             &::placeholder {
               font-size: 14px;
               line-height: 1.57;
@@ -61,6 +67,7 @@ const CustomTable = styled('div')`
       }
     }
     tr > td {
+      padding: 8px;
       flex-grow: 0;
       font-family: Roboto, sans-serif;
       line-height: 1.57;
@@ -76,7 +83,7 @@ const CustomTable = styled('div')`
         }
       }
       &:first-child {
-        padding-left: 64px;
+        padding-left: 78px;
 
         &.project-name {
           padding-left: 32px;
@@ -160,6 +167,14 @@ export default function OTTable({
               </tr>
             </thead>
             <tbody className="ant-table-tbody">
+              {program?.projects
+                ?.sort(sortByCreated)
+                .map((project) => (
+                  <ProjectDetails
+                    key={project.projectId}
+                    project={project}
+                  />
+                ))}
               {isAddProjectVisible ? (
                 <tr className="ant-table-row add-project-row">
                   <td colSpan={6} className="ant-table-cell">
@@ -170,6 +185,7 @@ export default function OTTable({
                         rules={[{ required: true, message: '' }]}
                       >
                         <Input
+                          autoFocus
                           prefix={
                             createProjectMutation.isLoading ? (
                               <LoadingOutlined
@@ -185,12 +201,6 @@ export default function OTTable({
                   </td>
                 </tr>
               ) : null}
-              {program?.projects?.map((project) => (
-                <ProjectDetails
-                  key={project.projectId}
-                  project={project}
-                />
-              ))}
             </tbody>
           </table>
         </div>

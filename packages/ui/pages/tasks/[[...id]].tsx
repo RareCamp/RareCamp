@@ -1,30 +1,23 @@
 import { useRouter } from 'next/router'
 import React, { useState } from 'react'
 import { AppLayout } from 'components/AppLayout'
-import { useMutation, useQuery } from 'react-query'
+import { useQuery } from 'react-query'
 import axios from 'axios'
-import {
-  Button,
-  Card,
-  Col,
-  notification,
-  Row,
-  Skeleton,
-  Space,
-} from 'antd'
+import { Button, Card, Col, Row, Skeleton, Space } from 'antd'
 import SubHeader from 'components/SubHeader'
 import PageHeading from 'components/PageHeading'
 import EditProject from 'components/EditProject'
 import styled from 'styled-components'
 import EditTask from 'components/EditTask'
-import { PoweroffOutlined, CommentOutlined } from '@ant-design/icons'
 import {
   AssigneeAvatar,
-  renderTaskStatus,
+  EditDate,
 } from 'components/TasksTable/TaskRow'
-import dayjs from 'dayjs'
 import dynamic from 'next/dynamic'
-import ContactServiceProviderModal from '../../components/ContactServiceProviderModal'
+import TaskStatus from 'components/TaskStatus'
+import TaskGuideCard from 'components/TaskGuideCard'
+import ServiceProviderCard from 'components/ServiceProviderCard'
+import { useEditTaskMutation } from 'helpers/API/mutation'
 
 const ReactQuill: any = dynamic(() => import('react-quill'), {
   ssr: false,
@@ -48,6 +41,7 @@ const TaskDetailsRow = styled('div')`
     .task-data {
       height: 60px;
       justify-content: space-between;
+      position: relative;
       .task-meta {
         color: rgba(0, 0, 0, 0.45);
       }
@@ -57,29 +51,12 @@ const TaskDetailsRow = styled('div')`
     display: flex;
     flex-direction: column-reverse;
     border-top: 1px solid #ccc;
-    //height: 350px;
     .ql-editor {
       height: 350px;
     }
   }
 `
-const ServiceProvider = styled(Space)`
-  height: 60px;
-  width: 100%;
-  border-bottom: 1px solid #f0f0f0;
-  justify-content: space-between;
-  .sp-name {
-    font-size: 16px;
-    font-weight: 500;
-    line-height: 1.5;
-    color: rgba(0, 0, 0, 0.85);
-  }
-  .sp-type {
-    font-size: 12px;
-    line-height: 1.38;
-    color: rgba(0, 0, 0, 0.45);
-  }
-`
+
 export default function TaskDetails() {
   const router = useRouter()
   const { id, programId } = router.query
@@ -115,7 +92,6 @@ export default function TaskDetails() {
     task?.description ||
     'This task is to gain an understanding of what knock-in mouse model is, the high level process to design and build and the cost/time it takes to develop a model. \n' +
       'Please work with an expert to determine if this is the right model for you.'
-  const backLink = '/'
   const element = (
     <Space align="baseline">
       <h3>{title}</h3>
@@ -127,28 +103,12 @@ export default function TaskDetails() {
     setNotes(task?.notes)
   }
 
-  const updateTaskMutation = useMutation(
-    () =>
-      axios.put(`/projects/${task.projectId}/tasks/${task.taskId}`, {
-        task: { notes },
-      }),
-    {
-      onSuccess: () => {
-        notification.success({
-          message: 'Task has been updated successfully',
-          duration: 2,
-        })
-      },
-      onError: (err: Error) => {
-        notification.error({
-          message: 'Error occur while updating task',
-          description: String(err),
-          duration: 2,
-        })
-      },
-    },
-  )
-
+  const updateTaskMutation = useEditTaskMutation({
+    programId,
+    taskId: task?.taskId,
+    projectId: task?.projectId,
+  })
+  const editTaskMutation = () => updateTaskMutation.mutate({ notes })
   return (
     <AppLayout
       title={projectTitle}
@@ -158,11 +118,7 @@ export default function TaskDetails() {
         <Skeleton />
       ) : (
         <>
-          <SubHeader
-            title={element}
-            subTitle={subTitle}
-            backLink={backLink}
-          />
+          <SubHeader title={element} subTitle={subTitle} />
           <TaskDetailsRow>
             <Row gutter={[24, 24]}>
               <Col span={16}>
@@ -179,8 +135,12 @@ export default function TaskDetails() {
                       >
                         <span className="task-meta">Status</span>
                         <span>
-                          {task?.status &&
-                            renderTaskStatus(task.status)}
+                          {task?.status && (
+                            <TaskStatus
+                              task={task}
+                              programId={programId}
+                            />
+                          )}
                         </span>
                       </Space>
                       <Space
@@ -208,26 +168,22 @@ export default function TaskDetails() {
                         className="task-data"
                       >
                         <span className="task-meta">Start Date</span>
-                        <span>
-                          {task?.estimatedStartDate
-                            ? dayjs(task.estimatedStartDate).format(
-                                'DD/MM/YYYY',
-                              )
-                            : ''}
-                        </span>
+                        <EditDate
+                          task={task}
+                          programId={programId}
+                          dateKey="estimatedStartDate"
+                        />
                       </Space>
                       <Space
                         direction="vertical"
                         className="task-data"
                       >
                         <span className="task-meta">End Date</span>
-                        <span>
-                          {task?.estimatedEndDate
-                            ? dayjs(task.estimatedEndDate).format(
-                                'DD/MM/YYYY',
-                              )
-                            : ''}
-                        </span>
+                        <EditDate
+                          task={task}
+                          programId={programId}
+                          dateKey="estimatedEndDate"
+                        />
                       </Space>
                     </Space>
                     <ReactQuill
@@ -249,7 +205,7 @@ export default function TaskDetails() {
                       block
                       loading={updateTaskMutation.isLoading}
                       type="primary"
-                      onClick={() => updateTaskMutation.mutate()}
+                      onClick={editTaskMutation}
                     >
                       Save
                     </Button>
@@ -257,83 +213,12 @@ export default function TaskDetails() {
                 </Card>
               </Col>
               <Col span={8}>
-                {task?.guide ? (
-                  <Card
-                    title={task?.guide?.title}
-                    bordered={false}
-                    style={{ marginBottom: 24 }}
-                    extra={
-                      <a
-                        href={task.guide?.detailsUrl}
-                        target="_blank"
-                      >
-                        <img
-                          width={16}
-                          alt="external link"
-                          src="https://image.flaticon.com/icons/svg/25/25284.svg"
-                        />
-                      </a>
-                    }
-                  >
-                    <Space direction="vertical">
-                      <img
-                        width="100%"
-                        src={task.guide?.imageUrl}
-                        alt={task.guide?.title}
-                      />
-                      <div>{task.guide?.about}</div>
-                      <a
-                        href={task.guide?.detailsUrl as string}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        Read More
-                      </a>
-                    </Space>
-                  </Card>
-                ) : null}
-                {task?.serviceProviders?.length ? (
-                  <Card
-                    title="Connect with Service Providers"
-                    bordered={false}
-                  >
-                    {task.serviceProviders?.map((serviceProvider) => {
-                      return (
-                        <ServiceProvider>
-                          <Space size={16}>
-                            <img
-                              width="60px"
-                              src={serviceProvider.logoURL}
-                              alt={`${serviceProvider.name} logo`}
-                            />
-                            <div>
-                              <div className="sp-name">
-                                {serviceProvider.name}
-                              </div>
-                              <div className="sp-type">
-                                {serviceProvider.type}
-                              </div>
-                            </div>
-                          </Space>
-                          <Button
-                            type="link"
-                            icon={<CommentOutlined />}
-                            style={{
-                              border: '1px solid',
-                              borderRadius: 0,
-                            }}
-                          >
-                            Reach out
-                          </Button>
-                          {/* <ContactServiceProviderModal */}
-                          {/*  visible */}
-                          {/*  setVisible={() => {}} */}
-                          {/* /> */}
-                        </ServiceProvider>
-                      )
-                    })}
-                  </Card>
-                ) : null}
+                {task?.guide && <TaskGuideCard guide={task?.guide} />}
+                {task?.serviceProviders && (
+                  <ServiceProviderCard
+                    serviceProviders={task?.serviceProviders}
+                  />
+                )}
               </Col>
             </Row>
           </TaskDetailsRow>

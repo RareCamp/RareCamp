@@ -8,6 +8,7 @@ import UserHeader from 'components/UserHeader'
 import styled from 'styled-components'
 import Link from 'next/link'
 import PageTitle from 'components/PageTitle'
+import EditProgram from 'components/EditProgram'
 
 const { Title } = Typography
 const ProgramCard = styled(Card)`
@@ -29,7 +30,7 @@ const Home = () => {
 
   return (
     <AppLayout
-      title={<PageTitle title="programs" />}
+      title={<PageTitle title="Programs" />}
       selectedKey="programs"
     >
       <UserHeader
@@ -41,18 +42,28 @@ const Home = () => {
       {isLoading || !data?.data?.workspace?.programs?.length ? (
         <Skeleton />
       ) : (
-        <Space style={{ padding: '24px' }}>
-          {data?.data?.workspace?.programs.map((program) => (
-            <ProgramCard bordered style={{ width: 284 }}>
-              <Link
-                href={`/programs/${program.workspaceId}/${program.programId}`}
-              >
-                <Title level={4}>{program.name}</Title>
-              </Link>
-              <p>{program.description}</p>
-            </ProgramCard>
-          ))}
-        </Space>
+        <div className="space-align-container">
+          <Space style={{ padding: '24px' }}>
+            {data?.data?.workspace?.programs.map((program) => (
+              <ProgramCard bordered style={{ width: 284 }}>
+                <Space
+                  style={{
+                    justifyContent: 'space-between',
+                    width: '100%',
+                  }}
+                >
+                  <Link
+                    href={`/programs/${program.workspaceId}/${program.programId}`}
+                  >
+                    <Title level={4}>{program.name}</Title>
+                  </Link>
+                  <EditProgram program={program} />
+                </Space>
+                <p>{program.description}</p>
+              </ProgramCard>
+            ))}
+          </Space>
+        </div>
       )}
     </AppLayout>
   )

@@ -11,8 +11,7 @@ import {
   mutationsTypesMap,
   proteinSizeTypesMap,
 } from 'constants/maps'
-import PageTitle from 'components/PageTitle'
-import SubHeader from '../../components/SubHeader'
+import SubHeader from 'components/SubHeader'
 
 const { Step } = Steps
 const OFForm = styled(Form)`
@@ -187,7 +186,7 @@ export default function questionnaire() {
     answers: {},
   })
   const [content, setContent] = React.useState({
-    imgURL: '/Group148.png',
+    imgURL: '/eligibility_2.png',
     description:
       "Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown typesetter in the 15th century who is thought to have scrambled parts of Cicero's De",
   })
@@ -195,19 +194,19 @@ export default function questionnaire() {
   React.useEffect(() => {
     if (current === 0)
       setContent({
-        imgURL: '/Group148.png',
+        imgURL: '/eligibility_2.png',
         description:
           "Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown typesetter in the 15th century who is thought to have scrambled parts of Cicero's De",
       })
     else if (current === 1)
       setContent({
-        imgURL: '/Illustrations14.png',
+        imgURL: '/eligibility_4.png',
         description:
           "Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown typesetter in the 15th century who is thought to have scrambled parts of Cicero's De",
       })
     else
       setContent({
-        imgURL: '/Illustrations13.png',
+        imgURL: '/eligibility_3.png',
         description:
           "Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown typesetter in the 15th century who is thought to have scrambled parts of Cicero's De",
       })
@@ -231,17 +230,9 @@ export default function questionnaire() {
   const title = 'Determine eligibility for AAV-based gene therapy'
   const subTitle =
     'Complete this short questionnaire to help our team determine your eligibility.'
-  const backLink = '/workspace/intro'
   return (
-    <AppLayout
-      title={<PageTitle title="programs" />}
-      selectedKey="programs"
-    >
-      <SubHeader
-        title={<h3>{title}</h3>}
-        subTitle={subTitle}
-        backLink={backLink}
-      />
+    <AppLayout title="" selectedKey="programs">
+      <SubHeader title={<h3>{title}</h3>} subTitle={subTitle} />
       <QuestionnaireContainer>
         <div className="questionnaire-form">
           {feasibility.assessmentFinished ? (

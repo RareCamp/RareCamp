@@ -51,13 +51,13 @@ export default function App() {
         </p>
       </div>
       <Form
-        layout='vertical'
-        name='register_form'
+        layout="vertical"
+        name="register_form"
         onFinish={mutation.mutate}
       >
         <Form.Item
           label={<span style={{ fontWeight: 500 }}>Email</span>}
-          name='username'
+          name="username"
           required={false}
           rules={[
             {
@@ -67,22 +67,22 @@ export default function App() {
             },
           ]}
         >
-          <Input placeholder='email@example.com' />
+          <Input placeholder="email@example.com" />
         </Form.Item>
         <Form.Item
           label={<span style={{ fontWeight: 500 }}>Name</span>}
-          name='name'
+          name="name"
           required={false}
           rules={[
             { required: true, message: 'Please input your name!' },
           ]}
         >
-          <Input placeholder='Jhon Rick ' />
+          <Input placeholder="Jhon Rick " />
         </Form.Item>
         <Form.Item
           style={{ marginBottom: '10px' }}
           label={<span style={{ fontWeight: 500 }}>Password</span>}
-          name='password'
+          name="password"
           required={false}
           rules={[
             {
@@ -91,27 +91,20 @@ export default function App() {
             },
           ]}
         >
-          <Input.Password placeholder='Must be at least 8 characters' />
+          <Input.Password placeholder="Must be at least 8 characters" />
         </Form.Item>
         <>
           <Form.Item>
             <Button
-              type='primary'
+              type="primary"
               disabled={mutation.isLoading}
               loading={mutation.isLoading}
-              htmlType='submit'
+              htmlType="submit"
               block
-              className='login-form-button'
+              className="login-form-button"
             >
               Sign up
             </Button>
-          </Form.Item>
-          <Form.Item>
-            <p style={{ fontSize: 12 }}>
-              By signing up, you acknowledge you have read and
-              understood OpenGT’s <Link>Privacy policy</Link> &{' '}
-              <Link>Terms of service</Link>
-            </p>
           </Form.Item>
         </>
       </Form>

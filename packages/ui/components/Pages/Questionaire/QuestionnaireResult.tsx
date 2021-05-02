@@ -40,16 +40,19 @@ export default function QuestionnaireResult({
   const queryClient = useQueryClient()
   const router = useRouter()
   const { data } = queryClient.getQueryData<any>('defaultWorkspace')
-  const mutation = useMutation(
+  const createProgramMutation = useMutation(
     () => createProgramFrom(answers, data.workspace.workspaceId),
     {
-      onSuccess: async () => {
+      onSuccess: async (resp) => {
+        const program = resp?.data?.program
         notification.success({
           duration: 2,
           message: 'Program created Successfully',
         })
         await queryClient.invalidateQueries('defaultWorkspace')
-        await router.push('/')
+        await router.push(
+          `/programs/${program.workspaceId}/${program.programId}`,
+        )
       },
       onError: (error: Error) =>
         notification.error({
@@ -67,11 +70,7 @@ export default function QuestionnaireResult({
     >
       <img
         width="238px"
-        src={
-          isFeasible
-            ? '/Disease_Eligible_illustration.png'
-            : '/NOT_Disease_Eligible_illustration.png'
-        }
+        src={isFeasible ? '/eligibility_5.png' : '/eligibility_6.png'}
         alt={`${isFeasible ? 'Not ' : ''}Eligible illustration`}
       />
       <div>
@@ -90,8 +89,8 @@ export default function QuestionnaireResult({
         <Button
           type="primary"
           icon={<PlusCircleOutlined />}
-          onClick={() => mutation.mutate()}
-          loading={mutation.isLoading}
+          onClick={() => createProgramMutation.mutate()}
+          loading={createProgramMutation.isLoading}
         >
           Create a new program
         </Button>
@@ -104,8 +103,8 @@ export default function QuestionnaireResult({
           </Button>
           <Button
             icon={<PlusCircleOutlined />}
-            onClick={() => mutation.mutate()}
-            loading={mutation.isLoading}
+            onClick={() => createProgramMutation.mutate()}
+            loading={createProgramMutation.isLoading}
           >
             Add Program
           </Button>

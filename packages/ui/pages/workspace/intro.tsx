@@ -32,10 +32,7 @@ const QuestionnaireIntro = styled('div')`
 
 const questionnaireIntro = () => {
   return (
-    <AppLayout
-      title={<PageTitle title="programs" />}
-      selectedKey="programs"
-    >
+    <AppLayout title="" selectedKey="programs">
       <QuestionnaireLayout>
         <UserHeader />
         <QuestionnaireIntro>
@@ -45,7 +42,7 @@ const questionnaireIntro = () => {
             style={{ width: 600, textAlign: 'center' }}
           >
             <img
-              src="/illustration25.png"
+              src="/eligibility_1.png"
               alt="OT feasibility illustration"
             />
             <Title level={3}>

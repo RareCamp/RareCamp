@@ -2,15 +2,14 @@ import { useState } from 'react'
 import { useMutation, useQueryClient } from 'react-query'
 import { Form, Input, notification, Space, Tooltip } from 'antd'
 import axios from 'axios'
-import Error from 'next/error'
 import {
   CaretDownOutlined,
-  CaretUpOutlined,
+  CaretRightOutlined,
   InfoCircleOutlined,
   LoadingOutlined,
 } from '@ant-design/icons'
 import EditProject from 'components/EditProject'
-import TaskRow from './TaskRow'
+import TaskRow from 'components/TasksTable/TaskRow'
 
 function addTaskToProject(program, projectId, task) {
   for (let i = 0; i < program.projects.length; i++) {
@@ -87,7 +86,7 @@ export default function ProjectDetails({ project }) {
                   {isProjectVisible ? (
                     <CaretDownOutlined />
                   ) : (
-                    <CaretUpOutlined />
+                    <CaretRightOutlined />
                   )}
                   <span>{project.name}</span>
                 </Space>
@@ -108,29 +107,29 @@ export default function ProjectDetails({ project }) {
               programId={project.programId}
             />
           ))}
+          <tr className="ant-table-row add-task-row">
+            <td colSpan={6} className="ant-table-cell">
+              <Form form={taskForm}>
+                <Form.Item
+                  name="name"
+                  required={false}
+                  rules={[{ required: true, message: '' }]}
+                >
+                  <Input
+                    prefix={
+                      createTaskMutation.isLoading ? (
+                        <LoadingOutlined style={{ fontSize: 20 }} />
+                      ) : null
+                    }
+                    placeholder="+ Add Task"
+                    onKeyUp={submitTask}
+                  />
+                </Form.Item>
+              </Form>
+            </td>
+          </tr>
         </>
       ) : null}
-      <tr className="ant-table-row add-task-row">
-        <td colSpan={6} className="ant-table-cell">
-          <Form form={taskForm}>
-            <Form.Item
-              name="name"
-              required={false}
-              rules={[{ required: true, message: '' }]}
-            >
-              <Input
-                prefix={
-                  createTaskMutation.isLoading ? (
-                    <LoadingOutlined style={{ fontSize: 20 }} />
-                  ) : null
-                }
-                placeholder="+ Add Task"
-                onKeyUp={submitTask}
-              />
-            </Form.Item>
-          </Form>
-        </td>
-      </tr>
     </>
   )
 }

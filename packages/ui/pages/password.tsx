@@ -34,7 +34,7 @@ const Password = () => {
             <span>to our future</span>
           </div>
           <img
-            src="/womenImage.png"
+            src="/Login_2.png"
             alt="signup"
             className="self-center h-full w-full"
           />

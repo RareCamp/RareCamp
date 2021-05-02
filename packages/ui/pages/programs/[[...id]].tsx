@@ -9,7 +9,7 @@ import { PlusOutlined } from '@ant-design/icons'
 import OTTable from 'components/TasksTable'
 import { useState } from 'react'
 import EditProgram from 'components/EditProgram'
-import PageHeading from '../../components/PageHeading'
+import PageHeading from 'components/PageHeading'
 
 function BackToHome() {
   return (

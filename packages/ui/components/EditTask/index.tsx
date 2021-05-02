@@ -16,6 +16,7 @@ import {
 } from '@ant-design/icons'
 import React, { useState } from 'react'
 import styled from 'styled-components'
+import { useEditTaskMutation } from 'helpers/API/mutation'
 
 const { confirm } = Modal
 const { Text } = Typography
@@ -97,32 +98,13 @@ export default function DeleteTask({
   const [isEditTaskVisible, setIsEditTaskVisible] = useState(false)
   const [editTaskForm] = Form.useForm()
 
-  const editTaskMutation = useMutation(
-    (values: any) => {
-      return axios.put(
-        `/projects/${task.projectId}/tasks/${task.taskId}`,
-        { task: values },
-      )
-    },
+  const editTaskMutation = useEditTaskMutation(
     {
-      onSuccess: async (resp) => {
-        queryClient.setQueryData(['task', task.taskId], {
-          data: resp.data,
-        })
-        await queryClient.invalidateQueries(['program', programId])
-        notification.success({
-          duration: 2,
-          message: `Task ${task.name} has been updated successfully`,
-        })
-        setIsEditTaskVisible(false)
-      },
-      onError: (err: Error) =>
-        notification.error({
-          duration: 2,
-          message: `Task ${task.name} was not updated`,
-          description: err.message,
-        }),
+      programId,
+      taskId: task.taskId,
+      projectId: task.projectId,
     },
+    () => setIsEditTaskVisible(false),
   )
 
   return (

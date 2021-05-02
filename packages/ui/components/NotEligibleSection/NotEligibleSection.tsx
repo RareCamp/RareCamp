@@ -8,7 +8,7 @@ function NotEligibleSection({ isShowEligibleSection }: any) {
     <div className={styles['not-eligible-section']}>
       <div className={styles['not-eligible-divOne']}>
         <img
-          src="/Illustrations16.png"
+          src="/eligibility_6.png"
           width={300}
           alt="noteligibleImage"
         />

@@ -5,15 +5,11 @@ import {
   MultipleProgram,
   WorkspaceHeader,
 } from 'components/Pages/Workspace'
-import PageTitle from 'components/PageTitle'
 
 function Workspace() {
   const isFirstTimeVisitor = true
   return (
-    <AppLayout
-      title={<PageTitle title="programs" />}
-      selectedKey="programs"
-    >
+    <AppLayout title="" selectedKey="programs">
       <div
         style={{
           backgroundColor: 'lightgray',

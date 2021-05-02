@@ -1,36 +1,12 @@
-import { Avatar, DatePicker, notification, Space, Tag } from 'antd'
+import { Avatar, DatePicker, Space, Tooltip } from 'antd'
 import dayjs from 'dayjs'
-import { useMutation, useQueryClient } from 'react-query'
-import axios from 'axios'
 import React, { useState } from 'react'
 import Link from 'next/link'
-import { TaskStatus } from 'types'
-import EditTask from '../EditTask'
-
-export function renderTaskStatus(status: string) {
-  switch (status) {
-    case TaskStatus.COMPLETED:
-      return <Tag color="#389e0d">Completed</Tag>
-    case TaskStatus.IN_PROGRESS:
-      return <Tag color="#fa8c16">In Progress</Tag>
-    case TaskStatus.NOT_STARTED:
-      return <Tag color="#bfbfbf">Not Started</Tag>
-    default:
-      return <Tag>{status}</Tag>
-  }
-}
-
-function updateTask(program, taskId, task) {
-  for (let i = 0; i < program.projects.length; i++) {
-    const project = program.projects[i]
-    for (let j = 0; j < project.tasks.length; j++) {
-      if (project.tasks[j].taskId === taskId) {
-        program.projects[i].tasks[j] = task
-        break
-      }
-    }
-  }
-}
+import EditTask from 'components/EditTask'
+import TaskStatus from 'components/TaskStatus'
+import { useEditTaskMutation } from 'helpers/API/mutation'
+import { CaretDownOutlined, LoadingOutlined } from '@ant-design/icons'
+import styled from 'styled-components'
 
 export function AssigneeAvatar({
   assignee,
@@ -49,36 +25,60 @@ export function AssigneeAvatar({
   ) : null
 }
 
-export default function TaskRow({ task, programId }) {
-  const queryClient = useQueryClient()
-  const [isStartDateOpen, setIsStartDateOpen] = useState(false)
-  const [isEndDateOpen, setIsEndDateOpen] = useState(false)
-  const updateTaskMutation = useMutation(
-    (data: any) =>
-      axios.put(
-        `/projects/${task.projectId}/tasks/${task.taskId}`,
-        data,
-      ),
-    {
-      onSuccess: (resp) => {
-        const { data } = queryClient.getQueryData<any>([
-          'program',
-          programId,
-        ])
-        updateTask(data.program, task.taskId, resp.data.task)
-        queryClient.setQueryData(['program', programId], { data })
-        notification.success({
-          message: 'Task has been successfully updated',
-        })
-      },
-      onError: (err) => {
-        notification.error({
-          message: 'Error while updating the task',
-          description: String(err),
-        })
-      },
-    },
+const DateCell = styled('td')`
+  &:hover {
+    border: 1px solid #1890ff !important;
+    cursor: pointer;
+  }
+  width: 120px;
+  .ant-picker {
+    visibility: hidden;
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+  }
+`
+export function EditDate({ task, programId, dateKey }) {
+  const [isDatePickerOpen, setIsDatePickerOpen] = useState(false)
+  const updateTaskMutation = useEditTaskMutation({
+    programId,
+    taskId: task.taskId,
+    projectId: task.projectId,
+  })
+  return (
+    <DateCell
+      className="ant-table-cell"
+      onClick={() => setIsDatePickerOpen(!isDatePickerOpen)}
+      onKeyPress={() => setIsDatePickerOpen(!isDatePickerOpen)}
+      tabIndex={task.taskId}
+    >
+      <Space>
+        <span>
+          {task[dateKey]
+            ? dayjs(task[dateKey]).format('DD/MM/YYYY')
+            : ''}
+        </span>
+        {isDatePickerOpen && !updateTaskMutation.isLoading && (
+          <CaretDownOutlined />
+        )}
+        {updateTaskMutation.isLoading && <LoadingOutlined />}
+      </Space>
+      <DatePicker
+        open={isDatePickerOpen}
+        onOpenChange={(open) => setIsDatePickerOpen(open)}
+        onChange={(date) => {
+          if (date) {
+            updateTaskMutation.mutate({
+              [dateKey]: date?.toDate(),
+            })
+          }
+        }}
+      />
+    </DateCell>
   )
+}
+
+export default function TaskRow({ task, programId }) {
   const taskDetailsLink = `/tasks/${task.projectId}/${task.taskId}?programId=${programId}`
   return (
     <tr data-row-key="2" className="ant-table-row">
@@ -89,71 +89,33 @@ export default function TaskRow({ task, programId }) {
         </Link>
       </td>
       <td className="ant-table-cell">
-        {renderTaskStatus(task.status)}
+        <TaskStatus task={task} programId={programId} />
       </td>
       <td className="ant-table-cell">
         <Space>
           {task?.assignees?.map((assignee) => (
-            <AssigneeAvatar assignee={assignee} />
+            <AssigneeAvatar size={24} assignee={assignee} />
           ))}
         </Space>
       </td>
       <td className="ant-table-cell">
-        {task.budget?.currency}
-        {task.budget?.amount}
+        <Tooltip title="Budget estimate based on data from patient led organizations">
+          <span>
+            {task.budget?.currency}
+            {task.budget?.amount}
+          </span>
+        </Tooltip>
       </td>
-      <td
-        className="ant-table-cell"
-        onClick={() => setIsStartDateOpen(!isStartDateOpen)}
-        onKeyPress={() => setIsStartDateOpen(!isStartDateOpen)}
-        tabIndex={task.taskId}
-      >
-        {task.estimatedStartDate
-          ? dayjs(task.estimatedStartDate).format('DD/MM/YYYY')
-          : ''}
-        <span>
-          <DatePicker
-            open={isStartDateOpen}
-            style={{ visibility: 'hidden', width: 0 }}
-            onOpenChange={(open) => setIsStartDateOpen(open)}
-            onChange={(date) => {
-              if (date) {
-                updateTaskMutation.mutate({
-                  task: {
-                    estimatedStartDate: date?.toDate(),
-                  },
-                })
-              }
-            }}
-          />
-        </span>
-      </td>
-      <td
-        className="ant-table-cell"
-        onClick={() => setIsEndDateOpen(!isEndDateOpen)}
-        onKeyPress={() => setIsEndDateOpen(!isEndDateOpen)}
-        tabIndex={task.taskId}
-      >
-        {task.estimatedEndDate
-          ? dayjs(task.estimatedEndDate).format('DD/MM/YYYY')
-          : ''}
-        <span>
-          <DatePicker
-            open={isEndDateOpen}
-            style={{ visibility: 'hidden', width: 0 }}
-            onOpenChange={(open) => setIsEndDateOpen(open)}
-            onChange={(date) => {
-              if (date) {
-                updateTaskMutation.mutate({
-                  task: {
-                    estimatedEndDate: date?.toDate(),
-                  },
-                })
-              }
-            }}
-          />
-        </span>
-      </td>
+      <EditDate
+        dateKey="estimatedStartDate"
+        programId={programId}
+        task={task}
+      />
+      <EditDate
+        dateKey="estimatedEndDate"
+        programId={programId}
+        task={task}
+      />
     </tr>
   )
 }
