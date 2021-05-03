@@ -54,7 +54,7 @@ export default function AuthLayout(props) {
         <Col span={12} className="form-column">
           <div className="auth-form">
             <img
-              src="/openGT_LOGO.png"
+              src="/logo_white.png"
               width="207px"
               alt="infoImage"
             />
