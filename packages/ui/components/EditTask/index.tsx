@@ -69,11 +69,11 @@ export default function DeleteTask({
   )
   const deleteTask = () =>
     confirm({
-      title: 'Are you sure you want to delete this project?',
+      title: 'Are you sure you want to delete this Task?',
       centered: true,
       icon: <ExclamationCircleOutlined />,
       content:
-        'Project will be immediately deleted. You cannot undo this action.',
+        'Task will be immediately deleted. You cannot undo this action.',
       okText: 'delete',
       onOk: deleteTaskMutation.mutateAsync,
     })
@@ -90,7 +90,7 @@ export default function DeleteTask({
       </Menu.Item>
       <Menu.Item>
         <Button onClick={deleteTask} type="text">
-          <Text type="danger">Delete Project</Text>
+          <Text type="danger">Delete Task</Text>
         </Button>
       </Menu.Item>
     </Menu>

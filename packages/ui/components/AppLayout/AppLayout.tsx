@@ -153,7 +153,7 @@ const AppLayout = ({ children, selectedKey, title }) => {
         <Link href="/">
           <img
             className="logo"
-            src="/opentreatments-logo.png"
+            src="/logo-trans.png"
             alt="open treatments foundation logo"
           />
         </Link>

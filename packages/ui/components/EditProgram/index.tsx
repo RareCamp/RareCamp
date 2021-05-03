@@ -52,7 +52,7 @@ export default function EditProgram({ program }) {
           onClick={() => setIsEditProgramVisible(true)}
           type="text"
         >
-          Edit Program name
+          Edit Program Details
         </Button>
       </Menu.Item>
       <Menu.Item>

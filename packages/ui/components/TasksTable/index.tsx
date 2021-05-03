@@ -83,7 +83,7 @@ const CustomTable = styled('div')`
         }
       }
       &:first-child {
-        padding-left: 78px;
+        padding-left: 85px;
 
         &.project-name {
           padding-left: 32px;
