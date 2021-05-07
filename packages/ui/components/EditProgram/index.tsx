@@ -52,7 +52,7 @@ export default function EditProgram({ program }) {
           onClick={() => setIsEditProgramVisible(true)}
           type="text"
         >
-          Edit Program name
+          Edit Program Details
         </Button>
       </Menu.Item>
       <Menu.Item>
@@ -75,6 +75,7 @@ export default function EditProgram({ program }) {
           duration: 2,
           message: `Program ${program.name} has been deleted successfully`,
         })
+        await queryClient.invalidateQueries('defaultWorkspace')
         await router.push('/')
       },
       onError: (err: Error) =>
@@ -96,14 +97,9 @@ export default function EditProgram({ program }) {
       )
     },
     {
-      onSuccess: async (_, variables: any) => {
-        const { data } = queryClient.getQueryData<any>([
-          'program',
-          program.programId,
-        ])
-        data.program = { ...data.program, ...variables }
+      onSuccess: async (resp) => {
         queryClient.setQueryData(['program', program.programId], {
-          data,
+          data: resp.data,
         })
         await queryClient.invalidateQueries('defaultWorkspace')
         notification.success({
@@ -165,12 +161,7 @@ export default function EditProgram({ program }) {
           <Form.Item
             label="Description"
             name="description"
-            rules={[
-              {
-                required: true,
-                message: 'Please input program description!',
-              },
-            ]}
+            rules={[{ message: 'Please input program description!' }]}
           >
             <Input.TextArea rows={4} />
           </Form.Item>

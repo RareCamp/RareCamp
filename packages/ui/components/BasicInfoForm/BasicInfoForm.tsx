@@ -39,7 +39,11 @@ const BasicInfoForm = ({
       <div className={formstyles['basic-form-one']}>
         <div>
           {showBasicInfoForm ? (
-            <img src="/Group148.png" width={300} alt="infoImage" />
+            <img
+              src="/eligibility_2.png"
+              width={300}
+              alt="infoImage"
+            />
           ) : null}
         </div>
         <p>

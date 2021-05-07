@@ -36,7 +36,7 @@ export default function RestPassword() {
       },
       onError: async (err: Error) =>
         notification.error({
-          message: 'Error reseting password',
+          message: 'Error resetting password',
           description: err.message,
           placement: 'topRight',
           duration: 3,
@@ -50,10 +50,8 @@ export default function RestPassword() {
         <Title level={3}>Rest your password?</Title>
         <p>
           Please enter you reset code and new password.
-{' '}
           <p>
-            or
-{' '}
+            <span>or</span>
             <Link onClick={() => router.push('/auth/login')}>
               Login
             </Link>

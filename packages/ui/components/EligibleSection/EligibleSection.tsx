@@ -26,13 +26,13 @@ function EligibleSection({
     <div className={styles['eligible-section']}>
       <div className={styles['eligible-divOne']}>
         <img
-          src="/Illustrations15.png"
+          src="/eligibility_5.png"
           width={300}
           alt="proteinformImage"
         />
         <h1>SSMD may be eligible for a AAV based Gene Therapy</h1>
         <p>
-          The results are fowarded to our science team for further
+          The results are forwarded to our science team for further
           validation. They will reach out to you to collect more gene
           and patient information to confirm Gene therapy feasibility.
           Beyond that it is critical that the you partner with a

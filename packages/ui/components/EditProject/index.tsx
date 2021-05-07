@@ -29,7 +29,13 @@ const EditProjectDropdown = styled('div')`
   }
 `
 
-export default function EditProject({ project }) {
+export default function EditProject({
+  project,
+  onDeleted,
+}: {
+  project: any
+  onDeleted?: any
+}) {
   const [isEditProjectVisible, setIsEditProjectVisible] = useState(
     false,
   )
@@ -77,6 +83,7 @@ export default function EditProject({ project }) {
           duration: 2,
           message: `Project ${project.name} has been deleted successfully`,
         })
+        onDeleted()
       },
       onError: (err: Error) =>
         notification.error({
@@ -161,12 +168,7 @@ export default function EditProject({ project }) {
           <Form.Item
             label="Description"
             name="description"
-            rules={[
-              {
-                required: true,
-                message: 'Please input project description!',
-              },
-            ]}
+            rules={[{ message: 'Please input project description!' }]}
           >
             <Input.TextArea rows={4} />
           </Form.Item>

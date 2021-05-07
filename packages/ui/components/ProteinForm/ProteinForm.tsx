@@ -122,7 +122,7 @@ const ProteinForm = ({
         <div>
           {showProteinForm ? (
             <img
-              src="/Illustrations13.png"
+              src="/eligibility_3.png"
               width={300}
               alt="proteinFormImage"
             />

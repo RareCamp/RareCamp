@@ -1,8 +1,10 @@
+import '../styles/quill.snow.css'
 import type { AppProps } from 'next/app'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { ReactQueryDevtools } from 'react-query/devtools'
 import 'styles/antd.less'
 import 'styles/example.less'
+
 import Amplify, { Auth } from 'aws-amplify'
 import axios from 'axios'
 import { useRouter } from 'next/router'

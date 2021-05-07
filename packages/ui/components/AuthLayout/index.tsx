@@ -26,13 +26,13 @@ const StyledLayout = styled(Layout)`
         width: 327px;
         display: flex;
         flex-direction: column;
-        justify-content: space-between
+        justify-content: space-between;
       }
     }
 
     .illustration-column {
       background-size: cover;
-      background-image: url('../OPenGT_Illustrations-signup.png');
+      background-image: url('../Login_1.png');
 
       .headline {
         color: #3e3465;
@@ -54,7 +54,7 @@ export default function AuthLayout(props) {
         <Col span={12} className="form-column">
           <div className="auth-form">
             <img
-              src="/openGT_LOGO.png"
+              src="/logo_white.png"
               width="207px"
               alt="infoImage"
             />
@@ -67,6 +67,6 @@ export default function AuthLayout(props) {
           </span>
         </Col>
       </Row>
-         </StyledLayout>
+    </StyledLayout>
   )
 }

@@ -131,7 +131,7 @@ const MutationForm = ({
         <div>
           {showMutationForm ? (
             <img
-              src="/Illustrations14.png"
+              src="/eligibility_4.png"
               width={300}
               alt="mutationImage"
             />

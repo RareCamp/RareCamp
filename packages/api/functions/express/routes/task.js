@@ -40,8 +40,7 @@ taskRouter.get('/', wrapAsync(async (req, res) => {
 
 taskRouter.get('/:taskId', wrapAsync(async (req, res) => {
   const { projectId, taskId } = req.params
-  const { userId } = req.cognitoUser
-  const task = await getTask({ userId, projectId, taskId })
+  const task = await getTask({ projectId, taskId })
 
   if (!task) {
     return res

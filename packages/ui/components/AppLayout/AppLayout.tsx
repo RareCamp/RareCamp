@@ -113,9 +113,6 @@ const AccountMenu = () => {
   return (
     <OFMenu>
       <Menu.Item>
-        <Link href="/account/settings">My Account Settings</Link>
-      </Menu.Item>
-      <Menu.Item>
         <Link href="/auth/password">Update Password</Link>
       </Menu.Item>
       <Menu.Item>
@@ -156,7 +153,7 @@ const AppLayout = ({ children, selectedKey, title }) => {
         <Link href="/">
           <img
             className="logo"
-            src="/opentreatments-logo.png"
+            src="/logo-trans.png"
             alt="open treatments foundation logo"
           />
         </Link>
@@ -180,17 +177,17 @@ const AppLayout = ({ children, selectedKey, title }) => {
               >
                 <Space>
                   <span>{program.name}</span>
-                  <EditProgram program={program} />
+                  {/* <EditProgram program={program} /> */}
                 </Space>
               </Link>
             </Menu.Item>
           ))}
-          <OTDivider>
+          {/* <OTDivider>
             <Divider plain />
           </OTDivider>
           <Menu.Item key="disease_info" icon={<FileOutlined />}>
             Disease Info
-          </Menu.Item>
+          </Menu.Item> */}
         </Menu>
       </Sider>
       <Layout className="site-layout">

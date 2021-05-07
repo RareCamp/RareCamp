@@ -6,14 +6,12 @@ import {
   QuestionnaireIllustration,
   QuestionnaireResult,
 } from 'components/Pages/Questionaire'
-import Link from 'next/link'
-import { ArrowLeftOutlined } from '@ant-design/icons'
 import { MutationType, ProteinSize, Questionnaire } from 'types'
 import {
   mutationsTypesMap,
   proteinSizeTypesMap,
 } from 'constants/maps'
-import PageTitle from 'components/PageTitle'
+import SubHeader from 'components/SubHeader'
 
 const { Step } = Steps
 const OFForm = styled(Form)`
@@ -167,19 +165,6 @@ const QuestionnaireContainer = styled('div')`
     flex: 1;
   }
 `
-const PageHeader = styled('div')`
-  padding: 24px;
-  background-color: #ffffff;
-  display: flex;
-  align-items: baseline;
-  border: 1px solid #eee;
-
-  .anticon.anticon-arrow-left {
-    margin-right: 17.5px;
-    font-size: 16px;
-    color: rgba(0, 0, 0, 0.85);
-  }
-`
 
 function isGeneTherapyFeasible(answers: Questionnaire): boolean {
   if (
@@ -201,7 +186,7 @@ export default function questionnaire() {
     answers: {},
   })
   const [content, setContent] = React.useState({
-    imgURL: '/Group148.png',
+    imgURL: '/eligibility_2.png',
     description:
       "Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown typesetter in the 15th century who is thought to have scrambled parts of Cicero's De",
   })
@@ -209,19 +194,19 @@ export default function questionnaire() {
   React.useEffect(() => {
     if (current === 0)
       setContent({
-        imgURL: '/Group148.png',
+        imgURL: '/eligibility_2.png',
         description:
           "Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown typesetter in the 15th century who is thought to have scrambled parts of Cicero's De",
       })
     else if (current === 1)
       setContent({
-        imgURL: '/Illustrations14.png',
+        imgURL: '/eligibility_4.png',
         description:
           "Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown typesetter in the 15th century who is thought to have scrambled parts of Cicero's De",
       })
     else
       setContent({
-        imgURL: '/Illustrations13.png',
+        imgURL: '/eligibility_3.png',
         description:
           "Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown typesetter in the 15th century who is thought to have scrambled parts of Cicero's De",
       })
@@ -242,23 +227,12 @@ export default function questionnaire() {
 
   const nextStep = () =>
     form.validateFields().then(() => setCurrent(current + 1))
+  const title = 'Determine eligibility for AAV-based gene therapy'
+  const subTitle =
+    'Complete this short questionnaire to help our team determine your eligibility.'
   return (
-    <AppLayout
-      title={<PageTitle title="programs" />}
-      selectedKey="programs"
-    >
-      <PageHeader>
-        <Link href="/workspace/intro">
-          <ArrowLeftOutlined />
-        </Link>
-        <div>
-          <h3>Determine eligibility for AAV-based gene therapy</h3>
-          <span>
-            Complete this short questionnaire to help our team
-            determine your eligibility.
-          </span>
-        </div>
-      </PageHeader>
+    <AppLayout title="" selectedKey="programs">
+      <SubHeader title={<h3>{title}</h3>} subTitle={subTitle} />
       <QuestionnaireContainer>
         <div className="questionnaire-form">
           {feasibility.assessmentFinished ? (

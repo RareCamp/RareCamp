@@ -27,13 +27,13 @@ export const DEFAULT_TASKS = [{
     amount: 100,
   },
   duration: '9-12 months',
-  notes: ['<div>Understand if a knock in mouse model is necessary for your disease. It '
+  notes: '<div>Understand if a knock in mouse model is necessary for your disease. It '
     + 'typically takes 9-12 months to develop a new knock-in model. You will need an expert'
     + ' to design the mouse model and then work with a lab to generate the model.Use this space to'
-    + ' document your conversations, thoughts and bookmark links you can later refer back to.ContactsTo do</div>'],
+    + ' document your conversations, thoughts and bookmark links you can later refer back to.ContactsTo do</div>',
   guide: {
     guideId: generateId(),
-    detailsUrl: 'https://en.wikipedia.org/wiki/Gene_knock-in>',
+    detailsUrl: 'https://en.wikipedia.org/wiki/Gene_knock-in',
     title: 'About Knock-in mouse models',
     imageUrl: 'https://proserve-bucket.s3-us-west-2.amazonaws.com/Screen+Shot+2021-03-19+at+4.38.39+AM.png',
     about: 'A knock-in mouse defines an animal model in which a gene sequence of interest is altered by one-for-one '
@@ -44,12 +44,30 @@ export const DEFAULT_TASKS = [{
   // TODO: to be fill by @sanathkr
   serviceProviders: [
     {
-      serviceProviderId: '<uuid>',
-      name: '<string>',
-      type: '<string>',
+      serviceProviderId: generateId(),
+      name: 'Charles River',
+      type: 'Biotech services',
+      logoURL: 'https://mms.businesswire.com/media/20201029005122/en/834441/23/charles_river_logo.jpg',
       shortDescription: '<string>',
       websiteUrl: '<string>',
-      email: '<string>',
+      email: 'sanath@gpx4.org',
+    },
+    {
+      serviceProviderId: generateId(),
+      name: 'Cyagen',
+      type: 'Biotech services',
+      logoURL: 'https://web.cdn.cyagen.com/static/img/web/us/public/logo-3.jpg',
+      shortDescription: '<string>',
+      websiteUrl: 'https://www.cyagen.com/us/en/',
+      email: 'sanath@gpx4.org',
+    }, {
+      serviceProviderId: generateId(),
+      name: 'Jacksons Lab',
+      type: 'Biomedical research',
+      logoURL: 'https://www.jax.org/_res/img/logo.png',
+      shortDescription: '<string>',
+      websiteUrl: '<string>',
+      email: 'sanath@gpx4.org',
     },
   ],
 }]

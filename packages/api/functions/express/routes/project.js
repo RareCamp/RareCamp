@@ -57,6 +57,6 @@ projectRouter.delete('/:projectId', wrapAsync(async (req, res) => {
 }))
 
 // task routes
-projectRouter.use('/:projectId/tasks', taskRouter)
+// projectRouter.use('/:projectId/tasks', taskRouter)
 
 export default projectRouter

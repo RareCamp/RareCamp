@@ -62,7 +62,7 @@ export interface Questionnaire {
   proteinSize: ProteinSize
 }
 
-export enum TaskStatus {
+export enum TaskStatuses {
   COMPLETED = 'completed',
   IN_PROGRESS = 'in-progress',
   NOT_STARTED = 'not-started',
