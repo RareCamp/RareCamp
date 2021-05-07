@@ -51,7 +51,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
       <GlobalLoadingIndicator />
-      <ReactQueryDevtools initialIsOpen={false} />
+      {/* <ReactQueryDevtools initialIsOpen={false} /> */}
       <Component {...pageProps} />
     </>
   )
