@@ -1,12 +1,7 @@
-import { Avatar, DatePicker, Space, Tooltip } from 'antd'
-import dayjs from 'dayjs'
-import React, { useState } from 'react'
-import Link from 'next/link'
-import EditTask from 'components/EditTask'
-import TaskStatus from 'components/TaskStatus'
-import { useEditTaskMutation } from 'helpers/API/mutation'
-import { CaretDownOutlined, LoadingOutlined } from '@ant-design/icons'
-import styled from 'styled-components'
+import { Avatar, Space, Tooltip } from 'antd'
+import TaskNameCell from 'components/TasksTable/TaskNameCell'
+import TaskDateCell from 'components/TasksTable/TaskDateCell'
+import TaskStatusCell from 'components/TasksTable/TaskStatusCell'
 
 export function AssigneeAvatar({
   assignee,
@@ -25,72 +20,11 @@ export function AssigneeAvatar({
   ) : null
 }
 
-const DateCell = styled('td')`
-  &:hover {
-    border: 1px solid #1890ff !important;
-    cursor: pointer;
-  }
-  width: 120px;
-  .ant-picker {
-    visibility: hidden;
-    position: absolute;
-    bottom: -10px;
-    left: 0;
-  }
-`
-export function EditDate({ task, programId, dateKey }) {
-  const [isDatePickerOpen, setIsDatePickerOpen] = useState(false)
-  const updateTaskMutation = useEditTaskMutation({
-    programId,
-    taskId: task.taskId,
-    projectId: task.projectId,
-  })
-  return (
-    <DateCell
-      className="ant-table-cell"
-      onClick={() => setIsDatePickerOpen(!isDatePickerOpen)}
-      onKeyPress={() => setIsDatePickerOpen(!isDatePickerOpen)}
-      tabIndex={task.taskId}
-    >
-      <Space>
-        <span>
-          {task[dateKey]
-            ? dayjs(task[dateKey]).format('DD/MM/YYYY')
-            : ''}
-        </span>
-        {isDatePickerOpen && !updateTaskMutation.isLoading && (
-          <CaretDownOutlined />
-        )}
-        {updateTaskMutation.isLoading && <LoadingOutlined />}
-      </Space>
-      <DatePicker
-        open={isDatePickerOpen}
-        onOpenChange={(open) => setIsDatePickerOpen(open)}
-        onChange={(date) => {
-          if (date) {
-            updateTaskMutation.mutate({
-              [dateKey]: date?.toDate(),
-            })
-          }
-        }}
-      />
-    </DateCell>
-  )
-}
-
 export default function TaskRow({ task, programId }) {
-  const taskDetailsLink = `/tasks/${task.projectId}/${task.taskId}?programId=${programId}`
   return (
     <tr data-row-key="2" className="ant-table-row">
-      <td className="ant-table-cell">
-        <EditTask task={task} programId={programId} />
-        <Link href={taskDetailsLink}>
-          <span style={{ cursor: 'pointer' }}>{task.name}</span>
-        </Link>
-      </td>
-      <td className="ant-table-cell">
-        <TaskStatus task={task} programId={programId} />
-      </td>
+      <TaskNameCell task={task} programId={programId} />
+      <TaskStatusCell task={task} programId={programId} />
       <td className="ant-table-cell">
         <Space>
           {task?.assignees?.map((assignee) => (
@@ -106,12 +40,12 @@ export default function TaskRow({ task, programId }) {
           </span>
         </Tooltip>
       </td>
-      <EditDate
+      <TaskDateCell
         dateKey="estimatedStartDate"
         programId={programId}
         task={task}
       />
-      <EditDate
+      <TaskDateCell
         dateKey="estimatedEndDate"
         programId={programId}
         task={task}

@@ -67,7 +67,7 @@ const CustomTable = styled('div')`
       }
     }
     tr > td {
-      padding: 8px;
+      padding: 12px;
       flex-grow: 0;
       font-family: Roboto, sans-serif;
       line-height: 1.57;
