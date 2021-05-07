@@ -49,10 +49,9 @@ const Home = () => {
     () => axios.get('/workspaces/default'),
     { retry: false },
   )
-  useEffect(() => {
-    if (!isLoading && !data?.data?.workspace?.programs?.length)
-      router.push('/workspace/intro')
-  }, [data])
+  if (!isLoading && !data?.data?.workspace?.programs?.length)
+    router.push('/workspace/intro')
+  useEffect(() => {}, [data])
 
   return (
     <AppLayout

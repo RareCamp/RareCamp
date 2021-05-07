@@ -42,7 +42,7 @@ export default function App() {
   return (
     <AuthLayout>
       <div>
-        <Title level={3}>Sign up for an account</Title>
+        <Title level={3}>Signup for an account</Title>
         <p>
           or{' '}
           <Link onClick={() => router.push('/auth/login')}>

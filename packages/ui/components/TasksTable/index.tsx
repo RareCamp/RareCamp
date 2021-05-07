@@ -97,7 +97,7 @@ const CustomTable = styled('div')`
 
       .ant-avatar {
         background-color: #efdbff;
-        color: rgba(23, 18, 18, 0.85);
+        color: #391085;
       }
     }
   }

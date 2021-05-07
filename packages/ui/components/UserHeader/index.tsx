@@ -18,7 +18,7 @@ const PageHeader = styled('div')`
   }
   .ant-avatar-string {
     font-size: 32px;
-    color: #818181;
+    color: #391085;
   }
 `
 
