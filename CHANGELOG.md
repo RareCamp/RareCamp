@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/RareCamp/RareCamp/compare/v1.2.0...v1.3.0) (2021-05-07)
+
+
+### Features
+
+* add Task details ([#65](https://github.com/RareCamp/RareCamp/issues/65)) ([bf0620e](https://github.com/RareCamp/RareCamp/commit/bf0620e776fa9ee7767a680e3911ea0ba955225d))
+
 # [1.2.0](https://github.com/RareCamp/RareCamp/compare/v1.1.1...v1.2.0) (2021-04-27)
 
 
