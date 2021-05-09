@@ -1,11 +1,10 @@
 import React from 'react'
-import { AppLayout } from 'components/AppLayout'
+import AppLayout from 'components/AppLayout'
 
 import { Button, Space, Typography } from 'antd'
 import styled from 'styled-components'
 import Link from 'next/link'
 import UserHeader from 'components/UserHeader'
-import PageTitle from 'components/PageTitle'
 
 const { Title } = Typography
 

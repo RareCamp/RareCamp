@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { Typography, Skeleton, Card, Space } from 'antd'
-import { AppLayout } from 'components/AppLayout'
+import AppLayout from 'components/AppLayout'
 import { useQuery } from 'react-query'
 import axios from 'axios'
 import UserHeader from 'components/UserHeader'

@@ -1,4 +1,4 @@
-import { AppLayout } from 'components/AppLayout'
+import AppLayout from 'components/AppLayout'
 import styled from 'styled-components'
 import React, { useEffect } from 'react'
 import { Button, Form, Input, Radio, Steps } from 'antd'

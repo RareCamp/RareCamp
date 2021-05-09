@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router'
 import React, { useState } from 'react'
-import { AppLayout } from 'components/AppLayout'
+import AppLayout from 'components/AppLayout'
 import { useQuery } from 'react-query'
 import axios from 'axios'
 import { Button, Card, Col, Row, Skeleton, Space } from 'antd'
