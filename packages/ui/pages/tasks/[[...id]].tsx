@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router'
 import React, { useState } from 'react'
-import { AppLayout } from 'components/AppLayout'
+import AppLayout from 'components/AppLayout'
 import { useQuery } from 'react-query'
 import axios from 'axios'
 import { Button, Card, Col, Row, Skeleton, Space } from 'antd'
@@ -9,15 +9,13 @@ import PageHeading from 'components/PageHeading'
 import EditProject from 'components/EditProject'
 import styled from 'styled-components'
 import EditTask from 'components/EditTask'
-import {
-  AssigneeAvatar,
-  EditDate,
-} from 'components/TasksTable/TaskRow'
+import { AssigneeAvatar } from 'components/TasksTable/TaskRow'
 import dynamic from 'next/dynamic'
 import TaskStatus from 'components/TaskStatus'
 import TaskGuideCard from 'components/TaskGuideCard'
 import ServiceProviderCard from 'components/ServiceProviderCard'
 import { useEditTaskMutation } from 'helpers/API/mutation'
+import TaskDateCell from '../../components/TasksTable/TaskDateCell'
 
 const ReactQuill: any = dynamic(() => import('react-quill'), {
   ssr: false,
@@ -168,7 +166,7 @@ export default function TaskDetails() {
                         className="task-data"
                       >
                         <span className="task-meta">Start Date</span>
-                        <EditDate
+                        <TaskDateCell
                           task={task}
                           programId={programId}
                           dateKey="estimatedStartDate"
@@ -179,7 +177,7 @@ export default function TaskDetails() {
                         className="task-data"
                       >
                         <span className="task-meta">End Date</span>
-                        <EditDate
+                        <TaskDateCell
                           task={task}
                           programId={programId}
                           dateKey="estimatedEndDate"

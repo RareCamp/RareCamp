@@ -2,7 +2,6 @@ import 'react-quill/dist/quill.snow.css'
 import 'styles/antd.less'
 import type { AppProps } from 'next/app'
 import { QueryClient, QueryClientProvider } from 'react-query'
-import { ReactQueryDevtools } from 'react-query/devtools'
 
 import Amplify, { Auth } from 'aws-amplify'
 import axios from 'axios'
@@ -14,10 +13,9 @@ axios.defaults.baseURL = process.env.NEXT_PUBLIC_ApiEndpoint
 Amplify.configure({
   Auth: {
     // region: process.env.NEXT_PUBLIC_region,
-    identityPoolId: process.env.NEXT_PUBLIC_CognitoIdentityPoolId,
-    userPoolId: process.env.NEXT_PUBLIC_CognitoUserPoolId,
-    userPoolWebClientId:
-      process.env.NEXT_PUBLIC_CognitoUserPoolClientId,
+    identityPoolId: 'us-west-2:b94093dd-9a02-4cd0-943d-6cf19bde3bf9',
+    userPoolId: 'us-west-2_hqThd7i27',
+    userPoolWebClientId: '5nhqnqgsq940amflb9np8stnrt',
   },
   ssr: true,
 })
@@ -50,7 +48,6 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
       <GlobalLoadingIndicator />
-      <ReactQueryDevtools initialIsOpen={false} />
       <Component {...pageProps} />
     </>
   )

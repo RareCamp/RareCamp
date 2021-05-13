@@ -67,7 +67,7 @@ const CustomTable = styled('div')`
       }
     }
     tr > td {
-      padding: 8px;
+      padding: 12px;
       flex-grow: 0;
       font-family: Roboto, sans-serif;
       line-height: 1.57;
@@ -97,7 +97,7 @@ const CustomTable = styled('div')`
 
       .ant-avatar {
         background-color: #efdbff;
-        color: rgba(23, 18, 18, 0.85);
+        color: #391085;
       }
     }
   }

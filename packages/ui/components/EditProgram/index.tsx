@@ -75,8 +75,15 @@ export default function EditProgram({ program }) {
           duration: 2,
           message: `Program ${program.name} has been deleted successfully`,
         })
-        await queryClient.invalidateQueries('defaultWorkspace')
-        await router.push('/')
+        const { data } = queryClient.getQueryData<any>(
+          'defaultWorkspace',
+        )
+        queryClient.invalidateQueries('defaultWorkspace')
+        if (data.workspace?.programs?.length) {
+          await router.push('/workspace/intro')
+        } else {
+          await router.push('/')
+        }
       },
       onError: (err: Error) =>
         notification.error({

@@ -1,4 +1,4 @@
-import { AppLayout } from 'components/AppLayout'
+import AppLayout from 'components/AppLayout'
 import { Result } from 'antd'
 import Link from 'next/link'
 import React from 'react'

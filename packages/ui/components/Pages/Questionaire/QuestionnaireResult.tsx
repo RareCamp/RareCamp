@@ -17,7 +17,7 @@ async function createProgramFrom(
   const payload = {
     // TODO: description, name, abbreviation and omimId should be entered by the user
     program: {
-      name: 'Gene Therapy',
+      name: `${answers.disease} Therapy`,
       description: 'Gene Therapy',
       disease: {
         name: answers.disease,
