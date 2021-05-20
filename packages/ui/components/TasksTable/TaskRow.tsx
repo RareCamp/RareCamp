@@ -25,14 +25,14 @@ export default function TaskRow({ task, programId }) {
     <tr data-row-key="2" className="ant-table-row">
       <TaskNameCell task={task} programId={programId} />
       <TaskStatusCell task={task} programId={programId} />
-      <td className="ant-table-cell">
+      <td className="ant-table-cell" style={{ width: 150 }}>
         <Space>
           {task?.assignees?.map((assignee) => (
             <AssigneeAvatar size={24} assignee={assignee} />
           ))}
         </Space>
       </td>
-      <td className="ant-table-cell">
+      <td className="ant-table-cell" style={{ width: 100 }}>
         <Tooltip title="Budget estimate based on data from patient led organizations">
           <span>
             {task.budget?.currency}
