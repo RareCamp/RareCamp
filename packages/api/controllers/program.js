@@ -51,11 +51,13 @@ export async function updateProgram({
   workspaceId,
   programId,
   program,
+  userId,
 }) {
   if (!workspaceId) throw new Error('userId is required')
   if (!programId) throw new Error('programId is required')
   if (!program) throw new Error('program is required')
-
+  const currentProgram = await getProgramWithWorkspace({ workspaceId, userId, programId })
+  if (!currentProgram) throw NotFoundError('Program can not be found')
   const programItem = await Program.update({
     ...program,
     workspaceId,
@@ -70,8 +72,8 @@ export async function updateProgram({
 export async function getProgramWithWorkspace({ programId, userId, workspaceId }) {
   const { Item: program } = await Program.get({ workspaceId, programId })
   if (!program) throw new NotFoundError('Program Can not be found')
-  const workspace = await getWorkspaceByIdAndUserId({ workspaceId: program.workspaceId, userId })
-  if (!workspace) throw new NotFoundError('Program Can not be found')
+  const workspace = await getWorkspaceByIdAndUserId({ workspaceId, userId })
+  if (!workspace.Item) throw new NotFoundError('Program Can not be found')
   const projects = await getProjects({ programId })
   const tasksList = await Promise.all(projects.map(({ projectId }) => getTasks({ projectId })))
   for (let i = 0; i < tasksList.length; i++) {
