@@ -33,12 +33,8 @@ export default function TaskNameCell({ task, programId }) {
     programId,
   })
   const [nameEditForm] = Form.useForm()
-  const submitForm = (e) => {
-    if (e.which === 10 || e.which === 13) {
-      nameEditForm.validateFields().then(({ name }) => {
-        editTaskNameMutation.mutate({ ...task, name })
-      })
-    }
+  const submitForm = ({ name }) => {
+    editTaskNameMutation.mutate({ ...task, name })
   }
   return (
     <td
@@ -55,9 +51,18 @@ export default function TaskNameCell({ task, programId }) {
         name="edit_name"
         initialValues={{ name: task.name }}
         form={nameEditForm}
-        onKeyPress={submitForm}
+        onFinish={submitForm}
       >
-        <EditTaskButton name="name">
+        <EditTaskButton
+          name="name"
+          required={false}
+          rules={[
+            {
+              required: true,
+              message: 'Task name can not be empty!',
+            },
+          ]}
+        >
           <Input
             disabled={editTaskNameMutation.isLoading}
             suffix={
