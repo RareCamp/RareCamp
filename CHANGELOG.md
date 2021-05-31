@@ -1,3 +1,15 @@
+# [1.4.0](https://github.com/RareCamp/RareCamp/compare/v1.3.0...v1.4.0) (2021-05-31)
+
+
+### Bug Fixes
+
+* **ui:** task hover behavior ([#71](https://github.com/RareCamp/RareCamp/issues/71)) ([202d0dc](https://github.com/RareCamp/RareCamp/commit/202d0dc84619a0cacfc997cadf2ae22847804eb7))
+
+
+### Features
+
+* **ui:** fix task hover behavior & add create program button ([#67](https://github.com/RareCamp/RareCamp/issues/67)) ([776c910](https://github.com/RareCamp/RareCamp/commit/776c910d6ef65cc5f7df97651db209d204f3c79c))
+
 # [1.3.0](https://github.com/RareCamp/RareCamp/compare/v1.2.0...v1.3.0) (2021-05-07)
 
 
