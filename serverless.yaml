@@ -62,10 +62,10 @@ custom:
       api:
         # TODO: create certificate and run serverless create_domain --stage=prod before enabling this
         domainEnabled: false
-        domainName: staging.api.opentreatment.org
-        validationDomain: opentreatment.org
+        domainName: staging.api.opentreatments.org
+        validationDomain: opentreatments.org
       amplify:
-        domainName: staging.opentreatment.org
+        domainName: staging.app.opentreatments.org
       alarms:
         notificationEmail: alert@example.com
     production:
@@ -74,10 +74,10 @@ custom:
       pointInTimeRecoveryEnabled: true
       api:
         domainEnabled: false
-        domainName: api.opentreatment.org
-        validationDomain: opentreatment.org
+        domainName: api.opentreatments.org
+        validationDomain: opentreatments.org
       amplify:
-        domainName: opentreatment.org
+        domainName: app.opentreatments.org
       alarms:
         notificationEmail: alert@example.com
   stageConfig: ${{self:custom.stages.${{self:provider.stage}}}}
