@@ -25,9 +25,10 @@ const StyledMoreOutlined = styled(MoreOutlined)`
   cursor: pointer;
   position: absolute;
   left: 30px;
+  top: 20px;
 `
 
-export default function DeleteTask({
+export default function EditTask({
   task,
   programId,
   onSuccess,
