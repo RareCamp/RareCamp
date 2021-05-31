@@ -1,3 +1,10 @@
+## [1.5.1](https://github.com/RareCamp/RareCamp/compare/v1.5.0...v1.5.1) (2021-05-31)
+
+
+### Bug Fixes
+
+* **ui:** change domain to app.opentreatments.org ([d68be34](https://github.com/RareCamp/RareCamp/commit/d68be34d7bb8c88624c4414b7bc1eb8154589007))
+
 # [1.5.0](https://github.com/RareCamp/RareCamp/compare/v1.4.0...v1.5.0) (2021-05-31)
 
 
