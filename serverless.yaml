@@ -52,6 +52,7 @@ custom:
       logRetentionInDays: 1
       amplify:
       api:
+        # TODO: create certificate and run serverless create_domain --stage=staging before enabling this
         domainEnabled: false
       alarms:
         notificationEmail: ${{env:ALARMS_NOTIFICATION_EMAIL}}
@@ -59,12 +60,12 @@ custom:
       profile: rarecamp_staging
       logRetentionInDays: 3
       api:
+        # TODO: create certificate and run serverless create_domain --stage=prod before enabling this
         domainEnabled: false
-        domainName: staging.api.example.com
-        validationDomain: example.com
+        domainName: staging.api.opentreatment.org
+        validationDomain: opentreatment.org
       amplify:
-        # domainName: staging.example.com
-        # branch: staging
+        domainName: staging.opentreatment.org
       alarms:
         notificationEmail: alert@example.com
     production:
@@ -73,10 +74,10 @@ custom:
       pointInTimeRecoveryEnabled: true
       api:
         domainEnabled: false
-        domainName: api.example.com
-        validationDomain: example.com
+        domainName: api.opentreatment.org
+        validationDomain: opentreatment.org
       amplify:
-        # domainName: example.com
+        domainName: opentreatment.org
       alarms:
         notificationEmail: alert@example.com
   stageConfig: ${{self:custom.stages.${{self:provider.stage}}}}
@@ -87,7 +88,6 @@ custom:
     domainName: ${{self:custom.stageConfig.api.domainName, ''}}
     certificateName: ${{self:custom.stageConfig.api.domainName, ''}}
     enabled: ${{self:custom.stageConfig.api.domainEnabled, false}}
-    # createRoute53Record: ${{self:custom.stageConfig.api.isDomainRoute53, false}}
   serverless-offline:
     httpPort: 4911
     noPrependStageInUrl: true
