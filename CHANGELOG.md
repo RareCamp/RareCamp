@@ -1,3 +1,10 @@
+# [1.5.0](https://github.com/RareCamp/RareCamp/compare/v1.4.0...v1.5.0) (2021-05-31)
+
+
+### Features
+
+* **ui:** setup domain ([3cc20b0](https://github.com/RareCamp/RareCamp/commit/3cc20b0a62c3e47e80b0fb7a46712183258ccbca))
+
 # [1.4.0](https://github.com/RareCamp/RareCamp/compare/v1.3.0...v1.4.0) (2021-05-31)
 
 
