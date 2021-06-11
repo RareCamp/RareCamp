@@ -213,9 +213,7 @@ export default function TaskDetails() {
               <Col span={8}>
                 {task?.guide && <TaskGuideCard guide={task?.guide} />}
                 {task?.serviceProviders && (
-                  <ServiceProviderCard
-                    serviceProviders={task?.serviceProviders}
-                  />
+                  <ServiceProviderCard task={task} />
                 )}
               </Col>
             </Row>

@@ -47,7 +47,7 @@ export default function QuestionnaireResult({
         const program = resp?.data?.program
         notification.success({
           duration: 2,
-          message: 'Program created Successfully',
+          message: 'Program created successfully',
         })
         await queryClient.invalidateQueries('defaultWorkspace')
         await router.push(

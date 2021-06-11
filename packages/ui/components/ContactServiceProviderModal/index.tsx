@@ -1,9 +1,46 @@
-import { Button, Col, Form, Input, Modal, Row, Space } from 'antd'
+import {
+  Button,
+  Col,
+  Form,
+  Input,
+  Modal,
+  notification,
+  Row,
+  Space,
+} from 'antd'
+import { useMutation } from 'react-query'
+import axios from 'axios'
 
 export default function ContactServiceProviderModal({
   visible,
   hide,
+  serviceProvider,
+  task,
 }) {
+  const contactMutation = useMutation(
+    (message) =>
+      axios.post(
+        `/projects/${task.projectId}/tasks/${task.taskId}/contactUs`,
+        { message, task, spName: serviceProvider.name },
+      ),
+    {
+      onSuccess: async () => {
+        notification.success({
+          duration: 2,
+          message: `Message has been sent successfully`,
+        })
+      },
+      onError: (err: Error) =>
+        notification.error({
+          duration: 2,
+          message: `Message was not sent`,
+          description: err.message,
+        }),
+    },
+  )
+
+  const onFinish = ({ message }) => contactMutation.mutate(message)
+
   return (
     <Modal
       centered
@@ -39,11 +76,14 @@ export default function ContactServiceProviderModal({
             direction="vertical"
             style={{ width: '100%', height: '100%' }}
           >
-            <h1>Send Message to Charles River</h1>
+            <h1>
+              Send Message to
+              {` ${serviceProvider.name}`}
+            </h1>
             <b>Briefly describe what you want to discuss</b>
-            <Form layout="vertical">
+            <Form layout="vertical" onFinish={onFinish}>
               <Form.Item
-                name="description"
+                name="message"
                 required={false}
                 rules={[
                   {
@@ -58,7 +98,12 @@ export default function ContactServiceProviderModal({
                   required={false}
                 />
               </Form.Item>
-              <Button block htmlType="submit" type="primary">
+              <Button
+                loading={contactMutation.isLoading}
+                block
+                htmlType="submit"
+                type="primary"
+              >
                 Send
               </Button>
             </Form>

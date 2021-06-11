@@ -2,7 +2,8 @@ import { Button, Card } from 'antd'
 import React, { useState } from 'react'
 import ServiceProvider from 'components/ServiceProvider'
 
-export default function ServiceProviderCard({ serviceProviders }) {
+export default function ServiceProviderCard({ task }) {
+  const { serviceProviders } = task
   const [showAllSps, setShowAllSps] = useState(false)
   return (
     <Card title="Connect with Service Providers" bordered={false}>
@@ -11,6 +12,7 @@ export default function ServiceProviderCard({ serviceProviders }) {
         if (index < 3 || showAllSps)
           return (
             <ServiceProvider
+              task={task}
               key={serviceProvider.serviceProviderId}
               serviceProvider={serviceProvider}
             />

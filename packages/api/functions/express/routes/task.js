@@ -5,7 +5,7 @@ import {
   getTask,
   updateTask,
   getTasks,
-  deleteTask,
+  deleteTask, sendContactSPEmail,
 } from '../../../controllers/task'
 
 const taskRouter = express.Router({ mergeParams: true })
@@ -17,6 +17,15 @@ taskRouter.post('/', wrapAsync(async (req, res) => {
   const taskItem = await createTask({ userId, projectId, task })
 
   res.json({ task: taskItem })
+}))
+
+taskRouter.post('/:taskId/contactUs', wrapAsync(async (req, res) => {
+  const { message, spName, task } = req.body
+  const { userId } = req.cognitoUser
+  await sendContactSPEmail({
+    message, task, userId, spName,
+  })
+  res.json({})
 }))
 
 taskRouter.put('/:taskId', wrapAsync(async (req, res) => {
