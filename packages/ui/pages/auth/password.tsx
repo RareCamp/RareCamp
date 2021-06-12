@@ -15,7 +15,7 @@ export default function App() {
     {
       onSuccess: async (_, variables) => {
         notification.success({
-          message: 'Instructions Sent to your emails',
+          message: 'Instructions sent to your emails',
           description: 'Account confirmed successfully!',
           placement: 'topRight',
           duration: 1.5,

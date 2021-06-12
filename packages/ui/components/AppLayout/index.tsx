@@ -17,7 +17,7 @@ import { useRouter } from 'next/router'
 import { useMutation, useQuery } from 'react-query'
 import { Auth } from 'aws-amplify'
 import axios from 'axios'
-import EditProgram from '../EditProgram'
+import EditProgram from 'components/EditProgram'
 
 const { Sider, Content, Header } = Layout
 
@@ -175,9 +175,9 @@ const Index = ({ children, selectedKey, title }) => {
                 key={program.name}
                 href={`/programs/${program.workspaceId}/${program.programId}`}
               >
-                <Space>
+                <Space align="center">
                   <span>{program.name}</span>
-                  {/* <EditProgram program={program} /> */}
+                  <EditProgram program={program} />
                 </Space>
               </Link>
             </Menu.Item>

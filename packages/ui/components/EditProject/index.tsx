@@ -41,12 +41,15 @@ export default function EditProject({
   )
   const deleteProject = () =>
     confirm({
+      okButtonProps: {
+        style: { backgroundColor: '#e53935', borderColor: '#e53935' },
+      },
       title: 'Are you sure you want to delete this project?',
       centered: true,
       icon: <ExclamationCircleOutlined />,
       content:
         'Project will be immediately deleted. You cannot undo this action.',
-      okText: 'delete',
+      okText: 'Delete',
       onOk: deleteProjectMutation.mutateAsync,
       onCancel: () => {},
     })

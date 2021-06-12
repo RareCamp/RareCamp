@@ -36,12 +36,15 @@ export default function EditProgram({ program }) {
   )
   const deleteProgram = () =>
     confirm({
+      okButtonProps: {
+        style: { backgroundColor: '#e53935', borderColor: '#e53935' },
+      },
       title: 'Are you sure you want to delete this program?',
       centered: true,
       icon: <ExclamationCircleOutlined />,
       content:
         'Program will be immediately deleted. You cannot undo this action.',
-      okText: 'delete',
+      okText: 'Delete',
       onOk: deleteProgramMutation.mutateAsync,
       onCancel() {},
     })

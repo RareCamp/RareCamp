@@ -70,12 +70,15 @@ export default function EditTask({
   )
   const deleteTask = () =>
     confirm({
+      okButtonProps: {
+        style: { backgroundColor: '#e53935', borderColor: '#e53935' },
+      },
       title: 'Are you sure you want to delete this Task?',
       centered: true,
       icon: <ExclamationCircleOutlined />,
       content:
         'Task will be immediately deleted. You cannot undo this action.',
-      okText: 'delete',
+      okText: 'Delete',
       onOk: deleteTaskMutation.mutateAsync,
     })
 

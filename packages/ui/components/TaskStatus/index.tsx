@@ -28,12 +28,15 @@ export default function TaskStatus({ task, programId }) {
   const menu = (
     <Menu>
       {Object.values(TaskStatuses)
-        .filter((status) => status !== task.status)
+        // .filter((status) => status !== task.status)
         .map((status) => (
           <Menu.Item key={status}>
             <Button
               type="text"
-              onClick={() => taskMutation.mutate({ ...task, status })}
+              onClick={() => {
+                if (status !== task.status)
+                  taskMutation.mutate({ ...task, status })
+              }}
             >
               <Tag color={statusMeta[status].bgColor}>
                 {statusMeta[status].label}

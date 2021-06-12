@@ -91,9 +91,14 @@ export default function ProjectDetails({ project }) {
                   <span>{project.name}</span>
                 </Space>
               </div>
-              <Tooltip placement="bottom" title={project.description}>
-                <InfoCircleOutlined />
-              </Tooltip>
+              {project.description ? (
+                <Tooltip
+                  placement="bottom"
+                  title={project.description}
+                >
+                  <InfoCircleOutlined />
+                </Tooltip>
+              ) : null}
             </Space>
           </div>
         </td>
