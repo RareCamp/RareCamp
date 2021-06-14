@@ -1,7 +1,9 @@
-import { Avatar, Space, Tooltip } from 'antd'
+import { Avatar, Space } from 'antd'
 import TaskNameCell from 'components/TasksTable/TaskNameCell'
 import TaskDateCell from 'components/TasksTable/TaskDateCell'
 import TaskStatusCell from 'components/TasksTable/TaskStatusCell'
+import React from 'react'
+import TaskBudgetCell from './TaskBudgetCell'
 
 export function AssigneeAvatar({
   assignee,
@@ -32,14 +34,7 @@ export default function TaskRow({ task, programId }) {
           ))}
         </Space>
       </td>
-      <td className="ant-table-cell" style={{ width: 100 }}>
-        <Tooltip title="Budget estimate based on data from patient led organizations">
-          <span>
-            {task.budget?.currency}
-            {task.budget?.amount}
-          </span>
-        </Tooltip>
-      </td>
+      <TaskBudgetCell task={task} programId={programId} />
       <TaskDateCell
         dateKey="estimatedStartDate"
         programId={programId}

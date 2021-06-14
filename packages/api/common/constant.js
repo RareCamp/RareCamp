@@ -24,7 +24,8 @@ export const DEFAULT_TASKS = [{
   assignees: [],
   budget: {
     currency: '$',
-    amount: 100,
+    amount: null,
+    default: 5000,
   },
   duration: '9-12 months',
   notes: '<div>Understand if a knock in mouse model is necessary for your disease. It '

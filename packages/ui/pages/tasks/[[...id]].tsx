@@ -3,7 +3,15 @@ import React, { useState } from 'react'
 import AppLayout from 'components/AppLayout'
 import { useQuery } from 'react-query'
 import axios from 'axios'
-import { Button, Card, Col, Row, Skeleton, Space } from 'antd'
+import {
+  Button,
+  Card,
+  Col,
+  notification,
+  Row,
+  Skeleton,
+  Space,
+} from 'antd'
 import SubHeader from 'components/SubHeader'
 import PageHeading from 'components/PageHeading'
 import EditProject from 'components/EditProject'
@@ -101,11 +109,18 @@ export default function TaskDetails() {
     setNotes(task?.notes)
   }
 
-  const updateTaskMutation = useEditTaskMutation({
-    programId,
-    taskId: task?.taskId,
-    projectId: task?.projectId,
-  })
+  const updateTaskMutation = useEditTaskMutation(
+    {
+      programId,
+      taskId: task?.taskId,
+      projectId: task?.projectId,
+    },
+    () =>
+      notification.success({
+        duration: 2,
+        message: `Task ${task.name} has been updated successfully`,
+      }),
+  )
   const editTaskMutation = () => updateTaskMutation.mutate({ notes })
   return (
     <AppLayout

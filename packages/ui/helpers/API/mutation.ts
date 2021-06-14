@@ -19,10 +19,6 @@ export const useEditTaskMutation = (
           data: resp.data,
         })
         await queryClient.invalidateQueries(['program', programId])
-        notification.success({
-          duration: 2,
-          message: `Task ${resp.data.task.name} has been updated successfully`,
-        })
         if (cb) cb()
       },
       onError: (err: Error, variables) =>

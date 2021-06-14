@@ -14,9 +14,12 @@ export default function TaskStatusCell({ task, programId }) {
       style={{ width: 130 }}
     >
       <TaskStatus task={task} programId={programId} />
-      {showEdit && (
-        <CaretDownOutlined style={{ position: 'absolute' }} />
-      )}
+      <CaretDownOutlined
+        style={{
+          position: 'absolute',
+          visibility: showEdit ? 'visible' : 'hidden',
+        }}
+      />
     </td>
   )
 }
