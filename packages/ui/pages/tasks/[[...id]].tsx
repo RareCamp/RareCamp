@@ -205,9 +205,14 @@ export default function TaskDetails() {
                       onChange={setNotes}
                       modules={{
                         toolbar: [
-                          ['bold', 'italic', 'underline'],
-                          [{ list: 'bullet' }, { list: 'ordered' }],
-                          ['link'],
+                          [
+                            'bold',
+                            'italic',
+                            'underline',
+                            { list: 'bullet' },
+                            { list: 'ordered' },
+                            'link',
+                          ],
                         ],
                         clipboard: {
                           matchVisual: false,
