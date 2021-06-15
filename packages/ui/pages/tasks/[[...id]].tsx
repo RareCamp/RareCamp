@@ -62,6 +62,7 @@ const TaskDetailsRow = styled('div')`
     }
   }
 `
+let timeoutId
 
 export default function TaskDetails() {
   const router = useRouter()
@@ -109,18 +110,11 @@ export default function TaskDetails() {
     setNotes(task?.notes)
   }
 
-  const updateTaskMutation = useEditTaskMutation(
-    {
-      programId,
-      taskId: task?.taskId,
-      projectId: task?.projectId,
-    },
-    () =>
-      notification.success({
-        duration: 2,
-        message: `Task ${task.name} has been updated successfully`,
-      }),
-  )
+  const updateTaskMutation = useEditTaskMutation({
+    programId,
+    taskId: task?.taskId,
+    projectId: task?.projectId,
+  })
   const editTaskMutation = () => updateTaskMutation.mutate({ notes })
   return (
     <AppLayout
@@ -199,34 +193,50 @@ export default function TaskDetails() {
                         />
                       </Space>
                     </Space>
-                    <ReactQuill
-                      theme="snow"
-                      value={notes}
-                      onChange={setNotes}
-                      modules={{
-                        toolbar: [
-                          [
-                            'bold',
-                            'italic',
-                            'underline',
-                            { list: 'bullet' },
-                            { list: 'ordered' },
-                            'link',
+                    <div>
+                      <ReactQuill
+                        theme="snow"
+                        value={notes}
+                        onPaste={editTaskMutation}
+                        onChange={(value) => {
+                          if (value !== notes) {
+                            if (timeoutId) clearTimeout(timeoutId)
+                            timeoutId = setTimeout(
+                              editTaskMutation,
+                              1000,
+                            )
+                            setNotes(value)
+                          }
+                        }}
+                        modules={{
+                          toolbar: [
+                            [
+                              'bold',
+                              'italic',
+                              'underline',
+                              { list: 'bullet' },
+                              { list: 'ordered' },
+                              'link',
+                            ],
                           ],
-                        ],
-                        clipboard: {
-                          matchVisual: false,
-                        },
-                      }}
-                    />
-                    <Button
-                      block
-                      loading={updateTaskMutation.isLoading}
-                      type="primary"
-                      onClick={editTaskMutation}
-                    >
-                      Save
-                    </Button>
+                          clipboard: {
+                            matchVisual: false,
+                          },
+                        }}
+                      />
+                      {updateTaskMutation.isLoading ? (
+                        <span
+                          style={{
+                            position: 'absolute',
+                            right: 35,
+                            bottom: 35,
+                            fontStyle: 'italic',
+                          }}
+                        >
+                          saving ...
+                        </span>
+                      ) : null}
+                    </div>
                   </Space>
                 </Card>
               </Col>
