@@ -41,9 +41,8 @@ export default function ProgramDetails() {
       axios.get(`/workspaces/${workspaceId}/programs/${programId}`),
     { retry: 0, enabled: Boolean(workspaceId && programId) },
   )
-  const [isAddProjectVisible, setIsAddProjectVisible] = useState(
-    false,
-  )
+  const [isAddProjectVisible, setIsAddProjectVisible] =
+    useState(false)
   const hideAddProjectBtn = () => setIsAddProjectVisible(false)
   const program = programQuery?.data?.data?.program
   const ProgramTitle = (

@@ -29,6 +29,18 @@ export default function TaskBudgetCell({ task, programId }) {
       budget: { ...task.budget, amount: parseFloat(amount) },
     })
   }
+  const EditLoader = (
+    <LoadingOutlined
+      style={{
+        color: 'rgba(0,0,0,.45)',
+        position: 'absolute',
+        right: 3,
+        visibility: updateTaskMutation.isLoading
+          ? 'inherit'
+          : 'hidden',
+      }}
+    />
+  )
   return (
     <td className="ant-table-cell" style={{ width: 100 }}>
       <Tooltip title="Budget estimate based on data from patient led organizations">
@@ -55,13 +67,7 @@ export default function TaskBudgetCell({ task, programId }) {
                 onBlur={() => setShowEdit(false)}
                 autoFocus={showEdit}
                 disabled={updateTaskMutation.isLoading}
-                suffix={
-                  updateTaskMutation.isLoading ? (
-                    <LoadingOutlined
-                      style={{ color: 'rgba(0,0,0,.45)' }}
-                    />
-                  ) : null
-                }
+                suffix={EditLoader}
               />
             </EditTask>
           </Form>

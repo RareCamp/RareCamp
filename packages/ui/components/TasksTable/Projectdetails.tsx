@@ -107,14 +107,14 @@ export default function ProjectDetails({ project }) {
         <>
           {project.tasks.map((task) => (
             <TaskRow
-              key={task.taskId}
+              key={JSON.stringify(task)}
               task={task}
               programId={project.programId}
             />
           ))}
           <tr className="ant-table-row add-task-row">
             <td colSpan={6} className="ant-table-cell">
-              <Form form={taskForm}>
+              <Form form={taskForm} name={`test${project.projectId}`}>
                 <Form.Item
                   name="name"
                   required={false}

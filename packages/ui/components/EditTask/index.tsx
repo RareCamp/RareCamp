@@ -16,7 +16,10 @@ import {
 } from '@ant-design/icons'
 import React, { useState } from 'react'
 import styled from 'styled-components'
-import { useEditTaskMutation } from 'helpers/API/mutation'
+import {
+  deleteProgramTask,
+  useEditTaskMutation,
+} from 'helpers/API/mutation'
 
 const { confirm } = Modal
 const { Text } = Typography
@@ -31,7 +34,7 @@ const StyledMoreOutlined = styled(MoreOutlined)`
 export default function EditTask({
   task,
   programId,
-  onSuccess,
+  // onSuccess,
   styles,
 }: {
   task: any
@@ -47,14 +50,17 @@ export default function EditTask({
       ),
     {
       onSuccess: async () => {
-        if (onSuccess) onSuccess()
-        else if (programId) {
-          const { data } = queryClient.getQueryData<any>([
-            'program',
-            programId,
-          ])
-          queryClient.setQueryData(['task', task.taskId], { data })
-        }
+        // if (onSuccess) onSuccess()
+        // else {
+        const programData: any = queryClient.getQueryData([
+          'program',
+          programId,
+        ])
+        deleteProgramTask(programData.data.program, task)
+        queryClient.setQueryData(['program', programId], {
+          data: programData.data,
+        })
+        // }
         notification.success({
           duration: 2,
           message: `Task ${task.name} has been deleted successfully`,

@@ -1,29 +1,21 @@
 import { useRouter } from 'next/router'
 import React, { useState } from 'react'
-import AppLayout from 'components/AppLayout'
 import { useQuery } from 'react-query'
 import axios from 'axios'
-import {
-  Button,
-  Card,
-  Col,
-  notification,
-  Row,
-  Skeleton,
-  Space,
-} from 'antd'
+import { Card, Col, Row, Skeleton, Space } from 'antd'
+import dynamic from 'next/dynamic'
+import styled from 'styled-components'
+import { useEditTaskMutation } from 'helpers/API/mutation'
+import AppLayout from 'components/AppLayout'
 import SubHeader from 'components/SubHeader'
 import PageHeading from 'components/PageHeading'
 import EditProject from 'components/EditProject'
-import styled from 'styled-components'
 import EditTask from 'components/EditTask'
 import { AssigneeAvatar } from 'components/TasksTable/TaskRow'
-import dynamic from 'next/dynamic'
 import TaskStatus from 'components/TaskStatus'
 import TaskGuideCard from 'components/TaskGuideCard'
 import ServiceProviderCard from 'components/ServiceProviderCard'
-import { useEditTaskMutation } from 'helpers/API/mutation'
-import TaskDateCell from '../../components/TasksTable/TaskDateCell'
+import TaskDateCell from 'components/TasksTable/TaskDateCell'
 
 const ReactQuill: any = dynamic(() => import('react-quill'), {
   ssr: false,

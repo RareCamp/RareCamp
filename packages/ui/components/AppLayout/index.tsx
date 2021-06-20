@@ -172,13 +172,14 @@ const Index = ({ children, selectedKey, title }) => {
               className="sub-menu"
             >
               <Link
-                key={program.name}
                 href={`/programs/${program.workspaceId}/${program.programId}`}
               >
-                <Space align="center">
-                  <span>{program.name}</span>
-                  <EditProgram program={program} />
-                </Space>
+                <a>
+                  <Space align="center">
+                    <span>{program.name}</span>
+                    <EditProgram program={program} />
+                  </Space>
+                </a>
               </Link>
             </Menu.Item>
           ))}

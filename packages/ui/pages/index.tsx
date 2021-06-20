@@ -69,7 +69,11 @@ const Home = () => {
       ) : (
         <ProgramCards>
           {data?.data?.workspace?.programs.map((program) => (
-            <Card bordered style={{ width: 284 }}>
+            <Card
+              key={program.programId}
+              bordered
+              style={{ width: 284 }}
+            >
               <Space
                 style={{
                   justifyContent: 'space-between',
@@ -79,7 +83,9 @@ const Home = () => {
                 <Link
                   href={`/programs/${program.workspaceId}/${program.programId}`}
                 >
-                  <Title level={4}>{program.name}</Title>
+                  <a>
+                    <Title level={4}>{program.name}</Title>
+                  </a>
                 </Link>
                 <EditProgram program={program} />
               </Space>
@@ -88,10 +94,12 @@ const Home = () => {
           ))}
           <Card bordered style={{ width: 284 }}>
             <Link href="/workspace/intro">
-              <div className="add-program">
-                <PlusCircleTwoTone style={{ fontSize: 33 }} />
-                <div>Add program</div>
-              </div>
+              <a>
+                <div className="add-program">
+                  <PlusCircleTwoTone style={{ fontSize: 33 }} />
+                  <div>Add program</div>
+                </div>
+              </a>
             </Link>
           </Card>
         </ProgramCards>

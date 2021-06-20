@@ -30,7 +30,11 @@ export default function TaskRow({ task, programId }) {
       <td className="ant-table-cell" style={{ width: 150 }}>
         <Space>
           {task?.assignees?.map((assignee) => (
-            <AssigneeAvatar size={24} assignee={assignee} />
+            <AssigneeAvatar
+              key={assignee.name}
+              size={24}
+              assignee={assignee}
+            />
           ))}
         </Space>
       </td>

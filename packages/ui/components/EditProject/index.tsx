@@ -36,9 +36,8 @@ export default function EditProject({
   project: any
   onDeleted?: any
 }) {
-  const [isEditProjectVisible, setIsEditProjectVisible] = useState(
-    false,
-  )
+  const [isEditProjectVisible, setIsEditProjectVisible] =
+    useState(false)
   const deleteProject = () =>
     confirm({
       okButtonProps: {
@@ -86,7 +85,7 @@ export default function EditProject({
           duration: 2,
           message: `Project ${project.name} has been deleted successfully`,
         })
-        onDeleted()
+        if (onDeleted) onDeleted()
       },
       onError: (err: Error) =>
         notification.error({
