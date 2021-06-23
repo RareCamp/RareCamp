@@ -156,16 +156,7 @@ export default function EditTask({
           >
             <Input />
           </Form.Item>
-          <Form.Item
-            label="Description"
-            name="description"
-            rules={[
-              {
-                required: true,
-                message: 'Please input task description!',
-              },
-            ]}
-          >
+          <Form.Item label="Description" name="description">
             <Input.TextArea rows={4} />
           </Form.Item>
         </Form>

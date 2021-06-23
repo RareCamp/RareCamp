@@ -3,23 +3,20 @@ import axios from 'axios'
 import { notification } from 'antd'
 
 function updateProgramTask(program, task) {
-  for (let i = 0; i < program.projects.length; i++) {
-    const project = program.projects[i]
-    for (let j = 0; j < project.tasks.length; j++) {
-      const task1 = project.tasks[j]
-      if (task1.taskId === task.taskId)
-        program.projects[i].tasks[j] = { ...task }
-    }
-  }
+  program.projects.forEach((project) => {
+    project.tasks.forEach((existentTask, index) => {
+      if (existentTask.taskId === task.taskId)
+        project.tasks[index] = { ...task }
+    })
+  })
 }
 
 export function deleteProgramTask(program, task) {
-  for (let i = 0; i < program.projects.length; i++) {
-    const project = program.projects[i]
+  program.projects.forEach((project) => {
     project.tasks = project.tasks.filter(
       ({ taskId }) => task.taskId !== taskId,
     )
-  }
+  })
 }
 export const useEditTaskMutation = (
   { taskId, projectId, programId },

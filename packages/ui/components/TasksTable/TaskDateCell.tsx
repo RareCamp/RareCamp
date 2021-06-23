@@ -47,7 +47,6 @@ export default function TaskDateCell({ task, programId, dateKey }) {
         <CaretDownOutlined
           style={{
             visibility: showEdit ? 'visible' : 'hidden',
-            position: 'absolute',
             top: 22,
           }}
         />

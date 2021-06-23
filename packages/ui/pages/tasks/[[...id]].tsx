@@ -16,6 +16,7 @@ import TaskStatus from 'components/TaskStatus'
 import TaskGuideCard from 'components/TaskGuideCard'
 import ServiceProviderCard from 'components/ServiceProviderCard'
 import TaskDateCell from 'components/TasksTable/TaskDateCell'
+import TaskBudgetCell from 'components/TasksTable/TaskBudgetCell'
 
 const ReactQuill: any = dynamic(() => import('react-quill'), {
   ssr: false,
@@ -87,10 +88,7 @@ export default function TaskDetails() {
     />
   )
   const title = task?.name
-  const subTitle =
-    task?.description ||
-    'This task is to gain an understanding of what knock-in mouse model is, the high level process to design and build and the cost/time it takes to develop a model. \n' +
-      'Please work with an expert to determine if this is the right model for you.'
+  const subTitle = task?.description
   const element = (
     <Space align="baseline">
       <h3>{title}</h3>
@@ -157,10 +155,10 @@ export default function TaskDetails() {
                         className="task-data"
                       >
                         <span className="task-meta">Budget</span>
-                        <span>
-                          {task?.budget?.currency +
-                            task?.budget?.amount}
-                        </span>
+                        <TaskBudgetCell
+                          task={task}
+                          programId={programId}
+                        />
                       </Space>
                       <Space
                         direction="vertical"

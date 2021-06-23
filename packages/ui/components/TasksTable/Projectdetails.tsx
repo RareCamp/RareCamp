@@ -12,10 +12,9 @@ import EditProject from 'components/EditProject'
 import TaskRow from 'components/TasksTable/TaskRow'
 
 function addTaskToProject(program, projectId, task) {
-  for (let i = 0; i < program.projects.length; i++) {
-    const project = program.projects[i]
+  program.projects?.forEach((project) => {
     if (project.projectId === projectId) project.tasks.push(task)
-  }
+  })
 }
 export default function ProjectDetails({ project }) {
   const [isProjectVisible, setIsProjectVisible] = useState(true)
