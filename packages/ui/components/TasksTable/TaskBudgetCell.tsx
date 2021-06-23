@@ -63,6 +63,7 @@ export default function TaskBudgetCell({ task, programId }) {
             >
               <Input
                 type="number"
+                step="0.01"
                 required
                 onBlur={() => setShowEdit(false)}
                 autoFocus={showEdit}
@@ -78,7 +79,7 @@ export default function TaskBudgetCell({ task, programId }) {
             onBlur={() => setShowEdit(false)}
             aria-hidden="true"
           >
-            {task.budget?.amount ? (
+            {task.budget?.amount !== null ? (
               <>
                 <span>{task.budget?.currency}</span>
                 <span>{task.budget?.amount}</span>
