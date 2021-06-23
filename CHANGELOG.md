@@ -1,3 +1,15 @@
+# [1.6.0](https://github.com/RareCamp/RareCamp/compare/v1.5.1...v1.6.0) (2021-06-23)
+
+
+### Bug Fixes
+
+* **ui:** usability improvements ([#75](https://github.com/RareCamp/RareCamp/issues/75)) ([b934063](https://github.com/RareCamp/RareCamp/commit/b934063ac963eb5a3c79a00b040cbc9a93308a62))
+
+
+### Features
+
+* add send email support ([#74](https://github.com/RareCamp/RareCamp/issues/74)) ([7b5581c](https://github.com/RareCamp/RareCamp/commit/7b5581c80752a27f8dba7b5998fd7b7707f34781))
+
 ## [1.5.1](https://github.com/RareCamp/RareCamp/compare/v1.5.0...v1.5.1) (2021-05-31)
 
 
