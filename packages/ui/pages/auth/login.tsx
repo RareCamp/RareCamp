@@ -66,7 +66,7 @@ export default function App() {
           rules={[
             {
               required: true,
-              message: 'Please input your email!',
+              message: 'Please input your email',
               type: 'email',
             },
           ]}
@@ -80,7 +80,7 @@ export default function App() {
           rules={[
             {
               required: true,
-              message: 'Please input your password!',
+              message: 'Please input your password',
             },
           ]}
         >

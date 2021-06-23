@@ -150,7 +150,7 @@ export default function EditTask({
             rules={[
               {
                 required: true,
-                message: 'Please input task name!',
+                message: 'Please input task name',
               },
             ]}
           >

@@ -59,7 +59,7 @@ export default function TaskNameCell({ task, programId }) {
           rules={[
             {
               required: true,
-              message: 'Task name can not be empty!',
+              message: 'Task name can not be empty',
             },
           ]}
         >

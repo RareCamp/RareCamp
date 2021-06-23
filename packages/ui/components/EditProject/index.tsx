@@ -161,7 +161,7 @@ export default function EditProject({
             rules={[
               {
                 required: true,
-                message: 'Please input project name!',
+                message: 'Please input project name',
               },
             ]}
           >
@@ -170,7 +170,7 @@ export default function EditProject({
           <Form.Item
             label="Description"
             name="description"
-            rules={[{ message: 'Please input project description!' }]}
+            rules={[{ message: 'Please input project description' }]}
           >
             <Input.TextArea rows={4} />
           </Form.Item>

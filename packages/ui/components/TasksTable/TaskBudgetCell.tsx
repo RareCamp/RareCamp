@@ -57,7 +57,7 @@ export default function TaskBudgetCell({ task, programId }) {
               rules={[
                 {
                   required: true,
-                  message: 'Task Budget can not be empty!',
+                  message: 'Task Budget can not be empty',
                 },
               ]}
             >

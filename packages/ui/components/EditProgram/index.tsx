@@ -31,9 +31,8 @@ const EditProgramDropdown = styled('div')`
 `
 
 export default function EditProgram({ program }) {
-  const [isEditProgramVisible, setIsEditProgramVisible] = useState(
-    false,
-  )
+  const [isEditProgramVisible, setIsEditProgramVisible] =
+    useState(false)
   const deleteProgram = () =>
     confirm({
       okButtonProps: {
@@ -162,7 +161,7 @@ export default function EditProgram({ program }) {
             rules={[
               {
                 required: true,
-                message: 'Please input program name!',
+                message: 'Please input program name',
               },
             ]}
           >
@@ -171,7 +170,7 @@ export default function EditProgram({ program }) {
           <Form.Item
             label="Description"
             name="description"
-            rules={[{ message: 'Please input program description!' }]}
+            rules={[{ message: 'Please input program description' }]}
           >
             <Input.TextArea rows={4} />
           </Form.Item>
