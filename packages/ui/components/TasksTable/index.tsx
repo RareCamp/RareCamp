@@ -171,7 +171,7 @@ export default function OTTable({
                 ?.sort(sortByCreated)
                 .map((project) => (
                   <ProjectDetails
-                    key={project.projectId}
+                    key={JSON.stringify(project)}
                     project={project}
                   />
                 ))}

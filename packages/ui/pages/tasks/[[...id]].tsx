@@ -1,21 +1,22 @@
 import { useRouter } from 'next/router'
 import React, { useState } from 'react'
-import AppLayout from 'components/AppLayout'
 import { useQuery } from 'react-query'
 import axios from 'axios'
-import { Button, Card, Col, Row, Skeleton, Space } from 'antd'
+import { Card, Col, Row, Skeleton, Space } from 'antd'
+import dynamic from 'next/dynamic'
+import styled from 'styled-components'
+import { useEditTaskMutation } from 'helpers/API/mutation'
+import AppLayout from 'components/AppLayout'
 import SubHeader from 'components/SubHeader'
 import PageHeading from 'components/PageHeading'
 import EditProject from 'components/EditProject'
-import styled from 'styled-components'
 import EditTask from 'components/EditTask'
 import { AssigneeAvatar } from 'components/TasksTable/TaskRow'
-import dynamic from 'next/dynamic'
 import TaskStatus from 'components/TaskStatus'
 import TaskGuideCard from 'components/TaskGuideCard'
 import ServiceProviderCard from 'components/ServiceProviderCard'
-import { useEditTaskMutation } from 'helpers/API/mutation'
-import TaskDateCell from '../../components/TasksTable/TaskDateCell'
+import TaskDateCell from 'components/TasksTable/TaskDateCell'
+import TaskBudgetCell from 'components/TasksTable/TaskBudgetCell'
 
 const ReactQuill: any = dynamic(() => import('react-quill'), {
   ssr: false,
@@ -54,6 +55,7 @@ const TaskDetailsRow = styled('div')`
     }
   }
 `
+let timeoutId
 
 export default function TaskDetails() {
   const router = useRouter()
@@ -86,10 +88,7 @@ export default function TaskDetails() {
     />
   )
   const title = task?.name
-  const subTitle =
-    task?.description ||
-    'This task is to gain an understanding of what knock-in mouse model is, the high level process to design and build and the cost/time it takes to develop a model. \n' +
-      'Please work with an expert to determine if this is the right model for you.'
+  const subTitle = task?.description
   const element = (
     <Space align="baseline">
       <h3>{title}</h3>
@@ -156,10 +155,10 @@ export default function TaskDetails() {
                         className="task-data"
                       >
                         <span className="task-meta">Budget</span>
-                        <span>
-                          {task?.budget?.currency +
-                            task?.budget?.amount}
-                        </span>
+                        <TaskBudgetCell
+                          task={task}
+                          programId={programId}
+                        />
                       </Space>
                       <Space
                         direction="vertical"
@@ -184,29 +183,50 @@ export default function TaskDetails() {
                         />
                       </Space>
                     </Space>
-                    <ReactQuill
-                      theme="snow"
-                      value={notes}
-                      onChange={setNotes}
-                      modules={{
-                        toolbar: [
-                          ['bold', 'italic', 'underline'],
-                          [{ list: 'bullet' }, { list: 'ordered' }],
-                          ['link'],
-                        ],
-                        clipboard: {
-                          matchVisual: false,
-                        },
-                      }}
-                    />
-                    <Button
-                      block
-                      loading={updateTaskMutation.isLoading}
-                      type="primary"
-                      onClick={editTaskMutation}
-                    >
-                      Save
-                    </Button>
+                    <div>
+                      <ReactQuill
+                        theme="snow"
+                        value={notes}
+                        onPaste={editTaskMutation}
+                        onChange={(value) => {
+                          if (value !== notes) {
+                            if (timeoutId) clearTimeout(timeoutId)
+                            timeoutId = setTimeout(
+                              editTaskMutation,
+                              1000,
+                            )
+                            setNotes(value)
+                          }
+                        }}
+                        modules={{
+                          toolbar: [
+                            [
+                              'bold',
+                              'italic',
+                              'underline',
+                              { list: 'bullet' },
+                              { list: 'ordered' },
+                              'link',
+                            ],
+                          ],
+                          clipboard: {
+                            matchVisual: false,
+                          },
+                        }}
+                      />
+                      {updateTaskMutation.isLoading ? (
+                        <span
+                          style={{
+                            position: 'absolute',
+                            right: 35,
+                            bottom: 35,
+                            fontStyle: 'italic',
+                          }}
+                        >
+                          saving ...
+                        </span>
+                      ) : null}
+                    </div>
                   </Space>
                 </Card>
               </Col>

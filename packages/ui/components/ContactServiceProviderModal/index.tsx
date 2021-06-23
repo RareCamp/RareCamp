@@ -88,7 +88,7 @@ export default function ContactServiceProviderModal({
                 rules={[
                   {
                     required: true,
-                    message: 'Please input task description!',
+                    message: 'Please input your message',
                   },
                 ]}
               >

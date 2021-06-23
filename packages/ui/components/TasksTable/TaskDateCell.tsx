@@ -6,6 +6,7 @@ import styled from 'styled-components'
 import { useEditTaskMutation } from 'helpers/API/mutation'
 
 const DateCell = styled('td')`
+  border: 1px solid transparent;
   &:hover {
     border: 1px solid #1890ff !important;
     cursor: pointer;
@@ -43,8 +44,21 @@ export default function TaskDateCell({ task, programId, dateKey }) {
             ? dayjs(task[dateKey]).format('DD/MM/YYYY')
             : ''}
         </span>
-        {showEdit && <CaretDownOutlined />}
-        {updateTaskMutation.isLoading && <LoadingOutlined />}
+        <CaretDownOutlined
+          style={{
+            visibility: showEdit ? 'visible' : 'hidden',
+            top: 22,
+          }}
+        />
+        <LoadingOutlined
+          style={{
+            position: 'absolute',
+            visibility: updateTaskMutation.isLoading
+              ? 'visible'
+              : 'hidden',
+            top: 22,
+          }}
+        />
       </Space>
       <DatePicker
         open={isDatePickerOpen}

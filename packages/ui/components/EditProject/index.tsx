@@ -36,17 +36,19 @@ export default function EditProject({
   project: any
   onDeleted?: any
 }) {
-  const [isEditProjectVisible, setIsEditProjectVisible] = useState(
-    false,
-  )
+  const [isEditProjectVisible, setIsEditProjectVisible] =
+    useState(false)
   const deleteProject = () =>
     confirm({
+      okButtonProps: {
+        style: { backgroundColor: '#e53935', borderColor: '#e53935' },
+      },
       title: 'Are you sure you want to delete this project?',
       centered: true,
       icon: <ExclamationCircleOutlined />,
       content:
         'Project will be immediately deleted. You cannot undo this action.',
-      okText: 'delete',
+      okText: 'Delete',
       onOk: deleteProjectMutation.mutateAsync,
       onCancel: () => {},
     })
@@ -83,7 +85,7 @@ export default function EditProject({
           duration: 2,
           message: `Project ${project.name} has been deleted successfully`,
         })
-        onDeleted()
+        if (onDeleted) onDeleted()
       },
       onError: (err: Error) =>
         notification.error({
@@ -159,7 +161,7 @@ export default function EditProject({
             rules={[
               {
                 required: true,
-                message: 'Please input project name!',
+                message: 'Please input project name',
               },
             ]}
           >
@@ -168,7 +170,7 @@ export default function EditProject({
           <Form.Item
             label="Description"
             name="description"
-            rules={[{ message: 'Please input project description!' }]}
+            rules={[{ message: 'Please input project description' }]}
           >
             <Input.TextArea rows={4} />
           </Form.Item>

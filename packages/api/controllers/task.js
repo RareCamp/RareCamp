@@ -35,7 +35,8 @@ export async function createTask({
   if (!item.budget) {
     item.budget = {
       currency: '$',
-      amount: 0,
+      amount: null,
+      default: 5000,
     }
   }
   const taskItem = await Task.update(item, { returnValues: 'ALL_NEW' })

@@ -31,7 +31,7 @@ const DiseaseForm = () => {
         label="Disease Name"
         name="disease"
         rules={[
-          { required: true, message: 'Please input Disease Name!' },
+          { required: true, message: 'Please input Disease Name' },
         ]}
       >
         <Input placeholder="example: cystic fibrosis" />
@@ -42,7 +42,7 @@ const DiseaseForm = () => {
         rules={[
           {
             required: true,
-            message: 'Please input Causal Gene Name!',
+            message: 'Please input Causal Gene Name',
           },
         ]}
       >
@@ -54,7 +54,7 @@ const DiseaseForm = () => {
         rules={[
           {
             required: true,
-            message: 'Please input Foundation or Organization Name!',
+            message: 'Please input Foundation or Organization Name',
           },
         ]}
       >
@@ -72,7 +72,7 @@ const MutationForm = () => {
         rules={[
           {
             required: true,
-            message: 'Please select one of the options!',
+            message: 'Please select one of the options',
           },
         ]}
       >
@@ -103,7 +103,7 @@ const ProteinFrom = () => {
         rules={[
           {
             required: true,
-            message: 'Please select one of the options!',
+            message: 'Please select one of the options',
           },
         ]}
       >

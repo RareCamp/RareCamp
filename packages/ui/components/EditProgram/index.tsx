@@ -31,17 +31,19 @@ const EditProgramDropdown = styled('div')`
 `
 
 export default function EditProgram({ program }) {
-  const [isEditProgramVisible, setIsEditProgramVisible] = useState(
-    false,
-  )
+  const [isEditProgramVisible, setIsEditProgramVisible] =
+    useState(false)
   const deleteProgram = () =>
     confirm({
+      okButtonProps: {
+        style: { backgroundColor: '#e53935', borderColor: '#e53935' },
+      },
       title: 'Are you sure you want to delete this program?',
       centered: true,
       icon: <ExclamationCircleOutlined />,
       content:
         'Program will be immediately deleted. You cannot undo this action.',
-      okText: 'delete',
+      okText: 'Delete',
       onOk: deleteProgramMutation.mutateAsync,
       onCancel() {},
     })
@@ -159,7 +161,7 @@ export default function EditProgram({ program }) {
             rules={[
               {
                 required: true,
-                message: 'Please input program name!',
+                message: 'Please input program name',
               },
             ]}
           >
@@ -168,7 +170,7 @@ export default function EditProgram({ program }) {
           <Form.Item
             label="Description"
             name="description"
-            rules={[{ message: 'Please input program description!' }]}
+            rules={[{ message: 'Please input program description' }]}
           >
             <Input.TextArea rows={4} />
           </Form.Item>

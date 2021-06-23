@@ -10,10 +10,10 @@ const TaskDetailsButton = styled(Button)`
   padding: 0;
   position: absolute;
   right: 10px;
-  top: 15px;
+  top: 32%;
   width: 120px;
   height: auto;
-  display: ${(props) => (props.isVisible ? 'inherit' : 'none')};
+  display: ${({ cssdisplay }) => cssdisplay};
 `
 
 const EditTaskButton = styled(Form.Item)`
@@ -48,7 +48,7 @@ export default function TaskNameCell({ task, programId }) {
         <EditTask task={task} programId={programId} />
       </div>
       <Form
-        name="edit_name"
+        name={`edit_name_${task.taskId}`}
         initialValues={{ name: task.name }}
         form={nameEditForm}
         onFinish={submitForm}
@@ -59,7 +59,7 @@ export default function TaskNameCell({ task, programId }) {
           rules={[
             {
               required: true,
-              message: 'Task name can not be empty!',
+              message: 'Task name can not be empty',
             },
           ]}
         >
@@ -75,9 +75,10 @@ export default function TaskNameCell({ task, programId }) {
           />
         </EditTaskButton>
       </Form>
+
       <Link href={taskDetailsLink}>
         <TaskDetailsButton
-          isVisible={showEdit}
+          cssdisplay={showEdit ? 'inherit' : 'none'}
           icon={<ArrowsAltOutlined />}
         >
           Task Details

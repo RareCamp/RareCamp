@@ -16,7 +16,10 @@ import {
 } from '@ant-design/icons'
 import React, { useState } from 'react'
 import styled from 'styled-components'
-import { useEditTaskMutation } from 'helpers/API/mutation'
+import {
+  deleteProgramTask,
+  useEditTaskMutation,
+} from 'helpers/API/mutation'
 
 const { confirm } = Modal
 const { Text } = Typography
@@ -31,7 +34,7 @@ const StyledMoreOutlined = styled(MoreOutlined)`
 export default function EditTask({
   task,
   programId,
-  onSuccess,
+  // onSuccess,
   styles,
 }: {
   task: any
@@ -47,14 +50,17 @@ export default function EditTask({
       ),
     {
       onSuccess: async () => {
-        if (onSuccess) onSuccess()
-        else if (programId) {
-          const { data } = queryClient.getQueryData<any>([
-            'program',
-            programId,
-          ])
-          queryClient.setQueryData(['task', task.taskId], { data })
-        }
+        // if (onSuccess) onSuccess()
+        // else {
+        const programData: any = queryClient.getQueryData([
+          'program',
+          programId,
+        ])
+        deleteProgramTask(programData.data.program, task)
+        queryClient.setQueryData(['program', programId], {
+          data: programData.data,
+        })
+        // }
         notification.success({
           duration: 2,
           message: `Task ${task.name} has been deleted successfully`,
@@ -70,12 +76,15 @@ export default function EditTask({
   )
   const deleteTask = () =>
     confirm({
+      okButtonProps: {
+        style: { backgroundColor: '#e53935', borderColor: '#e53935' },
+      },
       title: 'Are you sure you want to delete this Task?',
       centered: true,
       icon: <ExclamationCircleOutlined />,
       content:
         'Task will be immediately deleted. You cannot undo this action.',
-      okText: 'delete',
+      okText: 'Delete',
       onOk: deleteTaskMutation.mutateAsync,
     })
 
@@ -141,22 +150,13 @@ export default function EditTask({
             rules={[
               {
                 required: true,
-                message: 'Please input task name!',
+                message: 'Please input task name',
               },
             ]}
           >
             <Input />
           </Form.Item>
-          <Form.Item
-            label="Description"
-            name="description"
-            rules={[
-              {
-                required: true,
-                message: 'Please input task description!',
-              },
-            ]}
-          >
+          <Form.Item label="Description" name="description">
             <Input.TextArea rows={4} />
           </Form.Item>
         </Form>

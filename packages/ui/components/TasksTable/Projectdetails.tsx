@@ -12,10 +12,9 @@ import EditProject from 'components/EditProject'
 import TaskRow from 'components/TasksTable/TaskRow'
 
 function addTaskToProject(program, projectId, task) {
-  for (let i = 0; i < program.projects.length; i++) {
-    const project = program.projects[i]
+  program.projects?.forEach((project) => {
     if (project.projectId === projectId) project.tasks.push(task)
-  }
+  })
 }
 export default function ProjectDetails({ project }) {
   const [isProjectVisible, setIsProjectVisible] = useState(true)
@@ -91,9 +90,14 @@ export default function ProjectDetails({ project }) {
                   <span>{project.name}</span>
                 </Space>
               </div>
-              <Tooltip placement="bottom" title={project.description}>
-                <InfoCircleOutlined />
-              </Tooltip>
+              {project.description ? (
+                <Tooltip
+                  placement="bottom"
+                  title={project.description}
+                >
+                  <InfoCircleOutlined />
+                </Tooltip>
+              ) : null}
             </Space>
           </div>
         </td>
@@ -102,14 +106,14 @@ export default function ProjectDetails({ project }) {
         <>
           {project.tasks.map((task) => (
             <TaskRow
-              key={task.taskId}
+              key={JSON.stringify(task)}
               task={task}
               programId={project.programId}
             />
           ))}
           <tr className="ant-table-row add-task-row">
             <td colSpan={6} className="ant-table-cell">
-              <Form form={taskForm}>
+              <Form form={taskForm} name={`test${project.projectId}`}>
                 <Form.Item
                   name="name"
                   required={false}
