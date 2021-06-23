@@ -22,7 +22,7 @@ const Container = styled(Space)`
   }
 `
 
-export default function ServiceProvider({ serviceProvider }) {
+export default function ServiceProvider({ serviceProvider, task }) {
   const [isModalVisible, setIsModalVisible] = useState(false)
   return (
     <Container>
@@ -49,6 +49,8 @@ export default function ServiceProvider({ serviceProvider }) {
         Reach out
       </Button>
       <ContactServiceProviderModal
+        task={task}
+        serviceProvider={serviceProvider}
         visible={isModalVisible}
         hide={() => setIsModalVisible(false)}
       />

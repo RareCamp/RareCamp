@@ -46,6 +46,14 @@ express:
           - !GetAtt ProjectTable.Arn
           - !GetAtt ProgramTable.Arn
           - !GetAtt OrganizationTable.Arn
+      - Effect: "Allow"
+        Action:
+          - "SNS:Publish"
+          - "SES:Publish"
+          - "SES:SendEmail"
+          - "SES:SendRawEmail"
+        Resource:
+          - "*"
 
 postAuthN:
   handler: packages/api/functions/cognito/post-authentication.handler
