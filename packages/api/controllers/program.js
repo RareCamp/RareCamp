@@ -3,11 +3,31 @@ import { generateId } from '../utils/id'
 import { log } from '../utils/logger'
 import { validateProgramDto } from '../validations/program'
 import { createDisease } from './disease'
-import { DEFAULT_PROJECT, DEFAULT_TASKS } from '../common/constant'
+import {
+  DEFAULT_PROJECTS, DEFAULT_PROJECTS_TASKS,
+} from '../common/constant'
 import { createTask, getTasks } from './task'
 import NotFoundError from '../errors/NotFoundError'
 import { getWorkspaceByIdAndUserId } from './workspace'
 import { createProject, getProjects } from './project'
+
+async function createDefaultProject({
+  userId,
+  programId,
+  name,
+}) {
+  const project = await createProject({
+    userId,
+    programId,
+    project: DEFAULT_PROJECTS[name],
+  })
+  project.tasks = await Promise.all(DEFAULT_PROJECTS_TASKS[name].map(async (task) => createTask({
+    userId,
+    projectId: project.projectId,
+    task,
+  })))
+  return project
+}
 
 export async function createProgram({
   userId,
@@ -27,23 +47,18 @@ export async function createProgram({
   }
 
   const programItem = await Program.update({ ...item, workspaceId }, { returnValues: 'ALL_NEW' })
-
-  const project = await createProject({
+  const projects = await Promise.all(Object.keys(DEFAULT_PROJECTS).map((name) => createDefaultProject({
     userId,
     programId: item.programId,
-    project: DEFAULT_PROJECT,
-  })
-  project.tasks = await Promise.all(DEFAULT_TASKS.map(async (task) => createTask({
-    userId,
-    projectId: project.projectId,
-    task,
+    name,
   })))
+
   log.info('PROGRAM_CONTROLLER:PROGRAM_CREATED', { programItem })
 
   return {
     ...programItem.Attributes,
     disease: diseaseDB,
-    projects: [project],
+    projects,
   }
 }
 

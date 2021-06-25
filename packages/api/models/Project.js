@@ -21,6 +21,7 @@ const Project = new Entity({
     description: 'string',
     status: 'string',
     education: 'list',
+    serviceProviders: 'list',
   },
   table: ProjectTable,
 })
