@@ -2,8 +2,8 @@ import { Button, Card } from 'antd'
 import React, { useState } from 'react'
 import ServiceProvider from 'components/ServiceProvider'
 
-export default function ServiceProviderCard({ task }) {
-  const { serviceProviders } = task
+export default function ServiceProviderCard({ task, project }) {
+  const { serviceProviders } = project
   const [showAllSps, setShowAllSps] = useState(false)
   return (
     <Card title="Connect with Service Providers" bordered={false}>
