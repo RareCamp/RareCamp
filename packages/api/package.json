@@ -39,7 +39,7 @@
     "faker": "^5.4.0",
     "http-status-codes": "^2.1.4",
     "lodash": "^4.17.21",
-    "nanoid": "^3.1.22",
+    "nanoid": "^3.1.31",
     "node-fetch": "^2.6.1",
     "sanitize-html": "^2.3.2",
     "winston": "^3.3.3",
