@@ -40,3 +40,20 @@ The high level architecture looks quite simple in theroy, but has a fair bit of 
 
 
 
+### Data Fields sent by data providers
+
+
+**Quasi IDs**
+
+* First Name
+* Last Name
+* Date of Birth
+
+**Additional data**
+
+* Month and Year of Diagnosis
+* Type of variant: Enum of values - Pathogenic, Likely Pathogenic, Variant of Uncertain Significance
+* 
+
+
+
