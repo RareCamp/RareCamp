@@ -38,7 +38,7 @@ The high level architecture looks quite simple in theroy, but has a fair bit of 
 
 ### Distributed Agents Challenges
 
-
+TBD
 
 ### Data Fields sent by data providers
 
@@ -48,9 +48,13 @@ The high level architecture looks quite simple in theroy, but has a fair bit of 
 * First Name
 * Last Name
 * Date of Birth
+* Social Security Number
+* 
 
 **Additional data**
 
+* Data Source ID
+* Pseudonymized ID 
 * Month and Year of Diagnosis
 * Type of variant: Enum of values - Pathogenic, Likely Pathogenic, Variant of Uncertain Significance
 * 
