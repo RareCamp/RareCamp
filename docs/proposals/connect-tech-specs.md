@@ -49,13 +49,13 @@ TBD
 * Last Name
 * Date of Birth
 * City of Birth
-* Diagnosis
+
 
 **Additional data**
-
+* Diagnosis (OrphanetID or OMIM ID) (some people might have multiple rare diseases**)
 * Data Source ID
-* Pseudonymized ID 
-* Month and Year of Diagnosis
+* Linkback ID (Psedonymized or not - TBD?)
+* Month and Year of Diagnosis (not always available, if they don't do genetic testing)
 * Type of variant: Enum of values - Pathogenic, Likely Pathogenic, Variant of Uncertain Significance
 * 
 
