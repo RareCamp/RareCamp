@@ -48,8 +48,8 @@ TBD
 * First Name
 * Last Name
 * Date of Birth
-* Social Security Number
-* 
+* City of Birth
+* Diagnosis
 
 **Additional data**
 
