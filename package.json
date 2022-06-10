@@ -44,7 +44,7 @@
     "eslint-plugin-react": "^7.14.3",
     "eslint-plugin-react-hooks": "^1.7.0",
     "nodemon": "^2.0.3",
-    "semantic-release": "^17.3.0",
+    "semantic-release": "^19.0.3",
     "serverless": "^2.25.1",
     "serverless-apigateway-service-proxy": "^1.7.0",
     "serverless-cloudside-plugin": "^1.0.4",
