@@ -35,7 +35,7 @@
     "discord.js": "^12.5.1",
     "dotenv": "^8.2.0",
     "dynamodb-toolbox": "^0.3.3",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "faker": "^5.4.0",
     "http-status-codes": "^2.1.4",
     "lodash": "^4.17.21",
